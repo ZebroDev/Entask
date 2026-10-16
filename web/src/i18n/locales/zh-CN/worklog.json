@@ -1,0 +1,88 @@
+{
+  "empty": {
+    "description": "在卡片上上报工时后，工作日志会自动出现在这里。",
+    "group": {
+      "title": "本期间团队暂无工时上报"
+    },
+    "me": {
+      "title": "本期间暂无工时上报"
+    }
+  },
+  "export": {
+    "action": "导出 Excel"
+  },
+  "kpi": {
+    "cards": {
+      "title": "涵盖卡片",
+      "unit_other": "张"
+    },
+    "entries": {
+      "title": "工作条目",
+      "unit_other": "笔"
+    },
+    "hours": {
+      "title": "总工时"
+    },
+    "missing": {
+      "detail": " · 查看明细",
+      "each_other": "每人 {{count}} 个工作日",
+      "members_other": "{{count}} 人合计",
+      "title": "未上报工作日（合计）",
+      "unit_other": "天（{{members}}；{{days}}）"
+    },
+    "reported": {
+      "title": "已上报工作日",
+      "unit_other": "天"
+    }
+  },
+  "member": {
+    "cards_other": "{{count}} 张卡",
+    "collapse": {
+      "action": "收起明细"
+    },
+    "empty": "今日无工时上报",
+    "entries_other": "{{count}} 笔",
+    "expand": {
+      "action": "显示每日明细"
+    },
+    "heading_other": "团队成员（{{count}} 人）",
+    "missing": "未上报",
+    "spark": {
+      "tooltip": "{{day}}：{{hours}}"
+    },
+    "summary": "{{hours}} · {{entries}} · {{cards}} · {{workdays}}",
+    "workdays_other": "已上报 {{reported}}/{{total}} 工作日"
+  },
+  "missing": {
+    "group": {
+      "empty": "此期间无漏报",
+      "title": "漏报明细"
+    },
+    "me": {
+      "empty": "此期间你没有漏报",
+      "title": "我的漏报明细"
+    },
+    "member": {
+      "count_other": "未上报 {{missing}} / {{count}} 天"
+    },
+    "none_other": "另有 {{count}} 人无漏报",
+    "workdays_other": "共 {{count}} 个工作日"
+  },
+  "mode": {
+    "day": "日",
+    "month": "月",
+    "week": "周"
+  },
+  "nav": {
+    "next": {
+      "aria": "下一期"
+    },
+    "prev": {
+      "aria": "上一期"
+    },
+    "today": "今天"
+  },
+  "page": {
+    "hint": "由您上报的工时自动汇总的日报、周报与月报"
+  }
+}

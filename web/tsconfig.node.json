@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  // `*.ts`（不含 `**`）＝ 只涵蓋本目錄的根層 `.ts`——今天就是 `vite.config.ts` 與
+  // `tailwind.config.ts` 兩個。**刻意列成樣式而不是逐一列舉**：`tailwind.config.ts`
+  // 原本不在任何編譯單元裡（`tsconfig.app.json` 的 include 是 `["src"]`），
+  // 寫錯型別不會有任何閘門響、症狀是樣式靜默失效（`docs/state/44`）。
+  // 同一個缺口適用於**未來任何**根層 `.ts` 設定檔 ⇒ 關掉這個類，不是關掉這一個檔。
+  "include": ["*.ts"]
+}

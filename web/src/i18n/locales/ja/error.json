@@ -1,0 +1,142 @@
+{
+  "attachment": {
+    "notFound": "添付ファイルが見つかりません。削除された可能性があります。",
+    "tooLarge": "ファイルが上限の {{max}} MB を超えています",
+    "unsupportedType": "対応していないファイル形式です"
+  },
+  "auth": {
+    "adminGrantFailed": "システム管理者権限を設定できませんでした",
+    "invalidCredentials": "アカウントまたはパスワードが正しくありません",
+    "sessionInvalid": "ログイン状態が無効になりました。もう一度ログインしてください。",
+    "unauthenticated": "ログインしていないか、ログインの有効期限が切れています",
+    "usernameRequired": "アカウントを入力してください"
+  },
+  "board": {
+    "nameRequired": "ボード名を入力してください",
+    "notFound": "ボードが見つかりません。削除された可能性があります。"
+  },
+  "card": {
+    "coverInvalid": "カバーにはこのカードの画像添付ファイルを指定してください",
+    "estimateNotPositive": "見積工数は 0 より大きい値にしてください",
+    "fieldMemberNotFound": "メンバーフィールドが存在しないユーザーを参照しています",
+    "fieldNotFound": "カスタムフィールドが見つかりません。削除された可能性があります。",
+    "fieldTextTooLong": "テキストフィールドは {{max}} 文字以内で入力してください",
+    "fieldValueNotInOptions": "値が選択肢に含まれていません",
+    "memberNotProjectMember": "カードに割り当てできるのはこのプロジェクトのメンバーだけです",
+    "notFound": "カードが見つかりません。削除された可能性があります。",
+    "positionInvalid": "position は有効な並べ替え文字列にしてください",
+    "startAfterDue": "開始日を期限より後に設定することはできません",
+    "titleRequired": "カードタイトルを入力してください"
+  },
+  "checklist": {
+    "notFound": "チェックリストが見つかりません。削除された可能性があります。",
+    "titleRequired": "チェックリスト名を入力してください"
+  },
+  "checklistItem": {
+    "notFound": "項目が見つかりません。削除された可能性があります。",
+    "textRequired": "項目のテキストを入力してください"
+  },
+  "comment": {
+    "bodyRequired": "コメントを入力してください",
+    "notFound": "コメントが見つかりません。削除された可能性があります。",
+    "notOwner": "コメントを編集または削除できるのは投稿者本人だけです"
+  },
+  "concurrency": {
+    "conflict": "更新が競合しました。再試行してください。"
+  },
+  "effort": {
+    "hoursNotPositive": "工数は 0 より大きい値にしてください",
+    "localDateInFuture": "未来の日付には工数を登録できません"
+  },
+  "identity": {
+    "duplicateUserName": "アカウントはすでに存在します",
+    "invalidUserName": "アカウントの形式が正しくありません",
+    "passwordMismatch": "現在のパスワードが正しくありません",
+    "passwordRequiresDigit": "パスワードには数字を含めてください",
+    "passwordRequiresLower": "パスワードには小文字を含めてください",
+    "passwordRequiresNonAlphanumeric": "パスワードには英数字以外の文字を含めてください",
+    "passwordRequiresUniqueChars": "パスワードには異なる文字をより多く含めてください",
+    "passwordRequiresUpper": "パスワードには大文字を含めてください",
+    "passwordTooShort": "パスワードが短すぎます",
+    "unknown": "認証サービスから不明なエラーが返されました"
+  },
+  "label": {
+    "colorInvalid": "色は #rrggbb 形式で指定してください",
+    "nameDuplicate": "このボードには同じ名前のラベルが既に存在します",
+    "nameRequired": "ラベル名を入力してください",
+    "notFound": "ラベルが見つかりません。削除された可能性があります。"
+  },
+  "list": {
+    "notFound": "リストが見つかりません。削除された可能性があります。",
+    "titleRequired": "リスト名を入力してください"
+  },
+  "mindmap": {
+    "moveIntoSelf": "ノードを自身またはその子ノードの下に移動することはできません",
+    "nodeNotFound": "ノードが見つかりません。削除された可能性があります。",
+    "nodeTitleRequired": "ノードのタイトルを入力してください"
+  },
+  "notification": {
+    "notFound": "通知が見つかりません"
+  },
+  "permission": {
+    "denied": "このリソースにアクセスする権限がありません"
+  },
+  "project": {
+    "memberInUse": "このメンバーは本プロジェクトの {{refs}} 枚のカードに割り当てられています。先にカードから削除してください。",
+    "nameRequired": "プロジェクト名を入力してください",
+    "notFound": "プロジェクトが見つかりません。削除された可能性があります。"
+  },
+  "query": {
+    "rangeTooLong": "指定できる期間は {{max}} 日以内にしてください"
+  },
+  "request": {
+    "bodyTooLarge": "リクエストのデータ量が大きすぎるか、形式が正しくありません",
+    "collectionTooLarge": "リストの項目数は {{max}} 件以内にしてください",
+    "invalid": "リクエストの内容が正しくありません",
+    "timeZoneInvalid": "タイムゾーン ID が無効です",
+    "tooManyRequests": "リクエストが多すぎます。しばらくしてからもう一度お試しください"
+  },
+  "review": {
+    "commentRequiredOnReject": "差し戻し時はコメントを入力してください",
+    "notFound": "レビューが見つかりません。削除された可能性があります。",
+    "notReviewer": "このレビューを提出できるのは割り当てられたレビュアーだけです",
+    "rateNotPermitted": "スコアを入力する権限がありません",
+    "ratingInvalid": "スコアは 1～5 の範囲で入力してください",
+    "reviewerNotProjectMember": "レビュアーに割り当てできるのはこのプロジェクトのメンバーだけです",
+    "scoreNotAllowedOnReject": "差し戻し時はスコアを入力できません",
+    "statusNotSubmittable": "このレビュー状態では提出できません"
+  },
+  "server": {
+    "internalError": "システムエラーが発生しました。しばらくしてからもう一度お試しください"
+  },
+  "team": {
+    "memberNotFound": "チームメンバーが見つかりません",
+    "nameInvalid": "チーム名に無効な文字が含まれています",
+    "nameRequired": "チーム名を入力してください",
+    "nameTooLong": "チーム名は{{max}}文字以内で入力してください",
+    "notFound": "チームが見つかりません。削除された可能性があります。",
+    "notMember": "このチームのメンバーではないため、レポートを表示できません",
+    "roleAssigned": "このロールにはまだ割り当てられたメンバーがいます。先に割り当てを削除してください。"
+  },
+  "teamRole": {
+    "nameDuplicate": "ロール名はすでに存在します",
+    "nameRequired": "ロール名を入力してください",
+    "notFound": "ロールが見つかりません。削除された可能性があります。",
+    "systemNotDeletable": "削除できるのはチームのカスタムロールだけです",
+    "systemNotEditable": "編集できるのはチームのカスタムロールだけです"
+  },
+  "user": {
+    "avatarNotFound": "アバターが見つかりません",
+    "avatarTooLarge": "ファイルサイズは {{max}} MB 以下にしてください",
+    "avatarUnsupportedFormat": "対応していない画像形式です",
+    "deleteFailed": "削除に失敗しました",
+    "displayNameRequired": "表示名を入力してください",
+    "displayNameTooLong": "表示名は {{max}} 文字以内で入力してください",
+    "updateFailed": "更新に失敗しました"
+  },
+  "workCalendar": {
+    "kindInvalid": "勤務日の種別が正しくありません",
+    "nameTooLong": "名前は100文字以内で入力してください",
+    "notFound": "この日のカレンダー設定が見つかりません"
+  }
+}

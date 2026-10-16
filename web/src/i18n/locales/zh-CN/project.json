@@ -1,0 +1,475 @@
+{
+  "backToProjects": "← 我的项目",
+  "board": {
+    "archive": {
+      "action": "归档看板",
+      "success": "看板已归档"
+    },
+    "archivedSection": "已归档看板（{{n}}）",
+    "create": {
+      "action": "创建看板",
+      "placeholder": "新看板名称",
+      "success": "看板已创建"
+    },
+    "delete": {
+      "action": "删除看板"
+    },
+    "edit": {
+      "action": "编辑信息"
+    },
+    "empty": {
+      "description": "请联系项目管理员为此项目新建看板。",
+      "title": "项目暂无看板"
+    },
+    "menu": {
+      "aria": "看板菜单"
+    },
+    "noDescription": "无描述",
+    "restore": {
+      "action": "取消归档"
+    },
+    "unarchive": {
+      "success": "看板已取消归档"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "本月没有截止日期的卡片"
+    },
+    "more": "+{{n}} 更多",
+    "nextMonth": "下一个月 >",
+    "noDue": {
+      "empty": "无截止日期",
+      "title": "无截止日期卡片"
+    },
+    "prevMonth": "< 上一个月"
+  },
+  "cards": {
+    "truncated": "共 {{total}} 笔，仅加载前 {{shown}} 笔"
+  },
+  "create": {
+    "action": "创建项目",
+    "name": {
+      "placeholder": "例：下半年开发项目"
+    },
+    "success": "项目已创建",
+    "team": {
+      "label": "所属团队",
+      "required": "请选择所属团队"
+    },
+    "title": "创建项目"
+  },
+  "description": {
+    "label": "项目描述",
+    "placeholder": "这个项目的目标与范围…"
+  },
+  "edit": {
+    "aria": "编辑项目名称与描述",
+    "success": "项目信息已更新",
+    "title": "编辑项目信息"
+  },
+  "field": {
+    "add": {
+      "action": "新建字段"
+    },
+    "create": {
+      "action": "创建字段",
+      "hint": "字段会应用到此项目的所有卡片，创建后仍可修改名称与选项。",
+      "success": "字段已创建",
+      "title": "新建自定义字段"
+    },
+    "delete": {
+      "confirm": "确定要删除字段“{{name}}”？将删除所有卡片上的此字段值，此操作无法撤销。",
+      "success": "字段已删除",
+      "title": "删除自定义字段"
+    },
+    "edit": {
+      "hint": "{{scope}}范围字段。名称与选项的变更会应用到所有使用此字段的卡片。",
+      "title": "编辑字段“{{name}}”"
+    },
+    "name": {
+      "label": "名称",
+      "placeholder": "例如：优先级"
+    },
+    "options": {
+      "add": {
+        "action": "添加选项"
+      },
+      "empty": "下拉菜单至少需要一个选项",
+      "label": "选项",
+      "placeholder": "输入后按 Enter 添加，可粘贴“高,中,低”",
+      "remove": {
+        "aria": "移除选项 {{option}}"
+      }
+    },
+    "scope": {
+      "label": "范围"
+    },
+    "type": {
+      "label": "类型"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "确认变更并清除值"
+      },
+      "summary": "由“{{from}}”改为“{{to}}”",
+      "warning": "所有卡片上此字段的既有值将被删除，此操作无法撤销。",
+      "warningWithOptions": "所有卡片上此字段的既有值将被删除，原本的选项列表也会一并清除，此操作无法撤销。"
+    },
+    "update": {
+      "success": "字段已更新"
+    }
+  },
+  "filter": {
+    "allBoards": "所有看板",
+    "allMembers": "所有成员"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "进度 / 工时",
+      "task": "卡片标题"
+    },
+    "empty": "暂无已设置截止日期的任务卡片",
+    "excludeArchived": "排除已归档",
+    "filter": {
+      "board": "看板筛选",
+      "member": "成员筛选"
+    },
+    "groupBy": {
+      "assignee": "按负责人",
+      "board": "按看板",
+      "label": "分组：",
+      "none": "不分组"
+    },
+    "includeArchived": "含已归档",
+    "loading": "排期加载中…",
+    "schedule": {
+      "action": "排期"
+    },
+    "scrollBack": "向后滚动",
+    "scrollForward": "向前滚动",
+    "today": "今天",
+    "todayLine": "今日",
+    "unassigned": "未指派",
+    "unscheduled": {
+      "hint": "点击卡片即可设置预估工时与截止日期",
+      "title": "无截止日期任务待排期（{{n}}）",
+      "toggle": "未排期（{{n}}）"
+    },
+    "view": {
+      "day": "日视图",
+      "month": "月视图",
+      "week": "周视图"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_other": "{{count}} 个看板"
+    },
+    "createFirst": {
+      "action": "创建第一个项目"
+    },
+    "empty": {
+      "description": "创建项目后即可新建看板、安排任务并与团队实时协作。",
+      "title": "暂无任何项目"
+    },
+    "members": {
+      "count_other": "{{count}} 位成员"
+    },
+    "noDescription": "尚未提供项目描述",
+    "noMember": {
+      "description": "您目前尚未加入任何项目。请联系项目管理员或团队经理为您指派项目与工作任务。"
+    },
+    "noTeam": {
+      "action": "前往选择 / 创建团队",
+      "description": "项目必须隶属于特定团队。请先选择或创建团队以开始管理项目。",
+      "title": "尚未选择工作团队"
+    },
+    "switchTeam": {
+      "action": "选择 / 切换团队"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "指派成员",
+      "confirm": {
+        "action": "确认指派"
+      },
+      "required": "请选择成员并至少勾选一个角色",
+      "success": "已指派",
+      "title": "指派成员（可多角色）"
+    },
+    "column": {
+      "roles": "已指派角色",
+      "user": "用户"
+    },
+    "label": "成员",
+    "load": {
+      "error": "加载成员失败"
+    },
+    "noRoles": "无角色",
+    "remove": {
+      "confirm": "确定要将“{{name}}”移出此项目？此操作无法撤销。",
+      "success": "成员已移除",
+      "title": "移除成员"
+    },
+    "role": {
+      "system": "系统模板",
+      "template": "模板"
+    },
+    "roles": {
+      "edit": {
+        "action": "编辑角色",
+        "description": "调整“{{name}}（{{username}}）”在项目中的指派角色。",
+        "label": "项目角色（可多选）",
+        "title": "编辑成员角色"
+      },
+      "label": "角色",
+      "load": {
+        "error": "加载团队角色失败"
+      },
+      "loading": "加载团队角色中…",
+      "required": "请至少勾选一个角色；若要完全移除成员请使用“移除”按钮",
+      "save": {
+        "action": "保存角色"
+      },
+      "update": {
+        "error": "更新角色失败",
+        "success": "成员角色已更新"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "新建根节点",
+    "bind": {
+      "action": "绑定卡片",
+      "bound": "已绑定：{{title}}",
+      "change": "更换绑定卡片",
+      "list": {
+        "suffix": "（{{name}}）"
+      },
+      "loading": "加载看板与卡片中…",
+      "noMatch": "无匹配卡片",
+      "search": {
+        "aria": "搜索卡片标题",
+        "placeholder": "搜索卡片标题…"
+      },
+      "title": "绑定卡片：{{title}}",
+      "unbind": "解绑"
+    },
+    "cascade": {
+      "aria": "分支联动模式",
+      "label": "联动模式",
+      "off": "自由模式：拖拽节点仅移动当前节点",
+      "on": "联动模式：拖拽节点时，其所有子节点将保持相对间距同步移动"
+    },
+    "delete": {
+      "confirm_other": "将一并删除“{{title}}”及其 {{count}} 个子节点，此操作无法撤销。"
+    },
+    "empty": "暂无节点",
+    "error": {
+      "create": "新建节点失败",
+      "moveIntoDescendant": "不可移至自身子节点之下",
+      "savePosition": "保存节点位置失败"
+    },
+    "export": {
+      "blobError": "无法生成图片文件",
+      "canvasError": "无法创建画布环境",
+      "empty": "思维导图暂无节点",
+      "imageError": "生成图片时发生错误",
+      "png": {
+        "error": "思维导图 PNG 导出失败",
+        "success": "思维导图 PNG 高清图片导出成功",
+        "tooltip": "导出高清 PNG 图片"
+      },
+      "svg": {
+        "error": "思维导图 SVG 导出失败",
+        "success": "思维导图 SVG 导出成功",
+        "tooltip": "导出向量 SVG 图片"
+      },
+      "title": "思维导图"
+    },
+    "fullscreen": {
+      "enter": "全屏沉浸模式",
+      "exit": "退出全屏",
+      "label": "全屏"
+    },
+    "layout": {
+      "action": "一键整理布局",
+      "success": "已重置并优化思维导图布局",
+      "tooltip": "一键智能拓扑布局并保存"
+    },
+    "library": {
+      "bound": "已绑定：{{title}}",
+      "close": "关闭卡片库",
+      "convert": "转为节点",
+      "noMatch": "没有匹配的卡片",
+      "search": {
+        "placeholder": "搜索看板卡片…"
+      },
+      "title": "项目卡片库",
+      "toggle": "卡片库（{{n}} 绑定）",
+      "tooltip": "切换项目卡片抽屉",
+      "unbound": "未绑定"
+    },
+    "node": {
+      "addChild": "新建子节点",
+      "card": {
+        "completed": "（已完成）",
+        "tooltip": "卡片：{{title}}（点击打开）{{status}}"
+      },
+      "child": {
+        "placeholder": "子节点标题…"
+      },
+      "collapse": "折叠",
+      "delete": "删除节点",
+      "edit": "编辑节点",
+      "expand": "展开",
+      "noPermission": "无编辑权限",
+      "note": {
+        "placeholder": "备注…"
+      }
+    },
+    "prompt": {
+      "childInitial": "新节点",
+      "rootInitial": "新主题"
+    },
+    "root": {
+      "placeholder": "根节点标题…"
+    },
+    "untitledNode": "未命名节点",
+    "view": {
+      "canvas": "画布模式（Canvas）",
+      "tree": "大纲树（Outline）"
+    }
+  },
+  "name": {
+    "label": "项目名称",
+    "required": "请输入项目名称"
+  },
+  "report": {
+    "chart": {
+      "logged": "已投入",
+      "remaining": "剩余估算",
+      "title": "成员工时对比图表（全期）"
+    },
+    "column": {
+      "estimated": "预估",
+      "logged": "已报",
+      "member": "成员",
+      "remainingProgress": "剩余与进度（全期）"
+    },
+    "detail": {
+      "column": {
+        "board": "看板",
+        "card": "卡片",
+        "list": "列表",
+        "priority": "优先级",
+        "review": "审查"
+      },
+      "title": "卡片明细"
+    },
+    "export": {
+      "action": "导出 CSV"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "待审查：{{pending}} | 均分：{{score}}",
+        "title": "审查通过率"
+      },
+      "cards": {
+        "hint": "项目现状：追踪中的卡片总计",
+        "title": "卡片总数",
+        "value_other": "{{count}} 张"
+      },
+      "logged": {
+        "hint": "所选期间内累计的上报工时总和",
+        "title": "累计投入工时"
+      },
+      "remaining": {
+        "hint": "项目现状：尚未完成的工作总量，不随期间筛选变动",
+        "title": "总剩余预估工时（全期）"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "卡片数",
+        "hours": "总工时"
+      },
+      "empty": "暂无工时记录",
+      "title": "成员工时"
+    },
+    "remaining": {
+      "title": "成员剩余工时（全期）"
+    },
+    "review": {
+      "approved": "通过 {{n}}",
+      "average": "平均分 {{n}}",
+      "pending": "待审查 {{n}}",
+      "rejected": "驳回 {{n}}",
+      "title": "审查统计（全期）"
+    },
+    "year": {
+      "all": "全期",
+      "empty": "所选期间没有工时数据",
+      "label": "年度"
+    }
+  },
+  "tab": {
+    "boards": "看板",
+    "calendar": "日历",
+    "fields": "自定义字段",
+    "gantt": "甘特图",
+    "members": "成员",
+    "mindMap": "思维导图",
+    "report": "报表",
+    "table": "表格",
+    "worklog": "工作日志"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "批量归档失败",
+        "success_other": "已批量归档 {{count}} 张卡片"
+      },
+      "clearDue": "清除截止日期",
+      "due": {
+        "clear_other": "已清除 {{count}} 张卡片的截止日期",
+        "error": "批量更新失败",
+        "set_other": "已更新 {{count}} 张卡片的截止日期"
+      },
+      "mark": {
+        "error": "批量标记失败"
+      },
+      "markComplete": "标记为完成",
+      "marked": {
+        "complete_other": "已将 {{count}} 张卡片标记为已完成",
+        "incomplete_other": "已将 {{count}} 张卡片标记为未完成"
+      },
+      "markIncomplete": "标记为未完成",
+      "nextWeek": "一周后（+7 天）",
+      "selected": "已选中 {{n}} 项",
+      "setDue": "设置截止日期",
+      "today": "今天",
+      "tomorrow": "明天"
+    },
+    "clearSelection": "取消选择",
+    "column": {
+      "board": "看板",
+      "due": "截止日期",
+      "hours": "工时",
+      "list": "列表",
+      "progress": "进度",
+      "title": "卡片标题"
+    },
+    "empty": {
+      "all": "暂无卡片",
+      "filtered": "此看板没有卡片"
+    },
+    "filter": {
+      "includeArchived": "含归档卡片"
+    },
+    "rowCount_other": "{{count}} 笔",
+    "selectAll": "全选"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "activity": {
+    "empty": "尚無系統活動",
+    "title": "系統活動"
+  },
+  "column": {
+    "actions": "操作",
+    "changedAt": "異動時間",
+    "status": "狀態",
+    "user": "使用者"
+  },
+  "deactivate": {
+    "confirm": "確定要停用「{{name}}」嗎？",
+    "error": "停用失敗",
+    "note": "停用後他會立刻無法登入，現有工作階段也會失效。既有的指派與歷史紀錄不受影響，之後可以復原。",
+    "offboarding": "這個帳號目前還有：",
+    "openCards": "{{n}} 張未完成的卡片",
+    "pendingReviews": "{{n}} 筆待審查",
+    "projectMemberships": "{{n}} 個專案成員身分",
+    "success": "已停用",
+    "teamMemberships": "{{n}} 個團隊成員身分",
+    "title": "停用帳號"
+  },
+  "delete": {
+    "confirm": "確定要永久刪除「{{name}}」嗎？",
+    "description": "帳號資料（帳號名稱、密碼、頭像）會被清除且無法復原。顯示名稱與既有的卡片、審查、活動紀錄會保留，歷史仍可閱讀。",
+    "error": "刪除失敗",
+    "success": "已刪除",
+    "title": "刪除帳號",
+    "typeToConfirm": "請輸入顯示名稱「{{name}}」以確認"
+  },
+  "empty": "沒有符合條件的使用者",
+  "error": "載入使用者清單失敗",
+  "filter": {
+    "active": "啟用中",
+    "all": "全部",
+    "deactivated": "已停用"
+  },
+  "reactivate": {
+    "confirm": "確定要復原「{{name}}」嗎？",
+    "error": "復原失敗",
+    "note": "他會可以重新登入，但先前的工作階段不會恢復——需要重新登入。",
+    "success": "已復原",
+    "title": "復原帳號"
+  },
+  "resetPassword": {
+    "action": "重設密碼",
+    "description": "將為 {{name}} 設定一組臨時密碼。",
+    "error": "重設密碼失敗，請稍後再試",
+    "field": "臨時密碼",
+    "hint": "設定後請以安全的方式線下告知使用者；他目前的登入狀態會全部失效。",
+    "submit": "確認重設",
+    "success": "已重設密碼",
+    "title": "重設密碼"
+  },
+  "status": {
+    "active": "啟用中",
+    "deactivated": "已停用",
+    "deleted": "已刪除"
+  },
+  "subtitle": "停用可復原；刪除不可逆，且會清掉帳號資料。",
+  "title": "使用者管理"
+}

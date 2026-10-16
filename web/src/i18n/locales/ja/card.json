@@ -1,0 +1,350 @@
+{
+  "activity": {
+    "empty": "アクティビティはまだありません"
+  },
+  "activityType": {
+    "archive": "カードをアーカイブしました",
+    "attachmentAdded": "添付ファイルを追加しました",
+    "attachmentRemoved": "添付ファイルを削除しました",
+    "checklistAdded": "チェックリストを追加しました",
+    "checklistRemoved": "チェックリストを削除しました",
+    "comment": "コメントしました",
+    "complete": "カードを完了にしました",
+    "copy": "カードを複製しました",
+    "coverChange": "カバーを変更しました",
+    "create": "カードを作成しました",
+    "customFieldUpdated": "カスタムフィールドを更新しました",
+    "deliverySubmitted": "レビューを依頼しました",
+    "descriptionChange": "説明を更新しました",
+    "dueChange": "期限を変更しました",
+    "effortLogged": "工数を記録しました",
+    "itemChecked": "項目をチェックしました",
+    "labelAdded": "ラベルを追加しました",
+    "labelRemoved": "ラベルを削除しました",
+    "memberAdded": "メンバーを追加しました",
+    "memberRemoved": "メンバーを削除しました",
+    "mindMapBound": "マインドマップに紐付けました",
+    "mindMapUnbound": "マインドマップの紐付けを解除しました",
+    "move": "カードを移動しました",
+    "rename": "カード名を変更しました",
+    "restore": "カードのアーカイブを解除しました",
+    "reviewAdded": "レビュアーを割り当てました",
+    "reviewSubmitted": "レビューを提出しました",
+    "startChange": "開始日を変更しました",
+    "uncomplete": "完了を取り消しました"
+  },
+  "archive": {
+    "success": "アーカイブ状態を更新しました"
+  },
+  "attachment": {
+    "coverRemove": {
+      "action": "カバーを解除"
+    },
+    "coverSet": {
+      "action": "カバーに設定"
+    },
+    "delete": {
+      "confirm": "添付ファイル「{{name}}」を削除しますか？この操作は元に戻せません。",
+      "success": "削除しました",
+      "title": "添付ファイルを削除"
+    },
+    "empty": "添付ファイルはまだありません",
+    "upload": {
+      "action": "添付ファイルをアップロード（≤20MB）",
+      "success": "アップロードしました"
+    }
+  },
+  "background": {
+    "project": {
+      "label": "プロジェクト：{{name}}"
+    }
+  },
+  "backToBoard": {
+    "action": "ボードに戻る"
+  },
+  "checklist": {
+    "addItem": {
+      "action": "追加",
+      "error": "項目の追加に失敗しました"
+    },
+    "delete": {
+      "confirm": "「{{title}}」を削除しますか？チェックリスト全体とその項目が削除されます。この操作は元に戻せません。",
+      "title": "チェックリストを削除"
+    },
+    "deleteItem": {
+      "aria": "{{title}}を削除",
+      "confirm": "項目「{{title}}」を削除しますか？この操作は元に戻せません。",
+      "error": "項目の削除に失敗しました",
+      "title": "項目を削除"
+    },
+    "item": {
+      "placeholder": "新しい項目"
+    },
+    "moveDown": {
+      "aria": "{{title}}を下へ移動"
+    },
+    "moveItem": {
+      "error": "並べ替えに失敗しました"
+    },
+    "moveUp": {
+      "aria": "{{title}}を上へ移動"
+    },
+    "name": {
+      "placeholder": "新しいチェックリスト名"
+    },
+    "toggleItem": {
+      "error": "チェックに失敗しました"
+    }
+  },
+  "comment": {
+    "create": {
+      "error": "コメントの送信に失敗しました"
+    },
+    "empty": "コメントはまだありません",
+    "placeholder": "コメントを入力…",
+    "submit": {
+      "action": "送信"
+    }
+  },
+  "completion": {
+    "mark": {
+      "tooltip": "完了としてマーク"
+    },
+    "shortcut": {
+      "tooltip": "完了としてマーク（ショートカット X）"
+    },
+    "unmark": {
+      "tooltip": "未完了としてマーク"
+    }
+  },
+  "copy": {
+    "description": "「{{title}}」の複製を作成します。複製先のプロジェクト、ボード、リストを選択してください。",
+    "submit": {
+      "action": "複製する"
+    },
+    "success": "カードを複製しました",
+    "targetBoard": {
+      "label": "複製先ボード"
+    },
+    "targetList": {
+      "label": "複製先リスト"
+    },
+    "targetProject": {
+      "label": "複製先プロジェクト"
+    },
+    "title": "カードを複製"
+  },
+  "create": {
+    "board": {
+      "empty": "ボードがありません",
+      "label": "ボード",
+      "loading": "ボードを読み込み中…",
+      "placeholder": "ボードを選択"
+    },
+    "description": {
+      "label": "説明（任意）",
+      "placeholder": "メモや詳しいタスクの説明を追加…"
+    },
+    "dueDate": {
+      "label": "期限（任意）"
+    },
+    "hint": "いつでも <kbd>{{key}}</kbd> を押して、アイデアやタスクを記録できます",
+    "keepOpen": {
+      "action": "続けて追加",
+      "hint": "続けて作成"
+    },
+    "list": {
+      "empty": "リストがありません",
+      "label": "追加先リスト *",
+      "loading": "リストを読み込み中…",
+      "placeholder": "リストを選択",
+      "required": "リストを選択してください"
+    },
+    "name": {
+      "label": "カードタイトル *",
+      "placeholder": "カードタイトルを入力…",
+      "required": "カードタイトルを入力してください"
+    },
+    "partialError": "カードは作成されましたが、期限の設定に失敗しました",
+    "project": {
+      "label": "プロジェクト",
+      "loading": "プロジェクトを読み込み中…",
+      "placeholder": "プロジェクトを選択"
+    },
+    "submit": {
+      "action": "カードを作成"
+    },
+    "success": "カードを作成しました",
+    "successKeepOpen": "カードを作成しました。続けて追加できます。",
+    "title": "カードをすばやく追加"
+  },
+  "customField": {
+    "empty": "カスタムフィールドがありません",
+    "load": {
+      "error": "カスタムフィールドの読み込みに失敗しました"
+    },
+    "save": {
+      "error": "フィールドの保存に失敗しました"
+    }
+  },
+  "delete": {
+    "confirm": {
+      "action": "削除する"
+    },
+    "success": "カードを削除しました"
+  },
+  "description": {
+    "empty": {
+      "canEdit": "説明はまだありません——クリックして追加",
+      "readonly": "説明はまだありません"
+    }
+  },
+  "effort": {
+    "estimate": {
+      "label": "見積工数：",
+      "success": "見積工数を更新しました"
+    },
+    "hours": {
+      "placeholder": "工数（時間）"
+    },
+    "log": {
+      "action": "工数を記録",
+      "date": "日付",
+      "entry": "{{name}}：{{hours}}",
+      "error": "記録に失敗しました",
+      "note": "（{{note}}）",
+      "success": "工数を記録しました"
+    },
+    "summary": "{{unit}} · 記録済み {{logged}} · 残り {{remaining}}"
+  },
+  "field": {
+    "completed": {
+      "label": "完了"
+    },
+    "dueDate": {
+      "label": "期限："
+    },
+    "mindMap": {
+      "label": "マインドマップ：{{title}}"
+    },
+    "readonly": "（読み取り専用）",
+    "startAt": {
+      "label": "開始日："
+    }
+  },
+  "label": {
+    "count_other": "ラベル {{count}}",
+    "create": {
+      "action": "ラベルを作成",
+      "error": "ラベルの作成に失敗しました",
+      "heading": "新しいラベルを作成"
+    },
+    "delete": {
+      "confirm": "このラベルを削除しますか？",
+      "error": "ラベルの削除に失敗しました"
+    },
+    "edit": {
+      "heading": "ラベルを編集"
+    },
+    "list": {
+      "title": "ラベル"
+    },
+    "load": {
+      "error": "ラベルの読み込みに失敗しました"
+    },
+    "name": {
+      "placeholder": "ラベル名…"
+    },
+    "save": {
+      "error": "ラベルの保存に失敗しました"
+    },
+    "update": {
+      "error": "ラベルの更新に失敗しました"
+    }
+  },
+  "load": {
+    "error": {
+      "description": "カードを読み込めませんでした。存在しないか、権限がない可能性があります。",
+      "title": "カードの読み込みに失敗しました"
+    }
+  },
+  "member": {
+    "assign": {
+      "label": "メンバーを割り当て"
+    },
+    "assignSelf": {
+      "action": "+ 自分に割り当て"
+    },
+    "count_other": "メンバー {{count}}",
+    "empty": "プロジェクトメンバーがいません",
+    "load": {
+      "error": "メンバーの読み込みに失敗しました"
+    },
+    "removeSelf": {
+      "action": "自分の割り当てを解除"
+    }
+  },
+  "permission": {
+    "editRequired": "カードの編集権限が必要です"
+  },
+  "review": {
+    "assign": {
+      "error": "レビュアーの割り当てに失敗しました"
+    },
+    "comment": "（{{comment}}）",
+    "commentField": {
+      "placeholder": "コメント"
+    },
+    "confirm": {
+      "action": "確定して送信",
+      "card": "カード：{{name}}",
+      "comment": "コメント：{{comment}}",
+      "overwrite": "{{time}} の「{{previous}}」のレビューを上書きします",
+      "score": "評価：{{score}}",
+      "title": "レビューの確認",
+      "unchanged": "現在のレビューから変更がないため、送信する内容がありません",
+      "verdict": "判定：{{status}}"
+    },
+    "detail": {
+      "approved": "：承認済み",
+      "rejected": "：差し戻し——"
+    },
+    "score": " {{score}} 点",
+    "scoreLabel": "スコア",
+    "scoreNone": "評価なし",
+    "status": {
+      "aria": "レビュー状況",
+      "pending": "レビュー待ち"
+    },
+    "submit": {
+      "action": "提出",
+      "error": "提出に失敗しました",
+      "success": "レビューを提出しました"
+    },
+    "summary": "{{name}}：{{status}}"
+  },
+  "reviewer": {
+    "assign": {
+      "label": "レビュアーを割り当て"
+    },
+    "count_other": "レビュアー {{count}}",
+    "empty": "レビュアーがいません"
+  },
+  "reviewHistory": {
+    "empty": "レビュー履歴はまだありません",
+    "title": "レビュー履歴"
+  },
+  "section": {
+    "background": "背景セクション",
+    "review": "レビュー",
+    "work": "作業セクション"
+  },
+  "tab": {
+    "activity": "アクティビティ",
+    "attachments": "添付ファイル",
+    "checklists": "チェックリスト",
+    "comments": "コメント",
+    "description": "説明",
+    "details": "詳細"
+  }
+}

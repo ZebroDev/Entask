@@ -1,0 +1,48 @@
+{
+  "board": {
+    "create": "创建看板",
+    "delete": "删除看板",
+    "edit": "编辑看板",
+    "read": "查看看板"
+  },
+  "card": {
+    "assign": "指派卡片",
+    "comment": "评论",
+    "create": "创建卡片",
+    "delete": "删除卡片",
+    "edit": "编辑卡片",
+    "effort": {
+      "update": "更新工时与进度"
+    },
+    "rate": "填写审查评分",
+    "read": "查看卡片",
+    "review": "审查卡片"
+  },
+  "mindmap": {
+    "edit": "编辑思维导图节点"
+  },
+  "project": {
+    "create": "创建项目",
+    "delete": "删除项目",
+    "edit": "编辑项目",
+    "member": {
+      "manage": "管理项目成员"
+    },
+    "read": "查看项目"
+  },
+  "report": {
+    "view": "查看绩效报表"
+  },
+  "team": {
+    "member": {
+      "manage": "管理团队成员"
+    },
+    "read": "查看团队",
+    "role": {
+      "manage": "定义团队角色"
+    },
+    "workcalendar": {
+      "manage": "管理团队工作日历"
+    }
+  }
+}

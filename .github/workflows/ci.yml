@@ -1,0 +1,162 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-test:
+    name: .NET 10 Backend Build & Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: entask_test
+          POSTGRES_USER: entask_app
+          POSTGRES_PASSWORD: TestPassword2026!
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore -c Release
+
+    - name: Run Backend Tests
+      env:
+        ENTASK_TEST_CONNECTION: "Host=localhost;Port=5432;Database=entask_test;Username=entask_app;Password=TestPassword2026!"
+      run: dotnet test --no-build -c Release
+
+  frontend-test:
+    name: React 19 Frontend Tests
+    runs-on: ubuntu-latest
+
+    # 為什麼要等後端：這個 job 裡有五道閘門讀的是 repo 根的 `src/`，而它們的契約前提是
+    # 「這份 C# 編得過」——check:labels / check:errors / check:error-messages /
+    # check:message-values / check:query-filters 都會在 `src/` 上跑一次。
+    # 少了這一行，一份編不過的 C# 可以讓這五道閘門亮綠（掃描器讀的是文字，不需要它能編譯），
+    # 於是「可編譯的 C#」在 CI 上沒有任何機器強制——那正是這些閘門的保證的前提。
+    # 代價（刻意接受）：後端紅時這整個 job 跳過，連只讀 `web/` 的步驟也一起等。
+    needs: backend-test
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js 22
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Install dependencies
+      working-directory: ./web
+      run: npm ci
+
+    # oxlint。私有版在 2026-10-10 補上這一步（當時實查 `grep -n "lint\|oxlint" ci.yml`
+    # ⇒ 0 命中），overlay 版還停在 2026-10-06 的版本、沒有跟著同步（2026-10-16 實查 diff）。
+    # 它只擋 error 級規則——oxlint 預設不因 warning 失敗。
+    - name: Lint frontend
+      working-directory: ./web
+      run: npm run lint
+
+    - name: Run Vitest Suite
+      working-directory: ./web
+      run: npx vitest run --maxWorkers=2
+
+    # locale 檔必須與程式碼同步：有 t() 沒抽取、或有 key 已無人使用，都在這裡紅。
+    - name: Check i18n locale files are up to date
+      working-directory: ./web
+      run: npx i18next-parser --fail-on-update
+
+    # 各語系的 key 集合必須相等（比 key 集合，不是比檔案內容），且每個支援語系都要有
+    # 資源目錄、都要被 resources.ts 匯入——漏了匯入的 namespace 會靜默地退回 fallback 語系。
+    - name: Check locale key parity
+      working-directory: ./web
+      run: npm run i18n:parity
+
+    # 「有沒有翻」——值與 zh-TW 逐字相同的鍵必須列在 locale-copy-whitelist.json 裡。
+    # 唯一的 exit-1 路徑是白名單陳舊（鍵不存在、或已不再與 zh-TW 相同）——那份白名單
+    # 是手維護的，這道檢查就是它唯一的守門員。
+    - name: Check locale copy (untranslated values)
+      working-directory: ./web
+      run: npm run check:copy
+
+    # 後端字串常數 ↔ 前端標籤表的契約鎖。後端加了型別而前端沒加 case 時，活動牆會直接
+    # 印出原始型別字串，而 tsc、vitest、i18next-parser、parity 四個守門員都不會紅。
+    - name: Check backend label tables
+      working-directory: ./web
+      run: npm run check:labels
+
+    # 同一條門檻在 C# 與 TypeScript 各有一份時（前端那幾格是為了著色／決定要不要送請求），
+    # 兩邊的數值與運算子必須相符——而它們不會有任何紅燈。表是人工宣告的，所以它只守
+    # 宣告過的對；每一側都必須命中宣告的次數（0 次＝那一列靜默變成守著空氣）。
+    - name: Check threshold parity (C# vs TypeScript)
+      working-directory: ./web
+      run: npm run check:thresholds
+
+    - name: Check backend error code shapes
+      working-directory: ./web
+      run: npm run check:errors
+
+    # Gate B：C# 訊息表（ErrorMessages.cs）的值 ↔ zh-TW/error.json 同名 key 的值，單向、逐字。
+    # 那兩份是同一語意的兩份副本，改一邊沒改另一邊時新舊前端會顯示不同措辭，
+    # 而四個既有守門員都不會紅。先剝 {{...}} 佔位再比（樣板與成品永遠不可能逐字相等）。
+    - name: Check error message table matches zh-TW locale
+      working-directory: ./web
+      run: npm run check:error-messages
+
+    # Gate C：各端點內嵌的 `message` 字面值 ↔ zh-TW/error.json 同碼的值，雙向的值比對。
+    # 閘門 B 守表、這道守站點，兩者的聯集＝今天所有會進 `{code, message}` body 的字面值。
+    - name: Check inline message literals match zh-TW locale
+      working-directory: ./web
+      run: npm run check:message-values
+
+    # EF 全域 query filter（`CardReview.RemovedAt == null`）的破例只准有一處：FPY 的分母要的是
+    # 「曾指派過審查者」，其他查詢一律只該看得到現任者。多一處就是靜默的——rollup、待我審查、
+    # 報表統計都會跟著看到已移除的指派，而沒有任何測試會紅。裁定與已知盲區見該檔檔頭。
+    - name: Check query filter exceptions
+      working-directory: ./web
+      run: npm run check:query-filters
+
+    # 前端只有一個錯誤出口 `apiErrorMessage(error, fallback)`：直接讀 `error.message` 拿到的是
+    # axios 的傳輸層字串，不是伺服器說的話。另一條是巢狀 `t()`：i18next-parser 抽不到內層，
+    # keepRemoved: false 會把那條 key 從語系檔刪掉，畫面只顯示 key 本身，而 tsc -b、vitest、
+    # parity 全都不會紅。兩條都是 AST 掃描（不是 grep），見該檔檔頭的已知盲區。
+    - name: Check error paths (raw .message / nested t())
+      working-directory: ./web
+      run: npm run check:error-paths
+
+    - name: Build Frontend SPA
+      working-directory: ./web
+      run: npm run build
+
+  secrets-scan:
+    name: Secret Scan (gitleaks)
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # gitleaks-action 對個人帳號免費（組織帳號需授權）。
+    - uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

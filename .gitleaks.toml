@@ -1,0 +1,36 @@
+# .gitleaks.toml — 公開庫的機密掃描設定（CI 的 secrets-scan job 讀這一份）
+#
+# 為什麼需要這一份：`gitleaks/gitleaks-action` 用的是**預設規則集**，而公開樹裡有幾個
+# 「刻意公開、不是機密」的值。allowlist 只放行這幾條**具體字面值**，不動其餘規則——
+# 放行整個檔案或整個目錄，會讓真正的機密從那個洞溜出去。
+#
+# 為什麼是 .gitleaks.toml 而不是 .gitleaksignore：後者的每一筆是
+# `<commit>:<file>:<rule>:<line>` 指紋，得先有一個已存在的 commit 才寫得出來，而且
+# 檔案一搬、行號一動就失效。這裡要處理的是「內容本身」，用內容比對才是對的層級。
+#
+# 2026-10-16 實測（gitleaks 8.30.1、`detect --no-git`，未加本檔）：基準跑**只有 1 筆**
+# 命中——tests/Entask.Tests/AuthErrorBodyTests.cs:196（規則 generic-api-key，熵 4.51）。
+# 另外兩個值（GitHub Actions 服務容器的拋棄式測試密碼、開發預設帳密）**當天不命中**；
+# 仍然列在這裡，是因為它們是刻意公開的拋棄式值——規則集換版時不該重新變成紅燈。
+#
+# 這一份是「公開庫」的設定；私有庫有自己的一套（tools/public-export/denylist.txt ＋
+# allowlist.txt）在守同一批字面值，兩者互不取代。
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "刻意公開的測試 fixture 與拋棄式憑證——逐條理由見下方註解"
+# 預設只比對「被擷取到的密鑰字串」；改成整行比對，才不會因為規則的正則怎麼切
+# 而時靈時不靈（例如含 @ 的值不會被 generic-api-key 的擷取類別整個吃下）。
+regexTarget = "line"
+regexes = [
+  # HS256 的密鑰長度必須 ≥ 256 bits，所以這條 fixture 不能縮短——它測的是「簽章不對」
+  # 時挑戰標頭不得洩漏失敗分類（RFC 6750 §3）。字串本身是測試標的，不是憑證。
+  '''wrong-secret-0123456789abcdef0123456789ab''',
+  # GitHub Actions 的 postgres service：每次 run 重建，只綁在 runner 內部、不對外開放。
+  '''TestPassword2026!''',
+  # 開發預設帳密：README 已標明僅限本機開發；任何對外可及的部署一律自設憑證
+  # （compose 堆疊強制 .env 的 ADMIN_PASSWORD）。
+  '''Entask@Dev2026''',
+]

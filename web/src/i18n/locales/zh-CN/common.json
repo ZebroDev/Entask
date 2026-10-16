@@ -1,0 +1,224 @@
+{
+  "action": {
+    "add": "新建",
+    "archive": "归档",
+    "cancel": "取消",
+    "close": "关闭",
+    "confirm": "确定",
+    "copy": "复制",
+    "create": "创建",
+    "deactivate": "停用",
+    "delete": "删除",
+    "edit": "编辑",
+    "loadMore": "加载更多",
+    "reactivate": "恢复",
+    "remove": "移除",
+    "retry": "重试",
+    "save": "保存",
+    "saveChanges": "保存更改",
+    "unarchive": "取消归档",
+    "update": "更新",
+    "view": "查看"
+  },
+  "audit": {
+    "actorUnknown": "未知用户"
+  },
+  "column": {
+    "actions": "操作"
+  },
+  "connection": {
+    "offline": "实时同步连接已离线",
+    "reconnecting": "实时网络连接已中断，正在尝试自动重新连接…",
+    "restored": "实时连接已恢复，最新数据已自动同步！",
+    "retry": {
+      "action": "重试连接"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}}（{{weekday}}）",
+    "range": "{{from}} – {{to}}",
+    "rangeWithWeek": "{{from}} – {{to}}（{{week}}）",
+    "weekOfYear": "第 {{week}} 周"
+  },
+  "error": {
+    "archive": "归档失败",
+    "assign": "指派失败",
+    "assignDetail": "指派失败：{{detail}}",
+    "copy": "复制失败",
+    "create": "创建失败",
+    "createDetail": "创建失败：{{detail}}",
+    "delete": "删除失败",
+    "deleteDetail": "删除失败：{{detail}}",
+    "download": "下载失败，请稍后重试",
+    "export": "导出失败，请稍后重试",
+    "load": "加载失败",
+    "loadDetail": "加载失败：{{detail}}",
+    "loadRetry": "加载失败，请稍后再试",
+    "move": "移动失败",
+    "operation": "操作失败",
+    "remove": "移除失败",
+    "removeDetail": "移除失败：{{detail}}",
+    "rename": "重命名失败",
+    "restore": "取消归档失败",
+    "save": "保存失败",
+    "saveDetail": "保存失败：{{detail}}",
+    "toggleCompletion": "标记完成失败",
+    "tryLater": "请稍后重试",
+    "update": "更新失败",
+    "upload": "上传失败"
+  },
+  "fieldScope": {
+    "board": "看板",
+    "project": "项目"
+  },
+  "fieldType": {
+    "checkbox": "复选框",
+    "date": "日期",
+    "member": "成员",
+    "number": "数字",
+    "select": "下拉菜单",
+    "text": "文本"
+  },
+  "filter": {
+    "all": "全部",
+    "assignedToMe": "指派给我",
+    "dueToday": "今日到期"
+  },
+  "member": {
+    "display": "{{name}}（{{username}}）"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "导航路径",
+      "userMenu": "用户菜单"
+    },
+    "board": "看板",
+    "logout": "退出登录",
+    "myProjects": "我的项目",
+    "myTasks": "个人工作台",
+    "myWorklog": "我的日志",
+    "project": "项目",
+    "projectDetail": "项目详情",
+    "projects": "项目",
+    "search": "搜索",
+    "selectTeam": "选择团队",
+    "shortcuts": "快捷键手册（?）",
+    "teams": "团队",
+    "teamSettings": "团队设置",
+    "userSettings": "个人设置"
+  },
+  "notFound": {
+    "back": {
+      "action": "返回上一页"
+    },
+    "description": "此网址可能已被移除、重命名，或是您尚未获得此项目或看板的访问权限。",
+    "projects": {
+      "action": "回到我的项目"
+    },
+    "title": "找不到您请求的页面"
+  },
+  "period": {
+    "custom": "自定义期间",
+    "from": "开始日期",
+    "to": "结束日期"
+  },
+  "reviewStatus": {
+    "tooltip": "审查状态：{{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_other": "卡片（{{count}}）"
+    },
+    "comments": {
+      "heading_other": "评论（{{count}}）",
+      "onCard": "所在卡片：{{title}}"
+    },
+    "empty": "无搜索结果",
+    "hint": {
+      "cards": "搜索卡片、思维导图…",
+      "compact": "搜索…",
+      "projects": "搜索项目…"
+    },
+    "minLength": "请输入至少 2 个字符",
+    "nodes": {
+      "heading_other": "思维导图节点（{{count}}）"
+    },
+    "open": {
+      "hint": "点击打开 →"
+    },
+    "placeholder": "搜索卡片、评论、思维导图节点…",
+    "projects": {
+      "empty": "没有匹配的项目",
+      "heading_other": "我的项目（{{count}}）",
+      "placeholder": "搜索并前往项目…"
+    }
+  },
+  "select": {
+    "placeholder": "请选择…"
+  },
+  "separator": {
+    "label": "：",
+    "list": "、"
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "创建卡片并连续新建下一张"
+    },
+    "createCard": {
+      "label": "快速新建卡片"
+    },
+    "description": "使用键盘快捷键快速流畅地管理你的任务与项目",
+    "escape": {
+      "label": "关闭弹窗 / 取消焦点"
+    },
+    "help": {
+      "label": "打开快捷键手册"
+    },
+    "hint": "提示：打字或在输入框中时，单键快捷键会自动停用以保护输入内容。",
+    "quickFilter": {
+      "label": "切换个人任务筛选（指派给我）"
+    },
+    "search": {
+      "label": "全局搜索 / 命令面板"
+    },
+    "section": {
+      "board": "看板与卡片操作",
+      "navigation": "全站导航与指令"
+    },
+    "submit": {
+      "label": "提交保存 / 创建"
+    },
+    "title": "键盘快捷键手册"
+  },
+  "sourceOffer": {
+    "link": "源代码 (AGPL-3.0)",
+    "title": "查看此版本对应的源代码（AGPL-3.0 授权）"
+  },
+  "state": {
+    "approved": "通过",
+    "archived": "归档",
+    "assigning": "指派中…",
+    "completed": "已完成",
+    "copying": "复制中…",
+    "creating": "创建中…",
+    "deactivated": "已停用",
+    "deleting": "删除中…",
+    "loading": "加载中…",
+    "overdue": "已逾期",
+    "pending": "待审查",
+    "rejected": "驳回",
+    "saved": "已保存",
+    "saving": "保存中…",
+    "searching": "搜索中…",
+    "signingIn": "登录中…",
+    "unavailable": "内容无法显示",
+    "updating": "更新中…",
+    "uploading": "上传中…"
+  },
+  "theme": {
+    "dark": "深色",
+    "light": "浅色",
+    "system": "系统默认",
+    "toggle": "切换主题"
+  }
+}

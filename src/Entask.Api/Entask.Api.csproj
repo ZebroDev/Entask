@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entask.Core\Entask.Core.csproj" />
+    <ProjectReference Include="..\Entask.Infrastructure\Entask.Infrastructure.csproj" />
+    <ProjectReference Include="..\Entask.Identity\Entask.Identity.csproj" />
+    <ProjectReference Include="..\Entask.Board\Entask.Board.csproj" />
+    <ProjectReference Include="..\Entask.MindMap\Entask.MindMap.csproj" />
+    <ProjectReference Include="..\Entask.Performance\Entask.Performance.csproj" />
+  </ItemGroup>
+
+  <!-- 匯出檔的標籤。內嵌而非複製到輸出目錄：.xls 的產生是同步的字串組裝，
+       讀檔會讓「檔案不在」變成執行期例外，而內嵌資源不存在時是編譯期就少一個資源。
+       WithCulture="false" 是必要的：檔名符合 SDK 的「名稱.文化.副檔名」慣例，
+       AssignCulture 會把 export.en.json／export.zh-TW.json 判成文化專屬資源而編進
+       附屬組件（obj/.../en/Entask.Api.resources.dll），主組件的 GetManifestResourceNames()
+       便一份都列不到——ExportLabels 正是用它列舉語系的。
+       Content Remove 也是必要的：Web SDK 的預設 glob 把 **/*.json 當 Content 複製到輸出與
+       發行目錄，不移除的話上面「而非複製到輸出目錄」就是假的，且那份副本沒有任何讀取者。 -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\export.*.json" WithCulture="false" />
+    <Content Remove="Resources\export.*.json" />
+  </ItemGroup>
+
+</Project>

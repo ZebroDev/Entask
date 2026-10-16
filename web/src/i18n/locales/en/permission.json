@@ -1,0 +1,48 @@
+{
+  "board": {
+    "create": "Create board",
+    "delete": "Delete board",
+    "edit": "Edit board",
+    "read": "View board"
+  },
+  "card": {
+    "assign": "Assign card",
+    "comment": "Comment",
+    "create": "Create card",
+    "delete": "Delete card",
+    "edit": "Edit card",
+    "effort": {
+      "update": "Update hours and progress"
+    },
+    "rate": "Submit review scores",
+    "read": "View card",
+    "review": "Review card"
+  },
+  "mindmap": {
+    "edit": "Edit mind map nodes"
+  },
+  "project": {
+    "create": "Create project",
+    "delete": "Delete project",
+    "edit": "Edit project",
+    "member": {
+      "manage": "Manage project members"
+    },
+    "read": "View project"
+  },
+  "report": {
+    "view": "View team reports"
+  },
+  "team": {
+    "member": {
+      "manage": "Manage team members"
+    },
+    "read": "View team",
+    "role": {
+      "manage": "Define team roles"
+    },
+    "workcalendar": {
+      "manage": "Manage team work calendar"
+    }
+  }
+}

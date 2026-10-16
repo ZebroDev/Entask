@@ -1,0 +1,164 @@
+{
+  "avatar": {
+    "removed": "프로필 사진이 제거되었습니다",
+    "removeError": "프로필 사진 제거에 실패했습니다",
+    "updated": "프로필 사진이 업데이트되었습니다",
+    "updateError": "프로필 사진 업데이트에 실패했습니다",
+    "upload": {
+      "action": "새 프로필 사진 업로드",
+      "hint": "JPG, PNG, WEBP를 지원합니다. 최대 5MB."
+    }
+  },
+  "card": {
+    "markComplete": "완료로 표시",
+    "markIncomplete": "미완료로 표시",
+    "openBoard": {
+      "aria": "카드가 있는 보드 열기"
+    },
+    "overdue": {
+      "suffix": " (기한 초과)"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "모든 작업을 완료했습니다. 잠시 쉬어 가십시오! C 키를 누르면 카드를 빠르게 추가할 수 있습니다.",
+      "completed": "아직 완료한 카드가 없습니다. 작업을 완료하면 여기에 쌓입니다.",
+      "title": "조건에 맞는 카드가 없습니다"
+    }
+  },
+  "error": {
+    "loadDetail": "워크스페이스 불러오기에 실패했습니다: {{detail}}"
+  },
+  "filter": {
+    "reviews": "리뷰 대기"
+  },
+  "notification": {
+    "approved": {
+      "body": "{{actor}}님이 “{{card}}” 카드의 리뷰를 제출했습니다{{score}}",
+      "title": "리뷰 승인"
+    },
+    "assigned": {
+      "body": "“{{card}}” 카드에 할당되었습니다",
+      "description": "새 카드가 할당되면",
+      "label": "할당된 작업",
+      "title": "카드 할당 알림"
+    },
+    "bell": {
+      "aria": "알림 센터"
+    },
+    "comment": {
+      "body": "“{{card}}” 카드에 {{actor}}의 댓글이 달렸습니다",
+      "description": "참여 중인 카드에 새 댓글이 달리면",
+      "label": "새 댓글",
+      "title": "새 댓글 알림"
+    },
+    "empty": "아직 알림이 없습니다",
+    "fallback": {
+      "body": "새 알림이 있습니다",
+      "title": "알림"
+    },
+    "markAllRead": {
+      "action": "모두 읽음으로 표시"
+    },
+    "rejected": {
+      "body": "{{actor}}님이 “{{card}}” 카드의 리뷰를 반려했습니다{{score}}",
+      "title": "리뷰 반려"
+    },
+    "review": {
+      "body": "“{{card}}” 카드의 리뷰어로 할당되었습니다",
+      "description": "리뷰어로 추가되거나 리뷰 상태가 변경되면",
+      "label": "리뷰 요청 / 반려",
+      "title": "리뷰 요청"
+    },
+    "scoreSuffix": ". 점수 {{score}}",
+    "system": {
+      "description": "중요한 시스템 업데이트 또는 점검 알림",
+      "label": "시스템 공지"
+    },
+    "time": {
+      "justNow": "방금 전"
+    },
+    "title": "협업 알림 센터",
+    "unread_other": "{{count}} 읽지 않음"
+  },
+  "page": {
+    "description": "모든 프로젝트의 할 일과 리뷰 흐름을 한곳에서 관리하십시오"
+  },
+  "password": {
+    "bothRequired": "현재 비밀번호와 새 비밀번호를 모두 입력하십시오",
+    "change": {
+      "action": "비밀번호 업데이트",
+      "label": "비밀번호 변경"
+    },
+    "current": {
+      "placeholder": "현재 비밀번호"
+    },
+    "new": {
+      "placeholder": "새 비밀번호"
+    },
+    "updated": "비밀번호가 업데이트되었습니다",
+    "updateError": "비밀번호 업데이트에 실패했습니다"
+  },
+  "preferences": {
+    "loadError": "알림 설정을 불러올 수 없습니다",
+    "save": {
+      "action": "알림 설정 저장"
+    },
+    "saved": "알림 설정이 저장되었습니다"
+  },
+  "profile": {
+    "displayName": {
+      "label": "표시 이름",
+      "required": "표시 이름은 비워 둘 수 없습니다"
+    },
+    "updated": "프로필이 업데이트되었습니다",
+    "updateError": "프로필 업데이트에 실패했습니다"
+  },
+  "review": {
+    "open": {
+      "action": "리뷰 시작"
+    },
+    "pending": {
+      "badge": "리뷰 대기"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "팀 멤버가 리뷰어로 할당해 주면 관련 카드가 여기에 바로 표시됩니다",
+      "title": "훌륭합니다. 지금은 리뷰할 카드가 없습니다."
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "브라우저 설정 사용",
+      "hint": "인터페이스 텍스트와 날짜 형식이 함께 변경됩니다. 브라우저 설정을 사용하면 브라우저의 언어 설정을 따릅니다.",
+      "label": "인터페이스 언어"
+    },
+    "tab": {
+      "account": "개인 계정",
+      "language": "언어",
+      "notifications": "알림 설정"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "오늘 제출해야 하는 항목"
+    },
+    "inProgress": {
+      "hint": "모든 프로젝트의 할당 합계",
+      "label": "진행 중인 할 일"
+    },
+    "overdue": {
+      "hint": "우선 처리해야 하는 작업"
+    },
+    "reviews": {
+      "hint": "팀이 승인을 기다리고 있습니다"
+    }
+  },
+  "tab": {
+    "completed_other": "완료됨 ({{count}})",
+    "dueToday_other": "오늘 마감 ({{count}})",
+    "inProgress_other": "진행 중 ({{count}})",
+    "overdue_other": "기한 초과 ({{count}})"
+  }
+}

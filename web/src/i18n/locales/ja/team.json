@@ -1,0 +1,327 @@
+{
+  "activity": {
+    "empty": "アクティビティはまだありません"
+  },
+  "audit": {
+    "board": {
+      "created": "ボードを作成しました",
+      "deleted": "ボードを削除しました",
+      "updated": "ボードを更新しました"
+    },
+    "card": {
+      "created": "カードを作成しました",
+      "deleted": "カードを削除しました"
+    },
+    "customField": {
+      "created": "カスタムフィールドを作成しました",
+      "deleted": "カスタムフィールドを削除しました",
+      "updated": "カスタムフィールドを更新しました"
+    },
+    "member": {
+      "assigned": "メンバーを割り当てました",
+      "removed": "メンバーを削除しました"
+    },
+    "project": {
+      "created": "プロジェクトを作成しました",
+      "deleted": "プロジェクトを削除しました",
+      "updated": "プロジェクトを更新しました"
+    },
+    "projectMember": {
+      "added": "プロジェクトメンバーを追加しました",
+      "removed": "プロジェクトメンバーを削除しました",
+      "updated": "プロジェクトメンバーのロールを更新しました"
+    },
+    "role": {
+      "created": "ロールを作成しました",
+      "deleted": "ロールを削除しました",
+      "updated": "ロールを更新しました"
+    },
+    "team": {
+      "created": "チームを作成しました",
+      "updated": "チームを更新しました"
+    },
+    "user": {
+      "created": "ユーザーを作成しました",
+      "deactivated": "アカウントを無効化",
+      "deleted": "アカウントを削除",
+      "passwordReset": "パスワードをリセットしました",
+      "reactivated": "アカウントを復元"
+    },
+    "workCalendar": {
+      "deleted": "勤務カレンダーを削除しました",
+      "updated": "勤務カレンダーを更新しました"
+    }
+  },
+  "create": {
+    "action": "チームを作成",
+    "assign": {
+      "failed": "チームは作成されましたが、チームマネージャーを自動で割り当てできませんでした。手動でご自身をメンバーに追加してください。"
+    },
+    "confirm": {
+      "action": "作成を確定"
+    },
+    "error": "チームの作成に失敗しました",
+    "name": {
+      "placeholder": "例：コア開発チーム、プロダクト運営チーム",
+      "required": "チーム名を入力してください"
+    },
+    "success": "チームを作成しました",
+    "title": "新しいチームを作成"
+  },
+  "description": {
+    "label": "チームの説明（任意）",
+    "placeholder": "例：フルスタック製品開発とアジャイル開発を担当"
+  },
+  "edit": {
+    "error": "チームの更新に失敗しました",
+    "name": {
+      "placeholder": "例：コアプロジェクトチーム",
+      "required": "チーム名は空にできません"
+    },
+    "success": "チーム情報を更新しました",
+    "title": "チーム情報を編集"
+  },
+  "member": {
+    "assign": {
+      "action": "メンバーを割り当て",
+      "confirm": {
+        "action": "メンバーの割り当てを確定"
+      },
+      "required": "メンバーを選択し、少なくとも 1 つのロールにチェックを入れてください",
+      "roles": {
+        "label": "割り当てるロール（複数選択可）"
+      },
+      "select": {
+        "label": "割り当てるメンバーを選択"
+      },
+      "success": "メンバーを割り当てました",
+      "title": "チームへのメンバー割り当て"
+    },
+    "empty": "メンバーがいません",
+    "heading": "メンバー（{{n}}）",
+    "remove": {
+      "confirm": "「{{name}}」をこのチームから削除しますか？このメンバーはこのチームに関連する権限を失います。この操作は元に戻せません。",
+      "success": "メンバーを削除しました",
+      "title": "メンバーを削除"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "他のチームのメンバーが見つかりません",
+        "heading": "他のチームのメンバー",
+        "hint": "3 文字以上入力すると、他のチームのメンバーを検索できます",
+        "loading": "検索中…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "変更"
+      },
+      "loading": "ユーザー一覧を読み込み中…",
+      "noMatch": "「{{query}}」に一致するユーザーが見つかりません",
+      "search": {
+        "placeholder": "名前またはアカウントを入力して絞り込み…"
+      }
+    }
+  },
+  "name": {
+    "label": "チーム名"
+  },
+  "nav": {
+    "selectTeam": "← チームを選択"
+  },
+  "permissionCategory": {
+    "board": "ボード",
+    "card": "カード",
+    "mindmap": "マインドマップ",
+    "project": "プロジェクト",
+    "report": "レポート",
+    "team": "チーム"
+  },
+  "report": {
+    "column": {
+      "averageScore": "平均スコア",
+      "completed": "完了 / 総カード数",
+      "firstPassYield": "初回提出通過率",
+      "member": "メンバー",
+      "profile": "プロフィール",
+      "rank": "順位",
+      "rating": "年末評価"
+    },
+    "dossier": {
+      "account": "アカウント：@{{username}}",
+      "action": "プロフィールを表示",
+      "criteria": "評価基準：達成率と納期遵守率がともに 85% 以上、かつ初回提出通過率が 80% 以上の場合は S 評価、達成率 70% 以上の場合は A 評価、達成率 50% 以上の場合は B 評価。",
+      "period": "評価期間",
+      "print": {
+        "action": "評価表を印刷 / PDF として保存"
+      },
+      "rating": "総合評価",
+      "signature": "部門責任者署名：_________________________",
+      "signDate": "承認日：_______ 年 ____ 月 ____ 日",
+      "supervisor": {
+        "hint": "（この欄は直属の上司が評価コメント、年間賞与の査定、キャリア育成目標を記入するか、システム承認の注記に使用します）",
+        "label": "上司評価と年間承認コメント："
+      },
+      "title": "{{name}} の業績評価表"
+    },
+    "empty": "パフォーマンスデータがまだありません",
+    "export": {
+      "csv": {
+        "action": "CSV 集計表をエクスポート"
+      },
+      "excel": {
+        "action": "Excel 総合表をエクスポート"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_other": "{{done}} / {{count}} 枚のタスクカードを完了",
+        "title": "チーム全体のタスク達成率"
+      },
+      "delivered": {
+        "hint": "選択期間内に全プロジェクトで提出済み",
+        "title": "総完了カード数",
+        "value_other": "{{count}} 枚"
+      },
+      "hours": {
+        "hint": "チームの工数報告の合計",
+        "title": "累計投入工数"
+      },
+      "topPerformers": {
+        "hint": "S/A 評価の基準を達成",
+        "title": "高パフォーマンスメンバー（S/A）",
+        "value_other": "{{count}} 名"
+      }
+    },
+    "metric": {
+      "completion": "達成率",
+      "onTime": "納期遵守率"
+    },
+    "ranking": {
+      "description": "タスク達成率・納期遵守率・初回提出通過率に基づいて総合評価を算出",
+      "title": "チームメンバー業績ランキング"
+    },
+    "rating": {
+      "a": "A 優良",
+      "b": "B 良好",
+      "c": "C 要改善",
+      "s": "S 卓越"
+    },
+    "sampleCount_other": "{{count}} 件",
+    "sampleInsufficient": "サンプル不足",
+    "stat": {
+      "completed": "完了タスク数",
+      "completion": "タスク達成率",
+      "hours": "累計報告工数"
+    },
+    "year": {
+      "all": "全期間",
+      "empty": "選択した期間のパフォーマンスデータがありません",
+      "label": "年度"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "ロールを追加",
+      "title": "ロールを追加"
+    },
+    "custom": {
+      "badge": "カスタム"
+    },
+    "delete": {
+      "confirm": "ロール「{{name}}」を削除しますか？この操作は元に戻せません。",
+      "error": "削除に失敗しました（まだ割り当てられているメンバーがいる可能性があります）",
+      "success": "ロールを削除しました",
+      "title": "ロールを削除"
+    },
+    "description": {
+      "label": "説明"
+    },
+    "edit": {
+      "title": "ロールを編集"
+    },
+    "heading": "ロール",
+    "name": {
+      "label": "名前",
+      "required": "ロール名を入力してください"
+    },
+    "system": {
+      "badge": "システムテンプレート"
+    },
+    "template": {
+      "badge": "テンプレート"
+    }
+  },
+  "roleName": {
+    "eng_lead": "エンジニアリングリード",
+    "engineer": "エンジニア",
+    "project_assistant": "プロジェクトアシスタント",
+    "project_manager": "プロジェクト管理者",
+    "qa_engineer": "QAエンジニア",
+    "team_manager": "チームマネージャー"
+  },
+  "select": {
+    "current": "現在のチーム",
+    "empty": {
+      "action": "最初のチームを作成",
+      "description": "チームがまだありません。システム管理者として、今すぐチームを作成して利用を開始できます。"
+    },
+    "enter": {
+      "action": "入る"
+    },
+    "noPermission": {
+      "description": "現在のロール（エンジニアなど）では、割り当てられたプロジェクトとタスクのみに参加でき、チーム設定の管理画面にはアクセスできません。日常の作業には「マイプロジェクト」または「マイタスク」をご利用ください。",
+      "title": "現在のロールにはチーム管理権限がありません"
+    },
+    "noTeam": {
+      "description": "現在どのチームにも割り当てられていません。システム管理者またはチームマネージャーに、チームとプロジェクトの割り当てをご依頼ください。",
+      "title": "まだどのチームにも参加していません"
+    },
+    "projects": {
+      "action": "マイプロジェクトへ"
+    },
+    "tasks": {
+      "action": "マイタスク"
+    }
+  },
+  "tab": {
+    "activity": "アクティビティ",
+    "members": "メンバー",
+    "report": "レポート",
+    "roles": "ロール",
+    "worklog": "ワークログ"
+  },
+  "user": {
+    "admin": {
+      "label": "システム管理者（Admin）権限を付与"
+    },
+    "create": {
+      "action": "ユーザーアカウントを追加",
+      "confirm": {
+        "action": "作成を確定"
+      },
+      "empty": {
+        "action": "今すぐアカウントを作成"
+      },
+      "error": "アカウントの作成に失敗しました",
+      "inline": {
+        "action": "+ 新しいアカウントを作成"
+      },
+      "required": "アカウント、表示名、パスワードをすべて入力してください",
+      "success": "ユーザーアカウント「{{name}}」を作成しました",
+      "title": "新しいユーザーアカウントを作成"
+    },
+    "displayName": {
+      "label": "名前 / 表示名",
+      "placeholder": "例：山田太郎、Alice Wang"
+    },
+    "password": {
+      "label": "初期パスワード（8 文字以上）",
+      "minLength": "パスワードは 8 文字以上で入力してください"
+    },
+    "username": {
+      "label": "ログインアカウント",
+      "placeholder": "例：bob、alice_dev"
+    }
+  }
+}

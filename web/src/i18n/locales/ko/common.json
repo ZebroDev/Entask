@@ -1,0 +1,224 @@
+{
+  "action": {
+    "add": "추가",
+    "archive": "보관",
+    "cancel": "취소",
+    "close": "닫기",
+    "confirm": "확인",
+    "copy": "복사",
+    "create": "생성",
+    "deactivate": "비활성화",
+    "delete": "삭제",
+    "edit": "편집",
+    "loadMore": "더 보기",
+    "reactivate": "복원",
+    "remove": "제거",
+    "retry": "재시도",
+    "save": "저장",
+    "saveChanges": "변경 사항 저장",
+    "unarchive": "보관 해제",
+    "update": "업데이트",
+    "view": "보기"
+  },
+  "audit": {
+    "actorUnknown": "알 수 없는 사용자"
+  },
+  "column": {
+    "actions": "작업"
+  },
+  "connection": {
+    "offline": "실시간 동기화 연결이 오프라인 상태입니다",
+    "reconnecting": "실시간 네트워크 연결이 끊어졌으며 자동으로 다시 연결을 시도하는 중입니다…",
+    "restored": "실시간 연결이 복구되었으며 최신 데이터가 자동으로 동기화되었습니다!",
+    "retry": {
+      "action": "연결 재시도"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}} ({{weekday}})",
+    "range": "{{from}} – {{to}}",
+    "rangeWithWeek": "{{from}} – {{to}} ({{week}})",
+    "weekOfYear": "{{week}}주차"
+  },
+  "error": {
+    "archive": "보관에 실패했습니다",
+    "assign": "할당에 실패했습니다",
+    "assignDetail": "할당에 실패했습니다: {{detail}}",
+    "copy": "복사에 실패했습니다",
+    "create": "생성에 실패했습니다",
+    "createDetail": "생성에 실패했습니다: {{detail}}",
+    "delete": "삭제에 실패했습니다",
+    "deleteDetail": "삭제에 실패했습니다: {{detail}}",
+    "download": "다운로드에 실패했습니다. 잠시 후 다시 시도하십시오.",
+    "export": "내보내기에 실패했습니다. 잠시 후 다시 시도하십시오.",
+    "load": "불러오기에 실패했습니다",
+    "loadDetail": "불러오기에 실패했습니다: {{detail}}",
+    "loadRetry": "불러오기에 실패했습니다. 잠시 후 다시 시도하십시오.",
+    "move": "이동에 실패했습니다",
+    "operation": "작업에 실패했습니다",
+    "remove": "제거에 실패했습니다",
+    "removeDetail": "제거에 실패했습니다: {{detail}}",
+    "rename": "이름 변경에 실패했습니다",
+    "restore": "보관 해제에 실패했습니다",
+    "save": "저장에 실패했습니다",
+    "saveDetail": "저장에 실패했습니다: {{detail}}",
+    "toggleCompletion": "완료 표시에 실패했습니다",
+    "tryLater": "잠시 후 다시 시도하십시오",
+    "update": "업데이트에 실패했습니다",
+    "upload": "업로드에 실패했습니다"
+  },
+  "fieldScope": {
+    "board": "보드",
+    "project": "프로젝트"
+  },
+  "fieldType": {
+    "checkbox": "체크박스",
+    "date": "날짜",
+    "member": "멤버",
+    "number": "숫자",
+    "select": "드롭다운",
+    "text": "텍스트"
+  },
+  "filter": {
+    "all": "전체",
+    "assignedToMe": "나에게 할당됨",
+    "dueToday": "오늘 마감"
+  },
+  "member": {
+    "display": "{{name}} ({{username}})"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "탐색 경로",
+      "userMenu": "사용자 메뉴"
+    },
+    "board": "보드",
+    "logout": "로그아웃",
+    "myProjects": "내 프로젝트",
+    "myTasks": "개인 워크스페이스",
+    "myWorklog": "내 업무 일지",
+    "project": "프로젝트",
+    "projectDetail": "프로젝트 상세",
+    "projects": "프로젝트",
+    "search": "검색",
+    "selectTeam": "팀 선택",
+    "shortcuts": "단축키 안내 (?)",
+    "teams": "팀",
+    "teamSettings": "팀 설정",
+    "userSettings": "개인 설정"
+  },
+  "notFound": {
+    "back": {
+      "action": "이전 페이지로 돌아가기"
+    },
+    "description": "이 URL은 삭제되었거나 이름이 변경되었을 수 있으며, 해당 프로젝트나 보드에 대한 접근 권한이 아직 없을 수도 있습니다",
+    "projects": {
+      "action": "내 프로젝트로 돌아가기"
+    },
+    "title": "요청하신 페이지를 찾을 수 없습니다"
+  },
+  "period": {
+    "custom": "사용자 지정 기간",
+    "from": "시작일",
+    "to": "종료일"
+  },
+  "reviewStatus": {
+    "tooltip": "리뷰 상태: {{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_other": "카드 ({{count}})"
+    },
+    "comments": {
+      "heading_other": "댓글 ({{count}})",
+      "onCard": "카드: {{title}}"
+    },
+    "empty": "검색 결과가 없습니다",
+    "hint": {
+      "cards": "카드, 마인드맵 검색…",
+      "compact": "검색…",
+      "projects": "프로젝트 검색…"
+    },
+    "minLength": "2자 이상 입력하십시오",
+    "nodes": {
+      "heading_other": "마인드맵 노드 ({{count}})"
+    },
+    "open": {
+      "hint": "클릭하여 열기 →"
+    },
+    "placeholder": "카드, 댓글, 마인드맵 노드 검색…",
+    "projects": {
+      "empty": "일치하는 프로젝트가 없습니다",
+      "heading_other": "내 프로젝트 ({{count}})",
+      "placeholder": "프로젝트 검색 및 이동…"
+    }
+  },
+  "select": {
+    "placeholder": "선택하십시오…"
+  },
+  "separator": {
+    "label": ": ",
+    "list": ", "
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "카드 생성 후 다음 카드도 연속 추가"
+    },
+    "createCard": {
+      "label": "카드 빠른 추가"
+    },
+    "description": "키보드 단축키로 작업과 프로젝트를 빠르고 매끄럽게 관리할 수 있습니다",
+    "escape": {
+      "label": "팝업 닫기 / 포커스 해제"
+    },
+    "help": {
+      "label": "단축키 안내 열기"
+    },
+    "hint": "안내: 입력 중이거나 입력란에 포커스가 있을 때는 단일 키 단축키가 자동으로 비활성화되어 입력 내용을 보호합니다",
+    "quickFilter": {
+      "label": "개인 작업 필터 전환 (나에게 할당됨)"
+    },
+    "search": {
+      "label": "전역 검색 / 명령 팔레트"
+    },
+    "section": {
+      "board": "보드 및 카드 작업",
+      "navigation": "사이트 전체 내비게이션 및 명령"
+    },
+    "submit": {
+      "label": "저장 / 생성 실행"
+    },
+    "title": "키보드 단축키 안내"
+  },
+  "sourceOffer": {
+    "link": "소스 코드 (AGPL-3.0)",
+    "title": "이 버전에 대응하는 소스 코드 보기(AGPL-3.0 라이선스)"
+  },
+  "state": {
+    "approved": "승인됨",
+    "archived": "보관됨",
+    "assigning": "할당 중…",
+    "completed": "완료됨",
+    "copying": "복사 중…",
+    "creating": "생성 중…",
+    "deactivated": "비활성",
+    "deleting": "삭제 중…",
+    "loading": "불러오는 중…",
+    "overdue": "기한 초과",
+    "pending": "리뷰 대기",
+    "rejected": "반려됨",
+    "saved": "저장됨",
+    "saving": "저장 중…",
+    "searching": "검색 중…",
+    "signingIn": "로그인 중…",
+    "unavailable": "콘텐츠를 표시할 수 없습니다",
+    "updating": "업데이트 중…",
+    "uploading": "업로드 중…"
+  },
+  "theme": {
+    "dark": "다크 테마",
+    "light": "라이트 테마",
+    "system": "시스템 기본값",
+    "toggle": "테마 전환"
+  }
+}

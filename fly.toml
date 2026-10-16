@@ -1,0 +1,49 @@
+# fly.toml app configuration file for Entask
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "<your-app-name>"
+primary_region = "sin"
+
+[build]
+  dockerfile = "Dockerfile.fly"
+
+[env]
+  ASPNETCORE_ENVIRONMENT = "Production"
+  Jwt__Issuer = "entask"
+  Jwt__Audience = "entask-web"
+  Seed__AdminUsername = "admin"
+  # 轉送標頭（2026-10-12）：fly 的邊緣 proxy 會**覆寫** Fly-* 家族的標頭（客戶端偽造
+  # 無效），而 X-Forwarded-* 在 fly 上是**原樣放行**的（2026-10-12 實測，見 spec §2 F4）
+  # ——所以這裡收的是 Fly-* 的名字。信任面＝清空清單（官方明文的信任全部；fly 的 proxy
+  # 位址不是穩定集合，釘了會靜默失效）。
+  ForwardedHeaders__ForHeaderName = "Fly-Client-Ip"
+  ForwardedHeaders__ProtoHeaderName = "Fly-Forwarded-Proto"
+  ForwardedHeaders__TrustAllProxies = "true"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  # 健康探針（2026-10-10）：fly 用它決定機器要不要換掉，打的是明示匿名的 /api/health。
+  # grace_period 給啟動窗（遷移＋seed 要走網路到 DB）；interval／timeout 照 fly 慣例。
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "20s"
+    method = "GET"
+    path = "/api/health"
+
+[mounts]
+  source = "entask_storage"
+  destination = "/app/storage"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512

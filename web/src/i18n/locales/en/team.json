@@ -1,0 +1,331 @@
+{
+  "activity": {
+    "empty": "No activity yet"
+  },
+  "audit": {
+    "board": {
+      "created": "Board created",
+      "deleted": "Board deleted",
+      "updated": "Board updated"
+    },
+    "card": {
+      "created": "Card created",
+      "deleted": "Card deleted"
+    },
+    "customField": {
+      "created": "Custom field created",
+      "deleted": "Custom field deleted",
+      "updated": "Custom field updated"
+    },
+    "member": {
+      "assigned": "Member assigned",
+      "removed": "Member removed"
+    },
+    "project": {
+      "created": "Project created",
+      "deleted": "Project deleted",
+      "updated": "Project updated"
+    },
+    "projectMember": {
+      "added": "Project member added",
+      "removed": "Project member removed",
+      "updated": "Project member roles updated"
+    },
+    "role": {
+      "created": "Role created",
+      "deleted": "Role deleted",
+      "updated": "Role updated"
+    },
+    "team": {
+      "created": "Team created",
+      "updated": "Team updated"
+    },
+    "user": {
+      "created": "User created",
+      "deactivated": "Deactivated account",
+      "deleted": "Deleted account",
+      "passwordReset": "Reset the password",
+      "reactivated": "Reactivated account"
+    },
+    "workCalendar": {
+      "deleted": "Removed a work calendar entry",
+      "updated": "Updated the work calendar"
+    }
+  },
+  "create": {
+    "action": "Create team",
+    "assign": {
+      "failed": "Team created, but the team manager role could not be assigned automatically. Add yourself as a member to finish setup."
+    },
+    "confirm": {
+      "action": "Confirm and create"
+    },
+    "error": "Failed to create team",
+    "name": {
+      "placeholder": "e.g. Core R&D, Product Ops",
+      "required": "Enter a team name"
+    },
+    "success": "Team created",
+    "title": "Create team"
+  },
+  "description": {
+    "label": "Description (optional)",
+    "placeholder": "e.g. Full-stack product development and agile delivery"
+  },
+  "edit": {
+    "error": "Failed to update team",
+    "name": {
+      "placeholder": "e.g. Core project team",
+      "required": "Enter a team name"
+    },
+    "success": "Team details updated",
+    "title": "Edit team details"
+  },
+  "member": {
+    "assign": {
+      "action": "Assign member",
+      "confirm": {
+        "action": "Confirm assignment"
+      },
+      "required": "Select a member and at least one role",
+      "roles": {
+        "label": "Roles (select all that apply)"
+      },
+      "select": {
+        "label": "Select member"
+      },
+      "success": "Member assigned",
+      "title": "Assign member to team"
+    },
+    "empty": "No members yet",
+    "heading": "Members ({{n}})",
+    "remove": {
+      "confirm": "Remove “{{name}}” from this team? They will lose access to this team, and this cannot be undone.",
+      "success": "Member removed",
+      "title": "Remove member"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "No members found in other teams",
+        "heading": "Members of other teams",
+        "hint": "Type at least 3 characters to search for members of other teams",
+        "loading": "Searching…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "Change"
+      },
+      "loading": "Loading users…",
+      "noMatch": "No user matches “{{query}}”",
+      "search": {
+        "placeholder": "Filter by name or username…"
+      }
+    }
+  },
+  "name": {
+    "label": "Team name"
+  },
+  "nav": {
+    "selectTeam": "← Select team"
+  },
+  "permissionCategory": {
+    "board": "Board",
+    "card": "Card",
+    "mindmap": "Mind map",
+    "project": "Project",
+    "report": "Report",
+    "team": "Team"
+  },
+  "report": {
+    "column": {
+      "averageScore": "Average score",
+      "completed": "Completed / total cards",
+      "firstPassYield": "First-pass yield",
+      "member": "Member",
+      "profile": "Profile",
+      "rank": "Rank",
+      "rating": "Year-end rating"
+    },
+    "dossier": {
+      "account": "Account: @{{username}}",
+      "action": "View profile",
+      "criteria": "Rating criteria: an S rating requires a completion rate and an on-time delivery rate of 85% or above, and a first-pass yield of 80% or above; 70% completion earns an A; 50% or above earns a B.",
+      "period": "Review period",
+      "print": {
+        "action": "Print appraisal form / Save as PDF"
+      },
+      "rating": "Overall rating",
+      "signature": "Department manager signature: _________________________",
+      "signDate": "Sign-off date: _______ / ____ / ____",
+      "supervisor": {
+        "hint": "(Space for the direct supervisor to write review comments, approve the annual performance bonus and set development goals)",
+        "label": "Supervisor review and annual sign-off: "
+      },
+      "title": "{{name}}'s performance review"
+    },
+    "empty": "No performance data yet",
+    "export": {
+      "csv": {
+        "action": "Export CSV"
+      },
+      "excel": {
+        "action": "Export Excel summary"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_one": "{{done}} / {{count}} card completed",
+        "hint_other": "{{done}} / {{count}} cards completed",
+        "title": "Team task completion rate"
+      },
+      "delivered": {
+        "hint": "Delivered across all projects in the selected period",
+        "title": "Cards delivered",
+        "value_one": "{{count}} card",
+        "value_other": "{{count}} cards"
+      },
+      "hours": {
+        "hint": "Sum of hours logged by the team",
+        "title": "Total hours logged"
+      },
+      "topPerformers": {
+        "hint": "Reaching the S/A performance benchmark",
+        "title": "Top performers (S/A)",
+        "value_one": "{{count}} person",
+        "value_other": "{{count}} people"
+      }
+    },
+    "metric": {
+      "completion": "Completion rate",
+      "onTime": "On-time delivery rate"
+    },
+    "ranking": {
+      "description": "Overall rating based on task completion, on-time delivery and first-pass yield",
+      "title": "Team performance ranking"
+    },
+    "rating": {
+      "a": "Excellent (A)",
+      "b": "Good (B)",
+      "c": "Needs improvement (C)",
+      "s": "Outstanding (S)"
+    },
+    "sampleCount_one": "{{count}} sample",
+    "sampleCount_other": "{{count}} samples",
+    "sampleInsufficient": "Not enough data",
+    "stat": {
+      "completed": "Tasks completed",
+      "completion": "Task completion rate",
+      "hours": "Total hours reported"
+    },
+    "year": {
+      "all": "All time",
+      "empty": "No performance data for the selected period",
+      "label": "Year"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "New role",
+      "title": "New role"
+    },
+    "custom": {
+      "badge": "Custom"
+    },
+    "delete": {
+      "confirm": "Delete the role “{{name}}”? This cannot be undone.",
+      "error": "Failed to delete (members may still be assigned)",
+      "success": "Role deleted",
+      "title": "Delete role"
+    },
+    "description": {
+      "label": "Description"
+    },
+    "edit": {
+      "title": "Edit role"
+    },
+    "heading": "Roles",
+    "name": {
+      "label": "Name",
+      "required": "Enter a role name"
+    },
+    "system": {
+      "badge": "System"
+    },
+    "template": {
+      "badge": "Template"
+    }
+  },
+  "roleName": {
+    "eng_lead": "Engineering Lead",
+    "engineer": "Engineer",
+    "project_assistant": "Project Assistant",
+    "project_manager": "Project Manager",
+    "qa_engineer": "QA Engineer",
+    "team_manager": "Team Manager"
+  },
+  "select": {
+    "current": "Current team",
+    "empty": {
+      "action": "Create your first team",
+      "description": "No teams yet. As a system administrator you can create one right away."
+    },
+    "enter": {
+      "action": "Open"
+    },
+    "noPermission": {
+      "description": "Roles such as Engineer can only work on assigned projects and tasks, so team settings are not available. Use My projects or your personal workspace for day-to-day work.",
+      "title": "Your role does not include team management access"
+    },
+    "noTeam": {
+      "description": "You have not been assigned to any team yet. Ask a system administrator or team manager to assign you a team and project.",
+      "title": "Not in any team yet"
+    },
+    "projects": {
+      "action": "Go to my projects"
+    },
+    "tasks": {
+      "action": "Personal workspace"
+    }
+  },
+  "tab": {
+    "activity": "Activity log",
+    "members": "Members",
+    "report": "Team report",
+    "roles": "Roles",
+    "worklog": "Worklog"
+  },
+  "user": {
+    "admin": {
+      "label": "Grant system administrator (Admin) rights"
+    },
+    "create": {
+      "action": "Add user account",
+      "confirm": {
+        "action": "Confirm and create"
+      },
+      "empty": {
+        "action": "Create a new account"
+      },
+      "error": "Failed to create account",
+      "inline": {
+        "action": "+ Create account"
+      },
+      "required": "Fill in the username, display name and password",
+      "success": "User account “{{name}}” created",
+      "title": "Create user account"
+    },
+    "displayName": {
+      "label": "Name / display name",
+      "placeholder": "e.g. Alice Wang"
+    },
+    "password": {
+      "label": "Initial password (min. 8 characters)",
+      "minLength": "Enter a password of at least 8 characters"
+    },
+    "username": {
+      "label": "Login username",
+      "placeholder": "e.g. bob, alice_dev"
+    }
+  }
+}

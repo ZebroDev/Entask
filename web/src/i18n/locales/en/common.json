@@ -1,0 +1,228 @@
+{
+  "action": {
+    "add": "Add",
+    "archive": "Archive",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "copy": "Copy",
+    "create": "Create",
+    "deactivate": "Deactivate",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loadMore": "Load more",
+    "reactivate": "Reactivate",
+    "remove": "Remove",
+    "retry": "Retry",
+    "save": "Save",
+    "saveChanges": "Save changes",
+    "unarchive": "Unarchive",
+    "update": "Update",
+    "view": "View"
+  },
+  "audit": {
+    "actorUnknown": "Unknown user"
+  },
+  "column": {
+    "actions": "Actions"
+  },
+  "connection": {
+    "offline": "Live sync is offline",
+    "reconnecting": "Live connection lost. Reconnecting automatically…",
+    "restored": "Live connection restored. Your data is up to date.",
+    "retry": {
+      "action": "Reconnect"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}} ({{weekday}})",
+    "rangeWithWeek": "{{from}} – {{to}} ({{week}})",
+    "weekOfYear": "Week {{week}}",
+    "range": "{{from}} – {{to}}"
+  },
+  "error": {
+    "archive": "Failed to archive",
+    "assign": "Failed to assign",
+    "assignDetail": "Failed to assign: {{detail}}",
+    "copy": "Failed to copy",
+    "create": "Failed to create",
+    "createDetail": "Failed to create: {{detail}}",
+    "delete": "Failed to delete",
+    "deleteDetail": "Failed to delete: {{detail}}",
+    "download": "Download failed, please try again later",
+    "export": "Export failed, please try again later",
+    "load": "Failed to load",
+    "loadDetail": "Failed to load: {{detail}}",
+    "loadRetry": "Failed to load, please try again later",
+    "move": "Failed to move",
+    "operation": "Operation failed",
+    "remove": "Failed to remove",
+    "removeDetail": "Failed to remove: {{detail}}",
+    "rename": "Failed to rename",
+    "restore": "Failed to unarchive",
+    "save": "Failed to save",
+    "saveDetail": "Failed to save: {{detail}}",
+    "toggleCompletion": "Failed to update completion status",
+    "tryLater": "Please try again later",
+    "update": "Failed to update",
+    "upload": "Failed to upload"
+  },
+  "fieldScope": {
+    "board": "Board",
+    "project": "Project"
+  },
+  "fieldType": {
+    "checkbox": "Checkbox",
+    "date": "Date",
+    "member": "Member",
+    "number": "Number",
+    "select": "Dropdown",
+    "text": "Text"
+  },
+  "filter": {
+    "all": "All",
+    "assignedToMe": "Assigned to me",
+    "dueToday": "Due today"
+  },
+  "member": {
+    "display": "{{name}} ({{username}})"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "Breadcrumb",
+      "userMenu": "User menu"
+    },
+    "board": "Board",
+    "logout": "Log out",
+    "myProjects": "My projects",
+    "myTasks": "Personal workspace",
+    "myWorklog": "My worklog",
+    "project": "Project",
+    "projectDetail": "Project details",
+    "projects": "Projects",
+    "search": "Search",
+    "selectTeam": "Select team",
+    "shortcuts": "Keyboard shortcuts (?)",
+    "teams": "Teams",
+    "teamSettings": "Team settings",
+    "userSettings": "Personal settings"
+  },
+  "notFound": {
+    "back": {
+      "action": "Go back"
+    },
+    "description": "This URL may have been removed or renamed, or you may not have access to this project or board.",
+    "projects": {
+      "action": "Back to my projects"
+    },
+    "title": "Page not found"
+  },
+  "reviewStatus": {
+    "tooltip": "Review status: {{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_one": "Card ({{count}})",
+      "heading_other": "Cards ({{count}})"
+    },
+    "comments": {
+      "heading_one": "Comment ({{count}})",
+      "heading_other": "Comments ({{count}})",
+      "onCard": "On card: {{title}}"
+    },
+    "empty": "No results",
+    "hint": {
+      "cards": "Search cards and mind maps…",
+      "compact": "Search…",
+      "projects": "Search projects…"
+    },
+    "minLength": "Type at least 2 characters",
+    "nodes": {
+      "heading_one": "Mind map node ({{count}})",
+      "heading_other": "Mind map nodes ({{count}})"
+    },
+    "open": {
+      "hint": "Click to open →"
+    },
+    "placeholder": "Search cards, comments, and mind map nodes…",
+    "projects": {
+      "empty": "No matching projects",
+      "heading_one": "My project ({{count}})",
+      "heading_other": "My projects ({{count}})",
+      "placeholder": "Search for a project…"
+    }
+  },
+  "select": {
+    "placeholder": "Select…"
+  },
+  "separator": {
+    "label": ": ",
+    "list": ", "
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "Create a card and keep creating the next one"
+    },
+    "createCard": {
+      "label": "Quick add a card"
+    },
+    "description": "Manage your tasks and projects quickly with keyboard shortcuts",
+    "escape": {
+      "label": "Close dialogs / clear focus"
+    },
+    "help": {
+      "label": "Open keyboard shortcuts"
+    },
+    "hint": "Tip: single-key shortcuts are disabled while you are typing or while an input is focused, so your keystrokes are not lost.",
+    "quickFilter": {
+      "label": "Toggle the personal filter (assigned to me)"
+    },
+    "search": {
+      "label": "Global search / command palette"
+    },
+    "section": {
+      "board": "Board and card actions",
+      "navigation": "Navigation and commands"
+    },
+    "submit": {
+      "label": "Submit (save or create)"
+    },
+    "title": "Keyboard shortcuts"
+  },
+  "sourceOffer": {
+    "link": "Source code (AGPL-3.0)",
+    "title": "View the Corresponding Source for this version (AGPL-3.0)"
+  },
+  "state": {
+    "approved": "Approved",
+    "archived": "Archived",
+    "assigning": "Assigning…",
+    "completed": "Completed",
+    "copying": "Copying…",
+    "creating": "Creating…",
+    "deactivated": "Deactivated",
+    "deleting": "Deleting…",
+    "loading": "Loading…",
+    "overdue": "Overdue",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "saved": "Saved",
+    "saving": "Saving…",
+    "searching": "Searching…",
+    "signingIn": "Signing in…",
+    "unavailable": "Content cannot be displayed",
+    "updating": "Updating…",
+    "uploading": "Uploading…"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "toggle": "Toggle theme"
+  },
+  "period": {
+    "custom": "Custom period",
+    "from": "From",
+    "to": "To"
+  }
+}

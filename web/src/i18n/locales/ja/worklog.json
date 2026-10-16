@@ -1,0 +1,88 @@
+{
+  "empty": {
+    "description": "カードで工数を報告すると、ワークログが自動的にここに表示されます。",
+    "group": {
+      "title": "この期間、チームの工数報告はまだありません"
+    },
+    "me": {
+      "title": "この期間、自分の工数報告はまだありません"
+    }
+  },
+  "export": {
+    "action": "Excel をエクスポート"
+  },
+  "kpi": {
+    "cards": {
+      "title": "対象カード",
+      "unit_other": "枚"
+    },
+    "entries": {
+      "title": "報告件数",
+      "unit_other": "件"
+    },
+    "hours": {
+      "title": "合計工数"
+    },
+    "missing": {
+      "detail": " · 詳細を表示",
+      "each_other": "1 人あたり {{count}} 日",
+      "members_other": "合計 {{count}} 人",
+      "title": "未報告の勤務日（合計）",
+      "unit_other": "日（{{members}}；{{days}}）"
+    },
+    "reported": {
+      "title": "報告済みの勤務日",
+      "unit_other": "日"
+    }
+  },
+  "member": {
+    "cards_other": "カード {{count}} 枚",
+    "collapse": {
+      "action": "詳細を折りたたむ"
+    },
+    "empty": "本日の工数報告はありません",
+    "entries_other": "{{count}} 件",
+    "expand": {
+      "action": "日別の明細を表示"
+    },
+    "heading_other": "チームメンバー（{{count}} 人）",
+    "missing": "未報告",
+    "spark": {
+      "tooltip": "{{day}}：{{hours}}"
+    },
+    "summary": "{{hours}} · {{entries}} · {{cards}} · {{workdays}}",
+    "workdays_other": "報告済み {{reported}}/{{total}} 勤務日"
+  },
+  "missing": {
+    "group": {
+      "empty": "この期間に未報告はありません",
+      "title": "未報告の明細"
+    },
+    "me": {
+      "empty": "この期間、自分の未報告はありません",
+      "title": "自分の未報告の明細"
+    },
+    "member": {
+      "count_other": "未報告 {{missing}} / {{count}} 日"
+    },
+    "none_other": "他に {{count}} 人は未報告がありません",
+    "workdays_other": "合計 {{count}} 勤務日"
+  },
+  "mode": {
+    "day": "日",
+    "month": "月",
+    "week": "週"
+  },
+  "nav": {
+    "next": {
+      "aria": "次の期間"
+    },
+    "prev": {
+      "aria": "前の期間"
+    },
+    "today": "今日"
+  },
+  "page": {
+    "hint": "報告した工数から自動で集計される日報、週報、月報"
+  }
+}

@@ -1,0 +1,29 @@
+**/.git
+**/.vs
+**/bin
+**/obj
+# 上傳檔的落地目錄（storage/ 在 .gitignore，但 fly deploy 是從**工作目錄**建置的）
+**/storage
+web/node_modules
+web/dist
+.superpowers
+# 手冊與文件（含 13M 的 docs/）——不是建置所需，進 build context 只是拖慢傳輸
+docs
+# 本機手機截圖參考素材（在 .gitignore，也不該進 build context）
+mobile_img
+# 本機 agent skill 工具腳本（在 .gitignore，也不該進 build context）
+.agents
+# dotnet test 的測試產物（在 .gitignore；.trx 內含測試連線設定資訊）
+**/TestResults
+# 本機的舊 SPA 建置（在 .gitignore；容器內的 wwwroot 由 Dockerfile.fly 的 build-web 階段產生）
+src/Entask.Api/wwwroot
+# 本機 AI 工具設定（在 .gitignore，也不該進 build context）
+.claude
+# 未展開的家目錄殘留（僅含本機暫存 session 檔，不該進 build context）
+%USERPROFILE%
+# 一鍵部署的真 `.env` 及其變體（DB 密碼／JWT 密鑰）——line 5 記的「從工作目錄建置」會把它一起上傳
+.env*
+# 例外：`.env.example` 是無祕密的範本，留在 context 內供參考（`!` 覆蓋先前的 `.env*`）
+!.env.example
+*.pptx
+*.docx

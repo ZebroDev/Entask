@@ -1,0 +1,475 @@
+{
+  "backToProjects": "← 내 프로젝트",
+  "board": {
+    "archive": {
+      "action": "보드 보관",
+      "success": "보드를 보관했습니다"
+    },
+    "archivedSection": "보관된 보드 ({{n}})",
+    "create": {
+      "action": "보드 생성",
+      "placeholder": "새 보드 이름",
+      "success": "보드를 생성했습니다"
+    },
+    "delete": {
+      "action": "보드 삭제"
+    },
+    "edit": {
+      "action": "정보 편집"
+    },
+    "empty": {
+      "description": "이 프로젝트에 보드를 추가하려면 프로젝트 관리자에게 문의하십시오.",
+      "title": "프로젝트에 보드가 없습니다"
+    },
+    "menu": {
+      "aria": "보드 메뉴"
+    },
+    "noDescription": "설명 없음",
+    "restore": {
+      "action": "보관 해제"
+    },
+    "unarchive": {
+      "success": "보드 보관이 해제되었습니다"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "이번 달에 마감되는 카드가 없습니다"
+    },
+    "more": "+{{n}}개 더 보기",
+    "nextMonth": "다음 달 >",
+    "noDue": {
+      "empty": "마감일 없음",
+      "title": "마감일 없는 카드"
+    },
+    "prevMonth": "< 이전 달"
+  },
+  "cards": {
+    "truncated": "전체 {{total}}건 중 앞의 {{shown}}건만 로드"
+  },
+  "create": {
+    "action": "프로젝트 생성",
+    "name": {
+      "placeholder": "예: 하반기 개발 프로젝트"
+    },
+    "success": "프로젝트를 생성했습니다",
+    "team": {
+      "label": "소속 팀",
+      "required": "소속 팀을 선택하십시오"
+    },
+    "title": "프로젝트 생성"
+  },
+  "description": {
+    "label": "프로젝트 설명",
+    "placeholder": "이 프로젝트의 목표와 범위…"
+  },
+  "edit": {
+    "aria": "프로젝트 이름과 설명 편집",
+    "success": "프로젝트 정보를 업데이트했습니다",
+    "title": "프로젝트 정보 편집"
+  },
+  "field": {
+    "add": {
+      "action": "필드 추가"
+    },
+    "create": {
+      "action": "필드 생성",
+      "hint": "필드는 이 프로젝트의 모든 카드에 적용되며, 생성 후에도 이름과 옵션을 변경할 수 있습니다.",
+      "success": "필드를 생성했습니다",
+      "title": "사용자 정의 필드 추가"
+    },
+    "delete": {
+      "confirm": "“{{name}}” 필드를 삭제하시겠습니까? 모든 카드에서 이 필드의 값이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
+      "success": "필드를 삭제했습니다",
+      "title": "사용자 정의 필드 삭제"
+    },
+    "edit": {
+      "hint": "{{scope}} 범위 필드입니다. 이름과 옵션 변경은 이 필드를 사용하는 모든 카드에 적용됩니다.",
+      "title": "“{{name}}” 필드 편집"
+    },
+    "name": {
+      "label": "이름",
+      "placeholder": "예: 우선순위"
+    },
+    "options": {
+      "add": {
+        "action": "옵션 추가"
+      },
+      "empty": "드롭다운에는 옵션이 하나 이상 필요합니다",
+      "label": "옵션",
+      "placeholder": "입력 후 Enter로 추가할 수 있으며 “높음,보통,낮음” 붙여넣기도 지원합니다",
+      "remove": {
+        "aria": "옵션 {{option}} 제거"
+      }
+    },
+    "scope": {
+      "label": "범위"
+    },
+    "type": {
+      "label": "유형"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "변경 및 값 삭제 확인"
+      },
+      "summary": "“{{from}}” → “{{to}}” 변경",
+      "warning": "모든 카드에서 이 필드의 기존 값이 삭제되며, 이 작업은 되돌릴 수 없습니다.",
+      "warningWithOptions": "모든 카드에서 이 필드의 기존 값이 삭제되고 기존 옵션 목록도 함께 지워지며, 이 작업은 되돌릴 수 없습니다."
+    },
+    "update": {
+      "success": "필드를 업데이트했습니다"
+    }
+  },
+  "filter": {
+    "allBoards": "모든 보드",
+    "allMembers": "모든 멤버"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "진행률 / 공수",
+      "task": "카드 제목"
+    },
+    "empty": "마감일이 있는 카드가 아직 없습니다",
+    "excludeArchived": "보관됨 제외",
+    "filter": {
+      "board": "보드 필터",
+      "member": "멤버 필터"
+    },
+    "groupBy": {
+      "assignee": "담당자별",
+      "board": "보드별",
+      "label": "그룹: ",
+      "none": "그룹 없음"
+    },
+    "includeArchived": "보관됨 포함",
+    "loading": "일정을 불러오는 중…",
+    "schedule": {
+      "action": "일정 설정"
+    },
+    "scrollBack": "뒤로 스크롤",
+    "scrollForward": "앞으로 스크롤",
+    "today": "오늘",
+    "todayLine": "오늘",
+    "unassigned": "미할당",
+    "unscheduled": {
+      "hint": "카드를 클릭하면 예상 공수와 마감일을 설정할 수 있습니다",
+      "title": "일정이 없는 작업 ({{n}})",
+      "toggle": "일정 없음 ({{n}})"
+    },
+    "view": {
+      "day": "일 보기",
+      "month": "월 보기",
+      "week": "주 보기"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_other": "보드 {{count}}개"
+    },
+    "createFirst": {
+      "action": "첫 프로젝트 생성"
+    },
+    "empty": {
+      "description": "프로젝트를 생성하면 보드 추가, 작업 일정 설정, 팀과의 실시간 협업이 가능합니다.",
+      "title": "프로젝트가 아직 없습니다"
+    },
+    "members": {
+      "count_other": "멤버 {{count}}명"
+    },
+    "noDescription": "프로젝트 설명이 아직 없습니다",
+    "noMember": {
+      "description": "현재 어떤 프로젝트에도 참여하고 있지 않습니다. 프로젝트 관리자 또는 팀 매니저에게 프로젝트와 작업 할당을 요청하십시오."
+    },
+    "noTeam": {
+      "action": "팀 선택 / 생성",
+      "description": "프로젝트는 특정 팀에 속해야 합니다. 프로젝트 관리를 시작하려면 먼저 팀을 선택하거나 생성하십시오.",
+      "title": "팀이 선택되지 않았습니다"
+    },
+    "switchTeam": {
+      "action": "팀 선택 / 전환"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "멤버 할당",
+      "confirm": {
+        "action": "할당 확인"
+      },
+      "required": "멤버를 선택하고 역할을 하나 이상 선택하십시오",
+      "success": "할당했습니다",
+      "title": "멤버 할당 (역할 여러 개 가능)"
+    },
+    "column": {
+      "roles": "할당된 역할",
+      "user": "사용자"
+    },
+    "label": "멤버",
+    "load": {
+      "error": "멤버 불러오기에 실패했습니다"
+    },
+    "noRoles": "역할 없음",
+    "remove": {
+      "confirm": "“{{name}}” 멤버를 이 프로젝트에서 제거하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "success": "멤버를 제거했습니다",
+      "title": "멤버 제거"
+    },
+    "role": {
+      "system": "시스템 템플릿",
+      "template": "템플릿"
+    },
+    "roles": {
+      "edit": {
+        "action": "역할 편집",
+        "description": "“{{name}} ({{username}})”의 프로젝트 내 할당 역할을 조정합니다.",
+        "label": "프로젝트 역할 (복수 선택 가능)",
+        "title": "멤버 역할 편집"
+      },
+      "label": "역할",
+      "load": {
+        "error": "팀 역할 불러오기에 실패했습니다"
+      },
+      "loading": "팀 역할을 불러오는 중…",
+      "required": "역할을 하나 이상 선택하십시오. 멤버를 완전히 제거하려면 “제거” 버튼을 사용하십시오.",
+      "save": {
+        "action": "역할 저장"
+      },
+      "update": {
+        "error": "역할 업데이트에 실패했습니다",
+        "success": "멤버 역할을 업데이트했습니다"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "루트 노드 추가",
+    "bind": {
+      "action": "카드 연결",
+      "bound": "연결됨: {{title}}",
+      "change": "연결된 카드 변경",
+      "list": {
+        "suffix": " ({{name}})"
+      },
+      "loading": "보드와 카드를 불러오는 중…",
+      "noMatch": "일치하는 카드가 없습니다",
+      "search": {
+        "aria": "카드 제목 검색",
+        "placeholder": "카드 제목 검색…"
+      },
+      "title": "카드 연결: {{title}}",
+      "unbind": "연결 해제"
+    },
+    "cascade": {
+      "aria": "브랜치 연동 모드",
+      "label": "연동 모드",
+      "off": "자유 모드: 노드를 드래그하면 현재 노드만 이동합니다",
+      "on": "연동 모드: 노드를 드래그하면 모든 하위 노드가 상대 간격을 유지한 채 함께 이동합니다"
+    },
+    "delete": {
+      "confirm_other": "“{{title}}” 및 하위 노드 {{count}}개가 함께 삭제되며, 이 작업은 되돌릴 수 없습니다."
+    },
+    "empty": "노드가 아직 없습니다",
+    "error": {
+      "create": "노드 추가에 실패했습니다",
+      "moveIntoDescendant": "자신의 하위 노드 아래로 이동할 수 없습니다",
+      "savePosition": "노드 위치 저장에 실패했습니다"
+    },
+    "export": {
+      "blobError": "이미지 파일을 생성할 수 없습니다",
+      "canvasError": "캔버스 환경을 생성할 수 없습니다",
+      "empty": "마인드맵에 노드가 아직 없습니다",
+      "imageError": "이미지 생성 중 오류가 발생했습니다",
+      "png": {
+        "error": "마인드맵 PNG 내보내기에 실패했습니다",
+        "success": "마인드맵을 고해상도 PNG 이미지로 내보냈습니다",
+        "tooltip": "고해상도 PNG 이미지 내보내기"
+      },
+      "svg": {
+        "error": "마인드맵 SVG 내보내기에 실패했습니다",
+        "success": "마인드맵을 SVG로 내보냈습니다",
+        "tooltip": "벡터 SVG 이미지 내보내기"
+      },
+      "title": "마인드맵"
+    },
+    "fullscreen": {
+      "enter": "전체 화면 몰입 모드",
+      "exit": "전체 화면 종료",
+      "label": "전체 화면"
+    },
+    "layout": {
+      "action": "자동 정렬",
+      "success": "마인드맵 레이아웃을 재설정하고 최적화했습니다",
+      "tooltip": "클릭 한 번으로 자동 정렬하고 저장"
+    },
+    "library": {
+      "bound": "연결됨: {{title}}",
+      "close": "카드 라이브러리 닫기",
+      "convert": "노드로 변환",
+      "noMatch": "일치하는 카드가 없습니다",
+      "search": {
+        "placeholder": "보드 카드 검색…"
+      },
+      "title": "프로젝트 카드 라이브러리",
+      "toggle": "카드 라이브러리 ({{n}}개 연결됨)",
+      "tooltip": "프로젝트 카드 라이브러리 전환",
+      "unbound": "연결 안 됨"
+    },
+    "node": {
+      "addChild": "하위 노드 추가",
+      "card": {
+        "completed": " (완료)",
+        "tooltip": "카드: {{title}} (클릭하여 열기){{status}}"
+      },
+      "child": {
+        "placeholder": "하위 노드 제목…"
+      },
+      "collapse": "접기",
+      "delete": "노드 삭제",
+      "edit": "노드 편집",
+      "expand": "펼치기",
+      "noPermission": "편집 권한이 없습니다",
+      "note": {
+        "placeholder": "메모…"
+      }
+    },
+    "prompt": {
+      "childInitial": "새 노드",
+      "rootInitial": "새 주제"
+    },
+    "root": {
+      "placeholder": "루트 노드 제목…"
+    },
+    "untitledNode": "제목 없는 노드",
+    "view": {
+      "canvas": "캔버스 모드 (Canvas)",
+      "tree": "아웃라인 (Outline)"
+    }
+  },
+  "name": {
+    "label": "프로젝트 이름",
+    "required": "프로젝트 이름을 입력하십시오"
+  },
+  "report": {
+    "chart": {
+      "logged": "기록됨",
+      "remaining": "남은 예상",
+      "title": "멤버 공수 비교 차트 (전체 기간)"
+    },
+    "column": {
+      "estimated": "예상",
+      "logged": "기록됨",
+      "member": "멤버",
+      "remainingProgress": "남은 공수와 진행률 (전체 기간)"
+    },
+    "detail": {
+      "column": {
+        "board": "보드",
+        "card": "카드",
+        "list": "리스트",
+        "priority": "우선순위",
+        "review": "리뷰"
+      },
+      "title": "카드 상세"
+    },
+    "export": {
+      "action": "CSV 내보내기"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "리뷰 대기: {{pending}} | 평균 점수: {{score}}",
+        "title": "리뷰 승인율"
+      },
+      "cards": {
+        "hint": "프로젝트 현황: 추적 중인 카드 총수",
+        "title": "전체 카드 수",
+        "value_other": "{{count}}장"
+      },
+      "logged": {
+        "hint": "선택한 기간에 팀이 기록한 공수 합계",
+        "title": "총 기록 공수"
+      },
+      "remaining": {
+        "hint": "프로젝트 현황: 아직 완료되지 않은 총 작업량 (기간 필터와 무관)",
+        "title": "총 남은 예상 공수 (전체 기간)"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "카드 수",
+        "hours": "총 공수"
+      },
+      "empty": "공수 기록이 아직 없습니다",
+      "title": "멤버별 공수"
+    },
+    "remaining": {
+      "title": "멤버별 남은 공수 (전체 기간)"
+    },
+    "review": {
+      "approved": "승인 {{n}}",
+      "average": "평균 점수 {{n}}",
+      "pending": "리뷰 대기 {{n}}",
+      "rejected": "반려 {{n}}",
+      "title": "리뷰 통계 (전체 기간)"
+    },
+    "year": {
+      "all": "전체 기간",
+      "empty": "선택한 기간의 공수 데이터가 없습니다",
+      "label": "연도"
+    }
+  },
+  "tab": {
+    "boards": "보드",
+    "calendar": "캘린더",
+    "fields": "사용자 정의 필드",
+    "gantt": "간트 차트",
+    "members": "멤버",
+    "mindMap": "마인드맵",
+    "report": "보고서",
+    "table": "테이블",
+    "worklog": "업무 일지"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "일괄 보관에 실패했습니다",
+        "success_other": "카드 {{count}}장을 일괄 보관했습니다"
+      },
+      "clearDue": "마감일 지우기",
+      "due": {
+        "clear_other": "카드 {{count}}장의 마감일을 지웠습니다",
+        "error": "일괄 업데이트에 실패했습니다",
+        "set_other": "카드 {{count}}장의 마감일을 업데이트했습니다"
+      },
+      "mark": {
+        "error": "일괄 표시에 실패했습니다"
+      },
+      "markComplete": "완료로 표시",
+      "marked": {
+        "complete_other": "카드 {{count}}장을 완료로 표시했습니다",
+        "incomplete_other": "카드 {{count}}장을 미완료로 표시했습니다"
+      },
+      "markIncomplete": "미완료로 표시",
+      "nextWeek": "1주 후 (+7일)",
+      "selected": "{{n}}개 선택됨",
+      "setDue": "마감일 설정",
+      "today": "오늘",
+      "tomorrow": "내일"
+    },
+    "clearSelection": "선택 해제",
+    "column": {
+      "board": "보드",
+      "due": "마감일",
+      "hours": "공수",
+      "list": "리스트",
+      "progress": "진행률",
+      "title": "카드 제목"
+    },
+    "empty": {
+      "all": "카드가 아직 없습니다",
+      "filtered": "이 보드에는 카드가 없습니다"
+    },
+    "filter": {
+      "includeArchived": "보관된 카드 포함"
+    },
+    "rowCount_other": "{{count}}건",
+    "selectAll": "전체 선택"
+  }
+}

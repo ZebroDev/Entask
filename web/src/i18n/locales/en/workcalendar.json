@@ -1,0 +1,30 @@
+{
+  "action": {
+    "add": "Add exception day",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
+  },
+  "confirm": {
+    "delete": "Delete this exception day?"
+  },
+  "empty": "No exceptions in this year",
+  "error": {
+    "delete": "Failed to delete",
+    "load": "Failed to load",
+    "save": "Failed to save"
+  },
+  "field": {
+    "date": "Date",
+    "kind": "Type",
+    "name": "Name"
+  },
+  "hint": "Mark holidays and makeup workdays. Unmarked dates follow Monday to Friday.",
+  "kind": {
+    "holiday": "Holiday",
+    "workday": "Makeup workday"
+  },
+  "tab": "Work calendar",
+  "title": "Team work calendar"
+}

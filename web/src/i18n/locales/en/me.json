@@ -1,0 +1,169 @@
+{
+  "avatar": {
+    "removed": "Avatar removed",
+    "removeError": "Failed to remove avatar",
+    "updated": "Avatar updated",
+    "updateError": "Failed to update avatar",
+    "upload": {
+      "action": "Upload new avatar",
+      "hint": "Supports JPG, PNG, and WEBP. Up to 5 MB."
+    }
+  },
+  "card": {
+    "markComplete": "Mark as complete",
+    "markIncomplete": "Mark as incomplete",
+    "openBoard": {
+      "aria": "Open the board containing this card"
+    },
+    "overdue": {
+      "suffix": " (overdue)"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "All caught up. Enjoy the break, or press C to add a card.",
+      "completed": "You have not completed any cards yet. Finished tasks will show up here.",
+      "title": "No cards match this filter"
+    }
+  },
+  "error": {
+    "loadDetail": "Failed to load your workspace: {{detail}}"
+  },
+  "filter": {
+    "reviews": "To review"
+  },
+  "notification": {
+    "approved": {
+      "body": "“{{card}}” was approved by {{actor}}{{score}}",
+      "title": "Review approved"
+    },
+    "assigned": {
+      "body": "You were assigned to “{{card}}”",
+      "description": "When a new card is assigned to you",
+      "label": "Assigned work",
+      "title": "Card assigned"
+    },
+    "bell": {
+      "aria": "Notification center"
+    },
+    "comment": {
+      "body": "{{actor}} commented on “{{card}}”",
+      "description": "When a card you are involved in gets a new comment",
+      "label": "New comments",
+      "title": "New comment"
+    },
+    "empty": "No notifications yet",
+    "fallback": {
+      "body": "You have a notification",
+      "title": "Notification"
+    },
+    "markAllRead": {
+      "action": "Mark all as read"
+    },
+    "rejected": {
+      "body": "“{{card}}” was rejected by {{actor}}{{score}}",
+      "title": "Review rejected"
+    },
+    "review": {
+      "body": "You were assigned to review “{{card}}”",
+      "description": "When you are added as a reviewer or the review status changes",
+      "label": "Review requests and rejections",
+      "title": "Review request"
+    },
+    "scoreSuffix": ", score {{score}}",
+    "system": {
+      "description": "Important system updates or maintenance notices",
+      "label": "System announcements"
+    },
+    "time": {
+      "justNow": "Just now"
+    },
+    "title": "Collaboration notifications",
+    "unread_one": "{{count}} unread",
+    "unread_other": "{{count}} unread"
+  },
+  "page": {
+    "description": "Manage your to-dos and review workflow across every project"
+  },
+  "password": {
+    "bothRequired": "Enter both your current and your new password",
+    "change": {
+      "action": "Update password",
+      "label": "Change password"
+    },
+    "current": {
+      "placeholder": "Current password"
+    },
+    "new": {
+      "placeholder": "New password"
+    },
+    "updated": "Password updated",
+    "updateError": "Failed to update password"
+  },
+  "preferences": {
+    "loadError": "Failed to load notification settings",
+    "save": {
+      "action": "Save notification settings"
+    },
+    "saved": "Notification settings saved"
+  },
+  "profile": {
+    "displayName": {
+      "label": "Display name",
+      "required": "Enter a display name"
+    },
+    "updated": "Profile updated",
+    "updateError": "Failed to update profile"
+  },
+  "review": {
+    "open": {
+      "action": "Open review"
+    },
+    "pending": {
+      "badge": "Awaiting your review"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "When a teammate assigns you as a reviewer, the card appears here right away.",
+      "title": "You are all caught up — nothing is waiting for your review"
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "Use browser language",
+      "hint": "Changes the interface text and date formats. With “Use browser language”, the language follows your browser settings.",
+      "label": "Interface language"
+    },
+    "tab": {
+      "account": "Account",
+      "language": "Language",
+      "notifications": "Notifications"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "Items due today"
+    },
+    "inProgress": {
+      "hint": "Total assignments across projects",
+      "label": "In-progress to-dos"
+    },
+    "overdue": {
+      "hint": "Tasks that need attention first"
+    },
+    "reviews": {
+      "hint": "Your team is waiting for your sign-off"
+    }
+  },
+  "tab": {
+    "completed_one": "Completed ({{count}})",
+    "completed_other": "Completed ({{count}})",
+    "dueToday_one": "Due today ({{count}})",
+    "dueToday_other": "Due today ({{count}})",
+    "inProgress_one": "In progress ({{count}})",
+    "inProgress_other": "In progress ({{count}})",
+    "overdue_one": "Overdue ({{count}})",
+    "overdue_other": "Overdue ({{count}})"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "action": {
+    "add": "Agregar día de excepción",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "save": "Guardar"
+  },
+  "confirm": {
+    "delete": "¿Eliminar este día de excepción?"
+  },
+  "empty": "No hay excepciones en este año",
+  "error": {
+    "delete": "No se pudo eliminar",
+    "load": "No se pudo cargar",
+    "save": "No se pudo guardar"
+  },
+  "field": {
+    "date": "Fecha",
+    "kind": "Tipo",
+    "name": "Nombre"
+  },
+  "hint": "Marca días festivos y días de recuperación. Las fechas sin marcar siguen de lunes a viernes.",
+  "kind": {
+    "holiday": "Día festivo",
+    "workday": "Día de recuperación"
+  },
+  "tab": "Calendario laboral",
+  "title": "Calendario laboral del equipo"
+}

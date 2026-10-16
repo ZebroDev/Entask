@@ -1,0 +1,495 @@
+{
+  "backToProjects": "← Mis proyectos",
+  "board": {
+    "archive": {
+      "action": "Archivar tablero",
+      "success": "Tablero archivado"
+    },
+    "archivedSection": "Tableros archivados ({{n}})",
+    "create": {
+      "action": "Crear tablero",
+      "placeholder": "Nombre del nuevo tablero",
+      "success": "Tablero creado"
+    },
+    "delete": {
+      "action": "Eliminar tablero"
+    },
+    "edit": {
+      "action": "Editar información"
+    },
+    "empty": {
+      "description": "Pide a un administrador del proyecto que agregue un tablero a este proyecto.",
+      "title": "El proyecto aún no tiene tableros"
+    },
+    "menu": {
+      "aria": "Menú del tablero"
+    },
+    "noDescription": "Sin descripción",
+    "restore": {
+      "action": "Desarchivar"
+    },
+    "unarchive": {
+      "success": "Tablero desarchivado"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "No hay tarjetas con vencimiento este mes"
+    },
+    "more": "+{{n}} más",
+    "nextMonth": "Mes siguiente >",
+    "noDue": {
+      "empty": "Sin fecha de vencimiento",
+      "title": "Tarjetas sin fecha de vencimiento"
+    },
+    "prevMonth": "< Mes anterior"
+  },
+  "cards": {
+    "truncated": "{{total}} tarjetas en total; solo se cargan las primeras {{shown}}"
+  },
+  "create": {
+    "action": "Crear proyecto",
+    "name": {
+      "placeholder": "Ej.: proyecto de desarrollo del segundo semestre"
+    },
+    "success": "Proyecto creado",
+    "team": {
+      "label": "Equipo",
+      "required": "Selecciona un equipo"
+    },
+    "title": "Crear proyecto"
+  },
+  "description": {
+    "label": "Descripción del proyecto",
+    "placeholder": "Objetivos y alcance de este proyecto…"
+  },
+  "edit": {
+    "aria": "Editar el nombre y la descripción del proyecto",
+    "success": "Información del proyecto actualizada",
+    "title": "Editar información del proyecto"
+  },
+  "field": {
+    "add": {
+      "action": "Agregar campo"
+    },
+    "create": {
+      "action": "Crear campo",
+      "hint": "El campo se aplicará a todas las tarjetas de este proyecto. Después de crearlo, aún puedes cambiar su nombre y sus opciones.",
+      "success": "Campo creado",
+      "title": "Agregar campo personalizado"
+    },
+    "delete": {
+      "confirm": "¿Eliminar el campo “{{name}}”? Se borrarán los valores de este campo en todas las tarjetas. Esta acción no se puede deshacer.",
+      "success": "Campo eliminado",
+      "title": "Eliminar campo personalizado"
+    },
+    "edit": {
+      "hint": "Campo de alcance: {{scope}}. Los cambios en el nombre y en las opciones se aplicarán a todas las tarjetas que usan este campo.",
+      "title": "Editar el campo “{{name}}”"
+    },
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Por ejemplo: prioridad"
+    },
+    "options": {
+      "add": {
+        "action": "Agregar opción"
+      },
+      "empty": "La lista desplegable necesita al menos una opción",
+      "label": "Opciones",
+      "placeholder": "Escribe y presiona Enter para agregar; puedes pegar “Alta,Media,Baja”",
+      "remove": {
+        "aria": "Quitar la opción {{option}}"
+      }
+    },
+    "scope": {
+      "label": "Alcance"
+    },
+    "type": {
+      "label": "Tipo"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "Confirmar el cambio y borrar los valores"
+      },
+      "summary": "De “{{from}}” a “{{to}}”",
+      "warning": "Se eliminarán los valores actuales de este campo en todas las tarjetas. Esta acción no se puede deshacer.",
+      "warningWithOptions": "Se eliminarán los valores actuales de este campo en todas las tarjetas y también se borrará la lista de opciones. Esta acción no se puede deshacer."
+    },
+    "update": {
+      "success": "Campo actualizado"
+    }
+  },
+  "filter": {
+    "allBoards": "Todos los tableros",
+    "allMembers": "Todos los miembros"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "Progreso / Horas",
+      "task": "Título de la tarjeta"
+    },
+    "empty": "Aún no hay tarjetas con fecha de vencimiento",
+    "excludeArchived": "Excluir archivados",
+    "filter": {
+      "board": "Filtrar por tablero",
+      "member": "Filtrar por miembro"
+    },
+    "groupBy": {
+      "assignee": "Por responsable",
+      "board": "Por tablero",
+      "label": "Agrupar por: ",
+      "none": "Sin agrupar"
+    },
+    "includeArchived": "Incluir archivados",
+    "loading": "Cargando el cronograma…",
+    "schedule": {
+      "action": "Programar"
+    },
+    "scrollBack": "Desplazar hacia atrás",
+    "scrollForward": "Desplazar hacia adelante",
+    "today": "Hoy",
+    "todayLine": "Hoy",
+    "unassigned": "Sin asignar",
+    "unscheduled": {
+      "hint": "Haz clic en una tarjeta para definir las horas estimadas y la fecha de vencimiento",
+      "title": "Tareas sin vencimiento por programar ({{n}})",
+      "toggle": "Sin programar ({{n}})"
+    },
+    "view": {
+      "day": "Vista diaria",
+      "month": "Vista mensual",
+      "week": "Vista semanal"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_one": "{{count}} tablero",
+      "count_many": "{{count}} de tableros",
+      "count_other": "{{count}} tableros"
+    },
+    "createFirst": {
+      "action": "Crear el primer proyecto"
+    },
+    "empty": {
+      "description": "Cuando crees un proyecto, podrás agregar tableros, programar tareas y colaborar con tu equipo en tiempo real.",
+      "title": "Aún no hay proyectos"
+    },
+    "members": {
+      "count_one": "{{count}} miembro",
+      "count_many": "{{count}} de miembros",
+      "count_other": "{{count}} miembros"
+    },
+    "noDescription": "Este proyecto aún no tiene descripción",
+    "noMember": {
+      "description": "Todavía no perteneces a ningún proyecto. Pide a un administrador del proyecto o al gerente del equipo que te asigne proyectos y tareas."
+    },
+    "noTeam": {
+      "action": "Elegir o crear un equipo",
+      "description": "Todo proyecto debe pertenecer a un equipo. Elige o crea un equipo para empezar a gestionar proyectos.",
+      "title": "Aún no has elegido un equipo de trabajo"
+    },
+    "switchTeam": {
+      "action": "Elegir o cambiar de equipo"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "Asignar miembros",
+      "confirm": {
+        "action": "Confirmar la asignación"
+      },
+      "required": "Selecciona al menos un miembro y marca un rol como mínimo",
+      "success": "Asignado",
+      "title": "Asignar miembros (varios roles)"
+    },
+    "column": {
+      "roles": "Roles asignados",
+      "user": "Usuario"
+    },
+    "label": "Miembros",
+    "load": {
+      "error": "No se pudieron cargar los miembros"
+    },
+    "noRoles": "Sin roles",
+    "remove": {
+      "confirm": "¿Quitar a “{{name}}” de este proyecto? Esta acción no se puede deshacer.",
+      "success": "Miembro quitado",
+      "title": "Quitar miembro"
+    },
+    "role": {
+      "system": "Plantilla del sistema",
+      "template": "Plantilla"
+    },
+    "roles": {
+      "edit": {
+        "action": "Editar roles",
+        "description": "Ajusta los roles que “{{name}} ({{username}})” tiene asignados en el proyecto.",
+        "label": "Roles en el proyecto (selección múltiple)",
+        "title": "Editar los roles del miembro"
+      },
+      "label": "Roles",
+      "load": {
+        "error": "No se pudieron cargar los roles del equipo"
+      },
+      "loading": "Cargando los roles del equipo…",
+      "required": "Marca al menos un rol. Para quitar al miembro por completo, usa el botón “Quitar”",
+      "save": {
+        "action": "Guardar roles"
+      },
+      "update": {
+        "error": "No se pudieron actualizar los roles",
+        "success": "Roles del miembro actualizados"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "Agregar nodo raíz",
+    "bind": {
+      "action": "Vincular tarjeta",
+      "bound": "Vinculada: {{title}}",
+      "change": "Cambiar la tarjeta vinculada",
+      "list": {
+        "suffix": " ({{name}})"
+      },
+      "loading": "Cargando tableros y tarjetas…",
+      "noMatch": "No hay tarjetas coincidentes",
+      "search": {
+        "aria": "Buscar por título de tarjeta",
+        "placeholder": "Buscar por título de tarjeta…"
+      },
+      "title": "Vincular tarjeta: {{title}}",
+      "unbind": "Desvincular"
+    },
+    "cascade": {
+      "aria": "Modo de movimiento en cascada",
+      "label": "Modo en cascada",
+      "off": "Modo libre: al arrastrar un nodo solo se mueve ese nodo",
+      "on": "Modo en cascada: al arrastrar un nodo, todos sus nodos secundarios se mueven con él y mantienen la distancia relativa"
+    },
+    "delete": {
+      "confirm_one": "Se eliminará “{{title}}” junto con su {{count}} nodo secundario. Esta acción no se puede deshacer.",
+      "confirm_many": "Se eliminará “{{title}}” junto con sus {{count}} de nodos secundarios. Esta acción no se puede deshacer.",
+      "confirm_other": "Se eliminará “{{title}}” junto con sus {{count}} nodos secundarios. Esta acción no se puede deshacer."
+    },
+    "empty": "Aún no hay nodos",
+    "error": {
+      "create": "No se pudo agregar el nodo",
+      "moveIntoDescendant": "No se puede mover debajo de sus propios nodos secundarios",
+      "savePosition": "No se pudo guardar la posición del nodo"
+    },
+    "export": {
+      "blobError": "No se pudo generar el archivo de imagen",
+      "canvasError": "No se pudo crear el lienzo",
+      "empty": "El mapa mental aún no tiene nodos",
+      "imageError": "Ocurrió un error al generar la imagen",
+      "png": {
+        "error": "No se pudo exportar el mapa mental a PNG",
+        "success": "El mapa mental se exportó correctamente como imagen PNG de alta resolución",
+        "tooltip": "Exportar como imagen PNG de alta resolución"
+      },
+      "svg": {
+        "error": "No se pudo exportar el mapa mental a SVG",
+        "success": "El mapa mental se exportó correctamente como SVG",
+        "tooltip": "Exportar como imagen SVG vectorial"
+      },
+      "title": "Mapa mental"
+    },
+    "fullscreen": {
+      "enter": "Modo inmersivo de pantalla completa",
+      "exit": "Salir de pantalla completa",
+      "label": "Pantalla completa"
+    },
+    "layout": {
+      "action": "Organizar el diseño con un clic",
+      "success": "Se restableció y optimizó el diseño del mapa mental",
+      "tooltip": "Organiza el mapa con distribución automática y guarda los cambios"
+    },
+    "library": {
+      "bound": "Vinculada: {{title}}",
+      "close": "Cerrar la biblioteca de tarjetas",
+      "convert": "Convertir en nodo",
+      "noMatch": "No hay tarjetas coincidentes",
+      "search": {
+        "placeholder": "Buscar tarjetas del tablero…"
+      },
+      "title": "Biblioteca de tarjetas del proyecto",
+      "toggle": "Biblioteca de tarjetas ({{n}} vinculadas)",
+      "tooltip": "Mostrar u ocultar el panel de tarjetas del proyecto",
+      "unbound": "Sin vincular"
+    },
+    "node": {
+      "addChild": "Agregar nodo secundario",
+      "card": {
+        "completed": " (completada)",
+        "tooltip": "Tarjeta: {{title}} (haz clic para abrir){{status}}"
+      },
+      "child": {
+        "placeholder": "Título del nodo secundario…"
+      },
+      "collapse": "Contraer",
+      "delete": "Eliminar nodo",
+      "edit": "Editar nodo",
+      "expand": "Expandir",
+      "noPermission": "Sin permiso de edición",
+      "note": {
+        "placeholder": "Nota…"
+      }
+    },
+    "prompt": {
+      "childInitial": "Nuevo nodo",
+      "rootInitial": "Nuevo tema"
+    },
+    "root": {
+      "placeholder": "Título del nodo raíz…"
+    },
+    "untitledNode": "Nodo sin título",
+    "view": {
+      "canvas": "Vista de lienzo (Canvas)",
+      "tree": "Vista de esquema (Outline)"
+    }
+  },
+  "name": {
+    "label": "Nombre del proyecto",
+    "required": "Ingresa el nombre del proyecto"
+  },
+  "report": {
+    "chart": {
+      "logged": "Registradas",
+      "remaining": "Estimación restante",
+      "title": "Gráfico comparativo de horas por miembro (todo el período)"
+    },
+    "column": {
+      "estimated": "Estimadas",
+      "logged": "Registradas",
+      "member": "Miembro",
+      "remainingProgress": "Restante y progreso (todo el período)"
+    },
+    "detail": {
+      "column": {
+        "board": "Tablero",
+        "card": "Tarjeta",
+        "list": "Lista",
+        "priority": "Prioridad",
+        "review": "Revisión"
+      },
+      "title": "Detalle de tarjetas"
+    },
+    "export": {
+      "action": "Exportar CSV"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "Pendientes: {{pending}} | Promedio: {{score}}",
+        "title": "Tasa de aprobación de revisiones"
+      },
+      "cards": {
+        "hint": "Estado del proyecto: total de tarjetas registradas",
+        "title": "Total de tarjetas",
+        "value_one": "{{count}} tarjeta",
+        "value_many": "{{count}} de tarjetas",
+        "value_other": "{{count}} tarjetas"
+      },
+      "logged": {
+        "hint": "Horas registradas por el equipo en el período seleccionado",
+        "title": "Total de horas registradas"
+      },
+      "remaining": {
+        "hint": "Estado del proyecto: trabajo total pendiente; no cambia con el filtro de período",
+        "title": "Total de horas estimadas restantes (todo el período)"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "Tarjetas",
+        "hours": "Horas totales"
+      },
+      "empty": "Aún no hay registros de horas",
+      "title": "Horas por miembro"
+    },
+    "remaining": {
+      "title": "Horas restantes por miembro (todo el período)"
+    },
+    "review": {
+      "approved": "Aprobadas {{n}}",
+      "average": "Promedio {{n}}",
+      "pending": "Pendientes {{n}}",
+      "rejected": "Rechazadas {{n}}",
+      "title": "Estadísticas de revisión (todo el período)"
+    },
+    "year": {
+      "all": "Todo el período",
+      "empty": "No hay horas registradas en el período seleccionado",
+      "label": "Año"
+    }
+  },
+  "tab": {
+    "boards": "Tableros",
+    "calendar": "Calendario",
+    "fields": "Campos personalizados",
+    "gantt": "Gantt",
+    "members": "Miembros",
+    "mindMap": "Mapa mental",
+    "report": "Informes",
+    "table": "Tabla",
+    "worklog": "Registro de horas"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "No se pudieron archivar las tarjetas",
+        "success_one": "Se archivó {{count}} tarjeta",
+        "success_many": "Se archivaron {{count}} de tarjetas",
+        "success_other": "Se archivaron {{count}} tarjetas"
+      },
+      "clearDue": "Borrar la fecha de vencimiento",
+      "due": {
+        "clear_one": "Se borró la fecha de vencimiento de {{count}} tarjeta",
+        "clear_many": "Se borró la fecha de vencimiento de {{count}} de tarjetas",
+        "clear_other": "Se borró la fecha de vencimiento de {{count}} tarjetas",
+        "error": "No se pudo actualizar el lote",
+        "set_one": "Se actualizó la fecha de vencimiento de {{count}} tarjeta",
+        "set_many": "Se actualizó la fecha de vencimiento de {{count}} de tarjetas",
+        "set_other": "Se actualizó la fecha de vencimiento de {{count}} tarjetas"
+      },
+      "mark": {
+        "error": "No se pudo actualizar el estado de las tarjetas"
+      },
+      "markComplete": "Marcar como completadas",
+      "marked": {
+        "complete_one": "Se marcó {{count}} tarjeta como completada",
+        "complete_many": "Se marcaron {{count}} de tarjetas como completadas",
+        "complete_other": "Se marcaron {{count}} tarjetas como completadas",
+        "incomplete_one": "Se marcó {{count}} tarjeta como incompleta",
+        "incomplete_many": "Se marcaron {{count}} de tarjetas como incompletas",
+        "incomplete_other": "Se marcaron {{count}} tarjetas como incompletas"
+      },
+      "markIncomplete": "Marcar como incompletas",
+      "nextWeek": "En una semana (+7 días)",
+      "selected": "{{n}} seleccionados",
+      "setDue": "Definir la fecha de vencimiento",
+      "today": "Hoy",
+      "tomorrow": "Mañana"
+    },
+    "clearSelection": "Cancelar la selección",
+    "column": {
+      "board": "Tablero",
+      "due": "Vencimiento",
+      "hours": "Horas",
+      "list": "Lista",
+      "progress": "Progreso",
+      "title": "Título de la tarjeta"
+    },
+    "empty": {
+      "all": "Aún no hay tarjetas",
+      "filtered": "Este tablero no tiene tarjetas"
+    },
+    "filter": {
+      "includeArchived": "Incluir tarjetas archivadas"
+    },
+    "rowCount_one": "{{count}} fila",
+    "rowCount_many": "{{count}} de filas",
+    "rowCount_other": "{{count}} filas",
+    "selectAll": "Seleccionar todo"
+  }
+}

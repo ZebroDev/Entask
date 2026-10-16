@@ -1,0 +1,350 @@
+{
+  "activity": {
+    "empty": "暂无活动记录"
+  },
+  "activityType": {
+    "archive": "归档",
+    "attachmentAdded": "上传附件",
+    "attachmentRemoved": "删除附件",
+    "checklistAdded": "新建检查清单",
+    "checklistRemoved": "删除检查清单",
+    "comment": "评论",
+    "complete": "完成",
+    "copy": "复制卡片",
+    "coverChange": "更换封面",
+    "create": "创建卡片",
+    "customFieldUpdated": "更新字段",
+    "deliverySubmitted": "交付审查",
+    "descriptionChange": "更新描述",
+    "dueChange": "更新截止日期",
+    "effortLogged": "记录工时",
+    "itemChecked": "勾选检查项",
+    "labelAdded": "添加标签",
+    "labelRemoved": "移除标签",
+    "memberAdded": "添加成员",
+    "memberRemoved": "移除成员",
+    "mindMapBound": "绑定思维导图",
+    "mindMapUnbound": "解除思维导图绑定",
+    "move": "移动",
+    "rename": "改名",
+    "restore": "取消归档",
+    "reviewAdded": "指派审查者",
+    "reviewSubmitted": "提交审查",
+    "startChange": "更新开始日期",
+    "uncomplete": "取消完成"
+  },
+  "archive": {
+    "success": "已更新归档状态"
+  },
+  "attachment": {
+    "coverRemove": {
+      "action": "取消封面"
+    },
+    "coverSet": {
+      "action": "设为封面"
+    },
+    "delete": {
+      "confirm": "确定要删除附件“{{name}}”？此操作无法撤销。",
+      "success": "已删除",
+      "title": "删除附件"
+    },
+    "empty": "暂无附件",
+    "upload": {
+      "action": "上传附件（≤20MB）",
+      "success": "已上传"
+    }
+  },
+  "background": {
+    "project": {
+      "label": "项目：{{name}}"
+    }
+  },
+  "backToBoard": {
+    "action": "返回看板"
+  },
+  "checklist": {
+    "addItem": {
+      "action": "添加",
+      "error": "新建检查项失败"
+    },
+    "delete": {
+      "confirm": "确定要删除“{{title}}”？将删除整份检查清单及其检查项，此操作无法撤销。",
+      "title": "删除检查清单"
+    },
+    "deleteItem": {
+      "aria": "删除{{title}}",
+      "confirm": "确定要删除检查项“{{title}}”？此操作无法撤销。",
+      "error": "删除检查项失败",
+      "title": "删除检查项"
+    },
+    "item": {
+      "placeholder": "新检查项"
+    },
+    "moveDown": {
+      "aria": "下移{{title}}"
+    },
+    "moveItem": {
+      "error": "排序失败"
+    },
+    "moveUp": {
+      "aria": "上移{{title}}"
+    },
+    "name": {
+      "placeholder": "新检查清单名称"
+    },
+    "toggleItem": {
+      "error": "勾选失败"
+    }
+  },
+  "comment": {
+    "create": {
+      "error": "评论失败"
+    },
+    "empty": "暂无评论",
+    "placeholder": "写下评论…",
+    "submit": {
+      "action": "发送"
+    }
+  },
+  "completion": {
+    "mark": {
+      "tooltip": "标记为完成"
+    },
+    "shortcut": {
+      "tooltip": "标记为完成（快捷键 X）"
+    },
+    "unmark": {
+      "tooltip": "标记为未完成"
+    }
+  },
+  "copy": {
+    "description": "将创建「{{title}}」的副本，请选择副本要放到的项目、看板与列表。",
+    "submit": {
+      "action": "确定复制"
+    },
+    "success": "卡片已复制",
+    "targetBoard": {
+      "label": "目标看板"
+    },
+    "targetList": {
+      "label": "目标列表"
+    },
+    "targetProject": {
+      "label": "目标项目"
+    },
+    "title": "复制卡片"
+  },
+  "create": {
+    "board": {
+      "empty": "暂无看板",
+      "label": "看板",
+      "loading": "加载看板中…",
+      "placeholder": "选择看板"
+    },
+    "description": {
+      "label": "描述（选填）",
+      "placeholder": "添加备注或更详细的任务说明…"
+    },
+    "dueDate": {
+      "label": "截止日期（选填）"
+    },
+    "hint": "随时随地按下 <kbd>{{key}}</kbd> 捕捉灵感与任务",
+    "keepOpen": {
+      "action": "连续新建",
+      "hint": "连续创建"
+    },
+    "list": {
+      "empty": "暂无列表",
+      "label": "所属列表 *",
+      "loading": "加载列表中…",
+      "placeholder": "选择列表",
+      "required": "请选择所属列表"
+    },
+    "name": {
+      "label": "卡片标题 *",
+      "placeholder": "输入卡片标题…",
+      "required": "请输入卡片标题"
+    },
+    "partialError": "卡片已创建，但截止日期设置失败",
+    "project": {
+      "label": "项目",
+      "loading": "加载项目中…",
+      "placeholder": "选择项目"
+    },
+    "submit": {
+      "action": "创建卡片"
+    },
+    "success": "卡片创建成功",
+    "successKeepOpen": "卡片已创建，可继续新建",
+    "title": "快速新建卡片"
+  },
+  "customField": {
+    "empty": "暂无自定义字段",
+    "load": {
+      "error": "自定义字段加载失败"
+    },
+    "save": {
+      "error": "保存字段失败"
+    }
+  },
+  "delete": {
+    "confirm": {
+      "action": "确认删除"
+    },
+    "success": "卡片已删除"
+  },
+  "description": {
+    "empty": {
+      "canEdit": "暂无描述——点击此处添加",
+      "readonly": "暂无描述"
+    }
+  },
+  "effort": {
+    "estimate": {
+      "label": "预估工时：",
+      "success": "预估工时已更新"
+    },
+    "hours": {
+      "placeholder": "工时（小时）"
+    },
+    "log": {
+      "action": "记录工时",
+      "date": "日期",
+      "entry": "{{name}}：{{hours}}",
+      "error": "记录失败",
+      "note": "（{{note}}）",
+      "success": "工时已记录"
+    },
+    "summary": "{{unit}} · 已记录 {{logged}} · 剩余 {{remaining}}"
+  },
+  "field": {
+    "completed": {
+      "label": "完成"
+    },
+    "dueDate": {
+      "label": "截止日期："
+    },
+    "mindMap": {
+      "label": "思维导图：{{title}}"
+    },
+    "readonly": "（只读）",
+    "startAt": {
+      "label": "开始日期："
+    }
+  },
+  "label": {
+    "count_other": "标签 {{count}}",
+    "create": {
+      "action": "创建标签",
+      "error": "创建标签失败",
+      "heading": "创建新标签"
+    },
+    "delete": {
+      "confirm": "确定要删除此标签吗？",
+      "error": "删除标签失败"
+    },
+    "edit": {
+      "heading": "编辑标签"
+    },
+    "list": {
+      "title": "标签"
+    },
+    "load": {
+      "error": "标签加载失败"
+    },
+    "name": {
+      "placeholder": "标签名称…"
+    },
+    "save": {
+      "error": "标签更新失败"
+    },
+    "update": {
+      "error": "更新标签失败"
+    }
+  },
+  "load": {
+    "error": {
+      "description": "无法加载卡片数据，可能已不存在或无权限。",
+      "title": "加载卡片失败"
+    }
+  },
+  "member": {
+    "assign": {
+      "label": "指派成员"
+    },
+    "assignSelf": {
+      "action": "+ 指派给我"
+    },
+    "count_other": "成员 {{count}}",
+    "empty": "暂无项目成员",
+    "load": {
+      "error": "成员加载失败"
+    },
+    "removeSelf": {
+      "action": "取消指派我"
+    }
+  },
+  "permission": {
+    "editRequired": "需要卡片编辑权限"
+  },
+  "review": {
+    "assign": {
+      "error": "指派审查者失败"
+    },
+    "comment": "（{{comment}}）",
+    "commentField": {
+      "placeholder": "评语"
+    },
+    "confirm": {
+      "action": "确认送出",
+      "card": "卡片：{{name}}",
+      "comment": "评语：{{comment}}",
+      "overwrite": "将覆盖 {{time}} 的「{{previous}}」核定",
+      "score": "分数：{{score}}",
+      "title": "确认核定",
+      "unchanged": "内容与当前核定相同，没有需要送出的变更",
+      "verdict": "立场：{{status}}"
+    },
+    "detail": {
+      "approved": "已通过",
+      "rejected": "已退回——"
+    },
+    "score": " {{score}} 分",
+    "scoreLabel": "评分",
+    "scoreNone": "不评分",
+    "status": {
+      "aria": "审查状态",
+      "pending": "待审查"
+    },
+    "submit": {
+      "action": "提交",
+      "error": "提交失败",
+      "success": "审查已提交"
+    },
+    "summary": "{{name}}：{{status}}"
+  },
+  "reviewer": {
+    "assign": {
+      "label": "指派审查者"
+    },
+    "count_other": "审查者 {{count}}",
+    "empty": "暂无审查者"
+  },
+  "reviewHistory": {
+    "empty": "暂无审查记录",
+    "title": "审查记录"
+  },
+  "section": {
+    "background": "背景区块",
+    "review": "审查",
+    "work": "工作区块"
+  },
+  "tab": {
+    "activity": "活动",
+    "attachments": "附件",
+    "checklists": "检查清单",
+    "comments": "评论",
+    "description": "描述",
+    "details": "详细信息"
+  }
+}

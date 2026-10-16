@@ -1,0 +1,356 @@
+{
+  "activity": {
+    "empty": "Aún no hay actividad"
+  },
+  "activityType": {
+    "archive": "archivó la tarjeta",
+    "attachmentAdded": "subió un archivo adjunto",
+    "attachmentRemoved": "eliminó un archivo adjunto",
+    "checklistAdded": "agregó una lista de verificación",
+    "checklistRemoved": "eliminó una lista de verificación",
+    "comment": "comentó",
+    "complete": "completó la tarjeta",
+    "copy": "copió la tarjeta",
+    "coverChange": "cambió la portada",
+    "create": "creó la tarjeta",
+    "customFieldUpdated": "actualizó un campo personalizado",
+    "deliverySubmitted": "envió la tarjeta a revisión",
+    "descriptionChange": "actualizó la descripción",
+    "dueChange": "actualizó la fecha de vencimiento",
+    "effortLogged": "registró horas",
+    "itemChecked": "marcó un elemento",
+    "labelAdded": "agregó una etiqueta",
+    "labelRemoved": "eliminó una etiqueta",
+    "memberAdded": "agregó un miembro",
+    "memberRemoved": "eliminó un miembro",
+    "mindMapBound": "vinculó la tarjeta a un mapa mental",
+    "mindMapUnbound": "desvinculó la tarjeta de un mapa mental",
+    "move": "movió la tarjeta",
+    "rename": "renombró la tarjeta",
+    "restore": "desarchivó la tarjeta",
+    "reviewAdded": "asignó un revisor",
+    "reviewSubmitted": "envió su revisión",
+    "startChange": "actualizó la fecha de inicio",
+    "uncomplete": "marcó la tarjeta como incompleta"
+  },
+  "archive": {
+    "success": "Estado de archivo actualizado"
+  },
+  "attachment": {
+    "coverRemove": {
+      "action": "Quitar portada"
+    },
+    "coverSet": {
+      "action": "Establecer como portada"
+    },
+    "delete": {
+      "confirm": "¿Eliminar el archivo adjunto “{{name}}”? Esta acción no se puede deshacer.",
+      "success": "Eliminado",
+      "title": "Eliminar archivo adjunto"
+    },
+    "empty": "Aún no hay archivos adjuntos",
+    "upload": {
+      "action": "Subir archivo adjunto (≤20 MB)",
+      "success": "Subido"
+    }
+  },
+  "background": {
+    "project": {
+      "label": "Proyecto: {{name}}"
+    }
+  },
+  "backToBoard": {
+    "action": "Volver al tablero"
+  },
+  "checklist": {
+    "addItem": {
+      "action": "Agregar",
+      "error": "No se pudo agregar el elemento"
+    },
+    "delete": {
+      "confirm": "¿Eliminar “{{title}}”? Se borrará toda la lista de verificación con sus elementos. Esta acción no se puede deshacer.",
+      "title": "Eliminar lista de verificación"
+    },
+    "deleteItem": {
+      "aria": "Eliminar {{title}}",
+      "confirm": "¿Eliminar el elemento “{{title}}”? Esta acción no se puede deshacer.",
+      "error": "No se pudo eliminar el elemento",
+      "title": "Eliminar elemento"
+    },
+    "item": {
+      "placeholder": "Nuevo elemento"
+    },
+    "moveDown": {
+      "aria": "Bajar {{title}}"
+    },
+    "moveItem": {
+      "error": "No se pudo reordenar"
+    },
+    "moveUp": {
+      "aria": "Subir {{title}}"
+    },
+    "name": {
+      "placeholder": "Nombre de la nueva lista de verificación"
+    },
+    "toggleItem": {
+      "error": "No se pudo marcar el elemento"
+    }
+  },
+  "comment": {
+    "create": {
+      "error": "No se pudo publicar el comentario"
+    },
+    "empty": "Aún no hay comentarios",
+    "placeholder": "Escribe un comentario…",
+    "submit": {
+      "action": "Enviar"
+    }
+  },
+  "completion": {
+    "mark": {
+      "tooltip": "Marcar como completada"
+    },
+    "shortcut": {
+      "tooltip": "Marcar como completada (tecla X)"
+    },
+    "unmark": {
+      "tooltip": "Marcar como incompleta"
+    }
+  },
+  "copy": {
+    "description": "Se creará una copia de “{{title}}”. Elige el proyecto, el tablero y la lista de destino.",
+    "submit": {
+      "action": "Confirmar copia"
+    },
+    "success": "Tarjeta copiada",
+    "targetBoard": {
+      "label": "Tablero de destino"
+    },
+    "targetList": {
+      "label": "Lista de destino"
+    },
+    "targetProject": {
+      "label": "Proyecto de destino"
+    },
+    "title": "Copiar tarjeta"
+  },
+  "create": {
+    "board": {
+      "empty": "Aún no hay tableros",
+      "label": "Tablero",
+      "loading": "Cargando tableros…",
+      "placeholder": "Selecciona un tablero"
+    },
+    "description": {
+      "label": "Descripción (opcional)",
+      "placeholder": "Agrega una nota o una descripción más detallada…"
+    },
+    "dueDate": {
+      "label": "Fecha de vencimiento (opcional)"
+    },
+    "hint": "Presiona <kbd>{{key}}</kbd> en cualquier momento para capturar ideas y tareas",
+    "keepOpen": {
+      "action": "Crear varias",
+      "hint": "Seguir creando"
+    },
+    "list": {
+      "empty": "Aún no hay listas",
+      "label": "Lista *",
+      "loading": "Cargando listas…",
+      "placeholder": "Selecciona una lista",
+      "required": "Selecciona la lista"
+    },
+    "name": {
+      "label": "Título de la tarjeta *",
+      "placeholder": "Ingresa el título de la tarjeta…",
+      "required": "Ingresa el título de la tarjeta"
+    },
+    "partialError": "La tarjeta se creó, pero no se pudo definir la fecha de vencimiento",
+    "project": {
+      "label": "Proyecto",
+      "loading": "Cargando proyectos…",
+      "placeholder": "Selecciona un proyecto"
+    },
+    "submit": {
+      "action": "Crear tarjeta"
+    },
+    "success": "Tarjeta creada",
+    "successKeepOpen": "Tarjeta creada; puedes seguir agregando",
+    "title": "Creación rápida de tarjeta"
+  },
+  "customField": {
+    "empty": "Aún no hay campos personalizados",
+    "load": {
+      "error": "No se pudieron cargar los campos personalizados"
+    },
+    "save": {
+      "error": "No se pudo guardar el campo"
+    }
+  },
+  "delete": {
+    "confirm": {
+      "action": "Confirmar eliminación"
+    },
+    "success": "Tarjeta eliminada"
+  },
+  "description": {
+    "empty": {
+      "canEdit": "Sin descripción: haz clic para agregar una",
+      "readonly": "Sin descripción"
+    }
+  },
+  "effort": {
+    "estimate": {
+      "label": "Horas estimadas: ",
+      "success": "Horas estimadas actualizadas"
+    },
+    "hours": {
+      "placeholder": "Horas"
+    },
+    "log": {
+      "action": "Registrar horas",
+      "date": "Fecha",
+      "entry": "{{name}}: {{hours}}",
+      "error": "No se pudo registrar",
+      "note": " ({{note}})",
+      "success": "Horas registradas"
+    },
+    "summary": "{{unit}} · Registradas {{logged}} · Restantes {{remaining}}"
+  },
+  "field": {
+    "completed": {
+      "label": "Completada"
+    },
+    "dueDate": {
+      "label": "Fecha de vencimiento: "
+    },
+    "mindMap": {
+      "label": "Mapa mental: {{title}}"
+    },
+    "readonly": " (solo lectura)",
+    "startAt": {
+      "label": "Fecha de inicio: "
+    }
+  },
+  "label": {
+    "count_one": "{{count}} etiqueta",
+    "count_many": "{{count}} de etiquetas",
+    "count_other": "{{count}} etiquetas",
+    "create": {
+      "action": "Crear etiqueta",
+      "error": "No se pudo crear la etiqueta",
+      "heading": "Crear nueva etiqueta"
+    },
+    "delete": {
+      "confirm": "¿Eliminar esta etiqueta?",
+      "error": "No se pudo eliminar la etiqueta"
+    },
+    "edit": {
+      "heading": "Editar etiqueta"
+    },
+    "list": {
+      "title": "Etiquetas"
+    },
+    "load": {
+      "error": "No se pudieron cargar las etiquetas"
+    },
+    "name": {
+      "placeholder": "Nombre de la etiqueta…"
+    },
+    "save": {
+      "error": "No se pudo guardar la etiqueta"
+    },
+    "update": {
+      "error": "No se pudo actualizar la etiqueta"
+    }
+  },
+  "load": {
+    "error": {
+      "description": "No se pudieron cargar los datos de la tarjeta. Es posible que ya no exista o que no tengas permiso.",
+      "title": "No se pudo cargar la tarjeta"
+    }
+  },
+  "member": {
+    "assign": {
+      "label": "Asignar miembros"
+    },
+    "assignSelf": {
+      "action": "+ Asignarme"
+    },
+    "count_one": "{{count}} miembro",
+    "count_many": "{{count}} de miembros",
+    "count_other": "{{count}} miembros",
+    "empty": "Aún no hay miembros del proyecto",
+    "load": {
+      "error": "No se pudieron cargar los miembros"
+    },
+    "removeSelf": {
+      "action": "Quitar mi asignación"
+    }
+  },
+  "permission": {
+    "editRequired": "Se requiere permiso de edición de la tarjeta"
+  },
+  "review": {
+    "assign": {
+      "error": "No se pudieron asignar los revisores"
+    },
+    "comment": " ({{comment}})",
+    "commentField": {
+      "placeholder": "Comentario"
+    },
+    "confirm": {
+      "action": "Confirmar y enviar",
+      "card": "Tarjeta: {{name}}",
+      "comment": "Comentario: {{comment}}",
+      "overwrite": "Se sobrescribirá la revisión del {{time}}: {{previous}}",
+      "score": "Puntaje: {{score}}",
+      "title": "Confirmar revisión",
+      "unchanged": "No hay cambios respecto de la revisión actual.",
+      "verdict": "Veredicto: {{status}}"
+    },
+    "detail": {
+      "approved": ": aprobada",
+      "rejected": ": rechazada —"
+    },
+    "score": " {{score}} pts",
+    "scoreLabel": "Puntuación",
+    "scoreNone": "Sin puntaje",
+    "status": {
+      "aria": "Estado de revisión",
+      "pending": "Pendiente"
+    },
+    "submit": {
+      "action": "Enviar",
+      "error": "No se pudo enviar la revisión",
+      "success": "Revisión enviada"
+    },
+    "summary": "{{name}}: {{status}}"
+  },
+  "reviewer": {
+    "assign": {
+      "label": "Asignar revisores"
+    },
+    "count_one": "{{count}} revisor",
+    "count_many": "{{count}} de revisores",
+    "count_other": "{{count}} revisores",
+    "empty": "Aún no hay revisores"
+  },
+  "reviewHistory": {
+    "empty": "Aún no hay historial de revisión",
+    "title": "Historial de revisión"
+  },
+  "section": {
+    "background": "Fondo",
+    "review": "Revisión",
+    "work": "Trabajo"
+  },
+  "tab": {
+    "activity": "Actividad",
+    "attachments": "Archivos adjuntos",
+    "checklists": "Listas de verificación",
+    "comments": "Comentarios",
+    "description": "Descripción",
+    "details": "Detalles"
+  }
+}

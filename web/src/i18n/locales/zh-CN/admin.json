@@ -1,0 +1,63 @@
+{
+  "activity": {
+    "empty": "尚无系统活动",
+    "title": "系统活动"
+  },
+  "column": {
+    "actions": "操作",
+    "changedAt": "变更时间",
+    "status": "状态",
+    "user": "用户"
+  },
+  "deactivate": {
+    "confirm": "确定要停用「{{name}}」吗？",
+    "error": "停用失败",
+    "note": "停用后他会立刻无法登录，现有会话也会失效。既有的指派与历史记录不受影响，之后可以恢复。",
+    "offboarding": "这个账号目前还有：",
+    "openCards": "{{n}} 张未完成的卡片",
+    "pendingReviews": "{{n}} 笔待审查",
+    "projectMemberships": "{{n}} 个项目成员身份",
+    "success": "已停用",
+    "teamMemberships": "{{n}} 个团队成员身份",
+    "title": "停用账号"
+  },
+  "delete": {
+    "confirm": "确定要永久删除「{{name}}」吗？",
+    "description": "账号数据（账号名称、密码、头像）会被清除且无法恢复。显示名称与既有的卡片、审查、活动记录会保留，历史仍可阅读。",
+    "error": "删除失败",
+    "success": "已删除",
+    "title": "删除账号",
+    "typeToConfirm": "请输入显示名称「{{name}}」以确认"
+  },
+  "empty": "没有符合条件的用户",
+  "error": "加载用户列表失败",
+  "filter": {
+    "active": "启用中",
+    "all": "全部",
+    "deactivated": "已停用"
+  },
+  "reactivate": {
+    "confirm": "确定要恢复「{{name}}」吗？",
+    "error": "恢复失败",
+    "note": "他会可以重新登录，但先前的会话不会恢复——需要重新登录。",
+    "success": "已恢复",
+    "title": "恢复账号"
+  },
+  "resetPassword": {
+    "action": "重置密码",
+    "description": "将为 {{name}} 设置一组临时密码。",
+    "error": "重置密码失败，请稍后再试",
+    "field": "临时密码",
+    "hint": "设置后请以安全的方式线下告知该用户；他当前的登录状态会全部失效。",
+    "submit": "确认重置",
+    "success": "已重置密码",
+    "title": "重置密码"
+  },
+  "status": {
+    "active": "启用中",
+    "deactivated": "已停用",
+    "deleted": "已删除"
+  },
+  "subtitle": "停用可恢复；删除不可逆，且会清除账号数据。",
+  "title": "用户管理"
+}

@@ -1,0 +1,174 @@
+{
+  "avatar": {
+    "removed": "Avatar eliminado",
+    "removeError": "No se pudo eliminar el avatar",
+    "updated": "Avatar actualizado",
+    "updateError": "No se pudo actualizar el avatar",
+    "upload": {
+      "action": "Subir un avatar nuevo",
+      "hint": "Admite JPG, PNG y WEBP. Máximo 5 MB."
+    }
+  },
+  "card": {
+    "markComplete": "Marcar como completada",
+    "markIncomplete": "Marcar como incompleta",
+    "openBoard": {
+      "aria": "Abrir el tablero que contiene esta tarjeta"
+    },
+    "overdue": {
+      "suffix": " (vencida)"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "Todo al día. Disfruta el descanso, o presiona C para agregar una tarjeta.",
+      "completed": "Aún no has completado ninguna tarjeta. Las tareas terminadas aparecerán aquí.",
+      "title": "Ninguna tarjeta coincide con este filtro"
+    }
+  },
+  "error": {
+    "loadDetail": "No se pudo cargar tu espacio de trabajo: {{detail}}"
+  },
+  "filter": {
+    "reviews": "Por revisar"
+  },
+  "notification": {
+    "approved": {
+      "body": "“{{card}}” fue aprobada por {{actor}}{{score}}",
+      "title": "Revisión aprobada"
+    },
+    "assigned": {
+      "body": "Se te asignó “{{card}}”",
+      "description": "Cuando se te asigna una tarjeta nueva",
+      "label": "Trabajo asignado",
+      "title": "Tarjeta asignada"
+    },
+    "bell": {
+      "aria": "Centro de notificaciones"
+    },
+    "comment": {
+      "body": "{{actor}} comentó en “{{card}}”",
+      "description": "Cuando una tarjeta en la que participas recibe un comentario nuevo",
+      "label": "Comentarios nuevos",
+      "title": "Comentario nuevo"
+    },
+    "empty": "Aún no hay notificaciones",
+    "fallback": {
+      "body": "Tienes una notificación",
+      "title": "Notificación"
+    },
+    "markAllRead": {
+      "action": "Marcar todo como leído"
+    },
+    "rejected": {
+      "body": "“{{card}}” fue rechazada por {{actor}}{{score}}",
+      "title": "Revisión rechazada"
+    },
+    "review": {
+      "body": "Se te asignó revisar “{{card}}”",
+      "description": "Cuando te agregan como revisor o cambia el estado de la revisión",
+      "label": "Solicitudes y rechazos de revisión",
+      "title": "Solicitud de revisión"
+    },
+    "scoreSuffix": ", puntuación {{score}}",
+    "system": {
+      "description": "Actualizaciones importantes del sistema o avisos de mantenimiento",
+      "label": "Anuncios del sistema"
+    },
+    "time": {
+      "justNow": "Justo ahora"
+    },
+    "title": "Centro de notificaciones de colaboración",
+    "unread_one": "{{count}} sin leer",
+    "unread_many": "{{count}} sin leer",
+    "unread_other": "{{count}} sin leer"
+  },
+  "page": {
+    "description": "Gestiona tus pendientes y tu flujo de revisión en todos los proyectos"
+  },
+  "password": {
+    "bothRequired": "Ingresa tu contraseña actual y la nueva",
+    "change": {
+      "action": "Actualizar contraseña",
+      "label": "Cambiar contraseña"
+    },
+    "current": {
+      "placeholder": "Contraseña actual"
+    },
+    "new": {
+      "placeholder": "Contraseña nueva"
+    },
+    "updated": "Contraseña actualizada",
+    "updateError": "No se pudo actualizar la contraseña"
+  },
+  "preferences": {
+    "loadError": "No se pudieron cargar las preferencias",
+    "save": {
+      "action": "Guardar preferencias"
+    },
+    "saved": "Preferencias guardadas"
+  },
+  "profile": {
+    "displayName": {
+      "label": "Nombre visible",
+      "required": "El nombre visible no puede estar vacío"
+    },
+    "updated": "Perfil actualizado",
+    "updateError": "No se pudo actualizar el perfil"
+  },
+  "review": {
+    "open": {
+      "action": "Abrir la revisión"
+    },
+    "pending": {
+      "badge": "Pendiente de tu revisión"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "Cuando un miembro del equipo te asigne como revisor, la tarjeta aparecerá aquí de inmediato.",
+      "title": "Todo al día: no hay nada esperando tu revisión"
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "Usar el idioma del navegador",
+      "hint": "Cambia el texto de la interfaz y los formatos de fecha. Con “Usar el idioma del navegador”, el idioma sigue la configuración de tu navegador.",
+      "label": "Idioma de la interfaz"
+    },
+    "tab": {
+      "account": "Cuenta",
+      "language": "Idioma",
+      "notifications": "Notificaciones"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "Elementos que vencen hoy"
+    },
+    "inProgress": {
+      "hint": "Total de asignaciones en todos los proyectos",
+      "label": "Pendientes en curso"
+    },
+    "overdue": {
+      "hint": "Tareas que requieren atención primero"
+    },
+    "reviews": {
+      "hint": "Tu equipo espera tu aprobación"
+    }
+  },
+  "tab": {
+    "completed_one": "Completadas ({{count}})",
+    "completed_many": "Completadas ({{count}})",
+    "completed_other": "Completadas ({{count}})",
+    "dueToday_one": "Vencen hoy ({{count}})",
+    "dueToday_many": "Vencen hoy ({{count}})",
+    "dueToday_other": "Vencen hoy ({{count}})",
+    "inProgress_one": "En curso ({{count}})",
+    "inProgress_many": "En curso ({{count}})",
+    "inProgress_other": "En curso ({{count}})",
+    "overdue_one": "Vencidas ({{count}})",
+    "overdue_many": "Vencidas ({{count}})",
+    "overdue_other": "Vencidas ({{count}})"
+  }
+}

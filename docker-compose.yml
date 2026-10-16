@@ -1,0 +1,53 @@
+name: entask
+
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: entask
+      POSTGRES_USER: entask
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?在 .env 設定 POSTGRES_PASSWORD}
+    # 掛在**父目錄**，不是 /var/lib/postgresql/data。
+    # 18 起 PGDATA = /var/lib/postgresql/18/docker（版本子目錄），image 宣告的 VOLUME 也改成
+    # /var/lib/postgresql；掛在舊路徑時 entrypoint 會直接**拒絕啟動**並說
+    # 「there appears to be PostgreSQL data in: /var/lib/postgresql/data (unused mount/volume)」，
+    # 建議「place a single mount at /var/lib/postgresql」（2026-10-05 實測，db 進入 restart loop）。
+    # 掛在父目錄同時讓 image 的 VOLUME 宣告由這個具名 volume 滿足，不會多出匿名 volume。
+    volumes: [pgdata:/var/lib/postgresql]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U entask -d entask"]
+      interval: 5s
+      retries: 30
+    # 不對外開埠：只有 app 需要連它
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.fly
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=entask;Username=entask;Password=${POSTGRES_PASSWORD}"
+      Jwt__Secret: ${JWT_SECRET:?在 .env 設定 JWT_SECRET（≥32 字元）}
+      Jwt__Issuer: entask
+      Jwt__Audience: entask-web
+      Seed__AdminUsername: ${ADMIN_USERNAME:-admin}
+      Seed__AdminPassword: ${ADMIN_PASSWORD:?在 .env 設定 ADMIN_PASSWORD（≥8 字元）}
+      Storage__AttachmentsPath: /app/storage/attachments
+      Storage__AvatarsPath: /app/storage/avatars
+    volumes: [storage:/app/storage]
+    ports: ["${APP_PORT:-8080}:8080"]
+    # 與 Dockerfile 的 HEALTHCHECK 同形：探針問的是「服務能不能回應」，不是「埠開著沒有」
+    # ——`/api/health` 回 200 才算過。curl 由映像提供（Dockerfile.fly 有裝）。
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/api/health"]
+      interval: 30s
+      timeout: 3s
+      start_period: 20s
+      retries: 3
+
+volumes:
+  pgdata:
+  storage:

@@ -1,0 +1,48 @@
+{
+  "board": {
+    "create": "建立看板",
+    "delete": "刪除看板",
+    "edit": "編輯看板",
+    "read": "檢視看板"
+  },
+  "card": {
+    "assign": "指派卡片",
+    "comment": "留言",
+    "create": "建立卡片",
+    "delete": "刪除卡片",
+    "edit": "編輯卡片",
+    "effort": {
+      "update": "更新工時與進度"
+    },
+    "rate": "填寫審查評分",
+    "read": "檢視卡片",
+    "review": "審查卡片"
+  },
+  "mindmap": {
+    "edit": "編輯心智圖節點"
+  },
+  "project": {
+    "create": "建立專案",
+    "delete": "刪除專案",
+    "edit": "編輯專案",
+    "member": {
+      "manage": "管理專案成員"
+    },
+    "read": "檢視專案"
+  },
+  "report": {
+    "view": "檢視績效報表"
+  },
+  "team": {
+    "member": {
+      "manage": "管理團隊成員"
+    },
+    "read": "檢視團隊",
+    "role": {
+      "manage": "定義團隊角色"
+    },
+    "workcalendar": {
+      "manage": "管理團隊工作日曆"
+    }
+  }
+}

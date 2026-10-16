@@ -1,0 +1,224 @@
+{
+  "action": {
+    "add": "新增",
+    "archive": "封存",
+    "cancel": "取消",
+    "close": "關閉",
+    "confirm": "確定",
+    "copy": "複製",
+    "create": "建立",
+    "deactivate": "停用",
+    "delete": "刪除",
+    "edit": "編輯",
+    "loadMore": "載入更多",
+    "reactivate": "復原",
+    "remove": "移除",
+    "retry": "重試",
+    "save": "儲存",
+    "saveChanges": "儲存變更",
+    "unarchive": "取消封存",
+    "update": "更新",
+    "view": "查看"
+  },
+  "audit": {
+    "actorUnknown": "未知使用者"
+  },
+  "column": {
+    "actions": "操作"
+  },
+  "connection": {
+    "offline": "即時同步連線已離線",
+    "reconnecting": "即時網路連線已中斷，正在嘗試自動重新連線…",
+    "restored": "即時連線已恢復，最新資料已自動同步！",
+    "retry": {
+      "action": "重試連線"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}}（{{weekday}}）",
+    "range": "{{from}} – {{to}}",
+    "rangeWithWeek": "{{from}} – {{to}}（{{week}}）",
+    "weekOfYear": "第 {{week}} 週"
+  },
+  "error": {
+    "archive": "封存失敗",
+    "assign": "指派失敗",
+    "assignDetail": "指派失敗：{{detail}}",
+    "copy": "複製失敗",
+    "create": "建立失敗",
+    "createDetail": "建立失敗：{{detail}}",
+    "delete": "刪除失敗",
+    "deleteDetail": "刪除失敗：{{detail}}",
+    "download": "下載失敗，請稍後重試",
+    "export": "匯出失敗，請稍後重試",
+    "load": "載入失敗",
+    "loadDetail": "載入失敗：{{detail}}",
+    "loadRetry": "載入失敗，請稍後再試",
+    "move": "移動失敗",
+    "operation": "操作失敗",
+    "remove": "移除失敗",
+    "removeDetail": "移除失敗：{{detail}}",
+    "rename": "改名失敗",
+    "restore": "取消封存失敗",
+    "save": "儲存失敗",
+    "saveDetail": "儲存失敗：{{detail}}",
+    "toggleCompletion": "標記完成失敗",
+    "tryLater": "請稍後重試",
+    "update": "更新失敗",
+    "upload": "上傳失敗"
+  },
+  "fieldScope": {
+    "board": "看板",
+    "project": "專案"
+  },
+  "fieldType": {
+    "checkbox": "勾選",
+    "date": "日期",
+    "member": "成員",
+    "number": "數字",
+    "select": "下拉選單",
+    "text": "文字"
+  },
+  "filter": {
+    "all": "全部",
+    "assignedToMe": "指派給我",
+    "dueToday": "今日到期"
+  },
+  "member": {
+    "display": "{{name}}（{{username}}）"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "導覽路徑",
+      "userMenu": "使用者選單"
+    },
+    "board": "看板",
+    "logout": "登出",
+    "myProjects": "我的專案",
+    "myTasks": "個人工作台",
+    "myWorklog": "我的日誌",
+    "project": "專案",
+    "projectDetail": "專案詳情",
+    "projects": "專案",
+    "search": "搜尋",
+    "selectTeam": "選擇團隊",
+    "shortcuts": "快捷鍵手冊 (?)",
+    "teams": "團隊",
+    "teamSettings": "團隊設定",
+    "userSettings": "個人設定"
+  },
+  "notFound": {
+    "back": {
+      "action": "返回上一頁"
+    },
+    "description": "此網址可能已被移除、重新命名，或是您尚未獲得此專案或看板的存取權限。",
+    "projects": {
+      "action": "回到我的專案"
+    },
+    "title": "找不到您請求的頁面"
+  },
+  "period": {
+    "custom": "自訂期間",
+    "from": "起始日期",
+    "to": "結束日期"
+  },
+  "reviewStatus": {
+    "tooltip": "審查狀態：{{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_other": "卡片 ({{count}})"
+    },
+    "comments": {
+      "heading_other": "留言 ({{count}})",
+      "onCard": "於卡片：{{title}}"
+    },
+    "empty": "無搜尋結果",
+    "hint": {
+      "cards": "搜尋卡片、心智圖…",
+      "compact": "搜尋…",
+      "projects": "搜尋專案…"
+    },
+    "minLength": "請輸入至少 2 個字元",
+    "nodes": {
+      "heading_other": "心智圖節點 ({{count}})"
+    },
+    "open": {
+      "hint": "點擊開啟 →"
+    },
+    "placeholder": "搜尋卡片、留言、心智圖節點…",
+    "projects": {
+      "empty": "無相符專案",
+      "heading_other": "我的專案 ({{count}})",
+      "placeholder": "搜尋並前往專案…"
+    }
+  },
+  "select": {
+    "placeholder": "請選擇…"
+  },
+  "separator": {
+    "label": "：",
+    "list": "、"
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "建立卡片並連續新增下一張"
+    },
+    "createCard": {
+      "label": "快速新增卡片"
+    },
+    "description": "使用鍵盤快捷鍵快速流暢地管理你的任務與專案",
+    "escape": {
+      "label": "關閉彈窗 / 取消焦點"
+    },
+    "help": {
+      "label": "開啟快捷鍵手冊"
+    },
+    "hint": "提示：打字或在輸入框中時，單鍵快捷鍵會自動停用以保護輸入內容。",
+    "quickFilter": {
+      "label": "切換個人任務篩選 (指派給我)"
+    },
+    "search": {
+      "label": "全域搜尋 / 命令面板"
+    },
+    "section": {
+      "board": "看板與卡片操作",
+      "navigation": "全站導航與指令"
+    },
+    "submit": {
+      "label": "送出儲存 / 建立"
+    },
+    "title": "鍵盤快捷鍵手冊"
+  },
+  "sourceOffer": {
+    "link": "原始碼 (AGPL-3.0)",
+    "title": "檢視此版本的對應原始碼（AGPL-3.0 授權）"
+  },
+  "state": {
+    "approved": "通過",
+    "archived": "封存",
+    "assigning": "指派中…",
+    "completed": "已完成",
+    "copying": "複製中…",
+    "creating": "建立中…",
+    "deactivated": "已停用",
+    "deleting": "刪除中…",
+    "loading": "載入中…",
+    "overdue": "已逾期",
+    "pending": "待審查",
+    "rejected": "退回",
+    "saved": "已儲存",
+    "saving": "儲存中…",
+    "searching": "搜尋中…",
+    "signingIn": "登入中…",
+    "unavailable": "內容無法顯示",
+    "updating": "更新中…",
+    "uploading": "上傳中…"
+  },
+  "theme": {
+    "dark": "深色",
+    "light": "淺色",
+    "system": "系統預設",
+    "toggle": "切換主題"
+  }
+}

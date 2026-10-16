@@ -1,0 +1,350 @@
+{
+  "activity": {
+    "empty": "尚無活動紀錄"
+  },
+  "activityType": {
+    "archive": "封存",
+    "attachmentAdded": "上傳附件",
+    "attachmentRemoved": "刪除附件",
+    "checklistAdded": "新增檢查清單",
+    "checklistRemoved": "刪除檢查清單",
+    "comment": "留言",
+    "complete": "完成",
+    "copy": "複製卡片",
+    "coverChange": "更換封面",
+    "create": "建立卡片",
+    "customFieldUpdated": "更新欄位",
+    "deliverySubmitted": "交付審查",
+    "descriptionChange": "更新描述",
+    "dueChange": "更新截止日",
+    "effortLogged": "記錄工時",
+    "itemChecked": "勾選項目",
+    "labelAdded": "加上標籤",
+    "labelRemoved": "移除標籤",
+    "memberAdded": "加入成員",
+    "memberRemoved": "移除成員",
+    "mindMapBound": "綁定心智圖",
+    "mindMapUnbound": "解除心智圖綁定",
+    "move": "移動",
+    "rename": "改名",
+    "restore": "取消封存",
+    "reviewAdded": "指派審查者",
+    "reviewSubmitted": "提交審查",
+    "startChange": "更新開工日",
+    "uncomplete": "取消完成"
+  },
+  "archive": {
+    "success": "已更新封存狀態"
+  },
+  "attachment": {
+    "coverRemove": {
+      "action": "取消封面"
+    },
+    "coverSet": {
+      "action": "設為封面"
+    },
+    "delete": {
+      "confirm": "確定要刪除附件「{{name}}」？此操作無法復原。",
+      "success": "已刪除",
+      "title": "刪除附件"
+    },
+    "empty": "尚無附件",
+    "upload": {
+      "action": "上傳附件（≤20MB）",
+      "success": "已上傳"
+    }
+  },
+  "background": {
+    "project": {
+      "label": "專案：{{name}}"
+    }
+  },
+  "backToBoard": {
+    "action": "返回看板"
+  },
+  "checklist": {
+    "addItem": {
+      "action": "加入",
+      "error": "新增項目失敗"
+    },
+    "delete": {
+      "confirm": "確定要刪除「{{title}}」？將刪除整份檢查清單與其項目，此操作無法復原。",
+      "title": "刪除檢查清單"
+    },
+    "deleteItem": {
+      "aria": "刪除{{title}}",
+      "confirm": "確定要刪除項目「{{title}}」？此操作無法復原。",
+      "error": "刪除項目失敗",
+      "title": "刪除項目"
+    },
+    "item": {
+      "placeholder": "新項目"
+    },
+    "moveDown": {
+      "aria": "下移{{title}}"
+    },
+    "moveItem": {
+      "error": "排序失敗"
+    },
+    "moveUp": {
+      "aria": "上移{{title}}"
+    },
+    "name": {
+      "placeholder": "新檢查清單名稱"
+    },
+    "toggleItem": {
+      "error": "勾選失敗"
+    }
+  },
+  "comment": {
+    "create": {
+      "error": "留言失敗"
+    },
+    "empty": "尚無留言",
+    "placeholder": "寫下留言…",
+    "submit": {
+      "action": "送出"
+    }
+  },
+  "completion": {
+    "mark": {
+      "tooltip": "標記為完成"
+    },
+    "shortcut": {
+      "tooltip": "標記為完成（快捷鍵 X）"
+    },
+    "unmark": {
+      "tooltip": "標記為未完成"
+    }
+  },
+  "copy": {
+    "description": "將建立「{{title}}」的副本，請選擇副本要放到的專案、看板與列表。",
+    "submit": {
+      "action": "確定複製"
+    },
+    "success": "卡片已複製",
+    "targetBoard": {
+      "label": "目標看板"
+    },
+    "targetList": {
+      "label": "目標列表"
+    },
+    "targetProject": {
+      "label": "目標專案"
+    },
+    "title": "複製卡片"
+  },
+  "create": {
+    "board": {
+      "empty": "尚無看板",
+      "label": "看板",
+      "loading": "載入看板中…",
+      "placeholder": "選擇看板"
+    },
+    "description": {
+      "label": "描述 (選填)",
+      "placeholder": "添加備註或更詳細的任務說明…"
+    },
+    "dueDate": {
+      "label": "截止日 (選填)"
+    },
+    "hint": "隨時隨地按下 <kbd>{{key}}</kbd> 捕捉靈感與任務",
+    "keepOpen": {
+      "action": "連續新增",
+      "hint": "連續建立"
+    },
+    "list": {
+      "empty": "尚無列表",
+      "label": "放置列表 *",
+      "loading": "載入列表中…",
+      "placeholder": "選擇列表",
+      "required": "請選擇所屬列表"
+    },
+    "name": {
+      "label": "卡片標題 *",
+      "placeholder": "輸入卡片標題…",
+      "required": "請輸入卡片標題"
+    },
+    "partialError": "卡片已建立，但截止日設定失敗",
+    "project": {
+      "label": "專案",
+      "loading": "載入專案中…",
+      "placeholder": "選擇專案"
+    },
+    "submit": {
+      "action": "建立卡片"
+    },
+    "success": "卡片建立成功",
+    "successKeepOpen": "卡片已建立，可繼續新增",
+    "title": "快速新增卡片"
+  },
+  "customField": {
+    "empty": "尚無自訂欄位",
+    "load": {
+      "error": "自訂欄位載入失敗"
+    },
+    "save": {
+      "error": "儲存欄位失敗"
+    }
+  },
+  "delete": {
+    "confirm": {
+      "action": "確認刪除"
+    },
+    "success": "卡片已刪除"
+  },
+  "description": {
+    "empty": {
+      "canEdit": "尚無描述——點此新增",
+      "readonly": "尚無描述"
+    }
+  },
+  "effort": {
+    "estimate": {
+      "label": "預估工時：",
+      "success": "預估工時已更新"
+    },
+    "hours": {
+      "placeholder": "工時（小時）"
+    },
+    "log": {
+      "action": "記錄工時",
+      "date": "日期",
+      "entry": "{{name}}：{{hours}}",
+      "error": "記錄失敗",
+      "note": "（{{note}}）",
+      "success": "工時已記錄"
+    },
+    "summary": "{{unit}} · 已記錄 {{logged}} · 剩餘 {{remaining}}"
+  },
+  "field": {
+    "completed": {
+      "label": "完成"
+    },
+    "dueDate": {
+      "label": "截止日："
+    },
+    "mindMap": {
+      "label": "心智圖：{{title}}"
+    },
+    "readonly": "（唯讀）",
+    "startAt": {
+      "label": "開工日："
+    }
+  },
+  "label": {
+    "count_other": "標籤 {{count}}",
+    "create": {
+      "action": "建立標籤",
+      "error": "建立標籤失敗",
+      "heading": "建立新標籤"
+    },
+    "delete": {
+      "confirm": "確定要刪除此標籤嗎？",
+      "error": "刪除標籤失敗"
+    },
+    "edit": {
+      "heading": "編輯標籤"
+    },
+    "list": {
+      "title": "標籤"
+    },
+    "load": {
+      "error": "標籤載入失敗"
+    },
+    "name": {
+      "placeholder": "標籤名稱…"
+    },
+    "save": {
+      "error": "標籤更新失敗"
+    },
+    "update": {
+      "error": "更新標籤失敗"
+    }
+  },
+  "load": {
+    "error": {
+      "description": "無法載入卡片資料，可能已不存在或無權限。",
+      "title": "載入卡片失敗"
+    }
+  },
+  "member": {
+    "assign": {
+      "label": "指派成員"
+    },
+    "assignSelf": {
+      "action": "+ 指派給我"
+    },
+    "count_other": "成員 {{count}}",
+    "empty": "尚無專案成員",
+    "load": {
+      "error": "成員載入失敗"
+    },
+    "removeSelf": {
+      "action": "取消指派我"
+    }
+  },
+  "permission": {
+    "editRequired": "需要卡片編輯權限"
+  },
+  "review": {
+    "assign": {
+      "error": "指派審查者失敗"
+    },
+    "comment": "（{{comment}}）",
+    "commentField": {
+      "placeholder": "評語"
+    },
+    "confirm": {
+      "action": "確認送出",
+      "card": "卡片：{{name}}",
+      "comment": "評語：{{comment}}",
+      "overwrite": "將覆蓋 {{time}} 的「{{previous}}」核定",
+      "score": "分數：{{score}}",
+      "title": "確認核定",
+      "unchanged": "內容與目前核定相同，沒有需要送出的變更",
+      "verdict": "立場：{{status}}"
+    },
+    "detail": {
+      "approved": "已通過",
+      "rejected": "已退回——"
+    },
+    "score": " {{score}} 分",
+    "scoreLabel": "評分",
+    "scoreNone": "不評分",
+    "status": {
+      "aria": "審查狀態",
+      "pending": "待審查"
+    },
+    "submit": {
+      "action": "提交",
+      "error": "提交失敗",
+      "success": "審查已提交"
+    },
+    "summary": "{{name}}：{{status}}"
+  },
+  "reviewer": {
+    "assign": {
+      "label": "指派審查者"
+    },
+    "count_other": "審查者 {{count}}",
+    "empty": "尚無審查者"
+  },
+  "reviewHistory": {
+    "empty": "尚無審查紀錄",
+    "title": "審查歷程"
+  },
+  "section": {
+    "background": "背景區塊",
+    "review": "審查",
+    "work": "工作區塊"
+  },
+  "tab": {
+    "activity": "活動",
+    "attachments": "附件",
+    "checklists": "檢查清單",
+    "comments": "留言",
+    "description": "描述",
+    "details": "詳細資訊"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "avatar": {
+    "removed": "大頭貼已移除",
+    "removeError": "大頭貼移除失敗",
+    "updated": "大頭貼已更新",
+    "updateError": "大頭貼更新失敗",
+    "upload": {
+      "action": "上傳新大頭貼",
+      "hint": "支援 JPG, PNG, WEBP。最大 5MB。"
+    }
+  },
+  "card": {
+    "markComplete": "標記為完成",
+    "markIncomplete": "標記為未完成",
+    "openBoard": {
+      "aria": "開啟卡片所在看板"
+    },
+    "overdue": {
+      "suffix": "（逾期）"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "所有任務已清空，享受放鬆時光！或按下 C 鍵快速新增卡片。",
+      "completed": "尚未完成任何卡片，完成任務後將在此累積成果。",
+      "title": "目前沒有任何符合條件的卡片"
+    }
+  },
+  "error": {
+    "loadDetail": "載入工作台失敗：{{detail}}"
+  },
+  "filter": {
+    "reviews": "待我審查"
+  },
+  "notification": {
+    "approved": {
+      "body": "卡片「{{card}}」審查已由 {{actor}} 提交{{score}}",
+      "title": "審查通過"
+    },
+    "assigned": {
+      "body": "您已被指派至卡片「{{card}}」",
+      "description": "當有新卡片指派給您時",
+      "label": "被指派工作",
+      "title": "卡片指派通知"
+    },
+    "bell": {
+      "aria": "通知中心"
+    },
+    "comment": {
+      "body": "{{actor}} 在卡片「{{card}}」留了言",
+      "description": "當您參與的卡片有新留言時",
+      "label": "新留言",
+      "title": "新留言通知"
+    },
+    "empty": "目前沒有任何通知",
+    "fallback": {
+      "body": "您有一則通知",
+      "title": "通知"
+    },
+    "markAllRead": {
+      "action": "全部標為已讀"
+    },
+    "rejected": {
+      "body": "卡片「{{card}}」審查已由 {{actor}} 退回{{score}}",
+      "title": "審查被退回"
+    },
+    "review": {
+      "body": "您被指派審查卡片「{{card}}」",
+      "description": "當您被加入審查者，或審查狀態改變時",
+      "label": "審查請求/退回",
+      "title": "審查請求"
+    },
+    "scoreSuffix": "，評分 {{score}}",
+    "system": {
+      "description": "重要系統更新或維護通知",
+      "label": "系統公告"
+    },
+    "time": {
+      "justNow": "剛剛"
+    },
+    "title": "協作通知中心",
+    "unread_other": "{{count}} 未讀"
+  },
+  "page": {
+    "description": "集中管理您在所有專案中的待辦任務與審查流程"
+  },
+  "password": {
+    "bothRequired": "請輸入目前與新密碼",
+    "change": {
+      "action": "更新密碼",
+      "label": "變更密碼"
+    },
+    "current": {
+      "placeholder": "目前密碼"
+    },
+    "new": {
+      "placeholder": "新密碼"
+    },
+    "updated": "密碼已更新",
+    "updateError": "密碼更新失敗"
+  },
+  "preferences": {
+    "loadError": "無法載入通知設定",
+    "save": {
+      "action": "儲存通知設定"
+    },
+    "saved": "通知設定已儲存"
+  },
+  "profile": {
+    "displayName": {
+      "label": "顯示名稱",
+      "required": "顯示名稱不可為空"
+    },
+    "updated": "個人資料已更新",
+    "updateError": "更新個人資料失敗"
+  },
+  "review": {
+    "open": {
+      "action": "進入審查"
+    },
+    "pending": {
+      "badge": "待您審查"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "當團隊成員指派您作為審查者時，相關卡片會立即出現在這裡。",
+      "title": "太棒了，目前沒有等待您審查的卡片"
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "跟隨瀏覽器",
+      "hint": "介面文字與日期格式都會跟著改變；跟隨瀏覽器時由瀏覽器的語言設定決定。",
+      "label": "介面語言"
+    },
+    "tab": {
+      "account": "個人帳號",
+      "language": "語言",
+      "notifications": "通知設定"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "今天需交付的項目"
+    },
+    "inProgress": {
+      "hint": "跨專案指派總數",
+      "label": "進行中待辦"
+    },
+    "overdue": {
+      "hint": "需優先推進的任務"
+    },
+    "reviews": {
+      "hint": "團隊正等待您的簽核"
+    }
+  },
+  "tab": {
+    "completed_other": "已完成（{{count}}）",
+    "dueToday_other": "今日到期（{{count}}）",
+    "inProgress_other": "進行中（{{count}}）",
+    "overdue_other": "已逾期（{{count}}）"
+  }
+}

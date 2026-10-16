@@ -1,0 +1,164 @@
+{
+  "avatar": {
+    "removed": "アバターを削除しました",
+    "removeError": "アバターの削除に失敗しました",
+    "updated": "アバターを更新しました",
+    "updateError": "アバターの更新に失敗しました",
+    "upload": {
+      "action": "新しいアバターをアップロード",
+      "hint": "JPG、PNG、WEBP に対応しています。最大 5 MB。"
+    }
+  },
+  "card": {
+    "markComplete": "完了としてマーク",
+    "markIncomplete": "未完了としてマーク",
+    "openBoard": {
+      "aria": "カードがあるボードを開く"
+    },
+    "overdue": {
+      "suffix": "（期限切れ）"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "タスクはすべて片付きました。ゆっくり休憩しましょう！C キーでカードをすばやく追加することもできます。",
+      "completed": "完了したカードはまだありません。タスクを完了するとここに表示されます。",
+      "title": "条件に一致するカードはありません"
+    }
+  },
+  "error": {
+    "loadDetail": "ワークスペースの読み込みに失敗しました：{{detail}}"
+  },
+  "filter": {
+    "reviews": "レビュー待ち"
+  },
+  "notification": {
+    "approved": {
+      "body": "「{{card}}」のレビューが {{actor}} により承認されました{{score}}",
+      "title": "レビュー承認"
+    },
+    "assigned": {
+      "body": "カード「{{card}}」に割り当てられました",
+      "description": "新しいカードが自分に割り当てられたとき",
+      "label": "割り当てられた作業",
+      "title": "カードの割り当て"
+    },
+    "bell": {
+      "aria": "通知センター"
+    },
+    "comment": {
+      "body": "{{actor}} がカード「{{card}}」にコメントしました",
+      "description": "自分が関わっているカードに新しいコメントが付いたとき",
+      "label": "新しいコメント",
+      "title": "新しいコメント"
+    },
+    "empty": "通知はまだありません",
+    "fallback": {
+      "body": "通知があります",
+      "title": "通知"
+    },
+    "markAllRead": {
+      "action": "すべて既読にする"
+    },
+    "rejected": {
+      "body": "「{{card}}」のレビューが {{actor}} により差し戻されました{{score}}",
+      "title": "レビューの差し戻し"
+    },
+    "review": {
+      "body": "カード「{{card}}」のレビュー担当に割り当てられました",
+      "description": "自分がレビュアーに追加されたとき、またはレビュー状況が変わったとき",
+      "label": "レビュー依頼と差し戻し",
+      "title": "レビュー依頼"
+    },
+    "scoreSuffix": "、スコア {{score}}",
+    "system": {
+      "description": "重要なシステム更新やメンテナンスのお知らせ",
+      "label": "システムのお知らせ"
+    },
+    "time": {
+      "justNow": "たった今"
+    },
+    "title": "コラボレーション通知センター",
+    "unread_other": "未読 {{count}} 件"
+  },
+  "page": {
+    "description": "すべてのプロジェクトのタスクとレビューをまとめて管理できます。"
+  },
+  "password": {
+    "bothRequired": "現在のパスワードと新しいパスワードを入力してください",
+    "change": {
+      "action": "パスワードを更新",
+      "label": "パスワードの変更"
+    },
+    "current": {
+      "placeholder": "現在のパスワード"
+    },
+    "new": {
+      "placeholder": "新しいパスワード"
+    },
+    "updated": "パスワードを更新しました",
+    "updateError": "パスワードの更新に失敗しました"
+  },
+  "preferences": {
+    "loadError": "通知設定の読み込みに失敗しました",
+    "save": {
+      "action": "通知設定を保存"
+    },
+    "saved": "通知設定を保存しました"
+  },
+  "profile": {
+    "displayName": {
+      "label": "表示名",
+      "required": "表示名を入力してください"
+    },
+    "updated": "プロフィールを更新しました",
+    "updateError": "プロフィールの更新に失敗しました"
+  },
+  "review": {
+    "open": {
+      "action": "レビューを開く"
+    },
+    "pending": {
+      "badge": "レビュー待ち"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "チームメンバーが自分をレビュアーに割り当てると、そのカードがすぐにここに表示されます。",
+      "title": "すべて片付きました。レビュー待ちのカードはありません。"
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "ブラウザに合わせる",
+      "hint": "インターフェースのテキストと日付の形式も切り替わります。「ブラウザに合わせる」を選ぶと、ブラウザの言語設定に従います。",
+      "label": "表示言語"
+    },
+    "tab": {
+      "account": "アカウント",
+      "language": "言語",
+      "notifications": "通知設定"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "今日が期限の項目"
+    },
+    "inProgress": {
+      "hint": "プロジェクトをまたぐ割り当ての合計",
+      "label": "進行中のタスク"
+    },
+    "overdue": {
+      "hint": "優先して進めるべきタスク"
+    },
+    "reviews": {
+      "hint": "チームが自分の承認を待っています"
+    }
+  },
+  "tab": {
+    "completed_other": "完了（{{count}}）",
+    "dueToday_other": "今日が期限（{{count}}）",
+    "inProgress_other": "進行中（{{count}}）",
+    "overdue_other": "期限切れ（{{count}}）"
+  }
+}

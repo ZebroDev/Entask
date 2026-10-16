@@ -1,0 +1,63 @@
+{
+  "activity": {
+    "empty": "Aún no hay actividad del sistema",
+    "title": "Actividad del sistema"
+  },
+  "column": {
+    "actions": "Acciones",
+    "changedAt": "Modificado",
+    "status": "Estado",
+    "user": "Usuario"
+  },
+  "deactivate": {
+    "confirm": "¿Desactivar a {{name}}?",
+    "error": "No se pudo desactivar",
+    "note": "No podrá iniciar sesión de inmediato y sus sesiones actuales se cerrarán. Las asignaciones y el historial no se modifican, y esto se puede revertir después.",
+    "offboarding": "Esta cuenta todavía tiene:",
+    "openCards": "{{n}} tarjetas abiertas",
+    "pendingReviews": "{{n}} revisiones pendientes",
+    "projectMemberships": "{{n}} membresías de proyecto",
+    "success": "Desactivada",
+    "teamMemberships": "{{n}} membresías de equipo",
+    "title": "Desactivar cuenta"
+  },
+  "delete": {
+    "confirm": "¿Eliminar permanentemente a {{name}}?",
+    "description": "Los datos de la cuenta (nombre de usuario, contraseña, avatar) se borrarán y no se pueden recuperar. El nombre visible y las tarjetas, revisiones y registros de actividad existentes se conservan para que el historial siga siendo legible.",
+    "error": "No se pudo eliminar",
+    "success": "Eliminada",
+    "title": "Eliminar cuenta",
+    "typeToConfirm": "Escribe el nombre visible {{name}} para confirmar"
+  },
+  "empty": "Ningún usuario coincide con este filtro",
+  "error": "No se pudo cargar la lista de usuarios",
+  "filter": {
+    "active": "Activos",
+    "all": "Todos",
+    "deactivated": "Desactivados"
+  },
+  "reactivate": {
+    "confirm": "¿Reactivar a {{name}}?",
+    "error": "No se pudo reactivar",
+    "note": "Podrá iniciar sesión de nuevo, pero las sesiones anteriores no se restauran.",
+    "success": "Reactivada",
+    "title": "Reactivar cuenta"
+  },
+  "resetPassword": {
+    "action": "Restablecer contraseña",
+    "description": "Se establecerá una contraseña temporal para {{name}}.",
+    "error": "No se pudo restablecer la contraseña",
+    "field": "Contraseña temporal",
+    "hint": "Después de establecerla, comunícasela al usuario por un medio seguro fuera de la aplicación. Todas sus sesiones actuales se cerrarán.",
+    "submit": "Restablecer",
+    "success": "Contraseña restablecida",
+    "title": "Restablecer contraseña"
+  },
+  "status": {
+    "active": "Activo",
+    "deactivated": "Desactivado",
+    "deleted": "Eliminado"
+  },
+  "subtitle": "La desactivación es reversible; la eliminación no lo es y borra los datos de la cuenta.",
+  "title": "Administración de usuarios"
+}

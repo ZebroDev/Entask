@@ -1,0 +1,5 @@
+# GitHub 的 Sponsor 按鈕（repo 頁右上）——與 README 的「Supporting This Project」段同一組管道。
+# 鍵名以官方 schema（json.schemastore.org/github-funding.json，additionalProperties: false）為準：
+# 寫錯鍵名 GitHub 是靜默不顯示按鈕，不會報錯。
+buy_me_a_coffee: zebrodev
+ko_fi: zebrodev

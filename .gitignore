@@ -1,0 +1,41 @@
+bin/
+obj/
+.vs/
+*.user
+appsettings.Development.json
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env.local
+# 一鍵部署（docker compose）在工作樹放真的 `.env`（Task 2 起）——不可進版控；
+# `.env.example` 是要進版控的範本，用 `!` 例外保住（`!` 在後、覆蓋前面的 `.env*`）；
+# `.env*` 連變體一起擋——自架者 `cp .env.example .env.production` 後 `git add -A` 會把真密碼 commit（2026-10-06）。
+.env*
+!.env.example
+*.bak
+storage/
+!src/Entask.Infrastructure/Storage/
+
+.claude/
+.github/copilot-instructions.md
+
+.superpowers/
+
+# 保留在工作樹、但不隨專案發布的本機素材（2026-10-03）
+# mobile_img/：手機截圖參考素材
+# .agents/：本機 agent skill（raster-to-svg 等工具腳本）
+mobile_img/
+.agents/
+
+# 測試產物（dotnet test 的 .trx）
+[Tt]est[Rr]esult*/
+
+# `src/Entask.Api/wwwroot/` 裝的是**產物**、不是原始碼（2026-10-04）
+# 本機是頭像上傳留下的 `avatars/`；部署時 `Dockerfile.fly` 把 `web/dist` 複製進去。
+# 它有沒有內容會改變本機的端點圖：`Program.cs` 的 `MapFallbackToFile` 只在
+# `wwwroot/index.html` 存在時才被 map（那是 `File.Exists` 判斷，讀過那一行）。
+# ★ 目錄**不存在也不會擋啟動**——2026-10-04 實測：框架在啟動時自己建它
+#   （跑之前 `ls` 說 No such file，跑完路徑就在了，`Now listening` 照樣印）。
+#   所以**不需要** `.gitkeep`，也不要為了這件事去 `mkdir`。
+src/Entask.Api/wwwroot/

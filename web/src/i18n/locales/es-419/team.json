@@ -1,0 +1,335 @@
+{
+  "activity": {
+    "empty": "Aún no hay registros de actividad"
+  },
+  "audit": {
+    "board": {
+      "created": "Tablero creado",
+      "deleted": "Tablero eliminado",
+      "updated": "Tablero actualizado"
+    },
+    "card": {
+      "created": "Tarjeta creada",
+      "deleted": "Tarjeta eliminada"
+    },
+    "customField": {
+      "created": "Campo personalizado creado",
+      "deleted": "Campo personalizado eliminado",
+      "updated": "Campo personalizado actualizado"
+    },
+    "member": {
+      "assigned": "Miembro asignado",
+      "removed": "Miembro quitado"
+    },
+    "project": {
+      "created": "Proyecto creado",
+      "deleted": "Proyecto eliminado",
+      "updated": "Proyecto actualizado"
+    },
+    "projectMember": {
+      "added": "Miembro del proyecto agregado",
+      "removed": "Miembro del proyecto quitado",
+      "updated": "Roles del miembro del proyecto actualizados"
+    },
+    "role": {
+      "created": "Rol creado",
+      "deleted": "Rol eliminado",
+      "updated": "Rol actualizado"
+    },
+    "team": {
+      "created": "Equipo creado",
+      "updated": "Equipo actualizado"
+    },
+    "user": {
+      "created": "Usuario creado",
+      "deactivated": "Cuenta desactivada",
+      "deleted": "Cuenta eliminada",
+      "passwordReset": "Restableció la contraseña",
+      "reactivated": "Cuenta reactivada"
+    },
+    "workCalendar": {
+      "deleted": "Eliminó una entrada del calendario laboral",
+      "updated": "Actualizó el calendario laboral"
+    }
+  },
+  "create": {
+    "action": "Crear equipo",
+    "assign": {
+      "failed": "El equipo se creó, pero el rol de gerente del equipo no se pudo asignar automáticamente. Agrégate como miembro para terminar la configuración."
+    },
+    "confirm": {
+      "action": "Confirmar creación"
+    },
+    "error": "No se pudo crear el equipo",
+    "name": {
+      "placeholder": "Por ejemplo: I+D central, Operaciones de producto",
+      "required": "Ingresa el nombre del equipo"
+    },
+    "success": "Equipo creado",
+    "title": "Crear equipo nuevo"
+  },
+  "description": {
+    "label": "Descripción del equipo (opcional)",
+    "placeholder": "Por ejemplo: desarrollo de producto full-stack y entregas ágiles"
+  },
+  "edit": {
+    "error": "No se pudo actualizar el equipo",
+    "name": {
+      "placeholder": "Por ejemplo: equipo del proyecto central",
+      "required": "El nombre del equipo no puede estar vacío"
+    },
+    "success": "Información del equipo actualizada",
+    "title": "Editar información del equipo"
+  },
+  "member": {
+    "assign": {
+      "action": "Asignar miembro",
+      "confirm": {
+        "action": "Confirmar asignación"
+      },
+      "required": "Selecciona un miembro y al menos un rol",
+      "roles": {
+        "label": "Roles (selección múltiple)"
+      },
+      "select": {
+        "label": "Seleccionar miembro"
+      },
+      "success": "Miembro asignado",
+      "title": "Asignar miembro al equipo"
+    },
+    "empty": "Aún no hay miembros",
+    "heading": "Miembros ({{n}})",
+    "remove": {
+      "confirm": "¿Quitar a “{{name}}” de este equipo? Este miembro perderá el acceso a este equipo y esta acción no se puede deshacer.",
+      "success": "Miembro quitado",
+      "title": "Quitar miembro"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "No se encontraron miembros en otros equipos",
+        "heading": "Miembros de otros equipos",
+        "hint": "Ingresa al menos 3 caracteres para buscar miembros de otros equipos",
+        "loading": "Buscando…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "Cambiar"
+      },
+      "loading": "Cargando usuarios…",
+      "noMatch": "Ningún usuario coincide con “{{query}}”",
+      "search": {
+        "placeholder": "Filtra por nombre o nombre de usuario…"
+      }
+    }
+  },
+  "name": {
+    "label": "Nombre del equipo"
+  },
+  "nav": {
+    "selectTeam": "← Elegir equipo"
+  },
+  "permissionCategory": {
+    "board": "Tablero",
+    "card": "Tarjeta",
+    "mindmap": "Mapa mental",
+    "project": "Proyecto",
+    "report": "Informe",
+    "team": "Equipo"
+  },
+  "report": {
+    "column": {
+      "averageScore": "Puntuación promedio",
+      "completed": "Completadas / total de tarjetas",
+      "firstPassYield": "Tasa de aprobación a la primera entrega",
+      "member": "Miembro",
+      "profile": "Perfil",
+      "rank": "Posición",
+      "rating": "Calificación anual"
+    },
+    "dossier": {
+      "account": "Cuenta: @{{username}}",
+      "action": "Ver perfil",
+      "criteria": "Criterios de calificación: se otorga S cuando la tasa de cumplimiento y la tasa de entrega a tiempo alcanzan 85% o más y la tasa de aprobación a la primera entrega alcanza 80% o más; con 70% de cumplimiento se otorga A; con 50% o más se otorga B.",
+      "period": "Período de evaluación",
+      "print": {
+        "action": "Imprimir la evaluación / Guardar como PDF"
+      },
+      "rating": "Calificación general",
+      "signature": "Firma del gerente del departamento: _________________________",
+      "signDate": "Fecha de firma: ____ / ____ / ______",
+      "supervisor": {
+        "hint": "(Espacio para que el supervisor directo anote comentarios de evaluación, la aprobación del bono anual de desempeño y los objetivos de desarrollo profesional)",
+        "label": "Revisión del supervisor y firma anual: "
+      },
+      "title": "Evaluación de desempeño de {{name}}"
+    },
+    "empty": "Aún no hay datos de desempeño",
+    "export": {
+      "csv": {
+        "action": "Exportar CSV de resultados"
+      },
+      "excel": {
+        "action": "Exportar resumen en Excel"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_one": "{{done}} / {{count}} tarjeta completada",
+        "hint_many": "{{done}} / {{count}} de tarjetas completadas",
+        "hint_other": "{{done}} / {{count}} tarjetas completadas",
+        "title": "Tasa de cumplimiento de tareas del equipo"
+      },
+      "delivered": {
+        "hint": "Entregadas en todos los proyectos durante el período seleccionado",
+        "title": "Tarjetas entregadas",
+        "value_one": "{{count}} tarjeta",
+        "value_many": "{{count}} de tarjetas",
+        "value_other": "{{count}} tarjetas"
+      },
+      "hours": {
+        "hint": "Suma de las horas registradas por el equipo",
+        "title": "Total de horas acumuladas"
+      },
+      "topPerformers": {
+        "hint": "Alcanzan el estándar de desempeño S/A",
+        "title": "Miembros destacados (S/A)",
+        "value_one": "{{count}} persona",
+        "value_many": "{{count}} de personas",
+        "value_other": "{{count}} personas"
+      }
+    },
+    "metric": {
+      "completion": "Tasa de cumplimiento",
+      "onTime": "Tasa de entrega a tiempo"
+    },
+    "ranking": {
+      "description": "Calificación general calculada a partir de la tasa de cumplimiento de tareas, la tasa de entrega a tiempo y la tasa de aprobación a la primera entrega",
+      "title": "Ranking de desempeño del equipo"
+    },
+    "rating": {
+      "a": "A Excelente",
+      "b": "B Bueno",
+      "c": "C Necesita mejorar",
+      "s": "S Sobresaliente"
+    },
+    "sampleCount_one": "{{count}} muestra",
+    "sampleCount_many": "{{count}} de muestras",
+    "sampleCount_other": "{{count}} muestras",
+    "sampleInsufficient": "Muestra insuficiente",
+    "stat": {
+      "completed": "Tareas completadas",
+      "completion": "Tasa de cumplimiento de tareas",
+      "hours": "Total de horas reportadas"
+    },
+    "year": {
+      "all": "Todo el período",
+      "empty": "No hay datos de desempeño para el período seleccionado",
+      "label": "Año"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "Nuevo rol",
+      "title": "Nuevo rol"
+    },
+    "custom": {
+      "badge": "Personalizado"
+    },
+    "delete": {
+      "confirm": "¿Eliminar el rol “{{name}}”? Esta acción no se puede deshacer.",
+      "error": "No se pudo eliminar (es posible que todavía haya miembros asignados)",
+      "success": "Rol eliminado",
+      "title": "Eliminar rol"
+    },
+    "description": {
+      "label": "Descripción"
+    },
+    "edit": {
+      "title": "Editar rol"
+    },
+    "heading": "Roles",
+    "name": {
+      "label": "Nombre",
+      "required": "Ingresa el nombre del rol"
+    },
+    "system": {
+      "badge": "Plantilla del sistema"
+    },
+    "template": {
+      "badge": "Plantilla"
+    }
+  },
+  "roleName": {
+    "eng_lead": "Líder de ingeniería",
+    "engineer": "Ingeniero",
+    "project_assistant": "Asistente de proyecto",
+    "project_manager": "Administrador del proyecto",
+    "qa_engineer": "Ingeniero de QA",
+    "team_manager": "Gerente del equipo"
+  },
+  "select": {
+    "current": "Equipo actual",
+    "empty": {
+      "action": "Crea tu primer equipo",
+      "description": "Aún no hay equipos. Como administrador del sistema, puedes crear uno ahora mismo."
+    },
+    "enter": {
+      "action": "Abrir"
+    },
+    "noPermission": {
+      "description": "Los roles como Ingeniero solo pueden participar en los proyectos y tareas que se les asignan, por lo que no tienen acceso a la configuración del equipo. Usa “Mis proyectos” o tu espacio de trabajo personal para el trabajo diario.",
+      "title": "Tu rol no incluye acceso a la gestión del equipo"
+    },
+    "noTeam": {
+      "description": "Todavía no se te ha asignado ningún equipo. Pide a un administrador del sistema o al gerente del equipo que te asigne un equipo y un proyecto.",
+      "title": "Aún no perteneces a ningún equipo"
+    },
+    "projects": {
+      "action": "Ir a mis proyectos"
+    },
+    "tasks": {
+      "action": "Espacio de trabajo personal"
+    }
+  },
+  "tab": {
+    "activity": "Registro de actividad",
+    "members": "Miembros",
+    "report": "Informe de desempeño",
+    "roles": "Roles",
+    "worklog": "Registro de horas"
+  },
+  "user": {
+    "admin": {
+      "label": "Otorgar permisos de administrador del sistema (Admin)"
+    },
+    "create": {
+      "action": "Agregar cuenta de usuario",
+      "confirm": {
+        "action": "Confirmar creación"
+      },
+      "empty": {
+        "action": "Crea una cuenta ahora"
+      },
+      "error": "No se pudo crear la cuenta",
+      "inline": {
+        "action": "+ Crear cuenta"
+      },
+      "required": "Completa el nombre de usuario, el nombre visible y la contraseña",
+      "success": "Cuenta de usuario “{{name}}” creada",
+      "title": "Crear cuenta de usuario"
+    },
+    "displayName": {
+      "label": "Nombre / nombre visible",
+      "placeholder": "Por ejemplo: Ana Pérez"
+    },
+    "password": {
+      "label": "Contraseña inicial (mín. 8 caracteres)",
+      "minLength": "La contraseña debe tener al menos 8 caracteres"
+    },
+    "username": {
+      "label": "Nombre de usuario",
+      "placeholder": "Por ejemplo: bob, alice_dev"
+    }
+  }
+}

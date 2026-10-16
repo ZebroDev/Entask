@@ -1,0 +1,475 @@
+{
+  "backToProjects": "← 我的專案",
+  "board": {
+    "archive": {
+      "action": "封存看板",
+      "success": "看板已封存"
+    },
+    "archivedSection": "已封存看板（{{n}}）",
+    "create": {
+      "action": "建立看板",
+      "placeholder": "新看板名稱",
+      "success": "看板已建立"
+    },
+    "delete": {
+      "action": "刪除看板"
+    },
+    "edit": {
+      "action": "編輯資訊"
+    },
+    "empty": {
+      "description": "請聯絡專案管理員為此專案新增看板。",
+      "title": "專案尚無看板"
+    },
+    "menu": {
+      "aria": "看板選單"
+    },
+    "noDescription": "無描述",
+    "restore": {
+      "action": "取消封存"
+    },
+    "unarchive": {
+      "success": "看板已取消封存"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "本月無到期卡片"
+    },
+    "more": "+{{n}} 更多",
+    "nextMonth": "下一個月 >",
+    "noDue": {
+      "empty": "無截止日",
+      "title": "無截止日卡片"
+    },
+    "prevMonth": "< 上一個月"
+  },
+  "cards": {
+    "truncated": "共 {{total}} 筆，僅載入前 {{shown}} 筆"
+  },
+  "create": {
+    "action": "建立專案",
+    "name": {
+      "placeholder": "例：下半年開發專案"
+    },
+    "success": "專案已建立",
+    "team": {
+      "label": "所屬團隊",
+      "required": "請選擇所屬團隊"
+    },
+    "title": "建立專案"
+  },
+  "description": {
+    "label": "專案敘述",
+    "placeholder": "這個專案的目標與範圍…"
+  },
+  "edit": {
+    "aria": "編輯專案名稱與敘述",
+    "success": "專案資訊已更新",
+    "title": "編輯專案資訊"
+  },
+  "field": {
+    "add": {
+      "action": "新增欄位"
+    },
+    "create": {
+      "action": "建立欄位",
+      "hint": "欄位會套用到此專案的所有卡片，建立後仍可修改名稱與選項。",
+      "success": "欄位已建立",
+      "title": "新增自訂欄位"
+    },
+    "delete": {
+      "confirm": "確定要刪除欄位「{{name}}」？將刪除所有卡片上的此欄位值，此操作無法復原。",
+      "success": "欄位已刪除",
+      "title": "刪除自訂欄位"
+    },
+    "edit": {
+      "hint": "{{scope}}範疇欄位。名稱與選項的變更會套用到所有使用此欄位的卡片。",
+      "title": "編輯欄位「{{name}}」"
+    },
+    "name": {
+      "label": "名稱",
+      "placeholder": "例如：優先級"
+    },
+    "options": {
+      "add": {
+        "action": "加入選項"
+      },
+      "empty": "下拉選單至少需要一個選項",
+      "label": "選項",
+      "placeholder": "輸入後按 Enter 新增，可貼上「高,中,低」",
+      "remove": {
+        "aria": "移除選項 {{option}}"
+      }
+    },
+    "scope": {
+      "label": "範疇"
+    },
+    "type": {
+      "label": "型態"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "確認變更並清除值"
+      },
+      "summary": "由「{{from}}」改為「{{to}}」",
+      "warning": "所有卡片上此欄位的既有值將被刪除，此動作無法復原。",
+      "warningWithOptions": "所有卡片上此欄位的既有值將被刪除，原本的選項清單也會一併清除，此動作無法復原。"
+    },
+    "update": {
+      "success": "欄位已更新"
+    }
+  },
+  "filter": {
+    "allBoards": "所有看板",
+    "allMembers": "所有成員"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "進度 / 工時",
+      "task": "卡片標題"
+    },
+    "empty": "尚無具備截止日的任務卡片",
+    "excludeArchived": "排除已封存",
+    "filter": {
+      "board": "看板篩選",
+      "member": "成員篩選"
+    },
+    "groupBy": {
+      "assignee": "依負責人",
+      "board": "依看板",
+      "label": "分組：",
+      "none": "不分組"
+    },
+    "includeArchived": "含已封存",
+    "loading": "時程載入中…",
+    "schedule": {
+      "action": "排程"
+    },
+    "scrollBack": "向後滾動",
+    "scrollForward": "向前滾動",
+    "today": "今天",
+    "todayLine": "今日",
+    "unassigned": "未指派",
+    "unscheduled": {
+      "hint": "點擊卡片即可設定預估工時與截止日期",
+      "title": "無截止日任務待排程 ({{n}})",
+      "toggle": "未排程 ({{n}})"
+    },
+    "view": {
+      "day": "日檢視",
+      "month": "月檢視",
+      "week": "週檢視"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_other": "{{count}} 個看板"
+    },
+    "createFirst": {
+      "action": "建立第一個專案"
+    },
+    "empty": {
+      "description": "建立專案後即可新增看板、排定任務並與團隊即時協作。",
+      "title": "尚無任何專案"
+    },
+    "members": {
+      "count_other": "{{count}} 位成員"
+    },
+    "noDescription": "尚未提供專案描述",
+    "noMember": {
+      "description": "您目前尚未加入任何專案。請聯絡專案管理員或團隊經理為您指派專案與工作任務。"
+    },
+    "noTeam": {
+      "action": "前往選擇 / 建立團隊",
+      "description": "專案必須隸屬於特定團隊。請先選擇或建立團隊以開始管理專案。",
+      "title": "尚未選擇工作團隊"
+    },
+    "switchTeam": {
+      "action": "選擇 / 切換團隊"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "指派成員",
+      "confirm": {
+        "action": "確認指派"
+      },
+      "required": "請選擇成員並至少勾選一個角色",
+      "success": "已指派",
+      "title": "指派成員（可多角色）"
+    },
+    "column": {
+      "roles": "已指派角色",
+      "user": "使用者"
+    },
+    "label": "成員",
+    "load": {
+      "error": "載入成員失敗"
+    },
+    "noRoles": "無角色",
+    "remove": {
+      "confirm": "確定要將「{{name}}」移出此專案？此操作無法復原。",
+      "success": "成員已移除",
+      "title": "移除成員"
+    },
+    "role": {
+      "system": "系統範本",
+      "template": "範本"
+    },
+    "roles": {
+      "edit": {
+        "action": "編輯角色",
+        "description": "調整「{{name}}（{{username}}）」在專案中的指派角色。",
+        "label": "專案角色（可多選）",
+        "title": "編輯成員角色"
+      },
+      "label": "角色",
+      "load": {
+        "error": "載入團隊角色失敗"
+      },
+      "loading": "載入團隊角色中…",
+      "required": "請至少勾選一個角色；若要完全移除成員請使用「移除」按鈕",
+      "save": {
+        "action": "儲存角色"
+      },
+      "update": {
+        "error": "更新角色失敗",
+        "success": "成員角色已更新"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "新增根節點",
+    "bind": {
+      "action": "綁定卡片",
+      "bound": "已綁定：{{title}}",
+      "change": "更換綁定卡片",
+      "list": {
+        "suffix": "（{{name}}）"
+      },
+      "loading": "載入看板與卡片中…",
+      "noMatch": "無相符卡片",
+      "search": {
+        "aria": "搜尋卡片標題",
+        "placeholder": "搜尋卡片標題…"
+      },
+      "title": "綁定卡片：{{title}}",
+      "unbind": "解綁"
+    },
+    "cascade": {
+      "aria": "分支連動模式",
+      "label": "連動模式",
+      "off": "自由模式：拖曳節點僅移動當前節點",
+      "on": "連動模式：拖曳節點時，其所有子節點將保持相對間距同步移動"
+    },
+    "delete": {
+      "confirm_other": "將一併刪除「{{title}}」及其 {{count}} 個子節點，此操作無法復原。"
+    },
+    "empty": "尚無節點",
+    "error": {
+      "create": "新增節點失敗",
+      "moveIntoDescendant": "不可移至自身子節點之下",
+      "savePosition": "儲存節點位置失敗"
+    },
+    "export": {
+      "blobError": "無法產生圖片檔案",
+      "canvasError": "無法建立畫布環境",
+      "empty": "心智圖尚無節點",
+      "imageError": "產生圖片時發生錯誤",
+      "png": {
+        "error": "心智圖 PNG 匯出失敗",
+        "success": "心智圖 PNG 高解析圖片匯出成功",
+        "tooltip": "匯出高清 PNG 圖片"
+      },
+      "svg": {
+        "error": "心智圖 SVG 匯出失敗",
+        "success": "心智圖 SVG 匯出成功",
+        "tooltip": "匯出向量 SVG 圖片"
+      },
+      "title": "心智圖"
+    },
+    "fullscreen": {
+      "enter": "全螢幕沉浸模式",
+      "exit": "退出全螢幕",
+      "label": "全螢幕"
+    },
+    "layout": {
+      "action": "一鍵整理排版",
+      "success": "已重設並最佳化心智圖排版",
+      "tooltip": "一鍵智慧拓撲排版並儲存"
+    },
+    "library": {
+      "bound": "已綁定：{{title}}",
+      "close": "關閉卡片庫",
+      "convert": "轉為節點",
+      "noMatch": "沒有相符的卡片",
+      "search": {
+        "placeholder": "搜尋看板卡片…"
+      },
+      "title": "專案卡片庫",
+      "toggle": "卡片庫 ({{n}} 綁定)",
+      "tooltip": "切換專案卡片抽屜",
+      "unbound": "未綁定"
+    },
+    "node": {
+      "addChild": "新增子節點",
+      "card": {
+        "completed": "（已完成）",
+        "tooltip": "卡片：{{title}} (點擊開啟){{status}}"
+      },
+      "child": {
+        "placeholder": "子節點標題…"
+      },
+      "collapse": "摺疊",
+      "delete": "刪除節點",
+      "edit": "編輯節點",
+      "expand": "展開",
+      "noPermission": "無編輯權限",
+      "note": {
+        "placeholder": "備註…"
+      }
+    },
+    "prompt": {
+      "childInitial": "新節點",
+      "rootInitial": "新主題"
+    },
+    "root": {
+      "placeholder": "根節點標題…"
+    },
+    "untitledNode": "未命名節點",
+    "view": {
+      "canvas": "畫布模式 (Canvas)",
+      "tree": "大綱樹狀 (Outline)"
+    }
+  },
+  "name": {
+    "label": "專案名稱",
+    "required": "請輸入專案名稱"
+  },
+  "report": {
+    "chart": {
+      "logged": "已投入",
+      "remaining": "剩餘估算",
+      "title": "成員工時對比圖表（全期）"
+    },
+    "column": {
+      "estimated": "預估",
+      "logged": "已報",
+      "member": "成員",
+      "remainingProgress": "剩餘與進度（全期）"
+    },
+    "detail": {
+      "column": {
+        "board": "看板",
+        "card": "卡片",
+        "list": "列表",
+        "priority": "優先級",
+        "review": "審查"
+      },
+      "title": "卡片明細"
+    },
+    "export": {
+      "action": "匯出 CSV"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "待審查：{{pending}} | 均分：{{score}}",
+        "title": "審查通過率"
+      },
+      "cards": {
+        "hint": "專案現況：追蹤中的卡片總計",
+        "title": "卡片總數",
+        "value_other": "{{count}} 張"
+      },
+      "logged": {
+        "hint": "所選期間內累計的工時總和",
+        "title": "總已投入工時"
+      },
+      "remaining": {
+        "hint": "專案現況：尚未完成的工作總量，不隨期間篩選變動",
+        "title": "總剩餘預估工時（全期）"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "卡片數",
+        "hours": "總工時"
+      },
+      "empty": "尚無工時紀錄",
+      "title": "成員工時"
+    },
+    "remaining": {
+      "title": "成員剩餘工時（全期）"
+    },
+    "review": {
+      "approved": "通過 {{n}}",
+      "average": "平均分 {{n}}",
+      "pending": "待審查 {{n}}",
+      "rejected": "退回 {{n}}",
+      "title": "審查統計（全期）"
+    },
+    "year": {
+      "all": "全期",
+      "empty": "所選期間沒有工時資料",
+      "label": "年度"
+    }
+  },
+  "tab": {
+    "boards": "看板",
+    "calendar": "月曆",
+    "fields": "自訂欄位",
+    "gantt": "甘特圖",
+    "members": "成員",
+    "mindMap": "心智圖",
+    "report": "報表",
+    "table": "表格",
+    "worklog": "工作日誌"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "批次封存失敗",
+        "success_other": "已批次封存 {{count}} 張卡片"
+      },
+      "clearDue": "清除截止日",
+      "due": {
+        "clear_other": "已清除 {{count}} 張卡片之截止日",
+        "error": "批次更新失敗",
+        "set_other": "已更新 {{count}} 張卡片之截止日"
+      },
+      "mark": {
+        "error": "批次標記失敗"
+      },
+      "markComplete": "標為完成",
+      "marked": {
+        "complete_other": "已將 {{count}} 張卡片標記為已完成",
+        "incomplete_other": "已將 {{count}} 張卡片標記為未完成"
+      },
+      "markIncomplete": "標為未完成",
+      "nextWeek": "一週後 (+7 天)",
+      "selected": "已選取 {{n}} 項",
+      "setDue": "設定截止日",
+      "today": "今天",
+      "tomorrow": "明天"
+    },
+    "clearSelection": "取消選取",
+    "column": {
+      "board": "看板",
+      "due": "截止日",
+      "hours": "工時",
+      "list": "列表",
+      "progress": "進度",
+      "title": "卡片標題"
+    },
+    "empty": {
+      "all": "尚無卡片",
+      "filtered": "此看板沒有卡片"
+    },
+    "filter": {
+      "includeArchived": "含封存卡片"
+    },
+    "rowCount_other": "{{count}} 筆",
+    "selectAll": "全選"
+  }
+}

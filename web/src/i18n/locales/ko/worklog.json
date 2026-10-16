@@ -1,0 +1,88 @@
+{
+  "empty": {
+    "description": "카드에서 공수를 기록하면 업무 일지가 여기에 자동으로 표시됩니다",
+    "group": {
+      "title": "이 기간에는 팀의 공수 기록이 없습니다"
+    },
+    "me": {
+      "title": "이 기간에는 공수 기록이 없습니다"
+    }
+  },
+  "export": {
+    "action": "Excel 내보내기"
+  },
+  "kpi": {
+    "cards": {
+      "title": "대상 카드",
+      "unit_other": "장"
+    },
+    "entries": {
+      "title": "작업 건수",
+      "unit_other": "건"
+    },
+    "hours": {
+      "title": "총 공수"
+    },
+    "missing": {
+      "detail": " · 상세 보기",
+      "each_other": "1인당 {{count}}일",
+      "members_other": "{{count}}명 합계",
+      "title": "미기록 근무일 (합계)",
+      "unit_other": "일 ({{members}}; {{days}})"
+    },
+    "reported": {
+      "title": "기록된 근무일",
+      "unit_other": "일"
+    }
+  },
+  "member": {
+    "cards_other": "카드 {{count}}장",
+    "collapse": {
+      "action": "상세 접기"
+    },
+    "empty": "오늘은 공수 기록이 없습니다",
+    "entries_other": "{{count}}건",
+    "expand": {
+      "action": "일별 상세 펼치기"
+    },
+    "heading_other": "팀 멤버 ({{count}}명)",
+    "missing": "미기록",
+    "spark": {
+      "tooltip": "{{day}}: {{hours}}"
+    },
+    "summary": "{{hours}} · {{entries}} · {{cards}} · {{workdays}}",
+    "workdays_other": "기록된 근무일 {{reported}}/{{total}}"
+  },
+  "missing": {
+    "group": {
+      "empty": "이 기간에는 미기록이 없습니다",
+      "title": "미기록 상세"
+    },
+    "me": {
+      "empty": "이 기간에 기록하지 않은 근무일이 없습니다",
+      "title": "내 미기록 상세"
+    },
+    "member": {
+      "count_other": "미기록 {{missing}}/{{count}}일"
+    },
+    "none_other": "추가로 {{count}}명은 미기록이 없습니다",
+    "workdays_other": "총 {{count}}일"
+  },
+  "mode": {
+    "day": "일",
+    "month": "월",
+    "week": "주"
+  },
+  "nav": {
+    "next": {
+      "aria": "다음 기간"
+    },
+    "prev": {
+      "aria": "이전 기간"
+    },
+    "today": "오늘"
+  },
+  "page": {
+    "hint": "기록한 공수를 자동으로 집계한 일간, 주간, 월간 보고서"
+  }
+}

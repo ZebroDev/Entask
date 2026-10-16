@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "hide": "보관됨 숨기기",
+    "show": "보관됨 표시"
+  },
+  "backToProject": {
+    "action": "← 프로젝트"
+  },
+  "card": {
+    "create": {
+      "placeholder": "카드 추가…"
+    }
+  },
+  "copy": {
+    "action": "보드 복사",
+    "confirm": "보드를 복사하시겠습니까?",
+    "description": "“{{name}}”의 전체 복사본을 만들며, 모든 리스트, 카드, 라벨과 사용자 정의 필드 값을 포함합니다. 내용이 많으면 시간이 걸리며, 복사본은 완료 후 직접 삭제해야 합니다.",
+    "name": {
+      "label": "보드 이름(선택)",
+      "placeholder": "비워 두면 자동으로 이름을 지정합니다"
+    },
+    "noPermission": "해당 프로젝트에서 보드를 만들 권한이 없습니다",
+    "submit": {
+      "action": "복사 확인"
+    },
+    "success": "보드가 복사되었습니다",
+    "targetProject": {
+      "label": "대상 프로젝트"
+    }
+  },
+  "delete": {
+    "action": "보드 삭제",
+    "confirm": "보드를 삭제하시겠습니까?",
+    "description": "“{{name}}” 보드를 삭제하면 이 보드의 모든 리스트, 카드와 첨부 파일도 함께 제거됩니다. 이 작업은 되돌릴 수 없습니다.",
+    "error": "보드 삭제에 실패했습니다",
+    "submit": {
+      "action": "삭제 확인"
+    },
+    "success": "보드가 삭제되었습니다"
+  },
+  "edit": {
+    "aria": "보드 이름과 설명 편집",
+    "description": {
+      "label": "보드 설명 (선택 사항)",
+      "placeholder": "예: 1단계 기능 개발 진행 상황 추적"
+    },
+    "error": "보드 업데이트에 실패했습니다",
+    "name": {
+      "label": "보드 이름",
+      "placeholder": "예: Sprint 1 보드",
+      "required": "보드 이름을 입력하십시오"
+    },
+    "success": "보드 정보가 업데이트되었습니다",
+    "title": "보드 정보 편집"
+  },
+  "labelColor": {
+    "blue": "파랑",
+    "cyan": "청록색",
+    "grayPurple": "회보라색",
+    "green": "초록",
+    "lightGreen": "연초록",
+    "orange": "주황",
+    "pink": "분홍",
+    "purple": "보라",
+    "red": "빨강",
+    "yellow": "노랑"
+  },
+  "list": {
+    "archive": {
+      "action": "리스트 보관",
+      "success": "리스트가 보관되었습니다"
+    },
+    "archived": {
+      "dropBlocked": "보관된 리스트는 카드를 받을 수 없습니다"
+    },
+    "copy": {
+      "action": "리스트 복사",
+      "description": "“{{name}}”의 사본을 만듭니다. 사본을 넣을 프로젝트와 보드를 선택하세요.",
+      "noPermission": "해당 프로젝트에서 보드를 편집할 권한이 없습니다",
+      "submit": {
+        "action": "복사 확인"
+      },
+      "success": "리스트를 복사했습니다",
+      "targetBoard": {
+        "label": "대상 보드"
+      }
+    },
+    "create": {
+      "action": "리스트 추가"
+    },
+    "delete": {
+      "action": "리스트 삭제",
+      "confirm": "“{{name}}” 리스트를 삭제하시겠습니까? 리스트의 카드도 함께 삭제되며, 이 작업은 되돌릴 수 없습니다.",
+      "success": "리스트가 삭제되었습니다"
+    },
+    "drag": {
+      "aria": "“{{name}}” 리스트 드래그"
+    },
+    "empty": {
+      "canEdit": "이 보드에는 리스트가 아직 없습니다. 오른쪽에서 첫 번째 리스트를 만들어 시작하십시오.",
+      "readonly": "이 보드에는 리스트가 아직 없습니다"
+    },
+    "menu": {
+      "aria": "리스트 메뉴"
+    },
+    "name": {
+      "placeholder": "새 리스트 이름…"
+    },
+    "restore": {
+      "action": "보관 해제",
+      "success": "리스트 보관이 해제되었습니다"
+    }
+  },
+  "permission": {
+    "denied": "이 보드에 대한 권한이 없습니다"
+  },
+  "presence": {
+    "live": "실시간 연결 중",
+    "online_other": "{{count}}명 온라인"
+  },
+  "settings": {
+    "action": "보드 설정"
+  }
+}

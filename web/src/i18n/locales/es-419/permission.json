@@ -1,0 +1,48 @@
+{
+  "board": {
+    "create": "Crear tablero",
+    "delete": "Eliminar tablero",
+    "edit": "Editar tablero",
+    "read": "Ver tablero"
+  },
+  "card": {
+    "assign": "Asignar tarjeta",
+    "comment": "Comentar",
+    "create": "Crear tarjeta",
+    "delete": "Eliminar tarjeta",
+    "edit": "Editar tarjeta",
+    "effort": {
+      "update": "Actualizar horas y progreso"
+    },
+    "rate": "Enviar puntuaciones de revisión",
+    "read": "Ver tarjeta",
+    "review": "Revisar tarjeta"
+  },
+  "mindmap": {
+    "edit": "Editar nodos del mapa mental"
+  },
+  "project": {
+    "create": "Crear proyecto",
+    "delete": "Eliminar proyecto",
+    "edit": "Editar proyecto",
+    "member": {
+      "manage": "Gestionar miembros del proyecto"
+    },
+    "read": "Ver proyecto"
+  },
+  "report": {
+    "view": "Ver informes de desempeño"
+  },
+  "team": {
+    "member": {
+      "manage": "Gestionar miembros del equipo"
+    },
+    "read": "Ver equipo",
+    "role": {
+      "manage": "Definir roles del equipo"
+    },
+    "workcalendar": {
+      "manage": "Administrar el calendario laboral del equipo"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <Copyright>Copyright (c) 2026 ZebroDev</Copyright>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+</Project>

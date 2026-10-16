@@ -1,0 +1,475 @@
+{
+  "backToProjects": "← マイプロジェクト",
+  "board": {
+    "archive": {
+      "action": "ボードをアーカイブ",
+      "success": "ボードをアーカイブしました"
+    },
+    "archivedSection": "アーカイブ済みボード（{{n}}）",
+    "create": {
+      "action": "ボードを作成",
+      "placeholder": "新しいボード名",
+      "success": "ボードを作成しました"
+    },
+    "delete": {
+      "action": "ボードを削除"
+    },
+    "edit": {
+      "action": "情報を編集"
+    },
+    "empty": {
+      "description": "このプロジェクトにボードを追加するよう、プロジェクト管理者にご連絡ください。",
+      "title": "このプロジェクトにボードがありません"
+    },
+    "menu": {
+      "aria": "ボードメニュー"
+    },
+    "noDescription": "説明なし",
+    "restore": {
+      "action": "アーカイブを解除"
+    },
+    "unarchive": {
+      "success": "ボードのアーカイブを解除しました"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "今月に期限を迎えるカードはありません"
+    },
+    "more": "+{{n}} 件",
+    "nextMonth": "翌月 >",
+    "noDue": {
+      "empty": "期限なし",
+      "title": "期限のないカード"
+    },
+    "prevMonth": "< 前月"
+  },
+  "cards": {
+    "truncated": "全 {{total}} 件中、先頭 {{shown}} 件のみ読み込み"
+  },
+  "create": {
+    "action": "プロジェクトを作成",
+    "name": {
+      "placeholder": "例：下期開発プロジェクト"
+    },
+    "success": "プロジェクトを作成しました",
+    "team": {
+      "label": "所属チーム",
+      "required": "所属チームを選択してください"
+    },
+    "title": "プロジェクトを作成"
+  },
+  "description": {
+    "label": "プロジェクトの説明",
+    "placeholder": "このプロジェクトの目的と範囲…"
+  },
+  "edit": {
+    "aria": "プロジェクト名と説明を編集",
+    "success": "プロジェクト情報を更新しました",
+    "title": "プロジェクト情報を編集"
+  },
+  "field": {
+    "add": {
+      "action": "フィールドを追加"
+    },
+    "create": {
+      "action": "フィールドを作成",
+      "hint": "フィールドはこのプロジェクトのすべてのカードに適用されます。作成後も名前とオプションは変更できます。",
+      "success": "フィールドを作成しました",
+      "title": "カスタムフィールドを追加"
+    },
+    "delete": {
+      "confirm": "フィールド「{{name}}」を削除しますか？すべてのカードのこのフィールドの値が削除されます。この操作は元に戻せません。",
+      "success": "フィールドを削除しました",
+      "title": "カスタムフィールドを削除"
+    },
+    "edit": {
+      "hint": "{{scope}}スコープのフィールドです。名前とオプションの変更は、このフィールドを使用するすべてのカードに適用されます。",
+      "title": "フィールド「{{name}}」を編集"
+    },
+    "name": {
+      "label": "名前",
+      "placeholder": "例：優先度"
+    },
+    "options": {
+      "add": {
+        "action": "オプションを追加"
+      },
+      "empty": "ドロップダウンには少なくとも 1 つのオプションが必要です",
+      "label": "オプション",
+      "placeholder": "入力して Enter で追加できます。「高,中,低」の貼り付けにも対応しています。",
+      "remove": {
+        "aria": "オプション {{option}} を削除"
+      }
+    },
+    "scope": {
+      "label": "スコープ"
+    },
+    "type": {
+      "label": "タイプ"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "変更して値を消去"
+      },
+      "summary": "「{{from}}」から「{{to}}」に変更",
+      "warning": "すべてのカードのこのフィールドの既存の値が削除されます。この操作は元に戻せません。",
+      "warningWithOptions": "すべてのカードのこのフィールドの既存の値が削除され、元のオプションリストも消去されます。この操作は元に戻せません。"
+    },
+    "update": {
+      "success": "フィールドを更新しました"
+    }
+  },
+  "filter": {
+    "allBoards": "すべてのボード",
+    "allMembers": "すべてのメンバー"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "進捗 / 工数",
+      "task": "カードタイトル"
+    },
+    "empty": "期限付きのカードはまだありません",
+    "excludeArchived": "アーカイブを除外",
+    "filter": {
+      "board": "ボードで絞り込み",
+      "member": "メンバーで絞り込み"
+    },
+    "groupBy": {
+      "assignee": "担当者別",
+      "board": "ボード別",
+      "label": "グループ：",
+      "none": "グループなし"
+    },
+    "includeArchived": "アーカイブを含める",
+    "loading": "スケジュールを読み込み中…",
+    "schedule": {
+      "action": "スケジュール設定"
+    },
+    "scrollBack": "後方へスクロール",
+    "scrollForward": "前方へスクロール",
+    "today": "今日",
+    "todayLine": "今日",
+    "unassigned": "未割り当て",
+    "unscheduled": {
+      "hint": "カードをクリックすると、見積工数と期限を設定できます",
+      "title": "未スケジュールのタスク（{{n}}）",
+      "toggle": "未スケジュール（{{n}}）"
+    },
+    "view": {
+      "day": "日表示",
+      "month": "月表示",
+      "week": "週表示"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_other": "{{count}} 個のボード"
+    },
+    "createFirst": {
+      "action": "最初のプロジェクトを作成"
+    },
+    "empty": {
+      "description": "プロジェクトを作成すると、ボードの追加、タスクのスケジュール設定、チームとのリアルタイム共同作業ができます。",
+      "title": "プロジェクトがまだありません"
+    },
+    "members": {
+      "count_other": "{{count}} 名のメンバー"
+    },
+    "noDescription": "プロジェクトの説明はまだありません",
+    "noMember": {
+      "description": "現在どのプロジェクトにも参加していません。プロジェクト管理者またはチームマネージャーに、プロジェクトとタスクの割り当てをご依頼ください。"
+    },
+    "noTeam": {
+      "action": "チームを選択 / 作成",
+      "description": "プロジェクトは特定のチームに所属する必要があります。プロジェクトの管理を始めるには、先にチームを選択または作成してください。",
+      "title": "チームが選択されていません"
+    },
+    "switchTeam": {
+      "action": "チームを選択 / 切り替え"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "メンバーを割り当て",
+      "confirm": {
+        "action": "割り当てを確定"
+      },
+      "required": "メンバーを選択し、少なくとも 1 つのロールにチェックを入れてください",
+      "success": "割り当てました",
+      "title": "メンバーの割り当て（複数ロール可）"
+    },
+    "column": {
+      "roles": "割り当て済みロール",
+      "user": "ユーザー"
+    },
+    "label": "メンバー",
+    "load": {
+      "error": "メンバーの読み込みに失敗しました"
+    },
+    "noRoles": "ロールなし",
+    "remove": {
+      "confirm": "「{{name}}」をこのプロジェクトから削除しますか？この操作は元に戻せません。",
+      "success": "メンバーを削除しました",
+      "title": "メンバーを削除"
+    },
+    "role": {
+      "system": "システムテンプレート",
+      "template": "テンプレート"
+    },
+    "roles": {
+      "edit": {
+        "action": "ロールを編集",
+        "description": "「{{name}}（{{username}}）」のプロジェクト内での割り当てロールを調整します。",
+        "label": "プロジェクトロール（複数選択可）",
+        "title": "メンバーのロールを編集"
+      },
+      "label": "ロール",
+      "load": {
+        "error": "チームロールの読み込みに失敗しました"
+      },
+      "loading": "チームロールを読み込み中…",
+      "required": "少なくとも 1 つのロールにチェックを入れてください。メンバーを完全に削除する場合は「削除」ボタンをご利用ください。",
+      "save": {
+        "action": "ロールを保存"
+      },
+      "update": {
+        "error": "ロールの更新に失敗しました",
+        "success": "メンバーのロールを更新しました"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "ルートノードを追加",
+    "bind": {
+      "action": "カードを紐付け",
+      "bound": "紐付け済み：{{title}}",
+      "change": "紐付け先のカードを変更",
+      "list": {
+        "suffix": "（{{name}}）"
+      },
+      "loading": "ボードとカードを読み込み中…",
+      "noMatch": "一致するカードがありません",
+      "search": {
+        "aria": "カードタイトルを検索",
+        "placeholder": "カードタイトルを検索…"
+      },
+      "title": "カードの紐付け：{{title}}",
+      "unbind": "紐付けを解除"
+    },
+    "cascade": {
+      "aria": "ブランチ連動モード",
+      "label": "連動モード",
+      "off": "フリーモード：ノードをドラッグしてもそのノードだけが移動します",
+      "on": "連動モード：ノードをドラッグすると、すべての子ノードが相対間隔を保ったまま一緒に移動します"
+    },
+    "delete": {
+      "confirm_other": "「{{title}}」とその子ノード {{count}} 件も削除されます。この操作は元に戻せません。"
+    },
+    "empty": "ノードがまだありません",
+    "error": {
+      "create": "ノードの追加に失敗しました",
+      "moveIntoDescendant": "自身の子ノードの下には移動できません",
+      "savePosition": "ノードの位置の保存に失敗しました"
+    },
+    "export": {
+      "blobError": "画像ファイルを生成できませんでした",
+      "canvasError": "キャンバス環境を作成できませんでした",
+      "empty": "マインドマップにノードがまだありません",
+      "imageError": "画像の生成中にエラーが発生しました",
+      "png": {
+        "error": "マインドマップの PNG エクスポートに失敗しました",
+        "success": "マインドマップを高解像度 PNG 画像としてエクスポートしました",
+        "tooltip": "高解像度 PNG 画像をエクスポート"
+      },
+      "svg": {
+        "error": "マインドマップの SVG エクスポートに失敗しました",
+        "success": "マインドマップを SVG としてエクスポートしました",
+        "tooltip": "ベクター SVG 画像をエクスポート"
+      },
+      "title": "マインドマップ"
+    },
+    "fullscreen": {
+      "enter": "全画面の没入モード",
+      "exit": "全画面を終了",
+      "label": "全画面"
+    },
+    "layout": {
+      "action": "自動整列",
+      "success": "マインドマップのレイアウトをリセットして最適化しました",
+      "tooltip": "ワンクリックで自動整列して保存"
+    },
+    "library": {
+      "bound": "紐付け済み：{{title}}",
+      "close": "カードライブラリを閉じる",
+      "convert": "ノードに変換",
+      "noMatch": "一致するカードがありません",
+      "search": {
+        "placeholder": "ボードのカードを検索…"
+      },
+      "title": "プロジェクトのカードライブラリ",
+      "toggle": "カードライブラリ（{{n}} 件紐付け済み）",
+      "tooltip": "プロジェクトのカードライブラリを切り替え",
+      "unbound": "未紐付け"
+    },
+    "node": {
+      "addChild": "子ノードを追加",
+      "card": {
+        "completed": "（完了）",
+        "tooltip": "カード：{{title}}（クリックで開く）{{status}}"
+      },
+      "child": {
+        "placeholder": "子ノードのタイトル…"
+      },
+      "collapse": "折りたたむ",
+      "delete": "ノードを削除",
+      "edit": "ノードを編集",
+      "expand": "展開",
+      "noPermission": "編集権限がありません",
+      "note": {
+        "placeholder": "メモ…"
+      }
+    },
+    "prompt": {
+      "childInitial": "新しいノード",
+      "rootInitial": "新しいトピック"
+    },
+    "root": {
+      "placeholder": "ルートノードのタイトル…"
+    },
+    "untitledNode": "無題のノード",
+    "view": {
+      "canvas": "キャンバスモード（Canvas）",
+      "tree": "アウトライン（Outline）"
+    }
+  },
+  "name": {
+    "label": "プロジェクト名",
+    "required": "プロジェクト名を入力してください"
+  },
+  "report": {
+    "chart": {
+      "logged": "記録済み",
+      "remaining": "残りの見積",
+      "title": "メンバー別の工数比較グラフ（全期間）"
+    },
+    "column": {
+      "estimated": "見積",
+      "logged": "記録済み",
+      "member": "メンバー",
+      "remainingProgress": "残りと進捗（全期間）"
+    },
+    "detail": {
+      "column": {
+        "board": "ボード",
+        "card": "カード",
+        "list": "リスト",
+        "priority": "優先度",
+        "review": "レビュー"
+      },
+      "title": "カード明細"
+    },
+    "export": {
+      "action": "CSV をエクスポート"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "レビュー待ち：{{pending}} | 平均スコア：{{score}}",
+        "title": "レビュー承認率"
+      },
+      "cards": {
+        "hint": "プロジェクトの現状：追跡中のカードの総数",
+        "title": "カード総数",
+        "value_other": "{{count}} 枚"
+      },
+      "logged": {
+        "hint": "選択期間内にチームが記録した工数の合計",
+        "title": "記録済み工数の合計"
+      },
+      "remaining": {
+        "hint": "プロジェクトの現状：未完了作業の総量（期間の絞り込みでは変わりません）",
+        "title": "残りの見積工数の合計（全期間）"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "カード数",
+        "hours": "合計工数"
+      },
+      "empty": "工数の記録はまだありません",
+      "title": "メンバー別の工数"
+    },
+    "remaining": {
+      "title": "メンバー別の残り工数（全期間）"
+    },
+    "review": {
+      "approved": "承認 {{n}}",
+      "average": "平均スコア {{n}}",
+      "pending": "レビュー待ち {{n}}",
+      "rejected": "差し戻し {{n}}",
+      "title": "レビュー統計（全期間）"
+    },
+    "year": {
+      "all": "全期間",
+      "empty": "選択した期間の工数データがありません",
+      "label": "年度"
+    }
+  },
+  "tab": {
+    "boards": "ボード",
+    "calendar": "カレンダー",
+    "fields": "カスタムフィールド",
+    "gantt": "ガントチャート",
+    "members": "メンバー",
+    "mindMap": "マインドマップ",
+    "report": "レポート",
+    "table": "テーブル",
+    "worklog": "ワークログ"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "一括アーカイブに失敗しました",
+        "success_other": "{{count}} 枚のカードをアーカイブしました"
+      },
+      "clearDue": "期限をクリア",
+      "due": {
+        "clear_other": "{{count}} 枚のカードの期限をクリアしました",
+        "error": "一括更新に失敗しました",
+        "set_other": "{{count}} 枚のカードの期限を更新しました"
+      },
+      "mark": {
+        "error": "一括マークに失敗しました"
+      },
+      "markComplete": "完了としてマーク",
+      "marked": {
+        "complete_other": "{{count}} 枚のカードを完了としてマークしました",
+        "incomplete_other": "{{count}} 枚のカードを未完了としてマークしました"
+      },
+      "markIncomplete": "未完了としてマーク",
+      "nextWeek": "1 週間後（+7 日）",
+      "selected": "{{n}} 件を選択中",
+      "setDue": "期限を設定",
+      "today": "今日",
+      "tomorrow": "明日"
+    },
+    "clearSelection": "選択を解除",
+    "column": {
+      "board": "ボード",
+      "due": "期限",
+      "hours": "工数",
+      "list": "リスト",
+      "progress": "進捗",
+      "title": "カードタイトル"
+    },
+    "empty": {
+      "all": "カードがまだありません",
+      "filtered": "このボードにはカードがありません"
+    },
+    "filter": {
+      "includeArchived": "アーカイブ済みカードを含める"
+    },
+    "rowCount_other": "{{count}} 件",
+    "selectAll": "すべて選択"
+  }
+}

@@ -1,0 +1,353 @@
+{
+  "activity": {
+    "empty": "No activity yet"
+  },
+  "activityType": {
+    "archive": "archived the card",
+    "attachmentAdded": "uploaded an attachment",
+    "attachmentRemoved": "deleted an attachment",
+    "checklistAdded": "added a checklist",
+    "checklistRemoved": "deleted a checklist",
+    "comment": "commented",
+    "complete": "completed the card",
+    "copy": "copied the card",
+    "coverChange": "changed the cover",
+    "create": "created the card",
+    "customFieldUpdated": "updated a custom field",
+    "deliverySubmitted": "submitted for review",
+    "descriptionChange": "updated the description",
+    "dueChange": "updated the due date",
+    "effortLogged": "logged time",
+    "itemChecked": "checked an item",
+    "labelAdded": "added a label",
+    "labelRemoved": "removed a label",
+    "memberAdded": "added a member",
+    "memberRemoved": "removed a member",
+    "mindMapBound": "bound the card to a mind map",
+    "mindMapUnbound": "unbound the card from a mind map",
+    "move": "moved the card",
+    "rename": "renamed the card",
+    "restore": "unarchived the card",
+    "reviewAdded": "assigned a reviewer",
+    "reviewSubmitted": "submitted a review",
+    "startChange": "updated the start date",
+    "uncomplete": "marked the card incomplete"
+  },
+  "archive": {
+    "success": "Archive status updated"
+  },
+  "attachment": {
+    "coverRemove": {
+      "action": "Remove cover"
+    },
+    "coverSet": {
+      "action": "Set as cover"
+    },
+    "delete": {
+      "confirm": "Delete attachment “{{name}}”? This cannot be undone.",
+      "success": "Deleted",
+      "title": "Delete attachment"
+    },
+    "empty": "No attachments yet",
+    "upload": {
+      "action": "Upload attachment (≤20MB)",
+      "success": "Uploaded"
+    }
+  },
+  "background": {
+    "project": {
+      "label": "Project: {{name}}"
+    }
+  },
+  "backToBoard": {
+    "action": "Back to board"
+  },
+  "checklist": {
+    "addItem": {
+      "action": "Add",
+      "error": "Failed to add item"
+    },
+    "delete": {
+      "confirm": "Delete “{{title}}”? The whole checklist and its items will be deleted. This cannot be undone.",
+      "title": "Delete checklist"
+    },
+    "deleteItem": {
+      "aria": "Delete {{title}}",
+      "confirm": "Delete item “{{title}}”? This cannot be undone.",
+      "error": "Failed to delete item",
+      "title": "Delete item"
+    },
+    "item": {
+      "placeholder": "New item"
+    },
+    "moveDown": {
+      "aria": "Move {{title}} down"
+    },
+    "moveItem": {
+      "error": "Failed to reorder"
+    },
+    "moveUp": {
+      "aria": "Move {{title}} up"
+    },
+    "name": {
+      "placeholder": "New checklist name"
+    },
+    "toggleItem": {
+      "error": "Failed to update item"
+    }
+  },
+  "comment": {
+    "create": {
+      "error": "Failed to post comment"
+    },
+    "empty": "No comments yet",
+    "placeholder": "Write a comment…",
+    "submit": {
+      "action": "Post"
+    }
+  },
+  "completion": {
+    "mark": {
+      "tooltip": "Mark as complete"
+    },
+    "shortcut": {
+      "tooltip": "Mark as complete (shortcut X)"
+    },
+    "unmark": {
+      "tooltip": "Mark as incomplete"
+    }
+  },
+  "copy": {
+    "description": "A copy of “{{title}}” will be created. Choose the destination project, board, and list.",
+    "submit": {
+      "action": "Copy card"
+    },
+    "success": "Card copied",
+    "targetBoard": {
+      "label": "Destination board"
+    },
+    "targetList": {
+      "label": "Destination list"
+    },
+    "targetProject": {
+      "label": "Destination project"
+    },
+    "title": "Copy card"
+  },
+  "create": {
+    "board": {
+      "empty": "No boards available",
+      "label": "Board",
+      "loading": "Loading boards…",
+      "placeholder": "Select a board"
+    },
+    "description": {
+      "label": "Description (optional)",
+      "placeholder": "Add a note or more detail…"
+    },
+    "dueDate": {
+      "label": "Due date (optional)"
+    },
+    "hint": "Press <kbd>{{key}}</kbd> anywhere to capture ideas and tasks",
+    "keepOpen": {
+      "action": "Create another",
+      "hint": "Keep creating"
+    },
+    "list": {
+      "empty": "No lists available",
+      "label": "Target list *",
+      "loading": "Loading lists…",
+      "placeholder": "Select a list",
+      "required": "Select a list"
+    },
+    "name": {
+      "label": "Card title *",
+      "placeholder": "Enter a card title…",
+      "required": "Enter a card title"
+    },
+    "partialError": "Card created, but the due date could not be set",
+    "project": {
+      "label": "Project",
+      "loading": "Loading projects…",
+      "placeholder": "Select a project"
+    },
+    "submit": {
+      "action": "Create card"
+    },
+    "success": "Card created",
+    "successKeepOpen": "Card created — keep creating",
+    "title": "Quick add card"
+  },
+  "customField": {
+    "empty": "No custom fields",
+    "load": {
+      "error": "Failed to load custom fields"
+    },
+    "save": {
+      "error": "Failed to save field"
+    }
+  },
+  "delete": {
+    "confirm": {
+      "action": "Confirm delete"
+    },
+    "success": "Card deleted"
+  },
+  "description": {
+    "empty": {
+      "canEdit": "No description yet — click to add one",
+      "readonly": "No description yet"
+    }
+  },
+  "effort": {
+    "estimate": {
+      "label": "Estimate: ",
+      "success": "Estimate updated"
+    },
+    "hours": {
+      "placeholder": "Hours"
+    },
+    "log": {
+      "action": "Log time",
+      "date": "Date",
+      "entry": "{{name}}: {{hours}}",
+      "error": "Failed to log time",
+      "note": " ({{note}})",
+      "success": "Time logged"
+    },
+    "summary": "{{unit}} · Logged {{logged}} · Remaining {{remaining}}"
+  },
+  "field": {
+    "completed": {
+      "label": "Completed"
+    },
+    "dueDate": {
+      "label": "Due date: "
+    },
+    "mindMap": {
+      "label": "Mind map: {{title}}"
+    },
+    "readonly": " (read-only)",
+    "startAt": {
+      "label": "Start date: "
+    }
+  },
+  "label": {
+    "count_one": "{{count}} label",
+    "count_other": "{{count}} labels",
+    "create": {
+      "action": "Create label",
+      "error": "Failed to create label",
+      "heading": "New label"
+    },
+    "delete": {
+      "confirm": "Delete this label?",
+      "error": "Failed to delete label"
+    },
+    "edit": {
+      "heading": "Edit label"
+    },
+    "list": {
+      "title": "Labels"
+    },
+    "load": {
+      "error": "Failed to load labels"
+    },
+    "name": {
+      "placeholder": "Label name…"
+    },
+    "save": {
+      "error": "Failed to save labels"
+    },
+    "update": {
+      "error": "Failed to update label"
+    }
+  },
+  "load": {
+    "error": {
+      "description": "This card could not be loaded. It may no longer exist, or you may not have access to it.",
+      "title": "Failed to load card"
+    }
+  },
+  "member": {
+    "assign": {
+      "label": "Assign members"
+    },
+    "assignSelf": {
+      "action": "+ Assign me"
+    },
+    "count_one": "{{count}} member",
+    "count_other": "{{count}} members",
+    "empty": "No project members",
+    "load": {
+      "error": "Failed to load members"
+    },
+    "removeSelf": {
+      "action": "Unassign me"
+    }
+  },
+  "permission": {
+    "editRequired": "Card edit permission required"
+  },
+  "review": {
+    "assign": {
+      "error": "Failed to assign reviewers"
+    },
+    "comment": " ({{comment}})",
+    "commentField": {
+      "placeholder": "Comment"
+    },
+    "confirm": {
+      "action": "Confirm and submit",
+      "card": "Card: {{name}}",
+      "comment": "Comment: {{comment}}",
+      "overwrite": "This will overwrite the review from {{time}}: {{previous}}",
+      "score": "Score: {{score}}",
+      "title": "Confirm review",
+      "unchanged": "Nothing has changed since the current review.",
+      "verdict": "Verdict: {{status}}"
+    },
+    "detail": {
+      "approved": ": approved",
+      "rejected": ": rejected —"
+    },
+    "score": " {{score}} pts",
+    "scoreLabel": "Score",
+    "scoreNone": "No score",
+    "status": {
+      "aria": "Review status",
+      "pending": "Pending"
+    },
+    "submit": {
+      "action": "Submit",
+      "error": "Failed to submit review",
+      "success": "Review submitted"
+    },
+    "summary": "{{name}}: {{status}}"
+  },
+  "reviewer": {
+    "assign": {
+      "label": "Assign reviewers"
+    },
+    "count_one": "{{count}} reviewer",
+    "count_other": "{{count}} reviewers",
+    "empty": "No reviewers yet"
+  },
+  "reviewHistory": {
+    "empty": "No review history yet",
+    "title": "Review history"
+  },
+  "section": {
+    "background": "Background",
+    "review": "Review",
+    "work": "Work"
+  },
+  "tab": {
+    "activity": "Activity",
+    "attachments": "Attachments",
+    "checklists": "Checklists",
+    "comments": "Comments",
+    "description": "Description",
+    "details": "Details"
+  }
+}

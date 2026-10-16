@@ -1,0 +1,485 @@
+{
+  "backToProjects": "← My projects",
+  "board": {
+    "archive": {
+      "action": "Archive board",
+      "success": "Board archived"
+    },
+    "archivedSection": "Archived boards ({{n}})",
+    "create": {
+      "action": "Create board",
+      "placeholder": "New board name",
+      "success": "Board created"
+    },
+    "delete": {
+      "action": "Delete board"
+    },
+    "edit": {
+      "action": "Edit info"
+    },
+    "empty": {
+      "description": "Ask a project manager to add a board to this project.",
+      "title": "No boards in this project"
+    },
+    "menu": {
+      "aria": "Board menu"
+    },
+    "noDescription": "No description",
+    "restore": {
+      "action": "Unarchive board"
+    },
+    "unarchive": {
+      "success": "Board unarchived"
+    }
+  },
+  "calendar": {
+    "empty": {
+      "month": "No cards due this month"
+    },
+    "more": "+{{n}} more",
+    "nextMonth": "Next month >",
+    "noDue": {
+      "empty": "No due date",
+      "title": "Cards without a due date"
+    },
+    "prevMonth": "< Previous month"
+  },
+  "cards": {
+    "truncated": "{{total}} cards in total; only the first {{shown}} are loaded"
+  },
+  "create": {
+    "action": "Create project",
+    "name": {
+      "placeholder": "e.g. H2 development project"
+    },
+    "success": "Project created",
+    "team": {
+      "label": "Team",
+      "required": "Select a team"
+    },
+    "title": "Create project"
+  },
+  "description": {
+    "label": "Project description",
+    "placeholder": "Goals and scope of this project…"
+  },
+  "edit": {
+    "aria": "Edit project name and description",
+    "success": "Project details updated",
+    "title": "Edit project details"
+  },
+  "field": {
+    "add": {
+      "action": "Add field"
+    },
+    "create": {
+      "action": "Create field",
+      "hint": "The field applies to every card in this project. You can still change its name and options later.",
+      "success": "Field created",
+      "title": "Add custom field"
+    },
+    "delete": {
+      "confirm": "Delete the field “{{name}}”? The values on every card will be deleted. This cannot be undone.",
+      "success": "Field deleted",
+      "title": "Delete custom field"
+    },
+    "edit": {
+      "hint": "{{scope}} field. Changes to the name and options apply to every card that uses this field.",
+      "title": "Edit field “{{name}}”"
+    },
+    "name": {
+      "label": "Name",
+      "placeholder": "e.g. Priority"
+    },
+    "options": {
+      "add": {
+        "action": "Add option"
+      },
+      "empty": "A dropdown needs at least one option",
+      "label": "Options",
+      "placeholder": "Press Enter to add, or paste “High,Medium,Low”",
+      "remove": {
+        "aria": "Remove option {{option}}"
+      }
+    },
+    "scope": {
+      "label": "Scope"
+    },
+    "type": {
+      "label": "Type"
+    },
+    "typeChange": {
+      "confirm": {
+        "action": "Confirm and clear values"
+      },
+      "summary": "Change from “{{from}}” to “{{to}}”",
+      "warning": "All existing values on every card will be deleted. This cannot be undone.",
+      "warningWithOptions": "All existing values on every card will be deleted and the option list will be cleared. This cannot be undone."
+    },
+    "update": {
+      "success": "Field updated"
+    }
+  },
+  "filter": {
+    "allBoards": "All boards",
+    "allMembers": "All members"
+  },
+  "gantt": {
+    "column": {
+      "progressHours": "Progress / Hours",
+      "task": "Card title"
+    },
+    "empty": "No tasks with a due date yet",
+    "excludeArchived": "Exclude archived",
+    "filter": {
+      "board": "Board filter",
+      "member": "Member filter"
+    },
+    "groupBy": {
+      "assignee": "By assignee",
+      "board": "By board",
+      "label": "Group by: ",
+      "none": "No grouping"
+    },
+    "includeArchived": "Include archived",
+    "loading": "Loading schedule…",
+    "schedule": {
+      "action": "Schedule"
+    },
+    "scrollBack": "Scroll back",
+    "scrollForward": "Scroll forward",
+    "today": "Today",
+    "todayLine": "Today",
+    "unassigned": "Unassigned",
+    "unscheduled": {
+      "hint": "Click a card to set its estimate and due date",
+      "title": "Unscheduled tasks ({{n}})",
+      "toggle": "Unscheduled ({{n}})"
+    },
+    "view": {
+      "day": "Day view",
+      "month": "Month view",
+      "week": "Week view"
+    }
+  },
+  "list": {
+    "boards": {
+      "count_one": "{{count}} board",
+      "count_other": "{{count}} boards"
+    },
+    "createFirst": {
+      "action": "Create your first project"
+    },
+    "empty": {
+      "description": "Create a project to add boards, schedule tasks, and collaborate with your team in real time.",
+      "title": "No projects yet"
+    },
+    "members": {
+      "count_one": "{{count}} member",
+      "count_other": "{{count}} members"
+    },
+    "noDescription": "No description yet",
+    "noMember": {
+      "description": "You have not joined any project yet. Ask a project manager or a team manager to assign you projects and tasks."
+    },
+    "noTeam": {
+      "action": "Select or create a team",
+      "description": "A project must belong to a team. Select or create a team to start managing projects.",
+      "title": "No team selected"
+    },
+    "switchTeam": {
+      "action": "Switch team"
+    }
+  },
+  "member": {
+    "assign": {
+      "action": "Assign member",
+      "confirm": {
+        "action": "Confirm assignment"
+      },
+      "required": "Select a member and at least one role",
+      "success": "Assigned",
+      "title": "Assign member (multiple roles)"
+    },
+    "column": {
+      "roles": "Assigned roles",
+      "user": "User"
+    },
+    "label": "Member",
+    "load": {
+      "error": "Failed to load members"
+    },
+    "noRoles": "No roles",
+    "remove": {
+      "confirm": "Remove “{{name}}” from this project? This cannot be undone.",
+      "success": "Member removed",
+      "title": "Remove member"
+    },
+    "role": {
+      "system": "System template",
+      "template": "Template"
+    },
+    "roles": {
+      "edit": {
+        "action": "Edit roles",
+        "description": "Adjust the project roles assigned to “{{name}} ({{username}})”.",
+        "label": "Project roles (select multiple)",
+        "title": "Edit member roles"
+      },
+      "label": "Role",
+      "load": {
+        "error": "Failed to load team roles"
+      },
+      "loading": "Loading team roles…",
+      "required": "Select at least one role. To remove the member entirely, use the “Remove” button.",
+      "save": {
+        "action": "Save roles"
+      },
+      "update": {
+        "error": "Failed to update roles",
+        "success": "Member roles updated"
+      }
+    }
+  },
+  "mindMap": {
+    "addRoot": "Add root node",
+    "bind": {
+      "action": "Bind card",
+      "bound": "Bound: {{title}}",
+      "change": "Change bound card",
+      "list": {
+        "suffix": " ({{name}})"
+      },
+      "loading": "Loading boards and cards…",
+      "noMatch": "No matching cards",
+      "search": {
+        "aria": "Search card titles",
+        "placeholder": "Search card titles…"
+      },
+      "title": "Bind card: {{title}}",
+      "unbind": "Unbind"
+    },
+    "cascade": {
+      "aria": "Branch cascade mode",
+      "label": "Cascade",
+      "off": "Free mode: dragging a node moves only that node",
+      "on": "Cascade mode: dragging a node moves all of its children with it"
+    },
+    "delete": {
+      "confirm_one": "This will also delete “{{title}}” and its {{count}} child node. This action cannot be undone.",
+      "confirm_other": "This will also delete “{{title}}” and its {{count}} child nodes. This action cannot be undone."
+    },
+    "empty": "No nodes yet",
+    "error": {
+      "create": "Failed to create the node",
+      "moveIntoDescendant": "Cannot move a node under one of its own descendants",
+      "savePosition": "Failed to save the node position"
+    },
+    "export": {
+      "blobError": "Could not generate the image file",
+      "canvasError": "Could not create a canvas context",
+      "empty": "The mind map has no nodes yet",
+      "imageError": "Could not generate the image",
+      "png": {
+        "error": "Failed to export the mind map as PNG",
+        "success": "Mind map exported as a high-resolution PNG",
+        "tooltip": "Export a high-resolution PNG image"
+      },
+      "svg": {
+        "error": "Failed to export the mind map as SVG",
+        "success": "Mind map exported as SVG",
+        "tooltip": "Export a vector SVG image"
+      },
+      "title": "Mind map"
+    },
+    "fullscreen": {
+      "enter": "Full-screen immersive mode",
+      "exit": "Exit full screen",
+      "label": "Full screen"
+    },
+    "layout": {
+      "action": "Auto-arrange",
+      "success": "Mind map layout reset and optimized",
+      "tooltip": "Auto-arrange and save the layout"
+    },
+    "library": {
+      "bound": "Bound: {{title}}",
+      "close": "Close the card library",
+      "convert": "Convert to node",
+      "noMatch": "No matching cards",
+      "search": {
+        "placeholder": "Search board cards…"
+      },
+      "title": "Project card library",
+      "toggle": "Card library ({{n}} bound)",
+      "tooltip": "Toggle the project card library",
+      "unbound": "Not bound"
+    },
+    "node": {
+      "addChild": "Add child node",
+      "card": {
+        "completed": " (completed)",
+        "tooltip": "Card: {{title}} (click to open){{status}}"
+      },
+      "child": {
+        "placeholder": "Child node title…"
+      },
+      "collapse": "Collapse",
+      "delete": "Delete node",
+      "edit": "Edit node",
+      "expand": "Expand",
+      "noPermission": "No edit permission",
+      "note": {
+        "placeholder": "Note…"
+      }
+    },
+    "prompt": {
+      "childInitial": "New node",
+      "rootInitial": "New topic"
+    },
+    "root": {
+      "placeholder": "Root node title…"
+    },
+    "untitledNode": "Untitled node",
+    "view": {
+      "canvas": "Canvas",
+      "tree": "Outline"
+    }
+  },
+  "name": {
+    "label": "Project name",
+    "required": "Enter a project name"
+  },
+  "report": {
+    "chart": {
+      "logged": "Logged",
+      "remaining": "Remaining",
+      "title": "Logged vs. remaining hours by member (all time)"
+    },
+    "column": {
+      "estimated": "Estimated",
+      "logged": "Logged",
+      "member": "Member",
+      "remainingProgress": "Remaining & progress (all time)"
+    },
+    "detail": {
+      "column": {
+        "board": "Board",
+        "card": "Card",
+        "list": "List",
+        "priority": "Priority",
+        "review": "Review"
+      },
+      "title": "Card details"
+    },
+    "export": {
+      "action": "Export CSV"
+    },
+    "kpi": {
+      "approval": {
+        "hint": "Pending: {{pending}} | Avg: {{score}}",
+        "title": "Review approval rate"
+      },
+      "cards": {
+        "hint": "Project status: all cards tracked in this project",
+        "title": "Total cards",
+        "value_one": "{{count}} card",
+        "value_other": "{{count}} cards"
+      },
+      "logged": {
+        "hint": "Hours logged by the team in the selected period",
+        "title": "Total logged hours"
+      },
+      "remaining": {
+        "hint": "Project status: total work not yet completed; does not change with the period filter",
+        "title": "Total remaining estimate (all time)"
+      }
+    },
+    "memberHours": {
+      "column": {
+        "cards": "Cards",
+        "hours": "Total hours"
+      },
+      "empty": "No hours logged yet",
+      "title": "Member hours"
+    },
+    "remaining": {
+      "title": "Member remaining hours (all time)"
+    },
+    "review": {
+      "approved": "Approved {{n}}",
+      "average": "Avg {{n}}",
+      "pending": "Pending {{n}}",
+      "rejected": "Rejected {{n}}",
+      "title": "Review stats (all time)"
+    },
+    "year": {
+      "label": "Year",
+      "all": "All time",
+      "empty": "No hours logged for the selected period"
+    }
+  },
+  "tab": {
+    "boards": "Boards",
+    "calendar": "Calendar",
+    "fields": "Custom fields",
+    "gantt": "Gantt",
+    "members": "Members",
+    "mindMap": "Mind map",
+    "report": "Report",
+    "table": "Table",
+    "worklog": "Worklog"
+  },
+  "table": {
+    "batch": {
+      "archive": {
+        "error": "Failed to archive the selected cards",
+        "success_one": "Archived {{count}} card",
+        "success_other": "Archived {{count}} cards"
+      },
+      "clearDue": "Clear due date",
+      "due": {
+        "clear_one": "Cleared the due date of {{count}} card",
+        "clear_other": "Cleared the due date of {{count}} cards",
+        "error": "Failed to update the due dates",
+        "set_one": "Updated the due date of {{count}} card",
+        "set_other": "Updated the due date of {{count}} cards"
+      },
+      "mark": {
+        "error": "Failed to mark the selected cards"
+      },
+      "markComplete": "Mark as complete",
+      "marked": {
+        "complete_one": "Marked {{count}} card as completed",
+        "complete_other": "Marked {{count}} cards as completed",
+        "incomplete_one": "Marked {{count}} card as incomplete",
+        "incomplete_other": "Marked {{count}} cards as incomplete"
+      },
+      "markIncomplete": "Mark as incomplete",
+      "nextWeek": "In a week (+7 days)",
+      "selected": "{{n}} selected",
+      "setDue": "Set due date",
+      "today": "Today",
+      "tomorrow": "Tomorrow"
+    },
+    "clearSelection": "Clear selection",
+    "column": {
+      "board": "Board",
+      "due": "Due date",
+      "hours": "Hours",
+      "list": "List",
+      "progress": "Progress",
+      "title": "Card title"
+    },
+    "empty": {
+      "all": "No cards yet",
+      "filtered": "This board has no cards"
+    },
+    "filter": {
+      "includeArchived": "Include archived cards"
+    },
+    "rowCount_one": "{{count}} row",
+    "rowCount_other": "{{count}} rows",
+    "selectAll": "Select all"
+  }
+}

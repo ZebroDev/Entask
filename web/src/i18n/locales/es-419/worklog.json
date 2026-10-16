@@ -1,0 +1,114 @@
+{
+  "empty": {
+    "description": "Cuando reportes horas en una tarjeta, el registro de horas aparecerá aquí automáticamente.",
+    "group": {
+      "title": "El equipo aún no reportó horas en este período"
+    },
+    "me": {
+      "title": "Aún no hay horas reportadas en este período"
+    }
+  },
+  "export": {
+    "action": "Exportar a Excel"
+  },
+  "kpi": {
+    "cards": {
+      "title": "Tarjetas cubiertas",
+      "unit_one": "tarjeta",
+      "unit_many": "tarjetas",
+      "unit_other": "tarjetas"
+    },
+    "entries": {
+      "title": "Registros de trabajo",
+      "unit_one": "registro",
+      "unit_many": "registros",
+      "unit_other": "registros"
+    },
+    "hours": {
+      "title": "Horas totales"
+    },
+    "missing": {
+      "detail": " · Ver detalles",
+      "each_one": "{{count}} día hábil por persona",
+      "each_many": "{{count}} de días hábiles por persona",
+      "each_other": "{{count}} días hábiles por persona",
+      "members_one": "{{count}} persona en total",
+      "members_many": "{{count}} de personas en total",
+      "members_other": "{{count}} personas en total",
+      "title": "Días hábiles sin reportar (total)",
+      "unit_one": "día ({{members}}; {{days}})",
+      "unit_many": "de días ({{members}}; {{days}})",
+      "unit_other": "días ({{members}}; {{days}})"
+    },
+    "reported": {
+      "title": "Días hábiles reportados",
+      "unit_one": "día",
+      "unit_many": "de días",
+      "unit_other": "días"
+    }
+  },
+  "member": {
+    "cards_one": "{{count}} tarjeta",
+    "cards_many": "{{count}} de tarjetas",
+    "cards_other": "{{count}} tarjetas",
+    "collapse": {
+      "action": "Ocultar detalles"
+    },
+    "empty": "No hay horas reportadas hoy",
+    "entries_one": "{{count}} registro",
+    "entries_many": "{{count}} de registros",
+    "entries_other": "{{count}} registros",
+    "expand": {
+      "action": "Mostrar el detalle diario"
+    },
+    "heading_one": "Miembro del equipo ({{count}})",
+    "heading_many": "Miembros del equipo ({{count}})",
+    "heading_other": "Miembros del equipo ({{count}})",
+    "missing": "Sin reportar",
+    "spark": {
+      "tooltip": "{{day}}: {{hours}}"
+    },
+    "summary": "{{hours}} · {{entries}} · {{cards}} · {{workdays}}",
+    "workdays_one": "{{reported}}/{{total}} día hábil reportado",
+    "workdays_many": "{{reported}}/{{total}} días hábiles reportados",
+    "workdays_other": "{{reported}}/{{total}} días hábiles reportados"
+  },
+  "missing": {
+    "group": {
+      "empty": "No hay omisiones en este período",
+      "title": "Detalle de omisiones"
+    },
+    "me": {
+      "empty": "No tienes omisiones en este período",
+      "title": "Mis omisiones"
+    },
+    "member": {
+      "count_one": "{{missing}} / {{count}} día sin reportar",
+      "count_many": "{{missing}} / {{count}} de días sin reportar",
+      "count_other": "{{missing}} / {{count}} días sin reportar"
+    },
+    "none_one": "{{count}} persona más sin omisiones",
+    "none_many": "{{count}} de personas más sin omisiones",
+    "none_other": "{{count}} personas más sin omisiones",
+    "workdays_one": "{{count}} día hábil en total",
+    "workdays_many": "{{count}} de días hábiles en total",
+    "workdays_other": "{{count}} días hábiles en total"
+  },
+  "mode": {
+    "day": "Día",
+    "month": "Mes",
+    "week": "Semana"
+  },
+  "nav": {
+    "next": {
+      "aria": "Período siguiente"
+    },
+    "prev": {
+      "aria": "Período anterior"
+    },
+    "today": "Hoy"
+  },
+  "page": {
+    "hint": "Resúmenes diarios, semanales y mensuales generados a partir de las horas que reportas"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "board": {
+    "create": "보드 생성",
+    "delete": "보드 삭제",
+    "edit": "보드 편집",
+    "read": "보드 조회"
+  },
+  "card": {
+    "assign": "카드 할당",
+    "comment": "댓글",
+    "create": "카드 생성",
+    "delete": "카드 삭제",
+    "edit": "카드 편집",
+    "effort": {
+      "update": "공수와 진행률 업데이트"
+    },
+    "rate": "리뷰 점수 입력",
+    "read": "카드 조회",
+    "review": "카드 리뷰"
+  },
+  "mindmap": {
+    "edit": "마인드맵 노드 편집"
+  },
+  "project": {
+    "create": "프로젝트 생성",
+    "delete": "프로젝트 삭제",
+    "edit": "프로젝트 편집",
+    "member": {
+      "manage": "프로젝트 멤버 관리"
+    },
+    "read": "프로젝트 조회"
+  },
+  "report": {
+    "view": "성과 보고서 조회"
+  },
+  "team": {
+    "member": {
+      "manage": "팀 멤버 관리"
+    },
+    "read": "팀 조회",
+    "role": {
+      "manage": "팀 역할 정의"
+    },
+    "workcalendar": {
+      "manage": "팀 근무 달력 관리"
+    }
+  }
+}

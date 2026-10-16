@@ -1,0 +1,63 @@
+{
+  "activity": {
+    "empty": "No system activity yet",
+    "title": "System activity"
+  },
+  "title": "User management",
+  "subtitle": "Deactivation is reversible; deletion is not, and clears the account data.",
+  "filter": {
+    "all": "All",
+    "active": "Active",
+    "deactivated": "Deactivated"
+  },
+  "column": {
+    "user": "User",
+    "status": "Status",
+    "changedAt": "Changed",
+    "actions": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "deactivated": "Deactivated",
+    "deleted": "Deleted"
+  },
+  "deactivate": {
+    "title": "Deactivate account",
+    "confirm": "Deactivate {{name}}?",
+    "offboarding": "This account still has:",
+    "openCards": "{{n}} open cards",
+    "pendingReviews": "{{n}} pending reviews",
+    "projectMemberships": "{{n}} project memberships",
+    "teamMemberships": "{{n}} team memberships",
+    "note": "They will be signed out immediately and cannot sign in again. Existing assignments and history are unaffected, and this can be undone later.",
+    "success": "Deactivated",
+    "error": "Could not deactivate"
+  },
+  "reactivate": {
+    "title": "Reactivate account",
+    "confirm": "Reactivate {{name}}?",
+    "note": "They will be able to sign in again, but previous sessions are not restored.",
+    "success": "Reactivated",
+    "error": "Could not reactivate"
+  },
+  "delete": {
+    "title": "Delete account",
+    "confirm": "Permanently delete {{name}}?",
+    "description": "The account data (username, password, avatar) will be erased and cannot be recovered. The display name and existing cards, reviews and activity records are kept so history stays readable.",
+    "typeToConfirm": "Type the display name {{name}} to confirm",
+    "success": "Deleted",
+    "error": "Could not delete"
+  },
+  "resetPassword": {
+    "action": "Reset password",
+    "title": "Reset password",
+    "description": "Set a temporary password for {{name}}.",
+    "hint": "After you set it, pass it to them offline through a secure channel. All of their current sessions will be signed out.",
+    "field": "Temporary password",
+    "submit": "Reset password",
+    "success": "Password reset",
+    "error": "Could not reset the password"
+  },
+  "empty": "No users match this filter",
+  "error": "Could not load users"
+}

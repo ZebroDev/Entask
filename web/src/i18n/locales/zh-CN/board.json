@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "hide": "隐藏已归档",
+    "show": "显示已归档"
+  },
+  "backToProject": {
+    "action": "← 项目"
+  },
+  "card": {
+    "create": {
+      "placeholder": "新建卡片…"
+    }
+  },
+  "copy": {
+    "action": "复制看板",
+    "confirm": "确定要复制看板吗？",
+    "description": "将创建“{{name}}”的完整副本，包含所有列表、卡片、标签与自定义字段值。 内容较多时需要一些时间，副本生成后需自行删除。",
+    "name": {
+      "label": "看板名称（选填）",
+      "placeholder": "留空则自动命名"
+    },
+    "noPermission": "你没有在该项目创建看板的权限",
+    "submit": {
+      "action": "确定复制"
+    },
+    "success": "看板已复制",
+    "targetProject": {
+      "label": "目标项目"
+    }
+  },
+  "delete": {
+    "action": "删除看板",
+    "confirm": "确定要删除看板吗？",
+    "description": "删除“{{name}}”将会一并移除该看板内的所有列表、卡片与附件，此操作无法撤销。",
+    "error": "删除看板失败",
+    "submit": {
+      "action": "确定删除"
+    },
+    "success": "看板已删除"
+  },
+  "edit": {
+    "aria": "编辑看板名称与描述",
+    "description": {
+      "label": "看板描述（选填）",
+      "placeholder": "例如：负责第一阶段功能开发跟踪"
+    },
+    "error": "更新看板失败",
+    "name": {
+      "label": "看板名称",
+      "placeholder": "例如：Sprint 1 看板",
+      "required": "看板名称不可为空"
+    },
+    "success": "看板信息已更新",
+    "title": "编辑看板信息"
+  },
+  "labelColor": {
+    "blue": "蓝色",
+    "cyan": "青色",
+    "grayPurple": "灰紫色",
+    "green": "绿色",
+    "lightGreen": "浅绿色",
+    "orange": "橙色",
+    "pink": "粉红色",
+    "purple": "紫色",
+    "red": "红色",
+    "yellow": "黄色"
+  },
+  "list": {
+    "archive": {
+      "action": "归档列表",
+      "success": "列表已归档"
+    },
+    "archived": {
+      "dropBlocked": "已归档列表不可接收卡片"
+    },
+    "copy": {
+      "action": "复制列表",
+      "description": "将创建「{{name}}」的副本，请选择副本要放到的项目与看板。",
+      "noPermission": "你没有在该项目编辑看板的权限",
+      "submit": {
+        "action": "确定复制"
+      },
+      "success": "列表已复制",
+      "targetBoard": {
+        "label": "目标看板"
+      }
+    },
+    "create": {
+      "action": "新建列表"
+    },
+    "delete": {
+      "action": "删除列表",
+      "confirm": "确定要删除“{{name}}”？列表中的卡片将一并删除，此操作无法撤销。",
+      "success": "列表已删除"
+    },
+    "drag": {
+      "aria": "拖拽列表“{{name}}”"
+    },
+    "empty": {
+      "canEdit": "此看板暂无列表，在右侧创建第一个列表开始使用",
+      "readonly": "此看板暂无列表"
+    },
+    "menu": {
+      "aria": "列表菜单"
+    },
+    "name": {
+      "placeholder": "新列表名称…"
+    },
+    "restore": {
+      "action": "取消归档",
+      "success": "列表已取消归档"
+    }
+  },
+  "permission": {
+    "denied": "你没有此看板的权限"
+  },
+  "presence": {
+    "live": "实时连接中",
+    "online_other": "{{count}} 人在线"
+  },
+  "settings": {
+    "action": "看板设置"
+  }
+}

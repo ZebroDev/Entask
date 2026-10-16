@@ -1,0 +1,101 @@
+{
+  "empty": {
+    "description": "Once you report hours on a card, the worklog appears here automatically.",
+    "group": {
+      "title": "No hours reported by the team in this period"
+    },
+    "me": {
+      "title": "No hours reported in this period"
+    }
+  },
+  "export": {
+    "action": "Export Excel"
+  },
+  "kpi": {
+    "cards": {
+      "title": "Cards covered",
+      "unit_one": "card",
+      "unit_other": "cards"
+    },
+    "entries": {
+      "title": "Work entries",
+      "unit_one": "entry",
+      "unit_other": "entries"
+    },
+    "hours": {
+      "title": "Total hours"
+    },
+    "missing": {
+      "detail": " · View details",
+      "each_one": "{{count}} workday each",
+      "each_other": "{{count}} workdays each",
+      "members_one": "{{count}} person in total",
+      "members_other": "{{count}} people in total",
+      "title": "Missing workdays (total)",
+      "unit_one": "day ({{members}}; {{days}})",
+      "unit_other": "days ({{members}}; {{days}})"
+    },
+    "reported": {
+      "title": "Reported workdays",
+      "unit_one": "day",
+      "unit_other": "days"
+    }
+  },
+  "member": {
+    "cards_one": "{{count}} card",
+    "cards_other": "{{count}} cards",
+    "collapse": {
+      "action": "Hide details"
+    },
+    "empty": "No hours reported today",
+    "entries_one": "{{count}} entry",
+    "entries_other": "{{count}} entries",
+    "expand": {
+      "action": "Show daily details"
+    },
+    "heading_one": "Team member ({{count}})",
+    "heading_other": "Team members ({{count}})",
+    "missing": "Not reported",
+    "spark": {
+      "tooltip": "{{day}}: {{hours}}"
+    },
+    "summary": "{{hours}} · {{entries}} · {{cards}} · {{workdays}}",
+    "workdays_one": "{{reported}}/{{total}} workday reported",
+    "workdays_other": "{{reported}}/{{total}} workdays reported"
+  },
+  "missing": {
+    "group": {
+      "empty": "No missing days in this period",
+      "title": "Missing days"
+    },
+    "me": {
+      "empty": "You have no missing days in this period",
+      "title": "My missing days"
+    },
+    "member": {
+      "count_one": "{{missing}} / {{count}} day not reported",
+      "count_other": "{{missing}} / {{count}} days not reported"
+    },
+    "none_one": "{{count}} other person has no missing days",
+    "none_other": "{{count}} other people have no missing days",
+    "workdays_one": "{{count}} workday in total",
+    "workdays_other": "{{count}} workdays in total"
+  },
+  "mode": {
+    "day": "Day",
+    "month": "Month",
+    "week": "Week"
+  },
+  "nav": {
+    "next": {
+      "aria": "Next period"
+    },
+    "prev": {
+      "aria": "Previous period"
+    },
+    "today": "Today"
+  },
+  "page": {
+    "hint": "Daily, weekly and monthly summaries built from the hours you report"
+  }
+}

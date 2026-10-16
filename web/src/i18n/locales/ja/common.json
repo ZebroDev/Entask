@@ -1,0 +1,224 @@
+{
+  "action": {
+    "add": "追加",
+    "archive": "アーカイブ",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "confirm": "確定",
+    "copy": "複製",
+    "create": "作成",
+    "deactivate": "無効化",
+    "delete": "削除",
+    "edit": "編集",
+    "loadMore": "さらに読み込む",
+    "reactivate": "復元",
+    "remove": "削除",
+    "retry": "再試行",
+    "save": "保存",
+    "saveChanges": "変更を保存",
+    "unarchive": "アーカイブを解除",
+    "update": "更新",
+    "view": "表示"
+  },
+  "audit": {
+    "actorUnknown": "不明なユーザー"
+  },
+  "column": {
+    "actions": "操作"
+  },
+  "connection": {
+    "offline": "リアルタイム同期接続がオフラインになりました",
+    "reconnecting": "リアルタイム接続が切断されました。自動再接続を試みています…",
+    "restored": "リアルタイム接続が復旧し、最新データが自動同期されました！",
+    "retry": {
+      "action": "接続を再試行"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}}（{{weekday}}）",
+    "range": "{{from}} 〜 {{to}}",
+    "rangeWithWeek": "{{from}} ～ {{to}}（{{week}}）",
+    "weekOfYear": "第 {{week}} 週"
+  },
+  "error": {
+    "archive": "アーカイブに失敗しました",
+    "assign": "割り当てに失敗しました",
+    "assignDetail": "割り当てに失敗しました：{{detail}}",
+    "copy": "複製に失敗しました",
+    "create": "作成に失敗しました",
+    "createDetail": "作成に失敗しました：{{detail}}",
+    "delete": "削除に失敗しました",
+    "deleteDetail": "削除に失敗しました：{{detail}}",
+    "download": "ダウンロードに失敗しました。しばらくしてから再試行してください。",
+    "export": "エクスポートに失敗しました。しばらくしてから再試行してください。",
+    "load": "読み込みに失敗しました",
+    "loadDetail": "読み込みに失敗しました：{{detail}}",
+    "loadRetry": "読み込みに失敗しました。しばらくしてから再試行してください。",
+    "move": "移動に失敗しました",
+    "operation": "操作に失敗しました",
+    "remove": "削除に失敗しました",
+    "removeDetail": "削除に失敗しました：{{detail}}",
+    "rename": "名前の変更に失敗しました",
+    "restore": "アーカイブの解除に失敗しました",
+    "save": "保存に失敗しました",
+    "saveDetail": "保存に失敗しました：{{detail}}",
+    "toggleCompletion": "完了マークに失敗しました",
+    "tryLater": "しばらくしてから再試行してください",
+    "update": "更新に失敗しました",
+    "upload": "アップロードに失敗しました"
+  },
+  "fieldScope": {
+    "board": "ボード",
+    "project": "プロジェクト"
+  },
+  "fieldType": {
+    "checkbox": "チェックボックス",
+    "date": "日付",
+    "member": "メンバー",
+    "number": "数値",
+    "select": "ドロップダウン",
+    "text": "テキスト"
+  },
+  "filter": {
+    "all": "すべて",
+    "assignedToMe": "自分に割り当て",
+    "dueToday": "今日が期限"
+  },
+  "member": {
+    "display": "{{name}}（{{username}}）"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "パンくずリスト",
+      "userMenu": "ユーザーメニュー"
+    },
+    "board": "ボード",
+    "logout": "ログアウト",
+    "myProjects": "マイプロジェクト",
+    "myTasks": "マイタスク",
+    "myWorklog": "マイワークログ",
+    "project": "プロジェクト",
+    "projectDetail": "プロジェクト詳細",
+    "projects": "プロジェクト",
+    "search": "検索",
+    "selectTeam": "チームを選択",
+    "shortcuts": "ショートカット一覧（?）",
+    "teams": "チーム",
+    "teamSettings": "チーム設定",
+    "userSettings": "個人設定"
+  },
+  "notFound": {
+    "back": {
+      "action": "前のページに戻る"
+    },
+    "description": "この URL は削除または名前が変更されたか、このプロジェクトまたはボードへのアクセス権限がない可能性があります。",
+    "projects": {
+      "action": "マイプロジェクトに戻る"
+    },
+    "title": "お探しのページが見つかりません"
+  },
+  "period": {
+    "custom": "カスタム期間",
+    "from": "開始日",
+    "to": "終了日"
+  },
+  "reviewStatus": {
+    "tooltip": "レビュー状況：{{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_other": "カード（{{count}}）"
+    },
+    "comments": {
+      "heading_other": "コメント（{{count}}）",
+      "onCard": "カード：{{title}}"
+    },
+    "empty": "検索結果がありません",
+    "hint": {
+      "cards": "カード、マインドマップを検索…",
+      "compact": "検索…",
+      "projects": "プロジェクトを検索…"
+    },
+    "minLength": "2 文字以上入力してください",
+    "nodes": {
+      "heading_other": "マインドマップノード（{{count}}）"
+    },
+    "open": {
+      "hint": "クリックして開く →"
+    },
+    "placeholder": "カード、コメント、マインドマップノードを検索…",
+    "projects": {
+      "empty": "一致するプロジェクトがありません",
+      "heading_other": "マイプロジェクト（{{count}}）",
+      "placeholder": "プロジェクトを検索して移動…"
+    }
+  },
+  "select": {
+    "placeholder": "選択してください…"
+  },
+  "separator": {
+    "label": "：",
+    "list": "、"
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "カードを作成して続けて次のカードを追加"
+    },
+    "createCard": {
+      "label": "カードをすばやく追加"
+    },
+    "description": "キーボードショートカットでタスクとプロジェクトをすばやくスムーズに管理できます",
+    "escape": {
+      "label": "モーダルを閉じる / フォーカスを解除"
+    },
+    "help": {
+      "label": "ショートカット一覧を開く"
+    },
+    "hint": "ヒント：入力中や入力フィールド内では、入力内容を保護するため単一キーのショートカットは自動的に無効になります。",
+    "quickFilter": {
+      "label": "個人タスクフィルターの切り替え（自分に割り当て）"
+    },
+    "search": {
+      "label": "グローバル検索 / コマンドパレット"
+    },
+    "section": {
+      "board": "ボードとカードの操作",
+      "navigation": "サイト全体のナビゲーションとコマンド"
+    },
+    "submit": {
+      "label": "保存または作成を実行"
+    },
+    "title": "キーボードショートカット一覧"
+  },
+  "sourceOffer": {
+    "link": "ソースコード (AGPL-3.0)",
+    "title": "このバージョンに対応するソースコードを表示（AGPL-3.0 ライセンス）"
+  },
+  "state": {
+    "approved": "承認済み",
+    "archived": "アーカイブ済み",
+    "assigning": "割り当て中…",
+    "completed": "完了",
+    "copying": "複製中…",
+    "creating": "作成中…",
+    "deactivated": "無効",
+    "deleting": "削除中…",
+    "loading": "読み込み中…",
+    "overdue": "期限切れ",
+    "pending": "レビュー待ち",
+    "rejected": "差し戻し",
+    "saved": "保存済み",
+    "saving": "保存中…",
+    "searching": "検索中…",
+    "signingIn": "ログイン中…",
+    "unavailable": "コンテンツを表示できません",
+    "updating": "更新中…",
+    "uploading": "アップロード中…"
+  },
+  "theme": {
+    "dark": "ダーク",
+    "light": "ライト",
+    "system": "システムに合わせる",
+    "toggle": "テーマを切り替え"
+  }
+}

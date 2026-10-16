@@ -1,0 +1,142 @@
+{
+  "attachment": {
+    "notFound": "No se encontró este archivo adjunto. Es posible que se haya eliminado",
+    "tooLarge": "El archivo supera el límite de {{max}} MB",
+    "unsupportedType": "Tipo de archivo no compatible"
+  },
+  "auth": {
+    "adminGrantFailed": "No se pudieron configurar los permisos de administrador del sistema",
+    "invalidCredentials": "Cuenta o contraseña incorrecta",
+    "sessionInvalid": "Tu sesión ha expirado. Inicia sesión de nuevo",
+    "unauthenticated": "No has iniciado sesión o tu sesión ha expirado",
+    "usernameRequired": "La cuenta no puede estar vacía"
+  },
+  "board": {
+    "nameRequired": "El nombre del tablero no puede estar vacío",
+    "notFound": "No se encontró este tablero. Es posible que se haya eliminado"
+  },
+  "card": {
+    "coverInvalid": "La portada debe ser un archivo adjunto de imagen de esta tarjeta",
+    "estimateNotPositive": "Las horas estimadas deben ser mayores que 0",
+    "fieldMemberNotFound": "El campo de miembro apunta a un usuario que no existe",
+    "fieldNotFound": "No se encontró este campo personalizado. Es posible que se haya eliminado",
+    "fieldTextTooLong": "El campo de texto debe tener {{max}} caracteres o menos",
+    "fieldValueNotInOptions": "El valor no está en la lista de opciones",
+    "memberNotProjectMember": "Solo puedes asignar miembros de este proyecto",
+    "notFound": "No se encontró esta tarjeta. Es posible que se haya eliminado",
+    "positionInvalid": "position debe ser una cadena de orden válida",
+    "startAfterDue": "La fecha de inicio no puede ser posterior a la fecha de vencimiento",
+    "titleRequired": "El título de la tarjeta no puede estar vacío"
+  },
+  "checklist": {
+    "notFound": "No se encontró esta lista de verificación. Es posible que se haya eliminado",
+    "titleRequired": "El nombre de la lista de verificación no puede estar vacío"
+  },
+  "checklistItem": {
+    "notFound": "No se encontró este elemento. Es posible que se haya eliminado",
+    "textRequired": "El texto del elemento no puede estar vacío"
+  },
+  "comment": {
+    "bodyRequired": "El comentario no puede estar vacío",
+    "notFound": "No se encontró este comentario. Es posible que se haya eliminado",
+    "notOwner": "Solo quien escribió el comentario puede editarlo o eliminarlo"
+  },
+  "concurrency": {
+    "conflict": "Conflicto de actualización simultánea. Inténtalo de nuevo"
+  },
+  "effort": {
+    "hoursNotPositive": "Las horas deben ser mayores que 0",
+    "localDateInFuture": "No se pueden registrar horas en una fecha futura"
+  },
+  "identity": {
+    "duplicateUserName": "La cuenta ya existe",
+    "invalidUserName": "El formato de la cuenta no es válido",
+    "passwordMismatch": "La contraseña actual es incorrecta",
+    "passwordRequiresDigit": "La contraseña debe incluir un número",
+    "passwordRequiresLower": "La contraseña debe incluir una letra minúscula",
+    "passwordRequiresNonAlphanumeric": "La contraseña debe incluir un carácter no alfanumérico",
+    "passwordRequiresUniqueChars": "La contraseña debe incluir más caracteres distintos",
+    "passwordRequiresUpper": "La contraseña debe incluir una letra mayúscula",
+    "passwordTooShort": "La contraseña es demasiado corta",
+    "unknown": "El servicio de autenticación reportó un error desconocido"
+  },
+  "label": {
+    "colorInvalid": "El formato del color debe ser #rrggbb",
+    "nameDuplicate": "Ya existe una etiqueta con este nombre en este tablero",
+    "nameRequired": "El nombre de la etiqueta no puede estar vacío",
+    "notFound": "No se encontró esta etiqueta. Es posible que se haya eliminado"
+  },
+  "list": {
+    "notFound": "No se encontró esta lista. Es posible que se haya eliminado",
+    "titleRequired": "El nombre de la lista no puede estar vacío"
+  },
+  "mindmap": {
+    "moveIntoSelf": "No puedes mover un nodo dentro de sí mismo ni debajo de sus nodos secundarios",
+    "nodeNotFound": "No se encontró este nodo. Es posible que se haya eliminado",
+    "nodeTitleRequired": "El título del nodo no puede estar vacío"
+  },
+  "notification": {
+    "notFound": "No se encontró esta notificación"
+  },
+  "permission": {
+    "denied": "No tienes permiso para acceder a este recurso"
+  },
+  "project": {
+    "memberInUse": "Este miembro todavía está asignado a {{refs}} tarjetas de este proyecto. Quítalo primero de las tarjetas",
+    "nameRequired": "El nombre del proyecto no puede estar vacío",
+    "notFound": "No se encontró este proyecto. Es posible que se haya eliminado"
+  },
+  "query": {
+    "rangeTooLong": "El período de la consulta no puede superar {{max}} días"
+  },
+  "request": {
+    "bodyTooLarge": "Los datos de la solicitud son demasiado grandes o el formato es incorrecto",
+    "collectionTooLarge": "La lista no puede superar los {{max}} elementos",
+    "invalid": "El contenido de la solicitud no es correcto",
+    "timeZoneInvalid": "El identificador de zona horaria no es válido",
+    "tooManyRequests": "Demasiadas solicitudes. Vuelve a intentarlo más tarde."
+  },
+  "review": {
+    "commentRequiredOnReject": "Debes escribir un comentario al rechazar",
+    "notFound": "No se encontró esta revisión. Es posible que se haya eliminado",
+    "notReviewer": "Solo el revisor asignado puede enviar esta revisión",
+    "rateNotPermitted": "No tienes permiso para asignar una puntuación",
+    "ratingInvalid": "La puntuación debe estar entre 1 y 5",
+    "reviewerNotProjectMember": "Solo puedes asignar miembros de este proyecto como revisores",
+    "scoreNotAllowedOnReject": "No puedes asignar una puntuación al rechazar",
+    "statusNotSubmittable": "El estado de la revisión no se puede enviar"
+  },
+  "server": {
+    "internalError": "Ocurrió un error en el sistema. Vuelve a intentarlo más tarde."
+  },
+  "team": {
+    "memberNotFound": "No se encontró este miembro del equipo",
+    "nameInvalid": "El nombre del equipo contiene caracteres no válidos",
+    "nameRequired": "El nombre del equipo no puede estar vacío",
+    "nameTooLong": "El nombre del equipo no debe superar los {{max}} caracteres",
+    "notFound": "No se encontró este equipo. Es posible que se haya eliminado",
+    "notMember": "No eres miembro de este equipo, por lo que no puedes ver el informe de desempeño",
+    "roleAssigned": "Este rol todavía tiene miembros asignados. Quítalos primero"
+  },
+  "teamRole": {
+    "nameDuplicate": "El nombre del rol ya existe",
+    "nameRequired": "El nombre del rol no puede estar vacío",
+    "notFound": "No se encontró este rol. Es posible que se haya eliminado",
+    "systemNotDeletable": "Solo se pueden eliminar roles personalizados del equipo",
+    "systemNotEditable": "Solo se pueden modificar roles personalizados del equipo"
+  },
+  "user": {
+    "avatarNotFound": "No se encontró este avatar",
+    "avatarTooLarge": "El archivo no puede superar {{max}} MB",
+    "avatarUnsupportedFormat": "Formato de archivo no compatible",
+    "deleteFailed": "No se pudo eliminar",
+    "displayNameRequired": "El nombre visible no puede estar vacío",
+    "displayNameTooLong": "El nombre visible no puede superar {{max}} caracteres",
+    "updateFailed": "No se pudo actualizar"
+  },
+  "workCalendar": {
+    "kindInvalid": "El tipo de día laboral no es válido",
+    "nameTooLong": "El nombre no debe superar los 100 caracteres",
+    "notFound": "No se encontró la configuración del calendario para este día"
+  }
+}

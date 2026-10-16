@@ -1,0 +1,142 @@
+{
+  "attachment": {
+    "notFound": "找不到这个附件，可能已被删除",
+    "tooLarge": "文件超过 {{max}}MB 上限",
+    "unsupportedType": "不支持的文件格式"
+  },
+  "auth": {
+    "adminGrantFailed": "无法设置系统管理员权限",
+    "invalidCredentials": "账号或密码错误",
+    "sessionInvalid": "登录状态已失效，请重新登录",
+    "unauthenticated": "尚未登录，或登录已过期",
+    "usernameRequired": "账号不能为空"
+  },
+  "board": {
+    "nameRequired": "看板名称不能为空",
+    "notFound": "找不到这个看板，可能已被删除"
+  },
+  "card": {
+    "coverInvalid": "封面必须是该卡片的图片附件",
+    "estimateNotPositive": "预估工时必须大于 0",
+    "fieldMemberNotFound": "成员字段指向不存在的用户",
+    "fieldNotFound": "找不到这个自定义字段，可能已被删除",
+    "fieldTextTooLong": "文字字段必须为 {{max}} 个字符以内的字符串",
+    "fieldValueNotInOptions": "值不在选项列表内",
+    "memberNotProjectMember": "只能指派本项目的成员",
+    "notFound": "找不到这张卡片，可能已被删除",
+    "positionInvalid": "position 必须为有效的排序字符串",
+    "startAfterDue": "开始日期不能晚于截止日期",
+    "titleRequired": "卡片标题不能为空"
+  },
+  "checklist": {
+    "notFound": "找不到这个检查清单，可能已被删除",
+    "titleRequired": "检查清单名称不能为空"
+  },
+  "checklistItem": {
+    "notFound": "找不到这个检查项，可能已被删除",
+    "textRequired": "检查项文字不能为空"
+  },
+  "comment": {
+    "bodyRequired": "评论不能为空",
+    "notFound": "找不到这条评论，可能已被删除",
+    "notOwner": "只有评论作者本人可以编辑或删除评论"
+  },
+  "concurrency": {
+    "conflict": "并发更新冲突，请重试"
+  },
+  "effort": {
+    "hoursNotPositive": "工时必须大于 0",
+    "localDateInFuture": "无法登记未来的工时"
+  },
+  "identity": {
+    "duplicateUserName": "账号已存在",
+    "invalidUserName": "账号格式无效",
+    "passwordMismatch": "当前密码不正确",
+    "passwordRequiresDigit": "密码必须包含数字",
+    "passwordRequiresLower": "密码必须包含小写字母",
+    "passwordRequiresNonAlphanumeric": "密码必须包含非字母数字字符",
+    "passwordRequiresUniqueChars": "密码必须包含更多不同字符",
+    "passwordRequiresUpper": "密码必须包含大写字母",
+    "passwordTooShort": "密码长度不足",
+    "unknown": "认证服务返回未知错误"
+  },
+  "label": {
+    "colorInvalid": "颜色格式必须为 #rrggbb",
+    "nameDuplicate": "此看板已有同名标签",
+    "nameRequired": "标签名称不能为空",
+    "notFound": "找不到这个标签，可能已被删除"
+  },
+  "list": {
+    "notFound": "找不到这个列表，可能已被删除",
+    "titleRequired": "列表名称不能为空"
+  },
+  "mindmap": {
+    "moveIntoSelf": "不能将节点移动到自身或其子节点之下",
+    "nodeNotFound": "找不到这个节点，可能已被删除",
+    "nodeTitleRequired": "节点标题不能为空"
+  },
+  "notification": {
+    "notFound": "找不到这条通知"
+  },
+  "permission": {
+    "denied": "你没有访问这个资源的权限"
+  },
+  "project": {
+    "memberInUse": "此成员仍被指派于本项目的 {{refs}} 张卡片，请先从卡片移除",
+    "nameRequired": "项目名称不能为空",
+    "notFound": "找不到这个项目，可能已被删除"
+  },
+  "query": {
+    "rangeTooLong": "查询的期间不能超过 {{max}} 天"
+  },
+  "request": {
+    "bodyTooLarge": "请求的数据量过大或格式错误",
+    "collectionTooLarge": "清单的项目数超过上限 {{max}}",
+    "invalid": "请求内容不正确",
+    "timeZoneInvalid": "时区标识符无效",
+    "tooManyRequests": "请求过于频繁，请稍后重试"
+  },
+  "review": {
+    "commentRequiredOnReject": "退回时必须填写评语",
+    "notFound": "找不到这条审查，可能已被删除",
+    "notReviewer": "只有被指派的审查者可以提交这条审查",
+    "rateNotPermitted": "没有填写评分的权限",
+    "ratingInvalid": "评分必须为 1–5",
+    "reviewerNotProjectMember": "只能指派本项目的成员为审查者",
+    "scoreNotAllowedOnReject": "退回时不可填写评分",
+    "statusNotSubmittable": "审查状态不可提交"
+  },
+  "server": {
+    "internalError": "系统发生错误，请稍后重试"
+  },
+  "team": {
+    "memberNotFound": "找不到这位团队成员",
+    "nameInvalid": "团队名称包含无效字符",
+    "nameRequired": "团队名称不能为空",
+    "nameTooLong": "团队名称不可超过 {{max}} 个字符",
+    "notFound": "找不到这个团队，可能已被删除",
+    "notMember": "你不是这个团队的成员，无法查看绩效报表",
+    "roleAssigned": "该角色仍有人被指派，请先移除指派"
+  },
+  "teamRole": {
+    "nameDuplicate": "角色名称已存在",
+    "nameRequired": "角色名称不能为空",
+    "notFound": "找不到这个角色，可能已被删除",
+    "systemNotDeletable": "仅能删除团队自定义角色",
+    "systemNotEditable": "仅能修改团队自定义角色"
+  },
+  "user": {
+    "avatarNotFound": "找不到这个头像",
+    "avatarTooLarge": "文件大小不能超过 {{max}}MB",
+    "avatarUnsupportedFormat": "不支持的文件格式",
+    "deleteFailed": "删除失败",
+    "displayNameRequired": "显示名称不能为空",
+    "displayNameTooLong": "显示名称不能超过 {{max}} 个字符",
+    "updateFailed": "更新失败"
+  },
+  "workCalendar": {
+    "kindInvalid": "工作日的种类不正确",
+    "nameTooLong": "名称不可超过 100 个字符",
+    "notFound": "找不到这天的日历设置"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "archive": {
+    "hide": "Ocultar archivados",
+    "show": "Mostrar archivados"
+  },
+  "backToProject": {
+    "action": "← Proyecto"
+  },
+  "card": {
+    "create": {
+      "placeholder": "Nueva tarjeta…"
+    }
+  },
+  "copy": {
+    "action": "Copiar tablero",
+    "confirm": "¿Copiar el tablero?",
+    "description": "Se creará una copia completa de “{{name}}”, con todas las listas, tarjetas, etiquetas y valores de campos personalizados. Si hay mucho contenido, tardará un poco; cuando la copia esté lista, tendrás que eliminarla tú.",
+    "name": {
+      "label": "Nombre del tablero (opcional)",
+      "placeholder": "Déjalo vacío para nombrarlo automáticamente"
+    },
+    "noPermission": "No tienes permiso para crear tableros en este proyecto",
+    "submit": {
+      "action": "Confirmar copia"
+    },
+    "success": "Tablero copiado",
+    "targetProject": {
+      "label": "Proyecto de destino"
+    }
+  },
+  "delete": {
+    "action": "Eliminar tablero",
+    "confirm": "¿Eliminar el tablero?",
+    "description": "Eliminar “{{name}}” también borrará todas las listas, tarjetas y archivos adjuntos de este tablero. Esta acción no se puede deshacer.",
+    "error": "No se pudo eliminar el tablero",
+    "submit": {
+      "action": "Confirmar eliminación"
+    },
+    "success": "Tablero eliminado"
+  },
+  "edit": {
+    "aria": "Editar el nombre y la descripción del tablero",
+    "description": {
+      "label": "Descripción del tablero (opcional)",
+      "placeholder": "Por ejemplo: seguimiento del desarrollo de la primera fase"
+    },
+    "error": "No se pudo actualizar el tablero",
+    "name": {
+      "label": "Nombre del tablero",
+      "placeholder": "Por ejemplo: Tablero del Sprint 1",
+      "required": "El nombre del tablero no puede estar vacío"
+    },
+    "success": "Información del tablero actualizada",
+    "title": "Editar información del tablero"
+  },
+  "labelColor": {
+    "blue": "Azul",
+    "cyan": "Cian",
+    "grayPurple": "Púrpura grisáceo",
+    "green": "Verde",
+    "lightGreen": "Verde claro",
+    "orange": "Naranja",
+    "pink": "Rosa",
+    "purple": "Púrpura",
+    "red": "Rojo",
+    "yellow": "Amarillo"
+  },
+  "list": {
+    "archive": {
+      "action": "Archivar lista",
+      "success": "Lista archivada"
+    },
+    "archived": {
+      "dropBlocked": "Las listas archivadas no pueden recibir tarjetas"
+    },
+    "copy": {
+      "action": "Copiar lista",
+      "description": "Se creará una copia de “{{name}}”. Elige el proyecto y el tablero de destino.",
+      "noPermission": "No tienes permiso para editar tableros en este proyecto",
+      "submit": {
+        "action": "Confirmar copia"
+      },
+      "success": "Lista copiada",
+      "targetBoard": {
+        "label": "Tablero de destino"
+      }
+    },
+    "create": {
+      "action": "Agregar lista"
+    },
+    "delete": {
+      "action": "Eliminar lista",
+      "confirm": "¿Eliminar “{{name}}”? Las tarjetas de la lista también se eliminarán. Esta acción no se puede deshacer.",
+      "success": "Lista eliminada"
+    },
+    "drag": {
+      "aria": "Arrastrar la lista “{{name}}”"
+    },
+    "empty": {
+      "canEdit": "Este tablero aún no tiene listas. Crea la primera a la derecha para empezar",
+      "readonly": "Este tablero aún no tiene listas"
+    },
+    "menu": {
+      "aria": "Menú de la lista"
+    },
+    "name": {
+      "placeholder": "Nombre de la nueva lista…"
+    },
+    "restore": {
+      "action": "Desarchivar",
+      "success": "Lista desarchivada"
+    }
+  },
+  "permission": {
+    "denied": "No tienes permiso para este tablero"
+  },
+  "presence": {
+    "live": "En vivo",
+    "online_one": "{{count}} persona en línea",
+    "online_many": "{{count}} de personas en línea",
+    "online_other": "{{count}} personas en línea"
+  },
+  "settings": {
+    "action": "Configuración del tablero"
+  }
+}

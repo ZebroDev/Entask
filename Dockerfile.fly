@@ -1,0 +1,80 @@
+# ==========================================
+# Stage 1: Build React SPA
+# ==========================================
+FROM node:22-alpine AS build-web
+WORKDIR /app/web
+
+# Install dependencies
+COPY web/package*.json ./
+RUN npm ci
+
+# Build to /app/web/dist
+COPY web/ ./
+RUN npm run build
+
+# ==========================================
+# Stage 2: Build .NET 10 API
+# ==========================================
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-api
+WORKDIR /app
+
+# Copy solution and restore NuGet packages
+COPY Entask.sln ./
+COPY src/Entask.Core/Entask.Core.csproj src/Entask.Core/
+COPY src/Entask.Identity/Entask.Identity.csproj src/Entask.Identity/
+COPY src/Entask.Infrastructure/Entask.Infrastructure.csproj src/Entask.Infrastructure/
+COPY src/Entask.Board/Entask.Board.csproj src/Entask.Board/
+COPY src/Entask.Performance/Entask.Performance.csproj src/Entask.Performance/
+COPY src/Entask.MindMap/Entask.MindMap.csproj src/Entask.MindMap/
+COPY src/Entask.Api/Entask.Api.csproj src/Entask.Api/
+COPY tests/Entask.Tests/Entask.Tests.csproj tests/Entask.Tests/
+
+RUN dotnet restore src/Entask.Api/Entask.Api.csproj
+
+# Copy source and publish Release build
+COPY src/ src/
+RUN dotnet publish src/Entask.Api/Entask.Api.csproj -c Release -o /app/publish
+
+# ==========================================
+# Stage 3: Runtime
+# ==========================================
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+# Copy published API
+COPY --from=build-api /app/publish ./
+
+# Copy built SPA to wwwroot for static serving
+COPY --from=build-web /app/web/dist ./wwwroot
+
+# Create directories for Fly Volume storage
+RUN mkdir -p /app/storage/avatars /app/storage/attachments
+# 擁有權給 app：下面以非 root 執行，附件／頭像要寫得進去。
+# ★ 這一行只影響映像層；Fly 上 /app/storage 是**掛載進來的 volume**，
+#   它的擁有者由部署平台決定 ⇒ 部署後要實測（上傳一次頭像、看 logs 有沒有
+#   UnauthorizedAccessException）。
+RUN chown -R app:app /app/storage
+
+# curl 只為 HEALTHCHECK 而裝（--no-install-recommends ＋ 清 apt lists 控制層數與大小）。
+# ★ 為什麼不用 bash 的 /dev/tcp：**HTTP 200 與「埠開著」是兩件事**——/dev/tcp 只證明
+#   TCP 連得上；真的送一次 HTTP 請求還會證明 Kestrel 起得來、這條路徑回得出 200。
+#   ★ 別把它讀成更強的意思：`/api/health` 是**靜態 200、不碰資料庫**（HealthEndpoint.cs）
+#   ⇒ 這個探針證明的是「行程活著、HTTP 聽得到」，**不是**「DB 連得上」——DB 斷線時
+#   它照樣回 200。
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# start-period 給的是啟動窗（遷移＋seed 會走網路到 DB）；之後每 30s 打一次。
+HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \
+  CMD curl -fsS http://127.0.0.1:8080/api/health || exit 1
+
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+# 非 root 執行（aspnet:10.0 內建的 app 使用者；uid=1654 是 2026-10-10 當場實查）。
+# 放在最後：上面的 mkdir／chown／apt-get 都需要 root。
+USER app
+
+ENTRYPOINT ["dotnet", "Entask.Api.dll"]

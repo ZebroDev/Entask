@@ -1,0 +1,164 @@
+{
+  "avatar": {
+    "removed": "头像已移除",
+    "removeError": "头像移除失败",
+    "updated": "头像已更新",
+    "updateError": "头像更新失败",
+    "upload": {
+      "action": "上传新头像",
+      "hint": "支持 JPG、PNG、WEBP。最大 5MB。"
+    }
+  },
+  "card": {
+    "markComplete": "标记为完成",
+    "markIncomplete": "标记为未完成",
+    "openBoard": {
+      "aria": "打开卡片所在看板"
+    },
+    "overdue": {
+      "suffix": "（逾期）"
+    }
+  },
+  "cards": {
+    "empty": {
+      "all": "所有任务已清空，享受放松时光！或按 C 键快速新建卡片。",
+      "completed": "尚未完成任何卡片，完成任务后将在此累积成果。",
+      "title": "目前没有任何符合条件的卡片"
+    }
+  },
+  "error": {
+    "loadDetail": "加载工作台失败：{{detail}}"
+  },
+  "filter": {
+    "reviews": "待我审查"
+  },
+  "notification": {
+    "approved": {
+      "body": "卡片“{{card}}”审查已由 {{actor}} 提交{{score}}",
+      "title": "审查通过"
+    },
+    "assigned": {
+      "body": "有人将卡片“{{card}}”指派给了您",
+      "description": "当有新卡片指派给您时",
+      "label": "被指派工作",
+      "title": "卡片指派通知"
+    },
+    "bell": {
+      "aria": "通知中心"
+    },
+    "comment": {
+      "body": "{{actor}} 在卡片“{{card}}”发表了评论",
+      "description": "当您参与的卡片有新评论时",
+      "label": "新评论",
+      "title": "新评论通知"
+    },
+    "empty": "目前没有任何通知",
+    "fallback": {
+      "body": "您有一条通知",
+      "title": "通知"
+    },
+    "markAllRead": {
+      "action": "全部标为已读"
+    },
+    "rejected": {
+      "body": "卡片“{{card}}”审查已由 {{actor}} 驳回{{score}}",
+      "title": "审查被驳回"
+    },
+    "review": {
+      "body": "您被指派审查卡片“{{card}}”",
+      "description": "当您被指派为审查者，或审查状态发生变化时",
+      "label": "审查请求/驳回",
+      "title": "审查请求"
+    },
+    "scoreSuffix": "，评分 {{score}}",
+    "system": {
+      "description": "重要系统更新或维护通知",
+      "label": "系统公告"
+    },
+    "time": {
+      "justNow": "刚刚"
+    },
+    "title": "协作通知中心",
+    "unread_other": "{{count}} 未读"
+  },
+  "page": {
+    "description": "集中管理您在所有项目中的待办任务与审查流程"
+  },
+  "password": {
+    "bothRequired": "请输入当前密码和新密码",
+    "change": {
+      "action": "更新密码",
+      "label": "修改密码"
+    },
+    "current": {
+      "placeholder": "当前密码"
+    },
+    "new": {
+      "placeholder": "新密码"
+    },
+    "updated": "密码已更新",
+    "updateError": "密码更新失败"
+  },
+  "preferences": {
+    "loadError": "无法加载偏好设置",
+    "save": {
+      "action": "保存偏好设置"
+    },
+    "saved": "偏好设置已保存"
+  },
+  "profile": {
+    "displayName": {
+      "label": "显示名称",
+      "required": "显示名称不能为空"
+    },
+    "updated": "个人资料已更新",
+    "updateError": "更新个人资料失败"
+  },
+  "review": {
+    "open": {
+      "action": "进入审查"
+    },
+    "pending": {
+      "badge": "待您审查"
+    }
+  },
+  "reviews": {
+    "empty": {
+      "description": "当团队成员指派您作为审查者时，相关卡片会立即出现在这里。",
+      "title": "太棒了，目前没有等待您审查的卡片"
+    }
+  },
+  "settings": {
+    "language": {
+      "browser": "跟随浏览器",
+      "hint": "界面文字与日期格式都会跟着改变；跟随浏览器时由浏览器的语言设置决定。",
+      "label": "界面语言"
+    },
+    "tab": {
+      "account": "个人账号",
+      "language": "语言",
+      "notifications": "通知设置"
+    }
+  },
+  "stat": {
+    "dueToday": {
+      "hint": "今天需交付的条目"
+    },
+    "inProgress": {
+      "hint": "跨项目指派总数",
+      "label": "进行中待办"
+    },
+    "overdue": {
+      "hint": "需优先推进的任务"
+    },
+    "reviews": {
+      "hint": "团队正等待您的审查"
+    }
+  },
+  "tab": {
+    "completed_other": "已完成（{{count}}）",
+    "dueToday_other": "今日到期（{{count}}）",
+    "inProgress_other": "进行中（{{count}}）",
+    "overdue_other": "已逾期（{{count}}）"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "hide": "隱藏已封存",
+    "show": "顯示已封存"
+  },
+  "backToProject": {
+    "action": "← 專案"
+  },
+  "card": {
+    "create": {
+      "placeholder": "新增卡片…"
+    }
+  },
+  "copy": {
+    "action": "複製看板",
+    "confirm": "確定要複製看板嗎？",
+    "description": "將建立「{{name}}」的完整副本，包含所有列表、卡片、標籤與自訂欄位值。 內容較多時需要一些時間，副本產生後需自行刪除。",
+    "name": {
+      "label": "看板名稱（選填）",
+      "placeholder": "留空則自動命名"
+    },
+    "noPermission": "你沒有在該專案建立看板的權限",
+    "submit": {
+      "action": "確定複製"
+    },
+    "success": "看板已複製",
+    "targetProject": {
+      "label": "目標專案"
+    }
+  },
+  "delete": {
+    "action": "刪除看板",
+    "confirm": "確定要刪除看板嗎？",
+    "description": "刪除「{{name}}」將會一併移除該看板內的所有列表、卡片與附件，此動作無法復原。",
+    "error": "刪除看板失敗",
+    "submit": {
+      "action": "確定刪除"
+    },
+    "success": "看板已刪除"
+  },
+  "edit": {
+    "aria": "編輯看板名稱與描述",
+    "description": {
+      "label": "看板描述（選填）",
+      "placeholder": "例如：負責第一階段功能開發追蹤"
+    },
+    "error": "更新看板失敗",
+    "name": {
+      "label": "看板名稱",
+      "placeholder": "例如：Sprint 1 看板",
+      "required": "看板名稱不可為空"
+    },
+    "success": "看板資訊已更新",
+    "title": "編輯看板資訊"
+  },
+  "labelColor": {
+    "blue": "藍色",
+    "cyan": "青色",
+    "grayPurple": "灰紫色",
+    "green": "綠色",
+    "lightGreen": "淺綠色",
+    "orange": "橙色",
+    "pink": "粉紅色",
+    "purple": "紫色",
+    "red": "紅色",
+    "yellow": "黃色"
+  },
+  "list": {
+    "archive": {
+      "action": "封存列表",
+      "success": "列表已封存"
+    },
+    "archived": {
+      "dropBlocked": "已封存列表不可接收卡片"
+    },
+    "copy": {
+      "action": "複製列表",
+      "description": "將建立「{{name}}」的副本，請選擇副本要放到的專案與看板。",
+      "noPermission": "你沒有在該專案編輯看板的權限",
+      "submit": {
+        "action": "確定複製"
+      },
+      "success": "列表已複製",
+      "targetBoard": {
+        "label": "目標看板"
+      }
+    },
+    "create": {
+      "action": "新增列表"
+    },
+    "delete": {
+      "action": "刪除列表",
+      "confirm": "確定要刪除「{{name}}」？列表中的卡片將一併刪除，此操作無法復原。",
+      "success": "列表已刪除"
+    },
+    "drag": {
+      "aria": "拖曳列表「{{name}}」"
+    },
+    "empty": {
+      "canEdit": "此看板尚無列表，於右側建立第一個列表開始使用",
+      "readonly": "此看板尚無列表"
+    },
+    "menu": {
+      "aria": "列表選單"
+    },
+    "name": {
+      "placeholder": "新列表名稱…"
+    },
+    "restore": {
+      "action": "取消封存",
+      "success": "列表已取消封存"
+    }
+  },
+  "permission": {
+    "denied": "你沒有此看板的權限"
+  },
+  "presence": {
+    "live": "即時連線中",
+    "online_other": "{{count}} 人在線"
+  },
+  "settings": {
+    "action": "看板設定"
+  }
+}

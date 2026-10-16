@@ -1,0 +1,142 @@
+{
+  "attachment": {
+    "notFound": "This attachment could not be found. It may have been deleted.",
+    "tooLarge": "File exceeds the {{max}} MB limit",
+    "unsupportedType": "Unsupported file type"
+  },
+  "auth": {
+    "adminGrantFailed": "Failed to grant admin privileges",
+    "invalidCredentials": "Incorrect username or password",
+    "sessionInvalid": "Your session is no longer valid. Please sign in again",
+    "unauthenticated": "You are not signed in, or your session has expired",
+    "usernameRequired": "Username is required"
+  },
+  "board": {
+    "nameRequired": "Board name is required",
+    "notFound": "This board could not be found. It may have been deleted."
+  },
+  "card": {
+    "coverInvalid": "The cover must be an image attachment of this card",
+    "estimateNotPositive": "Estimated hours must be greater than 0",
+    "fieldMemberNotFound": "The member field points to a user that does not exist",
+    "fieldNotFound": "This custom field could not be found. It may have been deleted.",
+    "fieldTextTooLong": "The text field cannot exceed {{max}} characters",
+    "fieldValueNotInOptions": "The value is not one of the available options",
+    "memberNotProjectMember": "Only project members can be assigned to a card",
+    "notFound": "This card could not be found. It may have been deleted.",
+    "positionInvalid": "position must be a valid ordering string",
+    "startAfterDue": "Start date cannot be later than the due date",
+    "titleRequired": "Card title is required"
+  },
+  "checklist": {
+    "notFound": "This checklist could not be found. It may have been deleted.",
+    "titleRequired": "Checklist name is required"
+  },
+  "checklistItem": {
+    "notFound": "This checklist item could not be found. It may have been deleted.",
+    "textRequired": "Item text is required"
+  },
+  "comment": {
+    "bodyRequired": "Comment is required",
+    "notFound": "This comment could not be found. It may have been deleted.",
+    "notOwner": "Only the author of a comment can edit or delete it"
+  },
+  "concurrency": {
+    "conflict": "Someone else updated this at the same time. Please try again."
+  },
+  "effort": {
+    "hoursNotPositive": "Hours must be greater than 0",
+    "localDateInFuture": "Hours cannot be logged for a future date"
+  },
+  "identity": {
+    "duplicateUserName": "Username already exists",
+    "invalidUserName": "Username format is invalid",
+    "passwordMismatch": "Current password is incorrect",
+    "passwordRequiresDigit": "Password must contain a digit",
+    "passwordRequiresLower": "Password must contain a lowercase letter",
+    "passwordRequiresNonAlphanumeric": "Password must contain a non-alphanumeric character",
+    "passwordRequiresUniqueChars": "Password must contain more unique characters",
+    "passwordRequiresUpper": "Password must contain an uppercase letter",
+    "passwordTooShort": "Password is too short",
+    "unknown": "The identity service reported an unknown error"
+  },
+  "label": {
+    "colorInvalid": "Color must be in #rrggbb format",
+    "nameDuplicate": "A label with this name already exists on this board.",
+    "nameRequired": "Label name is required",
+    "notFound": "This label could not be found. It may have been deleted."
+  },
+  "list": {
+    "notFound": "This list could not be found. It may have been deleted.",
+    "titleRequired": "List name is required"
+  },
+  "mindmap": {
+    "moveIntoSelf": "A node cannot be moved under itself or its descendants",
+    "nodeNotFound": "This node could not be found. It may have been deleted.",
+    "nodeTitleRequired": "Node title is required"
+  },
+  "notification": {
+    "notFound": "This notification could not be found"
+  },
+  "permission": {
+    "denied": "You do not have permission to access this resource"
+  },
+  "project": {
+    "memberInUse": "This member is still assigned to {{refs}} of this project's cards; remove them from those cards first",
+    "nameRequired": "Project name is required",
+    "notFound": "This project could not be found. It may have been deleted."
+  },
+  "query": {
+    "rangeTooLong": "The date range cannot exceed {{max}} days"
+  },
+  "request": {
+    "bodyTooLarge": "The request payload is too large or malformed",
+    "collectionTooLarge": "The list cannot contain more than {{max}} items",
+    "invalid": "The request is invalid",
+    "timeZoneInvalid": "The time zone identifier is invalid",
+    "tooManyRequests": "Too many requests. Please try again later."
+  },
+  "review": {
+    "ratingInvalid": "Score must be between 1 and 5",
+    "statusNotSubmittable": "This review status cannot be submitted",
+    "scoreNotAllowedOnReject": "A score cannot be entered when rejecting",
+    "commentRequiredOnReject": "A comment is required when rejecting",
+    "notFound": "This review could not be found. It may have been deleted.",
+    "notReviewer": "Only the assigned reviewer can submit this review",
+    "rateNotPermitted": "You do not have permission to enter a score",
+    "reviewerNotProjectMember": "Only project members can be assigned as reviewers"
+  },
+  "server": {
+    "internalError": "Something went wrong. Please try again later."
+  },
+  "team": {
+    "memberNotFound": "This team member could not be found",
+    "nameInvalid": "Team name contains invalid characters",
+    "nameRequired": "Team name is required",
+    "nameTooLong": "Team name must not exceed {{max}} characters",
+    "notFound": "This team could not be found. It may have been deleted.",
+    "notMember": "You are not a member of this team and cannot view team reports",
+    "roleAssigned": "This role still has members assigned; remove them first"
+  },
+  "teamRole": {
+    "nameDuplicate": "Role name already exists",
+    "nameRequired": "Role name is required",
+    "notFound": "This role could not be found. It may have been deleted.",
+    "systemNotDeletable": "Only custom team roles can be deleted",
+    "systemNotEditable": "Only custom team roles can be edited"
+  },
+  "user": {
+    "avatarNotFound": "This avatar could not be found",
+    "avatarTooLarge": "File size cannot exceed {{max}} MB",
+    "avatarUnsupportedFormat": "Unsupported file format",
+    "deleteFailed": "Failed to delete",
+    "displayNameRequired": "Display name is required",
+    "displayNameTooLong": "Display name cannot exceed {{max}} characters",
+    "updateFailed": "Failed to update"
+  },
+  "workCalendar": {
+    "kindInvalid": "Invalid workday type",
+    "nameTooLong": "Name must not exceed 100 characters",
+    "notFound": "This calendar entry was not found"
+  }
+}

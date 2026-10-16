@@ -1,0 +1,327 @@
+{
+  "activity": {
+    "empty": "활동 기록이 아직 없습니다"
+  },
+  "audit": {
+    "board": {
+      "created": "보드를 생성했습니다",
+      "deleted": "보드를 삭제했습니다",
+      "updated": "보드를 업데이트했습니다"
+    },
+    "card": {
+      "created": "카드를 생성했습니다",
+      "deleted": "카드를 삭제했습니다"
+    },
+    "customField": {
+      "created": "사용자 정의 필드를 생성했습니다",
+      "deleted": "사용자 정의 필드를 삭제했습니다",
+      "updated": "사용자 정의 필드를 업데이트했습니다"
+    },
+    "member": {
+      "assigned": "멤버를 할당했습니다",
+      "removed": "멤버를 제거했습니다"
+    },
+    "project": {
+      "created": "프로젝트를 생성했습니다",
+      "deleted": "프로젝트를 삭제했습니다",
+      "updated": "프로젝트를 업데이트했습니다"
+    },
+    "projectMember": {
+      "added": "프로젝트 멤버를 추가했습니다",
+      "removed": "프로젝트 멤버를 제거했습니다",
+      "updated": "프로젝트 멤버 역할을 업데이트했습니다"
+    },
+    "role": {
+      "created": "역할을 생성했습니다",
+      "deleted": "역할을 삭제했습니다",
+      "updated": "역할을 업데이트했습니다"
+    },
+    "team": {
+      "created": "팀을 생성했습니다",
+      "updated": "팀을 업데이트했습니다"
+    },
+    "user": {
+      "created": "사용자를 생성했습니다",
+      "deactivated": "계정 비활성화",
+      "deleted": "계정 삭제",
+      "passwordReset": "비밀번호를 재설정했습니다",
+      "reactivated": "계정 복원"
+    },
+    "workCalendar": {
+      "deleted": "근무 달력을 삭제했습니다",
+      "updated": "근무 달력을 업데이트했습니다"
+    }
+  },
+  "create": {
+    "action": "팀 생성",
+    "assign": {
+      "failed": "팀이 생성되었지만 팀 매니저 자동 할당에 실패했습니다. 직접 멤버로 추가하십시오."
+    },
+    "confirm": {
+      "action": "생성 확인"
+    },
+    "error": "팀 생성에 실패했습니다",
+    "name": {
+      "placeholder": "예: 핵심 연구개발팀, 제품 운영팀",
+      "required": "팀 이름을 입력하십시오"
+    },
+    "success": "팀이 생성되었습니다",
+    "title": "새 팀 생성"
+  },
+  "description": {
+    "label": "팀 설명 (선택 사항)",
+    "placeholder": "예: 풀스택 제품 개발과 애자일 개발 담당"
+  },
+  "edit": {
+    "error": "팀 정보 업데이트에 실패했습니다",
+    "name": {
+      "placeholder": "예: 핵심 프로젝트 팀",
+      "required": "팀 이름은 비워 둘 수 없습니다"
+    },
+    "success": "팀 정보가 업데이트되었습니다",
+    "title": "팀 정보 편집"
+  },
+  "member": {
+    "assign": {
+      "action": "멤버 할당",
+      "confirm": {
+        "action": "멤버 할당 확인"
+      },
+      "required": "할당할 멤버를 선택하고 역할을 하나 이상 선택하십시오",
+      "roles": {
+        "label": "할당 역할 (복수 선택 가능)"
+      },
+      "select": {
+        "label": "할당할 멤버 선택"
+      },
+      "success": "멤버를 할당했습니다",
+      "title": "팀에 멤버 할당"
+    },
+    "empty": "멤버가 아직 없습니다",
+    "heading": "멤버 ({{n}})",
+    "remove": {
+      "confirm": "“{{name}}” 멤버를 팀에서 제거하시겠습니까? 이 멤버는 이 팀 관련 권한을 잃게 되며, 이 작업은 되돌릴 수 없습니다.",
+      "success": "멤버를 제거했습니다",
+      "title": "멤버 제거"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "다른 팀의 멤버를 찾을 수 없습니다",
+        "heading": "다른 팀의 멤버",
+        "hint": "3자 이상 입력하면 다른 팀의 멤버를 검색할 수 있습니다",
+        "loading": "검색 중…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "변경"
+      },
+      "loading": "사용자 목록을 불러오는 중…",
+      "noMatch": "“{{query}}”에 해당하는 사용자가 없습니다",
+      "search": {
+        "placeholder": "이름 또는 계정을 입력하여 실시간으로 필터링…"
+      }
+    }
+  },
+  "name": {
+    "label": "팀 이름"
+  },
+  "nav": {
+    "selectTeam": "← 팀 선택"
+  },
+  "permissionCategory": {
+    "board": "보드",
+    "card": "카드",
+    "mindmap": "마인드맵",
+    "project": "프로젝트",
+    "report": "보고서",
+    "team": "팀"
+  },
+  "report": {
+    "column": {
+      "averageScore": "평균 점수",
+      "completed": "완료 / 전체 카드",
+      "firstPassYield": "1차 제출 통과율",
+      "member": "멤버",
+      "profile": "프로필",
+      "rank": "순위",
+      "rating": "연말 등급"
+    },
+    "dossier": {
+      "account": "계정: @{{username}}",
+      "action": "프로필 보기",
+      "criteria": "등급 기준: 달성률과 정시 제출률이 모두 85% 이상이고 1차 제출 통과율이 80% 이상이면 S 등급, 달성률 70% 이상이면 A 등급, 달성률 50% 이상이면 B 등급입니다",
+      "period": "평가 기간",
+      "print": {
+        "action": "평가표 인쇄 / PDF로 저장"
+      },
+      "rating": "종합 등급",
+      "signature": "부서장 서명: _________________________",
+      "signDate": "서명일: ____년 __월 __일",
+      "supervisor": {
+        "hint": "(이곳은 직속 상사가 평가 의견, 연간 성과급 확정 및 경력 개발 목표를 작성하거나 시스템 서명으로 기록하는 공간입니다)",
+        "label": "상사 평가 및 연간 서명 의견: "
+      },
+      "title": "{{name}}의 성과 평가표"
+    },
+    "empty": "현재 성과 데이터가 없습니다",
+    "export": {
+      "csv": {
+        "action": "CSV 정산표 내보내기"
+      },
+      "excel": {
+        "action": "Excel 종합표 내보내기"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_other": "작업 카드 {{done}} / {{count}}장 완료",
+        "title": "팀 전체 작업 달성률"
+      },
+      "delivered": {
+        "hint": "선택한 기간 내 모든 프로젝트에서 제출 완료",
+        "title": "총 제출 카드 수",
+        "value_other": "{{count}}장"
+      },
+      "hours": {
+        "hint": "팀이 기록한 공수 합계",
+        "title": "누적 총 공수"
+      },
+      "topPerformers": {
+        "hint": "S/A 등급 성과 기준 달성",
+        "title": "고성과 멤버 (S/A)",
+        "value_other": "{{count}}명"
+      }
+    },
+    "metric": {
+      "completion": "달성률",
+      "onTime": "정시 제출률"
+    },
+    "ranking": {
+      "description": "작업 달성률, 정시 제출률, 1차 제출 통과율을 기준으로 종합 등급을 계산합니다",
+      "title": "팀 멤버 성과 결산 순위"
+    },
+    "rating": {
+      "a": "A 우수",
+      "b": "B 양호",
+      "c": "C 개선 필요",
+      "s": "S 탁월"
+    },
+    "sampleCount_other": "{{count}}건",
+    "sampleInsufficient": "표본 부족",
+    "stat": {
+      "completed": "완료 작업 수",
+      "completion": "작업 달성률",
+      "hours": "누적 보고 공수"
+    },
+    "year": {
+      "all": "전체 기간",
+      "empty": "선택한 기간의 성과 데이터가 없습니다",
+      "label": "연도"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "역할 추가",
+      "title": "역할 추가"
+    },
+    "custom": {
+      "badge": "사용자 정의"
+    },
+    "delete": {
+      "confirm": "“{{name}}” 역할을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "error": "삭제에 실패했습니다 (아직 할당된 사용자가 있을 수 있음)",
+      "success": "역할을 삭제했습니다",
+      "title": "역할 삭제"
+    },
+    "description": {
+      "label": "설명"
+    },
+    "edit": {
+      "title": "역할 편집"
+    },
+    "heading": "역할",
+    "name": {
+      "label": "이름",
+      "required": "역할 이름을 입력하십시오"
+    },
+    "system": {
+      "badge": "시스템 템플릿"
+    },
+    "template": {
+      "badge": "템플릿"
+    }
+  },
+  "roleName": {
+    "eng_lead": "엔지니어링 리드",
+    "engineer": "엔지니어",
+    "project_assistant": "프로젝트 어시스턴트",
+    "project_manager": "프로젝트 관리자",
+    "qa_engineer": "QA 엔지니어",
+    "team_manager": "팀 매니저"
+  },
+  "select": {
+    "current": "현재 팀",
+    "empty": {
+      "action": "첫 팀 생성",
+      "description": "아직 팀이 없습니다. 시스템 관리자이므로 지금 바로 팀을 만들어 시작할 수 있습니다."
+    },
+    "enter": {
+      "action": "입장"
+    },
+    "noPermission": {
+      "description": "엔지니어 등 현재 역할로는 할당된 프로젝트와 작업에만 참여할 수 있으며 팀 설정 관리 화면에 접근할 수 없습니다. “내 프로젝트” 또는 “개인 워크스페이스”에서 일상 업무를 진행하십시오.",
+      "title": "소속 역할에 팀 관리 권한이 없습니다"
+    },
+    "noTeam": {
+      "description": "아직 어떤 팀에도 할당되지 않았습니다. 시스템 관리자 또는 팀 매니저에게 팀과 프로젝트 배정을 요청하십시오.",
+      "title": "아직 어떤 팀에도 참여하지 않았습니다"
+    },
+    "projects": {
+      "action": "내 프로젝트로 이동"
+    },
+    "tasks": {
+      "action": "개인 워크스페이스"
+    }
+  },
+  "tab": {
+    "activity": "활동 기록",
+    "members": "멤버",
+    "report": "성과 보고서",
+    "roles": "역할",
+    "worklog": "업무 일지"
+  },
+  "user": {
+    "admin": {
+      "label": "시스템 관리자 (Admin) 권한 부여"
+    },
+    "create": {
+      "action": "사용자 계정 추가",
+      "confirm": {
+        "action": "생성 확인"
+      },
+      "empty": {
+        "action": "지금 새 계정 생성"
+      },
+      "error": "계정 생성에 실패했습니다",
+      "inline": {
+        "action": "+ 새 계정 생성"
+      },
+      "required": "계정, 표시 이름과 비밀번호를 모두 입력하십시오",
+      "success": "사용자 계정 “{{name}}” 생성이 완료되었습니다",
+      "title": "새 사용자 계정 생성"
+    },
+    "displayName": {
+      "label": "이름 / 표시 이름",
+      "placeholder": "예: 김민준, Alice Wang"
+    },
+    "password": {
+      "label": "초기 비밀번호 (8자 이상)",
+      "minLength": "비밀번호는 8자 이상이어야 합니다"
+    },
+    "username": {
+      "label": "로그인 계정",
+      "placeholder": "예: bob, alice_dev"
+    }
+  }
+}

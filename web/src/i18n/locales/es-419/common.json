@@ -1,0 +1,232 @@
+{
+  "action": {
+    "add": "Agregar",
+    "archive": "Archivar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "copy": "Copiar",
+    "create": "Crear",
+    "deactivate": "Desactivar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "loadMore": "Cargar más",
+    "reactivate": "Reactivar",
+    "remove": "Quitar",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "saveChanges": "Guardar cambios",
+    "unarchive": "Desarchivar",
+    "update": "Actualizar",
+    "view": "Ver"
+  },
+  "audit": {
+    "actorUnknown": "Usuario desconocido"
+  },
+  "column": {
+    "actions": "Acciones"
+  },
+  "connection": {
+    "offline": "La conexión de sincronización en vivo está fuera de línea",
+    "reconnecting": "La conexión en vivo se interrumpió. Se está intentando reconectar automáticamente…",
+    "restored": "¡La conexión en vivo se restableció y los datos más recientes se sincronizaron automáticamente!",
+    "retry": {
+      "action": "Reintentar la conexión"
+    }
+  },
+  "date": {
+    "dayWithWeekday": "{{day}} ({{weekday}})",
+    "range": "{{from}} – {{to}}",
+    "rangeWithWeek": "{{from}} – {{to}} ({{week}})",
+    "weekOfYear": "Semana {{week}}"
+  },
+  "error": {
+    "archive": "No se pudo archivar",
+    "assign": "No se pudo asignar",
+    "assignDetail": "No se pudo asignar: {{detail}}",
+    "copy": "No se pudo copiar",
+    "create": "No se pudo crear",
+    "createDetail": "No se pudo crear: {{detail}}",
+    "delete": "No se pudo eliminar",
+    "deleteDetail": "No se pudo eliminar: {{detail}}",
+    "download": "No se pudo descargar. Inténtalo de nuevo más tarde",
+    "export": "No se pudo exportar. Inténtalo de nuevo más tarde",
+    "load": "No se pudo cargar",
+    "loadDetail": "No se pudo cargar: {{detail}}",
+    "loadRetry": "No se pudo cargar. Inténtalo de nuevo más tarde",
+    "move": "No se pudo mover",
+    "operation": "La operación falló",
+    "remove": "No se pudo quitar",
+    "removeDetail": "No se pudo quitar: {{detail}}",
+    "rename": "No se pudo cambiar el nombre",
+    "restore": "No se pudo desarchivar",
+    "save": "No se pudo guardar",
+    "saveDetail": "No se pudo guardar: {{detail}}",
+    "toggleCompletion": "No se pudo marcar como completada",
+    "tryLater": "Inténtalo de nuevo más tarde",
+    "update": "No se pudo actualizar",
+    "upload": "No se pudo subir"
+  },
+  "fieldScope": {
+    "board": "Tablero",
+    "project": "Proyecto"
+  },
+  "fieldType": {
+    "checkbox": "Casilla",
+    "date": "Fecha",
+    "member": "Miembro",
+    "number": "Número",
+    "select": "Lista desplegable",
+    "text": "Texto"
+  },
+  "filter": {
+    "all": "Todos",
+    "assignedToMe": "Asignadas a mí",
+    "dueToday": "Vencen hoy"
+  },
+  "member": {
+    "display": "{{name}} ({{username}})"
+  },
+  "nav": {
+    "aria": {
+      "breadcrumb": "Ruta de navegación",
+      "userMenu": "Menú del usuario"
+    },
+    "board": "Tablero",
+    "logout": "Cerrar sesión",
+    "myProjects": "Mis proyectos",
+    "myTasks": "Espacio de trabajo personal",
+    "myWorklog": "Mi registro de horas",
+    "project": "Proyecto",
+    "projectDetail": "Detalles del proyecto",
+    "projects": "Proyectos",
+    "search": "Buscar",
+    "selectTeam": "Elegir equipo",
+    "shortcuts": "Manual de atajos (?)",
+    "teams": "Equipos",
+    "teamSettings": "Configuración del equipo",
+    "userSettings": "Configuración personal"
+  },
+  "notFound": {
+    "back": {
+      "action": "Volver a la página anterior"
+    },
+    "description": "Es posible que esta dirección se haya eliminado o renombrado, o que aún no tengas acceso a este proyecto o tablero.",
+    "projects": {
+      "action": "Volver a mis proyectos"
+    },
+    "title": "No se encontró la página solicitada"
+  },
+  "period": {
+    "custom": "Período personalizado",
+    "from": "Desde",
+    "to": "Hasta"
+  },
+  "reviewStatus": {
+    "tooltip": "Estado de revisión: {{status}}"
+  },
+  "search": {
+    "cards": {
+      "heading_one": "Tarjeta ({{count}})",
+      "heading_many": "Tarjetas ({{count}})",
+      "heading_other": "Tarjetas ({{count}})"
+    },
+    "comments": {
+      "heading_one": "Comentario ({{count}})",
+      "heading_many": "Comentarios ({{count}})",
+      "heading_other": "Comentarios ({{count}})",
+      "onCard": "En la tarjeta: {{title}}"
+    },
+    "empty": "No hay resultados",
+    "hint": {
+      "cards": "Buscar tarjetas, mapas mentales…",
+      "compact": "Buscar…",
+      "projects": "Buscar proyectos…"
+    },
+    "minLength": "Ingresa al menos 2 caracteres",
+    "nodes": {
+      "heading_one": "Nodo de mapa mental ({{count}})",
+      "heading_many": "Nodos de mapa mental ({{count}})",
+      "heading_other": "Nodos de mapa mental ({{count}})"
+    },
+    "open": {
+      "hint": "Haz clic para abrir →"
+    },
+    "placeholder": "Buscar tarjetas, comentarios, nodos de mapa mental…",
+    "projects": {
+      "empty": "No hay proyectos coincidentes",
+      "heading_one": "Mi proyecto ({{count}})",
+      "heading_many": "Mis proyectos ({{count}})",
+      "heading_other": "Mis proyectos ({{count}})",
+      "placeholder": "Buscar y abrir un proyecto…"
+    }
+  },
+  "select": {
+    "placeholder": "Selecciona…"
+  },
+  "separator": {
+    "label": ": ",
+    "list": ", "
+  },
+  "shortcuts": {
+    "createAnother": {
+      "label": "Crear una tarjeta y seguir agregando"
+    },
+    "createCard": {
+      "label": "Creación rápida de tarjeta"
+    },
+    "description": "Gestiona tus tareas y proyectos de forma rápida y fluida con atajos de teclado",
+    "escape": {
+      "label": "Cerrar el cuadro de diálogo / quitar el foco"
+    },
+    "help": {
+      "label": "Abrir el manual de atajos"
+    },
+    "hint": "Consejo: los atajos de una sola tecla se desactivan automáticamente mientras escribes o estás en un campo de texto, para no interferir con tu escritura.",
+    "quickFilter": {
+      "label": "Activar el filtro de mis tareas (asignadas a mí)"
+    },
+    "search": {
+      "label": "Búsqueda global / paleta de comandos"
+    },
+    "section": {
+      "board": "Tablero y tarjetas",
+      "navigation": "Navegación y comandos"
+    },
+    "submit": {
+      "label": "Enviar (guardar / crear)"
+    },
+    "title": "Manual de atajos de teclado"
+  },
+  "sourceOffer": {
+    "link": "Código fuente (AGPL-3.0)",
+    "title": "Ver el código fuente correspondiente de esta versión (licencia AGPL-3.0)"
+  },
+  "state": {
+    "approved": "Aprobada",
+    "archived": "Archivada",
+    "assigning": "Asignando…",
+    "completed": "Completada",
+    "copying": "Copiando…",
+    "creating": "Creando…",
+    "deactivated": "Desactivada",
+    "deleting": "Eliminando…",
+    "loading": "Cargando…",
+    "overdue": "Vencida",
+    "pending": "Pendiente",
+    "rejected": "Rechazada",
+    "saved": "Guardado",
+    "saving": "Guardando…",
+    "searching": "Buscando…",
+    "signingIn": "Iniciando sesión…",
+    "unavailable": "No se puede mostrar el contenido",
+    "updating": "Actualizando…",
+    "uploading": "Subiendo…"
+  },
+  "theme": {
+    "dark": "Oscuro",
+    "light": "Claro",
+    "system": "Sistema",
+    "toggle": "Cambiar tema"
+  }
+}

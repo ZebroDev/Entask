@@ -1,0 +1,125 @@
+{
+  "archive": {
+    "hide": "Hide archived",
+    "show": "Show archived"
+  },
+  "backToProject": {
+    "action": "← Project"
+  },
+  "card": {
+    "create": {
+      "placeholder": "Add a card…"
+    }
+  },
+  "copy": {
+    "action": "Copy board",
+    "confirm": "Copy this board?",
+    "description": "This creates a full copy of “{{name}}”, including every list, card, label, and custom field value. Large boards take a while; delete the copy yourself when you are done.",
+    "name": {
+      "label": "Board name (optional)",
+      "placeholder": "Leave empty to name it automatically"
+    },
+    "noPermission": "You do not have permission to create boards in this project",
+    "submit": {
+      "action": "Copy"
+    },
+    "success": "Board copied",
+    "targetProject": {
+      "label": "Destination project"
+    }
+  },
+  "delete": {
+    "action": "Delete board",
+    "confirm": "Delete this board?",
+    "description": "Deleting “{{name}}” also removes every list, card, and attachment in the board. This cannot be undone.",
+    "error": "Failed to delete board",
+    "submit": {
+      "action": "Delete"
+    },
+    "success": "Board deleted"
+  },
+  "edit": {
+    "aria": "Edit board name and description",
+    "description": {
+      "label": "Board description (optional)",
+      "placeholder": "e.g. Track phase-one feature delivery"
+    },
+    "error": "Failed to update board",
+    "name": {
+      "label": "Board name",
+      "placeholder": "e.g. Sprint 1 board",
+      "required": "Enter a board name"
+    },
+    "success": "Board updated",
+    "title": "Edit board info"
+  },
+  "labelColor": {
+    "blue": "Blue",
+    "cyan": "Cyan",
+    "grayPurple": "Grayish purple",
+    "green": "Green",
+    "lightGreen": "Light green",
+    "orange": "Orange",
+    "pink": "Pink",
+    "purple": "Purple",
+    "red": "Red",
+    "yellow": "Yellow"
+  },
+  "list": {
+    "archive": {
+      "action": "Archive list",
+      "success": "List archived"
+    },
+    "archived": {
+      "dropBlocked": "Archived lists cannot accept cards"
+    },
+    "copy": {
+      "action": "Copy list",
+      "targetBoard": {
+        "label": "Destination board"
+      },
+      "description": "A copy of “{{name}}” will be created. Choose the destination project and board.",
+      "submit": {
+        "action": "Copy list"
+      },
+      "success": "List copied",
+      "noPermission": "You do not have permission to edit boards in this project"
+    },
+    "create": {
+      "action": "Add list"
+    },
+    "delete": {
+      "action": "Delete list",
+      "confirm": "Delete “{{name}}”? The cards in it will be deleted too. This cannot be undone.",
+      "success": "List deleted"
+    },
+    "drag": {
+      "aria": "Drag list “{{name}}”"
+    },
+    "empty": {
+      "canEdit": "This board has no lists yet. Create the first one on the right to get started.",
+      "readonly": "This board has no lists yet."
+    },
+    "menu": {
+      "aria": "List menu"
+    },
+    "name": {
+      "placeholder": "New list name…"
+    },
+    "restore": {
+      "action": "Unarchive list",
+      "success": "List unarchived"
+    }
+  },
+  "permission": {
+    "denied": "You do not have access to this board"
+  },
+  "presence": {
+    "live": "Live",
+    "online_one": "{{count}} person online",
+    "online_other": "{{count}} people online"
+  },
+  "settings": {
+    "action": "Board settings"
+  }
+}

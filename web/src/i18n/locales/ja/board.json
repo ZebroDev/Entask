@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "hide": "アーカイブ済みを非表示",
+    "show": "アーカイブ済みを表示"
+  },
+  "backToProject": {
+    "action": "← プロジェクト"
+  },
+  "card": {
+    "create": {
+      "placeholder": "カードを追加…"
+    }
+  },
+  "copy": {
+    "action": "ボードを複製",
+    "confirm": "ボードを複製しますか？",
+    "description": "「{{name}}」の完全な複製を作成します。すべてのリスト、カード、ラベル、カスタムフィールドの値を含みます。内容が多い場合は時間がかかります。複製後の削除はご自身で行ってください。",
+    "name": {
+      "label": "ボード名（任意）",
+      "placeholder": "空欄の場合は自動で命名します"
+    },
+    "noPermission": "そのプロジェクトでボードを作成する権限がありません",
+    "submit": {
+      "action": "複製する"
+    },
+    "success": "ボードを複製しました",
+    "targetProject": {
+      "label": "複製先プロジェクト"
+    }
+  },
+  "delete": {
+    "action": "ボードを削除",
+    "confirm": "ボードを削除しますか？",
+    "description": "「{{name}}」を削除すると、このボード内のすべてのリスト、カード、添付ファイルも削除されます。この操作は元に戻せません。",
+    "error": "ボードの削除に失敗しました",
+    "submit": {
+      "action": "削除する"
+    },
+    "success": "ボードを削除しました"
+  },
+  "edit": {
+    "aria": "ボード名と説明を編集",
+    "description": {
+      "label": "ボードの説明（任意）",
+      "placeholder": "例：フェーズ1の機能開発の進捗管理"
+    },
+    "error": "ボードの更新に失敗しました",
+    "name": {
+      "label": "ボード名",
+      "placeholder": "例：Sprint 1 ボード",
+      "required": "ボード名を入力してください"
+    },
+    "success": "ボード情報を更新しました",
+    "title": "ボード情報を編集"
+  },
+  "labelColor": {
+    "blue": "青",
+    "cyan": "シアン",
+    "grayPurple": "グレーパープル",
+    "green": "緑",
+    "lightGreen": "ライトグリーン",
+    "orange": "オレンジ",
+    "pink": "ピンク",
+    "purple": "紫",
+    "red": "赤",
+    "yellow": "黄"
+  },
+  "list": {
+    "archive": {
+      "action": "リストをアーカイブ",
+      "success": "リストをアーカイブしました"
+    },
+    "archived": {
+      "dropBlocked": "アーカイブ済みリストにはカードを移動できません"
+    },
+    "copy": {
+      "action": "リストを複製",
+      "description": "「{{name}}」の複製を作成します。複製先のプロジェクトとボードを選択してください。",
+      "noPermission": "そのプロジェクトでボードを編集する権限がありません",
+      "submit": {
+        "action": "複製する"
+      },
+      "success": "リストを複製しました",
+      "targetBoard": {
+        "label": "複製先ボード"
+      }
+    },
+    "create": {
+      "action": "リストを追加"
+    },
+    "delete": {
+      "action": "リストを削除",
+      "confirm": "「{{name}}」を削除しますか？リスト内のカードも削除されます。この操作は元に戻せません。",
+      "success": "リストを削除しました"
+    },
+    "drag": {
+      "aria": "リスト「{{name}}」をドラッグ"
+    },
+    "empty": {
+      "canEdit": "このボードにはまだリストがありません。右側で最初のリストを作成してください。",
+      "readonly": "このボードにはまだリストがありません"
+    },
+    "menu": {
+      "aria": "リストメニュー"
+    },
+    "name": {
+      "placeholder": "新しいリスト名…"
+    },
+    "restore": {
+      "action": "アーカイブを解除",
+      "success": "リストのアーカイブを解除しました"
+    }
+  },
+  "permission": {
+    "denied": "このボードへの権限がありません"
+  },
+  "presence": {
+    "live": "リアルタイム接続中",
+    "online_other": "{{count}} 人がオンライン"
+  },
+  "settings": {
+    "action": "ボード設定"
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "activity": {
+    "empty": "尚無活動紀錄"
+  },
+  "audit": {
+    "board": {
+      "created": "已建立看板",
+      "deleted": "已刪除看板",
+      "updated": "已更新看板"
+    },
+    "card": {
+      "created": "已建立卡片",
+      "deleted": "已刪除卡片"
+    },
+    "customField": {
+      "created": "已建立自訂欄位",
+      "deleted": "已刪除自訂欄位",
+      "updated": "已更新自訂欄位"
+    },
+    "member": {
+      "assigned": "已指派成員",
+      "removed": "已移除成員"
+    },
+    "project": {
+      "created": "已建立專案",
+      "deleted": "已刪除專案",
+      "updated": "已更新專案"
+    },
+    "projectMember": {
+      "added": "已加入專案成員",
+      "removed": "已移除專案成員",
+      "updated": "已更新專案成員角色"
+    },
+    "role": {
+      "created": "已建立角色",
+      "deleted": "已刪除角色",
+      "updated": "已更新角色"
+    },
+    "team": {
+      "created": "已建立團隊",
+      "updated": "已更新團隊"
+    },
+    "user": {
+      "created": "已建立使用者",
+      "deactivated": "停用帳號",
+      "deleted": "刪除帳號",
+      "passwordReset": "重設了密碼",
+      "reactivated": "復原帳號"
+    },
+    "workCalendar": {
+      "deleted": "刪除了工作日曆",
+      "updated": "更新了工作日曆"
+    }
+  },
+  "create": {
+    "action": "建立團隊",
+    "assign": {
+      "failed": "團隊已建立，但未能自動指派團隊經理——請手動將自己加入成員"
+    },
+    "confirm": {
+      "action": "確認建立"
+    },
+    "error": "建立團隊失敗",
+    "name": {
+      "placeholder": "例如：核心研發團隊、產品營運組",
+      "required": "請輸入團隊名稱"
+    },
+    "success": "團隊建立成功",
+    "title": "建立新團隊"
+  },
+  "description": {
+    "label": "團隊描述（選填）",
+    "placeholder": "例如：負責全端產品研發與敏捷迭代"
+  },
+  "edit": {
+    "error": "更新團隊失敗",
+    "name": {
+      "placeholder": "例如：核心專案團隊",
+      "required": "團隊名稱不可為空"
+    },
+    "success": "團隊資訊已更新",
+    "title": "編輯團隊資訊"
+  },
+  "member": {
+    "assign": {
+      "action": "指派成員",
+      "confirm": {
+        "action": "確認指派成員"
+      },
+      "required": "請選擇指派成員並至少勾選一個角色",
+      "roles": {
+        "label": "指派角色（可複選）"
+      },
+      "select": {
+        "label": "選擇指派成員"
+      },
+      "success": "已成功指派成員",
+      "title": "指派成員至團隊"
+    },
+    "empty": "尚無成員",
+    "heading": "成員（{{n}}）",
+    "remove": {
+      "confirm": "確定要將「{{name}}」移出團隊？此成員將失去本團隊相關權限，此操作無法復原。",
+      "success": "已移除成員",
+      "title": "移除成員"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "找不到其他團隊的成員",
+        "heading": "其他團隊的成員",
+        "hint": "輸入至少 3 個字元可搜尋其他團隊的成員",
+        "loading": "搜尋中…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "更換"
+      },
+      "loading": "載入使用者名單中…",
+      "noMatch": "查無符合「{{query}}」的人員",
+      "search": {
+        "placeholder": "輸入姓名或帳號即時篩選…"
+      }
+    }
+  },
+  "name": {
+    "label": "團隊名稱"
+  },
+  "nav": {
+    "selectTeam": "← 選擇團隊"
+  },
+  "permissionCategory": {
+    "board": "看板",
+    "card": "卡片",
+    "mindmap": "心智圖",
+    "project": "專案",
+    "report": "報表",
+    "team": "團隊"
+  },
+  "report": {
+    "column": {
+      "averageScore": "平均評分",
+      "completed": "完成 / 總卡片",
+      "firstPassYield": "一次交付通過率",
+      "member": "成員",
+      "profile": "個人檔案",
+      "rank": "排名",
+      "rating": "年終評級"
+    },
+    "dossier": {
+      "account": "帳號：@{{username}}",
+      "action": "檢視檔案",
+      "criteria": "評級標準：達成率與準時交付率均達 85% 以上、且一次交付通過率達 80% 以上評為 S 級；達成率達 70% 評為 A 級；達成率 50% 以上評為 B 級。",
+      "period": "考核期間",
+      "print": {
+        "action": "列印考評表 / 另存 PDF"
+      },
+      "rating": "綜合評級",
+      "signature": "部門主管簽名：_________________________",
+      "signDate": "簽核日期：_______ 年 ____ 月 ____ 日",
+      "supervisor": {
+        "hint": "（此處供直屬主管書寫或系統簽核註記考評意見、年度績效獎金核定與職涯培力目標）",
+        "label": "主管考評與年度簽核意見："
+      },
+      "title": "{{name}} 的績效考核表"
+    },
+    "empty": "目前沒有任何績效數據",
+    "export": {
+      "csv": {
+        "action": "匯出 CSV 結算表"
+      },
+      "excel": {
+        "action": "匯出 Excel 總表"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_other": "完成 {{done}} / {{count}} 張任務卡",
+        "title": "團隊總任務達成率"
+      },
+      "delivered": {
+        "hint": "所選期間內，跨所有專案已交付",
+        "title": "總結案卡片數",
+        "value_other": "{{count}} 張"
+      },
+      "hours": {
+        "hint": "團隊工時加總",
+        "title": "累積投入總工時"
+      },
+      "topPerformers": {
+        "hint": "達成 S/A 級績效標竿",
+        "title": "高績效成員 (S/A)",
+        "value_other": "{{count}} 位"
+      }
+    },
+    "metric": {
+      "completion": "達成率",
+      "onTime": "準時交付率"
+    },
+    "ranking": {
+      "description": "依據任務達成率、準時交付率與一次交付通過率計算綜合評級",
+      "title": "團隊成員績效結算榜"
+    },
+    "rating": {
+      "a": "A 優良",
+      "b": "B 良好",
+      "c": "C 待加強",
+      "s": "S 卓越"
+    },
+    "sampleCount_other": "{{count}} 筆",
+    "sampleInsufficient": "樣本不足",
+    "stat": {
+      "completed": "完成任務數",
+      "completion": "任務達成率",
+      "hours": "累計回報工時"
+    },
+    "year": {
+      "all": "全期",
+      "empty": "所選期間沒有績效數據",
+      "label": "年度"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "新增角色",
+      "title": "新增角色"
+    },
+    "custom": {
+      "badge": "自訂"
+    },
+    "delete": {
+      "confirm": "確定要刪除角色「{{name}}」？此操作無法復原。",
+      "error": "刪除失敗（可能仍有人被指派）",
+      "success": "已刪除角色",
+      "title": "刪除角色"
+    },
+    "description": {
+      "label": "描述"
+    },
+    "edit": {
+      "title": "編輯角色"
+    },
+    "heading": "角色",
+    "name": {
+      "label": "名稱",
+      "required": "請填寫角色名稱"
+    },
+    "system": {
+      "badge": "系統範本"
+    },
+    "template": {
+      "badge": "範本"
+    }
+  },
+  "roleName": {
+    "eng_lead": "工程組長",
+    "engineer": "工程師",
+    "project_assistant": "專案助理",
+    "project_manager": "專案經理",
+    "qa_engineer": "測試工程師",
+    "team_manager": "團隊經理"
+  },
+  "select": {
+    "current": "目前團隊",
+    "empty": {
+      "action": "建立第一個團隊",
+      "description": "尚無團隊。身為系統管理員，您可以立即建立團隊開始使用。"
+    },
+    "enter": {
+      "action": "進入"
+    },
+    "noPermission": {
+      "description": "您目前的角色（如工程師）僅能參與指派的專案與任務，無法存取團隊設定後台。請前往「我的專案」或「個人工作台」進行日常工作。",
+      "title": "您所屬的角色未開放團隊管理權限"
+    },
+    "noTeam": {
+      "description": "您目前尚未被指派至任何團隊。請聯絡系統管理員或團隊經理為您分配團隊與專案。",
+      "title": "尚未加入任何團隊"
+    },
+    "projects": {
+      "action": "前往我的專案"
+    },
+    "tasks": {
+      "action": "個人工作台"
+    }
+  },
+  "tab": {
+    "activity": "活動紀錄",
+    "members": "成員",
+    "report": "績效報表",
+    "roles": "角色",
+    "worklog": "工作日誌"
+  },
+  "user": {
+    "admin": {
+      "label": "賦予系統管理員 (Admin) 權限"
+    },
+    "create": {
+      "action": "新增人員帳號",
+      "confirm": {
+        "action": "確認建立"
+      },
+      "empty": {
+        "action": "立即建立新帳號"
+      },
+      "error": "建立帳號失敗",
+      "inline": {
+        "action": "+ 建立新帳號"
+      },
+      "required": "請完整填寫帳號、顯示名稱與密碼",
+      "success": "使用者帳號「{{name}}」建立成功",
+      "title": "建立新人員帳號"
+    },
+    "displayName": {
+      "label": "姓名 / 顯示名稱",
+      "placeholder": "例如：王小明、Alice Wang"
+    },
+    "password": {
+      "label": "初始密碼 (至少 8 碼)",
+      "minLength": "密碼長度需至少 8 碼"
+    },
+    "username": {
+      "label": "登入帳號",
+      "placeholder": "例如：bob、alice_dev"
+    }
+  }
+}

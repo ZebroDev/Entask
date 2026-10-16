@@ -1,0 +1,327 @@
+{
+  "activity": {
+    "empty": "暂无活动记录"
+  },
+  "audit": {
+    "board": {
+      "created": "已创建看板",
+      "deleted": "已删除看板",
+      "updated": "已更新看板"
+    },
+    "card": {
+      "created": "已创建卡片",
+      "deleted": "已删除卡片"
+    },
+    "customField": {
+      "created": "已创建自定义字段",
+      "deleted": "已删除自定义字段",
+      "updated": "已更新自定义字段"
+    },
+    "member": {
+      "assigned": "已指派成员",
+      "removed": "已移除成员"
+    },
+    "project": {
+      "created": "已创建项目",
+      "deleted": "已删除项目",
+      "updated": "已更新项目"
+    },
+    "projectMember": {
+      "added": "已添加项目成员",
+      "removed": "已移除项目成员",
+      "updated": "已更新项目成员角色"
+    },
+    "role": {
+      "created": "已创建角色",
+      "deleted": "已删除角色",
+      "updated": "已更新角色"
+    },
+    "team": {
+      "created": "已创建团队",
+      "updated": "已更新团队"
+    },
+    "user": {
+      "created": "已创建用户",
+      "deactivated": "停用账号",
+      "deleted": "删除账号",
+      "passwordReset": "重置了密码",
+      "reactivated": "恢复账号"
+    },
+    "workCalendar": {
+      "deleted": "删除了工作日历",
+      "updated": "更新了工作日历"
+    }
+  },
+  "create": {
+    "action": "创建团队",
+    "assign": {
+      "failed": "团队已创建，但未能自动指派团队经理——请手动将自己添加为成员"
+    },
+    "confirm": {
+      "action": "确认创建"
+    },
+    "error": "创建团队失败",
+    "name": {
+      "placeholder": "例如：核心研发团队、产品运营组",
+      "required": "请输入团队名称"
+    },
+    "success": "团队创建成功",
+    "title": "创建新团队"
+  },
+  "description": {
+    "label": "团队描述（选填）",
+    "placeholder": "例如：负责全栈产品研发与敏捷迭代"
+  },
+  "edit": {
+    "error": "更新团队失败",
+    "name": {
+      "placeholder": "例如：核心项目团队",
+      "required": "团队名称不能为空"
+    },
+    "success": "团队信息已更新",
+    "title": "编辑团队信息"
+  },
+  "member": {
+    "assign": {
+      "action": "指派成员",
+      "confirm": {
+        "action": "确认指派成员"
+      },
+      "required": "请选择指派成员并至少勾选一个角色",
+      "roles": {
+        "label": "指派角色（可多选）"
+      },
+      "select": {
+        "label": "选择指派成员"
+      },
+      "success": "已成功指派成员",
+      "title": "指派成员至团队"
+    },
+    "empty": "暂无成员",
+    "heading": "成员（{{n}}）",
+    "remove": {
+      "confirm": "确定要将“{{name}}”移出团队？此成员将失去本团队相关权限，此操作无法撤销。",
+      "success": "已移除成员",
+      "title": "移除成员"
+    },
+    "search": {
+      "otherTeams": {
+        "empty": "找不到其他团队的成员",
+        "heading": "其他团队的成员",
+        "hint": "输入至少 3 个字符即可搜索其他团队的成员",
+        "loading": "搜索中…"
+      }
+    },
+    "select": {
+      "change": {
+        "action": "更换"
+      },
+      "loading": "加载用户名单中…",
+      "noMatch": "没有找到符合“{{query}}”的人员",
+      "search": {
+        "placeholder": "输入姓名或账号实时筛选…"
+      }
+    }
+  },
+  "name": {
+    "label": "团队名称"
+  },
+  "nav": {
+    "selectTeam": "← 选择团队"
+  },
+  "permissionCategory": {
+    "board": "看板",
+    "card": "卡片",
+    "mindmap": "思维导图",
+    "project": "项目",
+    "report": "报表",
+    "team": "团队"
+  },
+  "report": {
+    "column": {
+      "averageScore": "平均评分",
+      "completed": "完成 / 卡片总数",
+      "firstPassYield": "一次交付通过率",
+      "member": "成员",
+      "profile": "个人资料",
+      "rank": "排名",
+      "rating": "年终评级"
+    },
+    "dossier": {
+      "account": "账号：@{{username}}",
+      "action": "查看文件",
+      "criteria": "评级标准：达成率与准时交付率均达 85% 以上、且一次交付通过率达 80% 以上评为 S 级；达成率达 70% 评为 A 级；达成率 50% 以上评为 B 级。",
+      "period": "考核期间",
+      "print": {
+        "action": "打印考评表 / 另存为 PDF"
+      },
+      "rating": "综合评级",
+      "signature": "部门主管签名：_________________________",
+      "signDate": "审批日期：_______ 年 ____ 月 ____ 日",
+      "supervisor": {
+        "hint": "（此处供直属主管填写或系统审批批注考评评语、年度绩效奖金核定与职业发展目标）",
+        "label": "主管考评与年度审批意见："
+      },
+      "title": "{{name}} 的绩效考核表"
+    },
+    "empty": "目前没有任何绩效数据",
+    "export": {
+      "csv": {
+        "action": "导出 CSV 结算表"
+      },
+      "excel": {
+        "action": "导出 Excel 总表"
+      }
+    },
+    "kpi": {
+      "completion": {
+        "hint_other": "完成 {{done}} / {{count}} 张任务卡",
+        "title": "团队总任务达成率"
+      },
+      "delivered": {
+        "hint": "所选期间内，跨所有项目已交付",
+        "title": "已完成卡片总数",
+        "value_other": "{{count}} 张"
+      },
+      "hours": {
+        "hint": "团队上报工时汇总",
+        "title": "累计投入工时"
+      },
+      "topPerformers": {
+        "hint": "达成 S/A 级绩效标杆",
+        "title": "高绩效成员（S/A）",
+        "value_other": "{{count}} 位"
+      }
+    },
+    "metric": {
+      "completion": "达成率",
+      "onTime": "准时交付率"
+    },
+    "ranking": {
+      "description": "依据任务达成率、准时交付率与一次交付通过率计算综合评级",
+      "title": "团队成员绩效排行榜"
+    },
+    "rating": {
+      "a": "A 优良",
+      "b": "B 良好",
+      "c": "C 待加强",
+      "s": "S 卓越"
+    },
+    "sampleCount_other": "{{count}} 条",
+    "sampleInsufficient": "样本不足",
+    "stat": {
+      "completed": "完成任务数",
+      "completion": "任务达成率",
+      "hours": "累计上报工时"
+    },
+    "year": {
+      "all": "全期",
+      "empty": "所选期间没有绩效数据",
+      "label": "年度"
+    }
+  },
+  "role": {
+    "create": {
+      "action": "新建角色",
+      "title": "新建角色"
+    },
+    "custom": {
+      "badge": "自定义"
+    },
+    "delete": {
+      "confirm": "确定要删除角色“{{name}}”？此操作无法撤销。",
+      "error": "删除失败（可能仍有人被指派）",
+      "success": "已删除角色",
+      "title": "删除角色"
+    },
+    "description": {
+      "label": "描述"
+    },
+    "edit": {
+      "title": "编辑角色"
+    },
+    "heading": "角色",
+    "name": {
+      "label": "名称",
+      "required": "请填写角色名称"
+    },
+    "system": {
+      "badge": "系统模板"
+    },
+    "template": {
+      "badge": "模板"
+    }
+  },
+  "roleName": {
+    "eng_lead": "工程组长",
+    "engineer": "工程师",
+    "project_assistant": "项目助理",
+    "project_manager": "项目经理",
+    "qa_engineer": "测试工程师",
+    "team_manager": "团队经理"
+  },
+  "select": {
+    "current": "当前团队",
+    "empty": {
+      "action": "创建第一个团队",
+      "description": "暂无团队。作为系统管理员，您可以立即创建团队开始使用。"
+    },
+    "enter": {
+      "action": "进入"
+    },
+    "noPermission": {
+      "description": "您当前的角色（如工程师）仅能参与指派的项目与任务，无法访问团队设置后台。请前往“我的项目”或“个人工作台”进行日常工作。",
+      "title": "您所属的角色暂无团队管理权限"
+    },
+    "noTeam": {
+      "description": "您目前尚未被指派至任何团队。请联系系统管理员或团队经理为您分配团队与项目。",
+      "title": "尚未加入任何团队"
+    },
+    "projects": {
+      "action": "前往我的项目"
+    },
+    "tasks": {
+      "action": "个人工作台"
+    }
+  },
+  "tab": {
+    "activity": "活动记录",
+    "members": "成员",
+    "report": "绩效报表",
+    "roles": "角色",
+    "worklog": "工作日志"
+  },
+  "user": {
+    "admin": {
+      "label": "赋予系统管理员（Admin）权限"
+    },
+    "create": {
+      "action": "新建人员账号",
+      "confirm": {
+        "action": "确认创建"
+      },
+      "empty": {
+        "action": "立即创建新账号"
+      },
+      "error": "创建账号失败",
+      "inline": {
+        "action": "+ 创建新账号"
+      },
+      "required": "请完整填写账号、显示名称与密码",
+      "success": "用户账号“{{name}}”创建成功",
+      "title": "创建新人员账号"
+    },
+    "displayName": {
+      "label": "姓名 / 显示名称",
+      "placeholder": "例如：王小明、Alice Wang"
+    },
+    "password": {
+      "label": "初始密码（至少 8 位）",
+      "minLength": "密码长度需至少 8 位"
+    },
+    "username": {
+      "label": "登录账号",
+      "placeholder": "例如：bob、alice_dev"
+    }
+  }
+}
