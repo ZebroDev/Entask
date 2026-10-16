@@ -6,6 +6,16 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-10-16
+
+### Fixed
+
+- Security: the bundled HTTP client `axios` was updated to 1.20.0, resolving 12 advisories
+  (7 high) in the production dependency tree; the build/test-only dependencies `undici`,
+  `vitest`, `brace-expansion` and `source-map-js` were updated to their patched versions.
+- The CI workflow now declares explicit least-privilege `permissions` (`contents: read`),
+  resolving three code-scanning findings. No user-visible change.
+
 ## [1.0.1] - 2026-10-16
 
 ### Fixed
@@ -40,5 +50,6 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.0

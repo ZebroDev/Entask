@@ -6,6 +6,16 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.2] - 2026-10-16
+
+### 修正
+
+- 安全性：隨前端出貨的 HTTP 客戶端 `axios` 升至 1.20.0，解掉正式相依樹上的 12 條通報
+  （其中 7 條 high）；僅供建置與測試使用的 `undici`、`vitest`、`brace-expansion`、
+  `source-map-js` 也升到已修正的版本。
+- CI 工作流程改為明示最小權限 `permissions`（`contents: read`），解掉三條 code scanning 通報。
+  使用者可見行為不變。
+
 ## [1.0.1] - 2026-10-16
 
 ### 修正
@@ -35,5 +45,6 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.0

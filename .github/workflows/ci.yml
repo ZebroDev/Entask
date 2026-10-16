@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+# 最小權限：三個 job 都只需要讀取原始碼。CodeQL 的 actions/missing-workflow-permissions
+# 在此之前對三個 job 各開一條（2026-10-16 解掉）。
+permissions:
+  contents: read
+
 jobs:
   backend-test:
     name: .NET 10 Backend Build & Tests
@@ -150,6 +155,13 @@ jobs:
   secrets-scan:
     name: Secret Scan (gitleaks)
     runs-on: ubuntu-latest
+    # 這一格是推論（未實查）：gitleaks-action 的 README 只說它用 GITHUB_TOKEN 對 PR
+    # 留言（GITLEAKS_ENABLE_COMMENTS 預設 true），沒寫需要哪些 permissions 鍵，也沒寫
+    # 缺權限時是「跳過留言」還是「整個 job 紅」。這裡保住「留言照發」的現行行為，
+    # 不多給；若日後 PR 上的這一格紅在權限，先看的就是這兩行。
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
     - uses: actions/checkout@v4

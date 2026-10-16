@@ -31,7 +31,7 @@ wrong place with no warning.
 | 1 | Login page title | `web/src/pages/LoginPage.tsx` | `Entask` |
 | 2 | Header brand text | `web/src/components/layout/AppLayout.tsx` | `Entask` |
 | 3 | Header (before a team is selected) | `web/src/components/layout/AppLayout.tsx` | `Entask` |
-| 4 | Login page footer | `login.footer` in `web/src/i18n/locales/{en,es-419,ja,ko,zh-CN,zh-TW}/auth.json` | `Entask enterprise agile project management platform · v1.0.1` (one translation per locale) |
+| 4 | Login page footer | `login.footer` in `web/src/i18n/locales/{en,es-419,ja,ko,zh-CN,zh-TW}/auth.json` | `Entask enterprise agile project management platform · v1.0.2` (one translation per locale) |
 | 5 | Browser tab title | `web/index.html` | `<title>Entask</title>` |
 | 6 | iOS add-to-home-screen name | `web/index.html` | `apple-mobile-web-app-title` = `Entask` |
 | 7 | PWA manifest | `web/public/manifest.json` | all three of `name` / `short_name` / `description` are `Entask` |
