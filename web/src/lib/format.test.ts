@@ -53,8 +53,16 @@ describe("formatDate / formatDateTime", () => {
     expect(formatDate(undefined)).toBe("—");
   });
 
+  // 「日期」與「時段」之間的那一個空白是 ICU 給的、不是本專案的字面值：同一份 zh-TW
+  // pattern，GitHub Actions 的 Node 22 吐 U+2009 THIN SPACE、作者機器（Node 22.14.0）
+  // 吐 U+0020——肉眼幾乎相同，2026-10-16 公開 CI 首跑就是紅在這一個字元（逐碼點實測）。
+  // 其餘字元仍逐一釘死。
   it("formatDateTime 輸出與改動前逐字元相同（含時分秒）", () => {
-    expect(formatDateTime(iso(2026, 9, 10, 12, 0, 0))).toBe("2026/9/10 下午12:00:00");
+    const normSep = (s: string) => s.replace(/[   ]/g, " ");
+    // 本機的 ICU 吐不出 U+2009 ⇒ 先直接餵 CI 實測吐出的位元組，
+    // 否則「本機綠」證明不了 CI 會綠。
+    expect(normSep("2026/9/10 下午12:00:00")).toBe("2026/9/10 下午12:00:00");
+    expect(normSep(formatDateTime(iso(2026, 9, 10, 12, 0, 0)))).toBe("2026/9/10 下午12:00:00");
   });
 
   it("formatDateTime 對 null/undefined 回破折號", () => {

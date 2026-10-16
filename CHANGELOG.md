@@ -6,6 +6,14 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-10-16
+
+### Fixed
+
+- The frontend test suite no longer assumes which whitespace character sits between the date
+  and the day period in Traditional Chinese date-time output; ICU versions differ there
+  (U+2009 vs. U+0020), which is what made the 1.0.0 CI run fail. No user-visible change.
+
 ## [1.0.0] - 2026-10-16
 
 Initial open-source release, licensed under the GNU Affero General Public License
@@ -32,4 +40,5 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.0
