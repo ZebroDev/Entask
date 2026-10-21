@@ -106,6 +106,15 @@ const renderDialog = (overrides: Partial<DialogProps> = {}) =>
 /** 第 n 次 `api.get` 的 params（0 起算）。 */
 const callParams = (n: number) => (api.get as Mock).mock.calls[n][1].params as Record<string, unknown>;
 
+/**
+ * Testing Library **只正規化 DOM 那一側**的空白，字串 matcher 是原樣比對
+ * （`@testing-library/dom` 的 `matches.js`：`normalizedText === String(matcher)`）。
+ * zh-TW 的 `formatDateTime` 在「日期」與「時段」之間是 U+2009 或 U+0020、視 ICU 而定
+ * （`format.test.ts` 的同一家族；2026-10-21 公開 CI 的 v1.0.3 就是紅在這一個字元）。
+ * 期望值先過與 DOM 相同的一條 `\s+` → " "，其餘字元仍逐一釘死。
+ */
+const asRenderedText = (s: string) => s.replace(/\s+/g, " ");
+
 describe("ReportDrilldownDialog", () => {
   afterEach(() => {
     (api.get as Mock).mockReset();
@@ -228,7 +237,7 @@ describe("ReportDrilldownDialog", () => {
 
     const row = (await screen.findByText("卡片一")).closest("tr")!;
     expect(within(row).getByText("專案一")).toBeInTheDocument();
-    expect(within(row).getByText(formatDateTime("2026-06-01T00:00:00Z"))).toBeInTheDocument();
+    expect(within(row).getByText(asRenderedText(formatDateTime("2026-06-01T00:00:00Z")))).toBeInTheDocument();
     // dueAt 是「日」不是時間：`dueDay` 先切前 10 碼，再走本地日解析的 `formatDay`。
     expect(within(row).getByText(formatDay("2026-06-05"))).toBeInTheDocument();
     expect(within(row).getByText("✓")).toBeInTheDocument();
@@ -294,7 +303,7 @@ describe("ReportDrilldownDialog", () => {
 
     const row = (await screen.findByText("卡片一")).closest("tr")!;
     expect(within(row).getByText("通過")).toBeInTheDocument();
-    expect(within(row).getByText(formatDateTime("2026-06-02T00:00:00Z"))).toBeInTheDocument();
+    expect(within(row).getByText(asRenderedText(formatDateTime("2026-06-02T00:00:00Z")))).toBeInTheDocument();
     expect(row).toHaveTextContent("Bob");
   });
 
@@ -318,7 +327,7 @@ describe("ReportDrilldownDialog", () => {
 
     const row = (await screen.findByText("卡片一")).closest("tr")!;
     expect(row).toHaveTextContent("4.5");
-    expect(within(row).getByText(formatDateTime("2026-06-02T00:00:00Z"))).toBeInTheDocument();
+    expect(within(row).getByText(asRenderedText(formatDateTime("2026-06-02T00:00:00Z")))).toBeInTheDocument();
     expect(row).toHaveTextContent("Bob");
   });
 

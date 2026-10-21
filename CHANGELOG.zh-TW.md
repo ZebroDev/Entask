@@ -6,6 +6,13 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.4] - 2026-10-21
+
+### 修正
+
+- 前端測試套件不再假設團隊報表 drill-down 斷言裡「日期」與「時段」之間是哪一個空白字元；
+  ICU 版本在該處不同（U+2009 與 U+0020），1.0.3 的 CI 因此失敗。使用者可見行為不變。
+
 ## [1.0.3] - 2026-10-21
 
 ### 新增
@@ -66,6 +73,7 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
 [1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
 [1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
