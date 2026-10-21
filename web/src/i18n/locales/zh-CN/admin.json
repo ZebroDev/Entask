@@ -1,6 +1,7 @@
 {
   "activity": {
     "empty": "尚无系统活动",
+    "subtitle": "用户创建、停用、恢复、删除与密码重置的记录。",
     "title": "系统活动"
   },
   "column": {

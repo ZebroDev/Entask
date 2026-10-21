@@ -28,7 +28,7 @@ export function TeamPage() {
 
   return (
     <div className="flex-1 bg-background p-8">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-semibold">

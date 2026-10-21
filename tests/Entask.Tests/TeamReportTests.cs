@@ -860,6 +860,399 @@ public class TeamReportTests : IClassFixture<ApiWebApplicationFactory>
         Assert.Equal(5.0, member.GetProperty("averageScore").GetDouble(), 3);
     }
 
+    // ---------- Task 2：grade 分解（ratingBreakdown） ----------
+    //
+    // 契約（設計 §4.4）：分解由伺服器算好、前端只渲染（門檻不得在 TS 再寫一份）。
+    // `components` 的三態一律相對**該條件自己的規則**：`met`／`failed`／`notApplicable`。
+    // on-time 與 FPY 是 S 的門檻（`role: "sGate"`）——它們失敗**不會**改變 A／B／C 的
+    // 基礎評等，所以 `GatesDoNotChangeBaseBelowS` 裡 base 與 final 必須相同。
+    //
+    // 所有斷言都走端到端（回應裡的 `ratingBreakdown`），與 Task 10／11 的同一條理由：
+    // 分解的欄位名與接線只有在 JSON 這一層才驗得到。
+    //
+    // 分數一律是整數（`CardReviewEntry.Score` 是 `int?`）⇒ 兩筆或三筆樣本的算術平均
+    // 不可能是 plan 舉例的 4.8；這裡取**同樣跨過 4.5 門檻**的整數組合（5.0／4.667），
+    // 驗的是門檻兩側的行為，不是那個示範值本身。
+
+    /// <summary>回應裡 `ratingBreakdown.components` 中指定 `key` 的那一格。</summary>
+    private static JsonElement ComponentOf(JsonElement member, string key) =>
+        member.GetProperty("ratingBreakdown").GetProperty("components").EnumerateArray()
+            .Single(c => c.GetProperty("key").GetString() == key);
+
+    /// <summary>回應裡的 `ratingBreakdown.adjustment`。</summary>
+    private static JsonElement AdjustmentOf(JsonElement member) =>
+        member.GetProperty("ratingBreakdown").GetProperty("adjustment");
+
+    /// <summary>
+    /// 完成率決定基礎等級的那一格：5 張完成 3 張 ⇒ 0.60 ⇒ **B**。
+    /// 三筆 approved 分數都是 3（平均 3.0，落在 2.0～4.5 的區間內）⇒ 調整項**規則不觸發**，
+    /// 理由必須是 `withinRange`。
+    ///
+    /// 那三筆分數是判別力所在：沒有它們時 `scoreSamples` 是 0、理由會是 `sampleInsufficient`
+    /// ——驗到的就是另一條 early-return，而不是「在區間內」。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_BFromCompletion()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 5, 3, 3, 3, 3);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("finalRating").GetString());
+
+        var completion = ComponentOf(member, "completion");
+        Assert.Equal("tier", completion.GetProperty("role").GetString());
+        Assert.Equal(RatingCodes.B, completion.GetProperty("achievedTier").GetString());
+        Assert.Equal("met", completion.GetProperty("status").GetString());
+        Assert.Equal(5, completion.GetProperty("sampleSize").GetInt32());
+        Assert.Equal(0.6, completion.GetProperty("value").GetDouble(), 3);
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("notApplied", adjustment.GetProperty("status").GetString());
+        Assert.Equal("withinRange", adjustment.GetProperty("reason").GetString());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("to").GetString());
+        Assert.Equal(3, adjustment.GetProperty("scoreSamples").GetInt32());
+        Assert.Equal(3.0, adjustment.GetProperty("averageScore").GetDouble(), 3);
+    }
+
+    /// <summary>
+    /// 調整項**真的降級**的那一格：base B（完成率 0.60）＋ 3 筆 approved 分數 2.0
+    /// （平均恰在 `<= 2.0` 的等號上）⇒ final **C**、`appliedDown`、`from == "B"`、`to == "C"`。
+    ///
+    /// `from`／`to` 恆為「基準 → 最終」（不是「門檻 → 結果」）：少了這一條，
+    /// 一個把 `from` 寫成平均分的實作照樣綠。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_AdjustmentDown()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 5, 3, 2, 2, 2);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.C, breakdown.GetProperty("finalRating").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("appliedDown", adjustment.GetProperty("status").GetString());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.C, adjustment.GetProperty("to").GetString());
+        Assert.Equal(2.0, adjustment.GetProperty("averageScore").GetDouble(), 3);
+        Assert.Equal(3, adjustment.GetProperty("scoreSamples").GetInt32());
+        // 有套用時沒有「未套用的原因」——空值不是空字串。
+        Assert.Equal(JsonValueKind.Null, adjustment.GetProperty("reason").ValueKind);
+    }
+
+    /// <summary>
+    /// 樣本不足優先於「平均分夠高」：平均 5.0（≥ 4.5）但只有 **2 筆** ⇒ `notApplied`／
+    /// `sampleInsufficient`，final 停在 base B。
+    ///
+    /// 這一支與 `RatingBreakdown_NotAppliedAtCeiling` 成對：兩者的平均分都跨過 4.5，
+    /// 差別只在樣本數與 base 等級——少任何一支，一個把 `scoreSamples &lt; 3` 寫成
+    /// `&lt;= 3`（或根本不檢查）的實作都會在其中一格綠掉。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_NotAppliedSampleInsufficient()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 5, 3, 5, 5);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("finalRating").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("notApplied", adjustment.GetProperty("status").GetString());
+        Assert.Equal("sampleInsufficient", adjustment.GetProperty("reason").GetString());
+        Assert.Equal(5.0, adjustment.GetProperty("averageScore").GetDouble(), 3);
+        Assert.Equal(2, adjustment.GetProperty("scoreSamples").GetInt32());
+        Assert.Equal(3, adjustment.GetProperty("sampleThreshold").GetInt32());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("to").GetString());
+    }
+
+    /// <summary>
+    /// 已經在最高一級：base **S**（完成率 1.0、沒有截止日 ⇒ 準時率不列入、3 張被審 &lt; 5 ⇒
+    /// FPY 不列入）＋ 3 筆平均 4.667（≥ 4.5）⇒ 想升卻無處可升 ⇒ `notApplied`／`atCeiling`。
+    ///
+    /// 判別力：把原因順序寫成「先看區間」的實作會回 `withinRange`；不看 base
+    /// 就直接 `appliedUp` 的實作會讓 final 變成一個不存在的等級。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_NotAppliedAtCeiling()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 4, 4, 5, 5, 4);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.S, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.S, breakdown.GetProperty("finalRating").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("notApplied", adjustment.GetProperty("status").GetString());
+        Assert.Equal("atCeiling", adjustment.GetProperty("reason").GetString());
+        Assert.Equal(4.667, adjustment.GetProperty("averageScore").GetDouble(), 3);
+        Assert.Equal(3, adjustment.GetProperty("scoreSamples").GetInt32());
+        Assert.Equal(RatingCodes.S, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.S, adjustment.GetProperty("to").GetString());
+    }
+
+    /// <summary>
+    /// 已經在最低一級：base **C**（7 張完成 3 張 ⇒ 0.4286 &lt; 0.50）＋ 3 筆分數 1.0
+    /// （≤ 2.0）⇒ 想降卻無處可降 ⇒ `notApplied`／`atFloor`。
+    ///
+    /// 這是四種 `notApplied` 原因裡 brief 的六支測試沒有涵蓋的那一種（設計 §7 明列四種）；
+    /// 少了它，`atFloor` 這一格在後端是沒有守門員的死碼，而 `atCeiling` 與它在
+    /// 實作上高度對稱——對稱的兩半只驗一半，錯的那一半不會有紅燈。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_NotAppliedAtFloor()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 7, 3, 1, 1, 1);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.C, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.C, breakdown.GetProperty("finalRating").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("notApplied", adjustment.GetProperty("status").GetString());
+        Assert.Equal("atFloor", adjustment.GetProperty("reason").GetString());
+        Assert.Equal(1.0, adjustment.GetProperty("averageScore").GetDouble(), 3);
+        Assert.Equal(3, adjustment.GetProperty("scoreSamples").GetInt32());
+        Assert.Equal(RatingCodes.C, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.C, adjustment.GetProperty("to").GetString());
+    }
+
+    /// <summary>
+    /// 調整項真的**升級**的那一格（`appliedUp` 是第三個 status 字串，brief 的六支只覆蓋了
+    /// `appliedDown` 與兩個 `notApplied`）：base B ＋ 3 筆 5 分 ⇒ final **A**。
+    /// 同時釘住 `upThreshold`（4.5）與 `downThreshold`（2.0）是由伺服器帶下來的值。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_AdjustmentUp()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var member = await MemberAfterScoredWorkAsync(teamId, listId, adminId, 5, 3, 5, 5, 5);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.A, breakdown.GetProperty("finalRating").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("appliedUp", adjustment.GetProperty("status").GetString());
+        Assert.Equal(RatingCodes.B, adjustment.GetProperty("from").GetString());
+        Assert.Equal(RatingCodes.A, adjustment.GetProperty("to").GetString());
+        Assert.Equal(4.5, adjustment.GetProperty("upThreshold").GetDouble(), 3);
+        Assert.Equal(2.0, adjustment.GetProperty("downThreshold").GetDouble(), 3);
+        Assert.Equal(3, adjustment.GetProperty("sampleThreshold").GetInt32());
+    }
+
+    /// <summary>
+    /// 零卡片（只有工時）的成員：`ratingBreakdown` **仍是一個物件**（設計 §4.4／裁定 11），
+    /// `baseRating`／`finalRating` 都是 null，三個 component 全部 `notApplicable`，
+    /// 各自的 reason 由**那個 component 自己的缺樣本原因**決定：
+    /// completion `noCards`、onTime `noDueSamples`、FPY `sampleInsufficient`；
+    /// adjustment 是 `notApplied`／`sampleInsufficient`、`from`／`to` 皆 null。
+    ///
+    /// fixture 與 `MemberWithoutCards_HasNoRatesAndNoRating` 同型（工時是唯一把他帶進名冊的路）。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_ZeroCards()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, projectId, listId) = await SetupBareTeamAsync();
+        await AdminUserIdAsync();
+
+        var cardId = await CreateCardAsync(listId, "C1");
+        var noCardsId = await CreateProjectMemberAsync(teamId, projectId, "nocards-breakdown");
+        await AddEffortLogAsync(cardId, noCardsId, 3.5m);
+
+        var member = await MemberRowAsync(teamId, noCardsId);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(JsonValueKind.Null, breakdown.GetProperty("baseRating").ValueKind);
+        Assert.Equal(JsonValueKind.Null, breakdown.GetProperty("finalRating").ValueKind);
+
+        var completion = ComponentOf(member, "completion");
+        Assert.Equal("notApplicable", completion.GetProperty("status").GetString());
+        Assert.Equal("noCards", completion.GetProperty("reason").GetString());
+
+        var onTime = ComponentOf(member, "onTime");
+        Assert.Equal("notApplicable", onTime.GetProperty("status").GetString());
+        Assert.Equal("noDueSamples", onTime.GetProperty("reason").GetString());
+
+        var fpy = ComponentOf(member, "firstPassYield");
+        Assert.Equal("notApplicable", fpy.GetProperty("status").GetString());
+        Assert.Equal("sampleInsufficient", fpy.GetProperty("reason").GetString());
+
+        var adjustment = AdjustmentOf(member);
+        Assert.Equal("notApplied", adjustment.GetProperty("status").GetString());
+        Assert.Equal("sampleInsufficient", adjustment.GetProperty("reason").GetString());
+        Assert.Equal(0, adjustment.GetProperty("scoreSamples").GetInt32());
+        Assert.Equal(JsonValueKind.Null, adjustment.GetProperty("from").ValueKind);
+        Assert.Equal(JsonValueKind.Null, adjustment.GetProperty("to").ValueKind);
+    }
+
+    /// <summary>
+    /// S 的兩個 gate 都失敗、但完成率只到 B：`baseRating == finalRating == "B"`。
+    ///
+    /// fixture：5 張卡、完成 3 張（一張遲交、兩張無截止日）⇒ 完成率 0.60、準時率 0/1 = 0.0；
+    /// 5 張都指派了審查者、但**都沒有提交** ⇒ reviewed 5、firstPass 0 ⇒ FPY 0.0。
+    /// 兩個 gate 的 `failed` 是相對「S 的資格」，不是相對 B——所以 base 不受影響。
+    ///
+    /// 少了這一支，一個把 gate 失敗當成降級的實作（例如 sGate 失敗就從 A 掉到 B）在
+    /// 其他測試裡照樣綠：既有測試只驗有 S 資格的人。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_GatesDoNotChangeBaseBelowS()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        var cardIds = new List<string>();
+        for (var i = 0; i < 5; i++) cardIds.Add(await CreateCardAsync(listId, $"G{i}"));
+        await SetDueDateAsync(cardIds[0], "2020-01-01T00:00:00Z");
+        for (var i = 0; i < 3; i++) await CompleteAsync(cardIds[i]);
+        foreach (var cardId in cardIds) await AssignReviewerAsync(cardId, adminId);
+
+        var member = await MemberRowAsync(teamId, adminId);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.B, breakdown.GetProperty("finalRating").GetString());
+
+        var onTime = ComponentOf(member, "onTime");
+        Assert.Equal("sGate", onTime.GetProperty("role").GetString());
+        Assert.Equal("failed", onTime.GetProperty("status").GetString());
+        Assert.Equal(0.0, onTime.GetProperty("value").GetDouble(), 3);
+        Assert.Equal(1, onTime.GetProperty("sampleSize").GetInt32());
+
+        var fpy = ComponentOf(member, "firstPassYield");
+        Assert.Equal("sGate", fpy.GetProperty("role").GetString());
+        Assert.Equal("failed", fpy.GetProperty("status").GetString());
+        Assert.Equal(0.0, fpy.GetProperty("value").GetDouble(), 3);
+        Assert.Equal(5, fpy.GetProperty("sampleSize").GetInt32());
+        Assert.Equal(5, fpy.GetProperty("sampleThreshold").GetInt32());
+
+        // 兩個 gate 的 achievedTier 一律是 null——tier 只有 completion 那一格有。
+        Assert.Equal(JsonValueKind.Null, onTime.GetProperty("achievedTier").ValueKind);
+        Assert.Equal(JsonValueKind.Null, fpy.GetProperty("achievedTier").ValueKind);
+    }
+
+    /// <summary>
+    /// 兩個 sGate **都通過**的那一格（`met`）。其餘八支裡 onTime／FPY 非 null 時全是
+    /// `failed`——少了這一支，一個「所有非 null 都回 failed」的突變全綠。
+    ///
+    /// fixture：5 張全部準時交付（未來截止日）、全部指派審查者；其中 4 張第一筆 entry
+    /// 即 approved、1 張退回後才通過 ⇒ FPY 恰好 4/5 = **0.80**——順便釘住 `>= 0.80` 的
+    /// 等號那一格。完成率與準時率都是 1.0 ⇒ base **S**、沒有分數 ⇒ final S。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_SGatesMet()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        for (var i = 0; i < 4; i++)
+        {
+            var cardId = await CreateCardAsync(listId, $"S{i}");
+            await SetDueDateAsync(cardId, "2099-01-01T00:00:00Z");
+            var reviewId = await AssignReviewerAsync(cardId, adminId);
+            await CompleteAsync(cardId);
+            await SubmitReviewAsync(cardId, reviewId, ReviewStatuses.Approved);
+        }
+
+        // 第 5 張：第一筆 entry 是 rejected（退回會清掉 CompletedAt，所以要重新交付）
+        // ⇒ 只進 FPY 分母、不進分子。
+        var reworked = await CreateCardAsync(listId, "S-reworked");
+        await SetDueDateAsync(reworked, "2099-01-01T00:00:00Z");
+        var reworkedReview = await AssignReviewerAsync(reworked, adminId);
+        await CompleteAsync(reworked);
+        await SubmitReviewAsync(reworked, reworkedReview, ReviewStatuses.Rejected, comment: "退回重做");
+        await CompleteAsync(reworked);
+        await SubmitReviewAsync(reworked, reworkedReview, ReviewStatuses.Approved);
+
+        var member = await MemberRowAsync(teamId, adminId);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.S, breakdown.GetProperty("finalRating").GetString());
+
+        var onTime = ComponentOf(member, "onTime");
+        Assert.Equal("met", onTime.GetProperty("status").GetString());
+        Assert.Equal(1.0, onTime.GetProperty("value").GetDouble(), 3);
+
+        var fpy = ComponentOf(member, "firstPassYield");
+        Assert.Equal("met", fpy.GetProperty("status").GetString());
+        Assert.Equal(0.8, fpy.GetProperty("value").GetDouble(), 3);
+        Assert.Equal(5, fpy.GetProperty("sampleSize").GetInt32());
+    }
+
+    /// <summary>
+    /// `achievedTier` 與 `baseRating` **分離**的那一格：完成率 1.0（completion 自己對到 S），
+    /// 但準時率 3/4 = 0.75 &lt; 0.85 ⇒ S 的 gate 失敗 ⇒ base／final 都是 **A**。
+    ///
+    /// 其餘八支的 `achievedTier` 與 `baseRating` 恆重合（兩者都是 B），所以一個把
+    /// `achievedTier` 直接寫成 `baseRating` 的實作擋不住；這一支是那個突變的守門員。
+    /// </summary>
+    [Fact]
+    public async Task RatingBreakdown_AchievedTierIndependentOfBase()
+    {
+        var token = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var (teamId, _, listId) = await SetupBareTeamAsync();
+        var adminId = await AdminUserIdAsync();
+
+        // 4 張都有截止日且已交付：3 張準時、1 張遲交 ⇒ onTimeRate 0.75。
+        // 沒有審查者 ⇒ FPY 樣本不足（不列入），所以差異只可能來自準時率那一格。
+        for (var i = 0; i < 3; i++) await CreateOnTimeCardAsync(listId, $"O{i}-準時");
+        await CreateLateCardAsync(listId, "L-遲交");
+
+        var member = await MemberRowAsync(teamId, adminId);
+
+        var breakdown = member.GetProperty("ratingBreakdown");
+        Assert.Equal(RatingCodes.A, breakdown.GetProperty("baseRating").GetString());
+        Assert.Equal(RatingCodes.A, breakdown.GetProperty("finalRating").GetString());
+
+        var completion = ComponentOf(member, "completion");
+        Assert.Equal(RatingCodes.S, completion.GetProperty("achievedTier").GetString());
+        Assert.Equal(1.0, completion.GetProperty("value").GetDouble(), 3);
+
+        var onTime = ComponentOf(member, "onTime");
+        Assert.Equal("failed", onTime.GetProperty("status").GetString());
+        Assert.Equal(0.75, onTime.GetProperty("value").GetDouble(), 3);
+    }
+
     // ---------- 比率的「樣本不足」語意（2026-09-21，使用者回報） ----------
     //
     // 回報原文：「沒有一張完成的卡片，但準時交付率 100%，一次交付通過率和平均評分都是

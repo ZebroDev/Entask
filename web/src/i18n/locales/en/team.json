@@ -151,6 +151,35 @@
       "account": "Account: @{{username}}",
       "action": "View profile",
       "criteria": "Rating criteria: an S rating requires a completion rate and an on-time delivery rate of 85% or above, and a first-pass yield of 80% or above; 70% completion earns an A; 50% or above earns a B.",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}} (average score {{score}}, {{samples}} samples)",
+          "appliedUp": "{{from}} → {{to}} (average score {{score}}, {{samples}} samples)",
+          "atCeiling": "Already at the highest rating",
+          "atFloor": "Already at the lowest rating",
+          "notApplied": "Stays at {{rating}}: {{reason}}",
+          "notAppliedWithScore": "Stays at {{rating}}: {{reason}} (average score {{score}}, {{samples}} samples)",
+          "sampleInsufficient": "Not enough data ({{samples}} of {{threshold}})",
+          "withinRange": "Average score between {{down}} and {{up}}"
+        },
+        "adjustmentLabel": "Supervisor score adjustment",
+        "averageScore": "Average score",
+        "completion": "Completion rate {{value}} → {{achievedTier}}",
+        "firstPassYield": "First-pass yield {{value}}",
+        "notApplicable": {
+          "noCards": "Not enough data to rate",
+          "noDueSamples": "No due-date samples",
+          "sampleInsufficient": "Not enough data"
+        },
+        "onTime": "On-time delivery rate {{value}}",
+        "sampleSize": "{{samples}} samples",
+        "sampleWithThreshold": "{{samples}} samples, threshold {{threshold}}",
+        "sGateNote": "Below the S threshold (does not affect {{final}})",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "Why this rating",
+        "viewCards": "View cards",
+        "viewReviews": "View reviews"
+      },
       "period": "Review period",
       "print": {
         "action": "Print appraisal form / Save as PDF"
@@ -163,6 +192,37 @@
         "label": "Supervisor review and annual sign-off: "
       },
       "title": "{{name}}'s performance review"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "Card",
+        "completedAt": "Completed",
+        "dueAt": "Due date",
+        "dueChanges": "Due date changes",
+        "firstReview": "First review",
+        "project": "Project",
+        "qualifies": "Qualifies",
+        "reviewedAt": "Reviewed at",
+        "reviewer": "Reviewer",
+        "score": "Score"
+      },
+      "dueChange": {
+        "afterCompletion": "Changed after completion",
+        "legacy": "Value not recorded in older versions"
+      },
+      "empty": "No matching data",
+      "hiddenCards_one": "{{count}} card is in a project you cannot view",
+      "hiddenCards_other": "{{count}} cards are in projects you cannot view",
+      "hiddenReviews_one": "{{count}} review is in a project you cannot view",
+      "hiddenReviews_other": "{{count}} reviews are in projects you cannot view",
+      "page": {
+        "next": "Next",
+        "prev": "Previous"
+      },
+      "population": "Population {{n}}",
+      "qualifying": "Qualifying {{n}}",
+      "recordedSince": "Recorded since 2026-10-20",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "No performance data yet",
     "export": {

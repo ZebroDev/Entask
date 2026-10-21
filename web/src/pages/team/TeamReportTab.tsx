@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
@@ -20,42 +20,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Trophy, Target, Clock, CheckCircle2, Award, Download, UserCheck, FileSpreadsheet, Printer } from "lucide-react";
+import { Trophy, Target, Clock, CheckCircle2, Award, ChevronRight, Download, UserCheck, FileSpreadsheet, Printer } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
+import { RatingExplanation } from "./RatingExplanation";
+import { ReportDrilldownDialog } from "./ReportDrilldownDialog";
+import type { DrilldownMetric, MemberPerformance } from "./report-types";
 
 interface Props { teamId: string; }
-
-interface MemberPerformance {
-  userId: string;
-  username: string;
-  displayName: string;
-  avatarUrl?: string;
-  completedCards: number;
-  totalCards: number;
-  // **兩個比率可為 null＝「樣本不足」**（2026-09-21）：後端在沒有樣本時回 null，
-  // 不回 0 也不回 1——0 是「一張都沒完成」、1 是「全部準時」，兩者都是有依據的結論。
-  // 型別刻意寫成 `number | null`（不是 optional）：後端每一列都會帶這兩個鍵，
-  // 而編譯器會因此強迫下面兩個欄位先收斂 null 分支才碰得到格式化函式。
-  completionRate: number | null;
-  onTimeCards?: number;
-  onTimeRate?: number | null;
-  // 準時率的分母。與 `firstPass`／`reviewed`／`scoreSamples` 同一個道理：原料與比率
-  // 一起回傳，否則消費端看到 null 分不出「沒有樣本」與「別的原因」。前端目前只顯示比率。
-  onTimeSamples?: number;
-  loggedHours?: number;
-  // 等級集合的權威在後端 `RatingCodes`（守門員是第六張標籤表），前端不再複寫第四份。
-  // 沒有基準就沒有評等 ⇒ 一張卡片都沒有的成員這裡是 null。
-  rating?: string | null;
-  // Task 10／11 的兩個新指標。**全部選擇性**：舊的回應、以及這個檔既有的 fixture
-  // 都不帶它們，缺席是常態而不是異常。缺席時的判斷見下面兩個欄位的註解（`== null`
-  // 與 `?? 0` 是刻意的，兩者寫成嚴格比較都會靜默產生壞畫面）。
-  firstPass?: number;
-  reviewed?: number;
-  fpy?: number | null;
-  averageScore?: number | null;
-  scoreSamples?: number;
-}
 
 interface TeamReportResponse {
   members: MemberPerformance[];
@@ -107,9 +79,48 @@ const RATING_BADGE: Record<string, { outline?: boolean; className: string; icon:
   C: { outline: true, className: "text-muted-foreground", icon: "" },
 };
 
+/**
+ * dossier 裡可 drill-down 的統計磚（2026-10-21 使用者實測回報「看不出可以點」）。
+ *
+ * **靜止時就要說得出自己是按鈕**：右上角的 chevron 是唯一的靜態提示——hover 變色只有在
+ * 滑鼠已經移上去之後才發生，幫不了「一開始不知道要點哪裡」的人。`hover:border-primary/40`
+ * 與 chevron 的位移是第二層回饋。
+ *
+ * 標籤與數值維持**直接子節點**：`TeamReportTab.dossier.test.tsx` 的 `dialogStat` 以
+ * 「標籤的 parentElement 裡找 `.text-xl`」取值，多包一層 flex 會讓它找不到值。
+ */
+function DrilldownStatButton({
+  label,
+  value,
+  onClick,
+}: {
+  label: string;
+  value: ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-haspopup="dialog"
+      className="group relative p-3 rounded-lg border text-left transition-colors hover:bg-muted/50 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
+    >
+      <ChevronRight
+        aria-hidden="true"
+        className="absolute right-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground/60 transition-transform group-hover:translate-x-0.5 group-hover:text-primary"
+      />
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="text-xl font-bold mt-1">{value}</div>
+    </button>
+  );
+}
+
 export function TeamReportTab({ teamId }: Props) {
   const { t } = useTranslation(["common", "team"]);
   const [selectedMember, setSelectedMember] = useState<MemberPerformance | null>(null);
+  // drill-down 的 metric（Task 5）。與 `selectedMember` 一樣是「開啟中」的狀態：
+  // 非 null ⇒ `ReportDrilldownDialog` 掛載；關閉即卸載，所以頁碼等內部狀態不會殘留。
+  const [drilldownMetric, setDrilldownMetric] = useState<DrilldownMetric | null>(null);
   // 報表窗框：預設**今年**（設計 D5），全期與自訂區間是另外兩個**明確**的選擇。
   // 型別是三個變體而不是 `number | "all" | null`：`null` 在這裡讀起來像「還沒選」。
   // 窗框語意（上界排他、本地日轉 UTC、選項來源）全在 `lib/report-window.ts`，
@@ -124,6 +135,12 @@ export function TeamReportTab({ teamId }: Props) {
   // 分隔符就是為了這個（`TeamReportTab.test.tsx` 逐字斷言那個 URL）。
   const windowParamString = windowParams(win);
   const reportQueryAmp = windowParamString ? `&${windowParamString}` : "";
+  // drill-down 與報表用**同一段窗框**：`windowParams` 是唯一的窗框語意出口（本地日轉
+  // UTC、上界排他），這裡只把它拆回兩個 ISO 界線。各寫一份的話，drill-down 的數字會
+  // 對不上上面那張表，而畫面上沒有任何異狀。
+  const drilldownWindow = new URLSearchParams(windowParamString);
+  const drilldownFrom = drilldownWindow.get("from") ?? undefined;
+  const drilldownTo = drilldownWindow.get("to") ?? undefined;
 
   // 匯出檔名由**前端**決定：`a.download` 會覆蓋伺服器的 `Content-Disposition`，
   // 後端 `YearSuffix` 的年份後綴因此到不了 SPA 使用者。期間取**使用者選的本地值**，
@@ -225,6 +242,20 @@ export function TeamReportTab({ teamId }: Props) {
       </Badge>
     );
   };
+
+  // dossier 的平均分：**null ＝樣本不足**（含舊回應沒有 averageScore 的缺值，寬鬆等於
+  // 涵蓋 undefined）。樣本門檻取**payload 的** `sampleThreshold`（設計 §4.4：門檻由伺服器
+  // 帶、前端不得再寫一份 3）；舊回應沒有分解時退回「有沒有分數」——那正是舊後端唯一能給的
+  // 資訊，不猜一個門檻。
+  //
+  // 這裡先把「能不能顯示」收斂成一個值再進 JSX：留一個 `?? 0` 在格式化那側的話，
+  // 讀起來正是下一個分支已經排除掉的「null 當 0」——它走不到，但會騙人。
+  const dossierSampleThreshold = selectedMember?.ratingBreakdown?.adjustment.sampleThreshold;
+  const dossierAverageScore =
+    selectedMember?.averageScore == null ||
+    (dossierSampleThreshold != null && (selectedMember.scoreSamples ?? 0) < dossierSampleThreshold)
+      ? null
+      : selectedMember.averageScore;
 
   return (
     <div className="space-y-6">
@@ -336,7 +367,16 @@ export function TeamReportTab({ teamId }: Props) {
             <Card className="overflow-x-auto">
               <Table className="whitespace-nowrap">
                 <TableHeader>
+                  {/*
+                    **檢視檔案的動作欄在最前面**（2026-10-21 使用者實測回報）：它原本是第 9 欄，
+                    而這一頁的容器只有 `max-w-3xl` ⇒ 1909px 的螢幕上表格仍要橫向捲動，
+                    動作欄**永遠在第一屏之外**，使用者不知道右邊還有東西可看。
+                    容器已同時放寬（`TeamPage` 的 `max-w-6xl`），但動作欄留在最後的話，
+                    筆電寬度下同一個症狀會回來；放第一欄是最寬容的解法。
+                    排名欄因此退到第二欄——名次仍然是列的身分，只是不再是**第一個**看到的東西。
+                  */}
                   <TableRow className="bg-muted/50">
+                    <TableHead className="w-28">{t("team:report.column.profile")}</TableHead>
                     <TableHead className="w-16 text-center">{t("team:report.column.rank")}</TableHead>
                     <TableHead>{t("team:report.column.member")}</TableHead>
                     <TableHead className="text-center">{t("team:report.column.rating")}</TableHead>
@@ -345,12 +385,24 @@ export function TeamReportTab({ teamId }: Props) {
                     <TableHead>{t("team:report.metric.onTime")}</TableHead>
                     <TableHead>{t("team:report.column.firstPassYield")}</TableHead>
                     <TableHead>{t("team:report.column.averageScore")}</TableHead>
-                    <TableHead className="text-right">{t("team:report.column.profile")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {members.map((m, idx) => (
                     <TableRow key={m.userId} className="hover:bg-muted/40 transition-colors">
+                      {/* 動作欄跟著表頭移到第一欄；`outline` 比原本的 `ghost` 更像一顆按鈕
+                          （ghost 在列裡與純文字幾乎同一個重量，這也是「看不出可以點」的一半）。 */}
+                      <TableCell>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8 text-xs gap-1"
+                          onClick={() => setSelectedMember(m)}
+                        >
+                          <UserCheck className="h-3.5 w-3.5" />
+                          {t("team:report.dossier.action")}
+                        </Button>
+                      </TableCell>
                       <TableCell className="text-center font-bold text-muted-foreground">
                         {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : "#" + (idx + 1)}
                       </TableCell>
@@ -470,17 +522,6 @@ export function TeamReportTab({ teamId }: Props) {
                           </span>
                         )}
                       </TableCell>
-                      <TableCell className="text-right">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="h-8 text-xs gap-1"
-                          onClick={() => setSelectedMember(m)}
-                        >
-                          <UserCheck className="h-3.5 w-3.5" />
-                          {t("team:report.dossier.action")}
-                        </Button>
-                      </TableCell>
                     </TableRow>
                   ))}
                   {members.length === 0 && (
@@ -505,12 +546,36 @@ export function TeamReportTab({ teamId }: Props) {
 
       {/* 成員個人年度檔案對話框 (Member Performance Dossier) */}
       {selectedMember && (
-        <Dialog open onOpenChange={() => setSelectedMember(null)}>
-          <DialogContent className="max-w-md print:max-w-none print:shadow-none print:border-none print:p-6">
+        <Dialog
+          open
+          onOpenChange={() => {
+            // 關閉 dossier 時把 drill-down 的 metric 一起收掉：否則下一個成員的 dossier
+            // 一開，上一輪的 drill-down 會**自動**跟著開起來（它只檢查 metric 非 null）。
+            setSelectedMember(null);
+            setDrilldownMetric(null);
+          }}
+        >
+          {/*
+            列印隔離（2026-10-21，使用者實測「預覽兩頁、內容一樣」）：Radix 的
+            `DialogContent` 基底是 `position: fixed`；列印時固定定位的元素會畫在
+            **每一頁**上（當場量：報表頁 2 頁 ⇒ 考核表也印了 2 份）。`data-dossier-print`
+            讓 `index.css` 的列印規則把背後的 `#root` 收掉，`print:static` 讓對話框
+            回到文件流——只印這一張表，不再跟著底下的頁數重複。關閉鈕與頭像同理：
+            紙上不需要叉叉，頭像只剩一個姓氏字首。
+          */}
+          <DialogContent
+            data-dossier-print=""
+            className="max-w-md print:static print:transform-none print:w-full print:max-w-none print:max-h-none print:overflow-visible print:rounded-none print:border-none print:shadow-none print:p-6"
+          >
             <DialogHeader>
-              <div className="flex items-center justify-between">
+              {/*
+                右上角留給關閉鈕：`dialog.tsx` 把它釘在 `right-4 top-4`（16px 圖示 ⇒ 佔到距
+                右緣 32px），而列印鈕是標題列的最後一個元素——沒有這 40px，列印鈕的右上角
+                會和叉叉疊在一起，就是使用者回報的「叉叉有點跑版」。
+              */}
+              <div className="flex items-center justify-between pr-10">
                 <DialogTitle className="flex items-center gap-2 text-lg">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 print:hidden">
                     {selectedMember.avatarUrl ? (
                       <AvatarImage src={selectedMember.avatarUrl} alt={selectedMember.displayName} />
                     ) : (
@@ -540,6 +605,10 @@ export function TeamReportTab({ teamId }: Props) {
                 {getRatingBadge(selectedMember.rating)}
               </div>
 
+              {/* grade 分解（Task 4）：只渲染伺服器算好的 `ratingBreakdown`，舊回應沒有這個
+                  鍵時整個區塊不渲染。放在評級列的正下方——「為什麼是這個等級」是那一列的註腳。 */}
+              <RatingExplanation member={selectedMember} />
+
               {/* 考核期間：考評表上的數字都是**選定窗框**內的（螢幕與列印都是同一組），
                   少了這一列，列印出來的主管簽核檔案就沒有寫是哪一年。 */}
               <div className="flex items-center justify-between p-3 rounded-lg border">
@@ -552,24 +621,38 @@ export function TeamReportTab({ teamId }: Props) {
                   <div className="text-xs text-muted-foreground">{t("team:report.stat.completed")}</div>
                   <div className="text-xl font-bold mt-1">{selectedMember.completedCards} / {selectedMember.totalCards}</div>
                 </div>
-                <div className="p-3 rounded-lg border">
-                  <div className="text-xs text-muted-foreground">{t("team:report.stat.completion")}</div>
-                  {/* 與表格那一格同一個分支（寬鬆 `== null`，涵蓋 undefined）——兩處都必須擋，
-                      否則列印出來的主管簽核檔案上會是一個 0.0% 與一個 100.0%。 */}
-                  <div className="text-xl font-bold mt-1">
-                    {selectedMember.completionRate == null
-                      ? t("team:report.sampleInsufficient")
-                      : formatPercent(selectedMember.completionRate, 1)}
-                  </div>
-                </div>
-                <div className="p-3 rounded-lg border">
-                  <div className="text-xs text-muted-foreground">{t("team:report.metric.onTime")}</div>
-                  <div className="text-xl font-bold mt-1">
-                    {selectedMember.onTimeRate == null
-                      ? t("team:report.sampleInsufficient")
-                      : formatPercent(selectedMember.onTimeRate, 1)}
-                  </div>
-                </div>
+                {/* 與表格那一格同一個分支（寬鬆 `== null`，涵蓋 undefined）——兩處都必須擋，
+                    否則列印出來的主管簽核檔案上會是一個 0.0% 與一個 100.0%。 */}
+                <DrilldownStatButton
+                  label={t("team:report.stat.completion")}
+                  value={selectedMember.completionRate == null
+                    ? t("team:report.sampleInsufficient")
+                    : formatPercent(selectedMember.completionRate, 1)}
+                  onClick={() => setDrilldownMetric("completion")}
+                />
+                <DrilldownStatButton
+                  label={t("team:report.metric.onTime")}
+                  value={selectedMember.onTimeRate == null
+                    ? t("team:report.sampleInsufficient")
+                    : formatPercent(selectedMember.onTimeRate, 1)}
+                  onClick={() => setDrilldownMetric("onTime")}
+                />
+                {/* Task 4：dossier 原本沒有這兩個數字，grade 分解卻靠它們解釋 S 的資格。
+                    `null` ＝樣本不足（後端刻意不回 0），與表格那兩欄同一個語意。 */}
+                <DrilldownStatButton
+                  label={t("team:report.column.firstPassYield")}
+                  value={selectedMember.fpy == null
+                    ? t("team:report.sampleInsufficient")
+                    : formatPercent(selectedMember.fpy, 1)}
+                  onClick={() => setDrilldownMetric("firstPassYield")}
+                />
+                <DrilldownStatButton
+                  label={t("team:report.dossier.explanation.averageScore")}
+                  value={dossierAverageScore == null
+                    ? t("team:report.sampleInsufficient")
+                    : formatDecimal(dossierAverageScore)}
+                  onClick={() => setDrilldownMetric("averageScore")}
+                />
                 <div className="p-3 rounded-lg border">
                   <div className="text-xs text-muted-foreground">{t("team:report.stat.hours")}</div>
                   <div className="text-xl font-bold mt-1">{formatHours(selectedMember.loggedHours ?? 0)}</div>
@@ -594,6 +677,23 @@ export function TeamReportTab({ teamId }: Props) {
             </div>
           </DialogContent>
         </Dialog>
+      )}
+
+      {/* drill-down：疊在 dossier 上的一層，dossier 本身不跟著關。條件掛載 ⇒ 關閉即卸載，
+          內部的頁碼與選取列不會跨成員／metric 殘留。窗框與報表同源（見上面的
+          `drilldownWindow`）。 */}
+      {selectedMember && drilldownMetric && (
+        <ReportDrilldownDialog
+          open
+          onOpenChange={(open) => {
+            if (!open) setDrilldownMetric(null);
+          }}
+          teamId={teamId}
+          member={selectedMember}
+          metric={drilldownMetric}
+          from={drilldownFrom}
+          to={drilldownTo}
+        />
       )}
     </div>
   );

@@ -6,6 +6,31 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-10-21
+
+### Added
+
+- Team performance report explainability: each member's grade now comes with a breakdown of the
+  completion tier, the on-time and first-pass-yield S-gate checks (thresholds and sample counts
+  included), and any review-score adjustment with the average score it was based on.
+- Drill-down from a member's completion, on-time, first-pass-yield and average-score figures to
+  the exact cards or review entries behind them; rows the viewer may not read are counted
+  separately instead of being removed silently.
+- Deadline changes are recorded with their previous and new dates and appear in the on-time
+  drill-down. History starts with this release; earlier changes have no previous value.
+
+### Fixed
+
+- The team report uses the full content width, the member action moved to the first column, and
+  clickable figures now carry a visible affordance.
+- The user management and system activity pages use the same page shell as the rest of the app.
+- Printing a member dossier produces one page: the dialog no longer repeats on every printed
+  page, and the app chrome, close button and avatar are left off the paper.
+
+### Notes
+
+- No database migrations or configuration changes.
+
 ## [1.0.2] - 2026-10-16
 
 ### Fixed
@@ -50,6 +75,7 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
 [1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.0

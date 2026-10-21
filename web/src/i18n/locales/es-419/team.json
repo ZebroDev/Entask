@@ -151,6 +151,35 @@
       "account": "Cuenta: @{{username}}",
       "action": "Ver perfil",
       "criteria": "Criterios de calificación: se otorga S cuando la tasa de cumplimiento y la tasa de entrega a tiempo alcanzan 85% o más y la tasa de aprobación a la primera entrega alcanza 80% o más; con 70% de cumplimiento se otorga A; con 50% o más se otorga B.",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}} (puntuación promedio {{score}}, {{samples}} muestras)",
+          "appliedUp": "{{from}} → {{to}} (puntuación promedio {{score}}, {{samples}} muestras)",
+          "atCeiling": "Ya está en la calificación más alta",
+          "atFloor": "Ya está en la calificación más baja",
+          "notApplied": "Se mantiene en {{rating}}: {{reason}}",
+          "notAppliedWithScore": "Se mantiene en {{rating}}: {{reason}} (puntuación media {{score}}, {{samples}} muestras)",
+          "sampleInsufficient": "Muestra insuficiente ({{samples}} de {{threshold}})",
+          "withinRange": "La puntuación promedio está entre {{down}} y {{up}}"
+        },
+        "adjustmentLabel": "Ajuste por puntuación del supervisor",
+        "averageScore": "Puntuación promedio",
+        "completion": "Tasa de cumplimiento {{value}} → {{achievedTier}}",
+        "firstPassYield": "Tasa de aprobación a la primera entrega {{value}}",
+        "notApplicable": {
+          "noCards": "Muestra insuficiente, sin calificación",
+          "noDueSamples": "Sin muestras con fecha de vencimiento",
+          "sampleInsufficient": "Muestra insuficiente"
+        },
+        "onTime": "Tasa de entrega a tiempo {{value}}",
+        "sampleSize": "{{samples}} muestras",
+        "sampleWithThreshold": "{{samples}} muestras, umbral {{threshold}}",
+        "sGateNote": "No alcanza el umbral S (no afecta a {{final}})",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "Por qué esta calificación",
+        "viewCards": "Ver tarjetas",
+        "viewReviews": "Ver revisiones"
+      },
       "period": "Período de evaluación",
       "print": {
         "action": "Imprimir la evaluación / Guardar como PDF"
@@ -163,6 +192,39 @@
         "label": "Revisión del supervisor y firma anual: "
       },
       "title": "Evaluación de desempeño de {{name}}"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "Tarjeta",
+        "completedAt": "Completada",
+        "dueAt": "Vencimiento",
+        "dueChanges": "Cambios de vencimiento",
+        "firstReview": "Primera revisión",
+        "project": "Proyecto",
+        "qualifies": "Cumple",
+        "reviewedAt": "Revisada",
+        "reviewer": "Revisor",
+        "score": "Puntuación"
+      },
+      "dueChange": {
+        "afterCompletion": "Cambiado después de completarse",
+        "legacy": "Valor no registrado en versiones anteriores"
+      },
+      "empty": "No hay datos que coincidan",
+      "hiddenCards_one": "{{count}} tarjeta está en un proyecto que no puedes ver",
+      "hiddenCards_many": "{{count}} tarjetas están en proyectos que no puedes ver",
+      "hiddenCards_other": "{{count}} tarjetas están en proyectos que no puedes ver",
+      "hiddenReviews_one": "{{count}} revisión está en un proyecto que no puedes ver",
+      "hiddenReviews_many": "{{count}} revisiones están en proyectos que no puedes ver",
+      "hiddenReviews_other": "{{count}} revisiones están en proyectos que no puedes ver",
+      "page": {
+        "next": "Siguiente",
+        "prev": "Anterior"
+      },
+      "population": "Población {{n}}",
+      "qualifying": "Cumplen {{n}}",
+      "recordedSince": "Registrado desde el 2026-10-20",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "Aún no hay datos de desempeño",
     "export": {

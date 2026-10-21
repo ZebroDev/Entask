@@ -25,7 +25,7 @@
 | 1 | 登入頁標題 | `web/src/pages/LoginPage.tsx` | `Entask` |
 | 2 | 頁首品牌字 | `web/src/components/layout/AppLayout.tsx` | `Entask` |
 | 3 | 頁首（尚未選團隊時） | `web/src/components/layout/AppLayout.tsx` | `Entask` |
-| 4 | 登入頁頁腳 | `web/src/i18n/locales/{en,es-419,ja,ko,zh-CN,zh-TW}/auth.json` 的 `login.footer` | `Entask 企業級敏捷專案管理平台 · 版本 v1.0.2`（每個語系一份翻譯） |
+| 4 | 登入頁頁腳 | `web/src/i18n/locales/{en,es-419,ja,ko,zh-CN,zh-TW}/auth.json` 的 `login.footer` | `Entask 企業級敏捷專案管理平台 · 版本 v1.0.3`（每個語系一份翻譯） |
 | 5 | 瀏覽器分頁標題 | `web/index.html` | `<title>Entask</title>` |
 | 6 | iOS 加入主畫面名稱 | `web/index.html` | `apple-mobile-web-app-title` = `Entask` |
 | 7 | PWA manifest | `web/public/manifest.json` | `name` / `short_name` / `description` 三者的值都是 `Entask` |

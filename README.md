@@ -61,8 +61,10 @@ Next to those sits a project report: three objective numbers and one separate la
 scores. You use them to see how delivery is going, spot problems, and decide what to change.
 First-pass yield is the share of the year's deliveries that passed review the first time, and
 the grade comes from completion rate, on-time rate and that yield. Review scores sit in a
-separate layer and can move the grade by up to one level; they never change the three numbers. Worklog
-coverage is a number too: a completed card with no hours logged shows up as an unreported workday
+separate layer and can move the grade by up to one level; they never change the three numbers.
+The team performance report applies the same measures per member: each member's figures open the
+exact cards or review entries behind them, and the dossier spells out how the grade was reached.
+Worklog coverage is a number too: a completed card with no hours logged shows up as an unreported workday
 you can open and chase. When a project is worth reusing, copy it whole. Cards, lists, boards and
 whole projects can each be copied on their own.
 

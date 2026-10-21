@@ -1,6 +1,20 @@
 **English** · [繁體中文](features.zh-TW.md)
 ## Recent features
 
+### Team report explainability and drill-down
+- Each member's grade comes with a breakdown: the completion tier, the on-time and
+  first-pass-yield S-gate checks with their thresholds and sample counts, and any review-score
+  adjustment with the average score it was based on
+- The four member figures in the dossier (completion, on-time, first-pass yield and average
+  score) open the exact cards or review entries behind them; rows the viewer may not read are
+  counted separately
+- Deadline changes are recorded with their previous and new dates and shown in the on-time
+  drill-down; history starts with this release, so earlier changes have no previous value
+- The team report uses the full content width, the member action sits in the first column, and
+  clickable figures carry a visible affordance
+- Printing a member dossier produces one page: the dialog returns to normal flow, and the app
+  chrome, close button and avatar stay off the paper
+
 ### Full CRUD for checklist items
 - **Backend**: new route `DELETE /api/cards/{cardId}/checklists/{checklistId}/items/{itemId}`
 - **Frontend**:

@@ -1,6 +1,7 @@
 {
   "activity": {
     "empty": "No system activity yet",
+    "subtitle": "A record of user creation, deactivation, reactivation, deletion, and password resets.",
     "title": "System activity"
   },
   "title": "User management",

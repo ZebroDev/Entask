@@ -1,6 +1,7 @@
 {
   "activity": {
     "empty": "Aún no hay actividad del sistema",
+    "subtitle": "Registro de creación, desactivación, reactivación, eliminación y restablecimiento de contraseñas de usuarios.",
     "title": "Actividad del sistema"
   },
   "column": {

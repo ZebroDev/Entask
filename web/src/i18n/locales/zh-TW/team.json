@@ -151,6 +151,35 @@
       "account": "帳號：@{{username}}",
       "action": "檢視檔案",
       "criteria": "評級標準：達成率與準時交付率均達 85% 以上、且一次交付通過率達 80% 以上評為 S 級；達成率達 70% 評為 A 級；達成率 50% 以上評為 B 級。",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}}（平均分 {{score}}，{{samples}} 筆）",
+          "appliedUp": "{{from}} → {{to}}（平均分 {{score}}，{{samples}} 筆）",
+          "atCeiling": "已是最高等級",
+          "atFloor": "已是最低等級",
+          "notApplied": "維持 {{rating}}：{{reason}}",
+          "notAppliedWithScore": "維持 {{rating}}：{{reason}}（平均分 {{score}}，{{samples}} 筆）",
+          "sampleInsufficient": "樣本不足（{{samples}} / {{threshold}} 筆）",
+          "withinRange": "平均分介於 {{down}} 與 {{up}} 之間"
+        },
+        "adjustmentLabel": "主管評分調整",
+        "averageScore": "平均評分",
+        "completion": "完成率 {{value}} → {{achievedTier}}",
+        "firstPassYield": "一次交付通過率 {{value}}",
+        "notApplicable": {
+          "noCards": "樣本不足，不評等",
+          "noDueSamples": "無截止日樣本",
+          "sampleInsufficient": "樣本不足"
+        },
+        "onTime": "準時交付率 {{value}}",
+        "sampleSize": "{{samples}} 筆",
+        "sampleWithThreshold": "{{samples}} 筆，門檻 {{threshold}}",
+        "sGateNote": "未達 S 門檻（不影響 {{final}}）",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "為什麼是這個等級",
+        "viewCards": "查看卡片",
+        "viewReviews": "查看 review"
+      },
       "period": "考核期間",
       "print": {
         "action": "列印考評表 / 另存 PDF"
@@ -163,6 +192,35 @@
         "label": "主管考評與年度簽核意見："
       },
       "title": "{{name}} 的績效考核表"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "卡片",
+        "completedAt": "完成時間",
+        "dueAt": "截止日",
+        "dueChanges": "截止日變更",
+        "firstReview": "第一筆 review",
+        "project": "專案",
+        "qualifies": "符合",
+        "reviewedAt": "審查時間",
+        "reviewer": "審查者",
+        "score": "分數"
+      },
+      "dueChange": {
+        "afterCompletion": "完成後變更",
+        "legacy": "舊版未記錄數值"
+      },
+      "empty": "沒有符合條件的資料",
+      "hiddenCards_other": "{{count}} 張卡片位於你無權檢視的專案",
+      "hiddenReviews_other": "{{count}} 筆 review 位於你無權檢視的專案",
+      "page": {
+        "next": "下一頁",
+        "prev": "上一頁"
+      },
+      "population": "母體 {{n}}",
+      "qualifying": "符合 {{n}}",
+      "recordedSince": "本功能自 2026-10-20 起記錄",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "目前沒有任何績效數據",
     "export": {

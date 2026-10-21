@@ -70,6 +70,8 @@ type ReviewLabelTranslate = TFunction<
   | readonly ["common"]
   | readonly ["common", "card"]
   | readonly ["common", "project", "card"]
+  // 團隊報表的 drill-down（2026-10-21）：FPY 的第一筆 review 狀態。
+  | readonly ["common", "team"]
 >;
 
 // **兩個 key 仍不同，但顯示字已於 2026-09-19 統一為「待審查」**：本支走 `common:state.pending`，

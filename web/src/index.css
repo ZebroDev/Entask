@@ -120,3 +120,13 @@ body,
 .dark .react-flow__controls-button:hover {
   background: hsl(var(--foreground) / 0.08);
 }
+
+/* dossier 列印隔離（2026-10-21）：Radix 的 DialogContent 是 `position: fixed`，列印時
+   固定定位的內容會畫在**每一頁**上（實測：報表頁 2 頁 ⇒ 考核表重複 2 份，兩頁一模一樣）。
+   dossier 開著時只印它自己：背後的 `#root` 退出紙張，對話框由 `print:static` 回到文件流。
+   用 `:has` 是為了只在 dossier 開著時生效——平常對報表頁按 Ctrl+P 不受影響。 */
+@media print {
+  body:has([data-dossier-print]) #root {
+    display: none;
+  }
+}

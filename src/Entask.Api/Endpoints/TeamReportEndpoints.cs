@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Authorization;
 using Entask.Api.Dtos;
+using Entask.Core.Abstractions;
 using Entask.Infrastructure.Data;
 using Entask.Performance;
 using Entask.Core;
@@ -9,35 +10,29 @@ using System.Security.Claims;
 
 namespace Entask.Api.Endpoints;
 
-public static class TeamReportEndpoints
+/// <summary>
+/// 團隊報表的三條輸出（JSON／CSV／xls）與 drill-down。**partial**：grade 分解、匯出呈現
+/// 與 drill-down 的輔助各自一個檔（2026-10-21 拆檔，主檔硬上限 800 行）。
+///
+/// **門檻常數與兩組比較站點留在這個檔**（`RatingFor`／`FpyGateStatus`、
+/// `ApplyScoreAdjustment`／`AdjustmentSamplesInsufficient`）：`check:thresholds` 讀的是
+/// 這個路徑，而它要求每一組「恰好兩個站點、同一個值」。
+/// </summary>
+public static partial class TeamReportEndpoints
 {
-    /// <summary>
-    /// 評級 → xls 儲存格樣式（字色、底色、是否粗體）。
-    ///
-    /// **這一張表同時產生 &lt;Style&gt; 區塊與每一格的 StyleID**，所以「有評級、沒有樣式」
-    /// 在結構上不可能只發生在一邊。原本四個 &lt;Style ss:ID="RatingX"&gt; 是寫死的，而每一格
-    /// 是 `$"Rating{rating}"` 拼出來的——新增一個評級就會產生一個指向不存在樣式的參考，
-    /// 而 Excel 對 dangling 的 StyleID 是**靜默容忍**，沒有任何既有防線看得到。
-    /// </summary>
-    private static readonly Dictionary<string, (string Font, string Interior, bool Bold)> RatingStyles = new()
-    {
-        [RatingCodes.S] = ("#B45309", "#FEF3C7", true),
-        [RatingCodes.A] = ("#15803D", "#DCFCE7", true),
-        [RatingCodes.B] = ("#1D4ED8", "#DBEAFE", true),
-        [RatingCodes.C] = ("#4B5563", "#F3F4F6", false),
-    };
-
-    /// <summary>
-    /// 評級的 StyleID。**不在表裡的評級落回 DataCell**——寧可沒有顏色，也不要產生一個
-    /// 指向不存在樣式的參考。
-    ///
-    /// **`rating` 可為 null（2026-09-21）**：沒有評等的人（零卡片、或沒有任何可評依據）
-    /// 也要落回 `DataCell`。少了這一格，`RatingStyles.ContainsKey(null)` 對
-    /// `Dictionary<string, …>` 會拋 `ArgumentNullException`——而它的觸發條件是「團隊裡有
-    /// 一個沒被評等的人」，正是這一版要新增的合法狀態。
-    /// </summary>
-    private static string RatingStyleId(string? rating) =>
-        rating is not null && RatingStyles.ContainsKey(rating) ? $"Rating{rating}" : "DataCell";
+    // ---- 評等門檻（設計 §13.2／§13.3／§13.4）----
+    //
+    // **公式與 grade 分解（`BuildRatingBreakdown`）共用這一份常數**：分解回給前端的
+    // `tiers`／`sampleThreshold` 與這裡算出來的值因此不可能各寫一份。前端不得再寫字面值。
+    private const double CompletionS = 0.85;
+    private const double CompletionA = 0.70;
+    private const double CompletionB = 0.50;
+    private const double OnTimeS = 0.85;
+    private const double FpyS = 0.80;
+    private const int FpySampleThreshold = 5;
+    private const double AdjustmentUp = 4.5;
+    private const double AdjustmentDown = 2.0;
+    private const int AdjustmentSampleThreshold = 3;
 
     /// <summary>
     /// 績效評等。**三條輸出路徑（JSON／CSV／xls）共用這一處**——原本是三份各寫一次的三元式，
@@ -61,18 +56,37 @@ public static class TeamReportEndpoints
     ///   `TeamReportTests.CompletionRate_IsZero_WhenHasCardsButNoneCompleted`）。
     /// * `onTimeRate` 為 null ＝ **已交付的卡片全都沒有截止日** ⇒ 不列入（見 `CardStats`）。
     /// </summary>
-    private static string? RatingFor(double? completionRate, double? onTimeRate, double? fpy) =>
+    private static string? RatingFor(double? completionRate, double? onTimeRate, double? fpy)
+    {
+        var tier = CompletionTier(completionRate);
+        if (tier is null) return null;
+        // S 是唯一要三個條件的等級：完成率對到 S 之後，兩個 gate 任一不成立就落回 A。
+        // 其餘三級只由完成率決定（設計 §13.2 的欄位關係）。
+        if (tier != RatingCodes.S) return tier;
+        return (onTimeRate is null || onTimeRate >= OnTimeS) && (fpy is null || fpy >= FpyS)
+            ? RatingCodes.S : RatingCodes.A;
+    }
+
+    /// <summary>
+    /// 完成率自己的階梯（不含 S 的兩個 gate）。`RatingFor` 與 `RatingComponentDto.AchievedTier`
+    /// 共用這一支——**兩份階梯就會有兩份先漂移的門檻**（0.85／0.70／0.50）。
+    ///
+    /// `AchievedTier` 的語意是「**完成率**對到哪一級」，不是 `baseRating`：完成率 1.0 而
+    /// 準時率 0.75 的人 base 是 A，但把他解釋成「完成率 100% → A」是錯的——掉出 S 的原因
+    /// 在 onTime 那一格（設計 §4.4 的 sGate），completion 這一格只說完成率自己的結論。
+    /// </summary>
+    private static string? CompletionTier(double? completionRate) =>
         completionRate is null ? null :
-        completionRate >= 0.85 && (onTimeRate is null || onTimeRate >= 0.85) && (fpy is null || fpy >= 0.80) ? RatingCodes.S :
-        completionRate >= 0.70 ? RatingCodes.A :
-        completionRate >= 0.50 ? RatingCodes.B : RatingCodes.C;
+        completionRate >= CompletionS ? RatingCodes.S :
+        completionRate >= CompletionA ? RatingCodes.A :
+        completionRate >= CompletionB ? RatingCodes.B : RatingCodes.C;
 
     /// <summary>
     /// 樣本門檻與「樣本不足 ⇒ 該條件不適用」的**唯一出處**（設計 §13.4／D10）。
     /// 回傳 null 表示「不適用」，不是 0——畫面靠這個區別顯示「樣本不足」而不是「0%」。
     /// </summary>
     private static double? FirstPassYieldOrNull(int firstPass, int reviewed) =>
-        reviewed >= 5 ? (double)firstPass / reviewed : null;
+        reviewed >= FpySampleThreshold ? (double)firstPass / reviewed : null;
 
     /// <summary>
     /// 成員的卡片統計與兩個比率。**三條輸出路徑（JSON／CSV／xls）共用這一處**——原本三份
@@ -136,60 +150,73 @@ public static class TeamReportEndpoints
     /// 門檻（4.5／2.0）刻意設在兩端，讓「不動」是預設結果。
     ///
     /// **這一支是獨立一層，不進 `RatingFor`**（設計 §13.3 的架構決定）：分數是主觀的，
-    /// 客觀公式不碰它。唯一的呼叫端是 `RatingForMember`——三條輸出路徑都經過那裡。
+    /// 客觀公式不碰它。唯一的呼叫端是 `Rate`——三條輸出路徑都經過那裡。
     ///
     /// 認不得的基準評等回傳原值：`RatingLadder` 與 `RatingCodes` 同源，走不到那一格，
     /// 但真的發生時「不調整」比「猜一個索引 0 的 C」安全。
     /// </summary>
     private static string ApplyScoreAdjustment(string baseRating, double? averageScore, int scoreSamples)
     {
-        if (averageScore is null || scoreSamples < 3) return baseRating;
+        if (averageScore is null || scoreSamples < AdjustmentSampleThreshold) return baseRating;
         var i = Array.IndexOf(RatingLadder, baseRating);
         if (i < 0) return baseRating;
-        if (averageScore >= 4.5) return RatingLadder[Math.Min(i + 1, RatingLadder.Length - 1)];
-        if (averageScore <= 2.0) return RatingLadder[Math.Max(i - 1, 0)];
+        if (averageScore >= AdjustmentUp) return RatingLadder[Math.Min(i + 1, RatingLadder.Length - 1)];
+        if (averageScore <= AdjustmentDown) return RatingLadder[Math.Max(i - 1, 0)];
         return baseRating;
     }
 
     /// <summary>
-    /// 樣本門檻 ＋ 評等（三條輸出路徑共用）。`fpy` 為 null 表示樣本不足——該條件
-    /// **不適用**，不是不成立（見 `RatingFor` 的說明：`null >= 0.80` 在 C# 是 false）。
-    ///
-    /// 這一層存在的理由與 `RatingFor` 相同：門檻值（`5`）與 null 的判斷原本在三條路徑
-    /// 各寫一次，而 CSV／xls 那兩份**沒有任何測試打到**——寫死 `null`（跳過整條 FPY 條件）
-    /// 或把門檻寫成別的數字，都不會有紅燈。現在三個呼叫端都只經過這裡。
-    ///
-    /// Task 11 起這裡也掛上主管評分的調整項：**`ApplyScoreAdjustment` 是包在 `RatingFor`
-    /// 外面的獨立一層**（設計 §13.3），不是它的第四個參數——客觀公式不碰主觀分數。
-    /// 掛在這裡而不是三個呼叫端各包一次，理由與上面那條相同。
+    /// 評等的**唯一出口**：一次算出 base（客觀公式）與 final（加上調整項）。
+    /// JSON 的 `ratingBreakdown` 需要兩者，CSV／xls 只需要 final——三個呼叫端都走這裡，
+    /// 「畫面說的 base」與「匯出檔的 rating」因此不可能各算一次（Task 10／11 的同一條理由）。
     /// </summary>
-    /// 2026-09-21 起回傳 **`string?`**：沒有基準評等（零卡片）時就沒有可調整的東西。
-    /// `rating is null` 在這一層擋掉，所以 `ApplyScoreAdjustment` 的簽章仍是 `string`
-    /// ——**調整項是「在既有等級上加減」，沒有等級就沒有加減的對象**。
-    /// </summary>
-    private static string? RatingForMember(double? completionRate, double? onTimeRate,
+    private static (string? Base, string? Final) Rate(
+        double? completionRate, double? onTimeRate,
         int firstPass, int reviewed, double? averageScore, int scoreSamples)
     {
-        var rating = RatingFor(completionRate, onTimeRate, FirstPassYieldOrNull(firstPass, reviewed));
-        return rating is null ? null : ApplyScoreAdjustment(rating, averageScore, scoreSamples);
+        var baseRating = RatingFor(completionRate, onTimeRate, FirstPassYieldOrNull(firstPass, reviewed));
+        // 調整項是「在既有等級上加減」，沒有等級（零卡片）就沒有加減的對象。
+        var finalRating = baseRating is null ? null : ApplyScoreAdjustment(baseRating, averageScore, scoreSamples);
+        return (baseRating, finalRating);
     }
 
     /// <summary>
-    /// 匯出檔名的年份後綴（設計 §5.4）：由**窗框左界**推導，全期時是空字串。
+    /// 樣本門檻 ＋ 評等的**匯出轉接**（只剩 CSV／xls 兩條路徑呼叫；JSON 直接走 `Rate`）。
+    /// `fpy` 為 null 表示樣本不足——該條件**不適用**，不是不成立（見 `RatingFor` 的說明：
+    /// `null >= 0.80` 在 C# 是 false）。
     ///
-    /// **不得改讀時鐘**（`DateTime.Now.Year`）：哪一年是使用者選的，後端只反映窗框（設計 D3）。
-    /// 兩條有檔名的輸出路徑（CSV／xls；JSON 沒有檔名）共用這一處，理由與 `CardStats` 相同
-    /// ——同一個式子抄兩份就會有一個地方先漂移。
+    /// 這一層存在的理由與 `RatingFor` 相同：門檻值（`5`）與 null 的判斷原本在三條路徑
+    /// 各寫一次，而 CSV／xls 那兩份**沒有任何測試打到**——寫死 `null`（跳過整條 FPY 條件）
+    /// 或把門檻寫成別的數字，都不會有紅燈。現在兩條匯出路徑都只經過這裡。
     ///
-    /// **已知且刻意接受的誤差**（裁定與理由見設計 §5.4 的更正標記）：前端送的是本地年頭轉
-    /// UTC（`new Date(2026, 0, 1).toISOString()`），且設計**明文不送時區位移**（D8③）
-    /// ——後端因此還原不了使用者選的本地年：在 UTC 以東，`window.From` 落在**前一個 UTC 年**
-    /// ——台北的使用者選 2026 會拿到 `-2025` 的檔名。修它要動前端的送法，
-    /// 或加一個參數（D8③ 明文不加），代價與一個檔名後綴不成比例。殘餘待本批收尾寫進
-    /// `docs/STATE.md`。
+    /// Task 11 的調整項由 `Rate` 套用：**`ApplyScoreAdjustment` 是包在 `RatingFor`
+    /// 外面的獨立一層**（設計 §13.3），不是它的第四個參數——客觀公式不碰主觀分數；
+    /// 集中在 `Rate` 而不是各呼叫端各包一次。這一支因此只是 `Rate(...).Final` 的轉接。
     /// </summary>
-    private static string YearSuffix(ReportWindow window) =>
-        window.From is null ? "" : $"-{window.From.Value.Year}";
+    /// 2026-09-21 起回傳 **`string?`**：沒有基準評等（零卡片）時就沒有可調整的東西。
+    /// `rating is null` 在 `Rate` 擋掉，所以 `ApplyScoreAdjustment` 的簽章仍是 `string`
+    /// ——**調整項是「在既有等級上加減」，沒有等級就沒有加減的對象**。
+    /// </summary>
+    private static string? RatingForMember(double? completionRate, double? onTimeRate,
+        int firstPass, int reviewed, double? averageScore, int scoreSamples) =>
+        Rate(completionRate, onTimeRate, firstPass, reviewed, averageScore, scoreSamples).Final;
+
+    /// <summary>
+    /// FPY 的 S gate 狀態（`met`／`failed`）——`BuildRatingBreakdown`（partial 檔）用它，
+    /// 而 `RatingFor` 用它**同一條界線**決定 S 的資格。**兩個站點都在這個檔**：門檻值與
+    /// 比較式只有一份宣告（`check:thresholds` 的 fpy 那一列守著「兩個站點同值」）。
+    /// `fpy` 為 null 不是 `failed`——那是「樣本不足、不列入」，由呼叫端判成 `notApplicable`。
+    /// </summary>
+    private static string FpyGateStatus(double fpy) => fpy >= FpyS ? "met" : "failed";
+
+    /// <summary>
+    /// 調整項的樣本門檻（設計 §13.3）：樣本不足 ⇒ 不調整，`notApplied` 的原因即
+    /// `sampleInsufficient`。**`ApplyScoreAdjustment` 的早退與 `NotAppliedReason`
+    /// （partial 檔）共用同一條界線**——比較式留在這個檔，`check:thresholds` 的
+    /// scoreSamples 那一列要求兩個站點都在這裡、且指著同一個常數。
+    /// </summary>
+    private static bool AdjustmentSamplesInsufficient(double? averageScore, int scoreSamples) =>
+        averageScore is null || scoreSamples < AdjustmentSampleThreshold;
 
     public static IEndpointRouteBuilder MapTeamReports(this IEndpointRouteBuilder app)
     {
@@ -275,7 +302,9 @@ public static class TeamReportEndpoints
                 // fpy 另存一份給回應（畫面要顯示「樣本不足」）。門檻與 null 的判斷只有
                 // `FirstPassYieldOrNull` 這一處，所以這一格與評等用的那一個不可能不一致。
                 double? fpy = FirstPassYieldOrNull(firstPass, reviewed);
-                var rating = RatingForMember(completionRate, onTimeRate, firstPass, reviewed, averageScore, scoreSamples);
+                // 評等的唯一出口：base 與 final 一次算好——`rating` 與 `ratingBreakdown`
+                // 因此是同一個 base／final 的兩個視圖，不是兩次計算。
+                var (baseRating, finalRating) = Rate(completionRate, onTimeRate, firstPass, reviewed, averageScore, scoreSamples);
 
                 return new
                 {
@@ -297,11 +326,16 @@ public static class TeamReportEndpoints
                     firstPass = firstPass,
                     reviewed = reviewed,
                     fpy = fpy,
-                    // 與餵給 `RatingForMember` 的**是同一個字典查出來的同一個值**（Task 10 的 I2
+                    // 與餵給 `Rate` 的**是同一個字典查出來的同一個值**（Task 10 的 I2
                     // 消滅的正是「同一件事算兩次」）：畫面顯示的取捨依據必須等於評等用的依據。
                     averageScore = averageScore,
                     scoreSamples = scoreSamples,
-                    rating = rating
+                    rating = finalRating,
+                    // 分解完全用上面已算好的值（不新增 DB 查詢）；門檻由伺服器帶，前端只渲染。
+                    ratingBreakdown = BuildRatingBreakdown(
+                        completionRate, total, onTimeRate, onTimeSamples,
+                        reviewed, fpy, averageScore, scoreSamples,
+                        baseRating, finalRating)
                 };
             })
             // **依評等，同級再依達成率**（使用者 2026-09-21 裁定）。
@@ -679,6 +713,83 @@ public static class TeamReportEndpoints
             // `TeamReportTests.TeamXlsExport_FilenameIgnoresHostileTeamName`。
             return Results.File(bytes, "application/vnd.ms-excel", $"team-performance-{teamId}{YearSuffix(window)}.xls");
         }).RequireAuthorization().RequirePermission(PermissionCodes.ReportView);
+
+        // ---- drill-down（2026-10-20 報表可解釋性，Task 1）----
+        //
+        // 母體／分子的語意全部住在 `ReportDrilldownQueries`（逐條沿用團隊報表那一份）；
+        // 這一層只負責參數驗證、權限過濾、補名與 wire DTO。
+        app.MapGet("/api/teams/{teamId:guid}/report/drilldown",
+            async (Guid teamId, Guid userId, string metric, DateTime? from, DateTime? to,
+                   int page = 1, int pageSize = 50, EntaskDbContext db = default!,
+                   IPermissionChecker permissionChecker = default!, ClaimsPrincipal principal = default!) =>
+            {
+                // 窗框驗證與團隊報表相同（顛倒、天數上限），錯誤碼與訊息逐字相同。
+                if (from is not null && to is not null && from >= to)
+                    return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "from 須早於 to" });
+                if (from is not null && to is not null && (to.Value - from.Value).TotalDays > WorkLogQueries.MaxRangeDays)
+                    return Results.BadRequest(new
+                    {
+                        code = ErrorCodes.QueryRangeTooLong,
+                        message = $"查詢的期間不可超過 {WorkLogQueries.MaxRangeDays} 天",
+                        @params = new { max = WorkLogQueries.MaxRangeDays }
+                    });
+
+                // **只接受具名值**：`Enum.TryParse` 連數字字串都收（`metric=3` ⇒ `AverageScore`），
+                // 那是列舉的底層值、不是這條路由的契約——數字與未知字串走同一條 400。
+                if (!TryParseMetricName(metric, out var parsed))
+                    return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "metric 無效" });
+                if (page < 1 || pageSize < 1 || pageSize > 200)
+                    return Results.BadRequest(new
+                    {
+                        code = ErrorCodes.RequestInvalid,
+                        message = "page 須大於等於 1，pageSize 須介於 1 與 200",
+                    });
+
+                // 窗框語意只在 `ReportWindow` —— 不自己 normalize。
+                var window = ReportWindow.Create(from, to);
+                var teamProjectIds = await db.Projects.Where(p => p.TeamId == teamId).Select(p => p.Id).ToListAsync();
+
+                // 可見範圍問的是**呼叫者**的 `card.read`（設計 §4.3「只回傳呼叫者有 card.read
+                // 的專案列」），不是被檢視成員的權限。逐專案走 `IPermissionChecker`（30 秒快取）
+                // ——不另寫一份 bulk 權限查詢，那是第二份授權語意。
+                var callerId = BoardEndpoints.CurrentUserId(principal);
+                var readableProjectIds = new List<Guid>();
+                foreach (var projectId in teamProjectIds)
+                {
+                    if (await permissionChecker.HasProjectPermissionAsync(callerId, projectId, PermissionCodes.CardRead))
+                        readableProjectIds.Add(projectId);
+                }
+
+                var result = await ReportDrilldownQueries.GetAsync(
+                    db, teamProjectIds, readableProjectIds, userId, parsed, window, page, pageSize);
+
+                // 每頁**一次**補名（`GetUsersAsync` 是既有模式）；不得逐列查詢。
+                var reviewerIds = result.Rows
+                    .SelectMany(r => new[] { r.FirstReviewerUserId, r.ReviewerUserId })
+                    .Where(id => id is not null)
+                    .Select(id => id!.Value)
+                    .Distinct()
+                    .ToList();
+                var users = await ActivityEndpoints.GetUsersAsync(db, reviewerIds);
+
+                var rows = result.Rows.Select(r => new ReportDrilldownItemDto(
+                    r.CardId, r.Title, r.ProjectId, r.ProjectName, r.CompletedAt, r.DueAt, r.Qualifies,
+                    r.FirstReviewEntryId, r.FirstReviewStatus, r.FirstReviewAt,
+                    ResolveUserName(users, r.FirstReviewerUserId),
+                    r.ReviewEntryId, r.Score, r.ReviewCreatedAt,
+                    ResolveUserName(users, r.ReviewerUserId),
+                    r.DueChanges?.Select(d => new DueChangeDto(d.ChangedAt, d.From, d.To)).ToList())).ToList();
+
+                return Results.Ok(new ReportDrilldownResponseDto(
+                    Metric: MetricKey(parsed),
+                    RowKind: result.RowKind == ReportRowKind.ReviewEntry ? "reviewEntry" : "card",
+                    PopulationCount: result.PopulationCount,
+                    QualifyingCount: result.QualifyingCount,
+                    VisiblePopulationCount: result.VisiblePopulationCount,
+                    VisibleQualifyingCount: result.VisibleQualifyingCount,
+                    HiddenCount: result.PopulationCount - result.VisiblePopulationCount,
+                    Rows: rows, Page: page, PageSize: pageSize));
+            }).RequireAuthorization().RequirePermission(PermissionCodes.ReportView);
 
         return app;
     }

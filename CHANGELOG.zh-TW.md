@@ -6,6 +6,27 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.3] - 2026-10-21
+
+### 新增
+
+- 團隊績效報表可解釋性：每位成員的評級附上分解——完成率對到的等級、準時交付率與
+  一次交付通過率的 S 門檻（含門檻值與樣本數），以及主管評分調整（含所依據的平均分）。
+- 成員的完成率、準時交付率、一次交付通過率與平均評分可 drill-down 到背後的卡片或
+  review 明細；沒有權限閱讀的列會單獨計數，不會默默消失。
+- 截止日變更會記錄舊值與新值，並顯示在準時交付率的明細裡。歷史從本版開始；
+  本版之前的變更沒有舊值可追。
+
+### 修正
+
+- 團隊報表改用完整內容寬度、成員操作入口移到第一欄，可點的數字有可見的提示。
+- 使用者管理與系統活動頁改用與其他頁面相同的頁殼。
+- 列印成員考核表只輸出一頁：對話框不再於每一頁重複，應用程式外殼、關閉鈕與頭像不進紙張。
+
+### 備註
+
+- 沒有資料庫 migration，也沒有設定變更。
+
 ## [1.0.2] - 2026-10-16
 
 ### 修正
@@ -45,6 +66,7 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
 [1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.0

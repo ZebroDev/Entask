@@ -1,51 +1,52 @@
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { TeamReportTab } from "./TeamReportTab";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import type { Mock } from "vitest";
 import { setLocale } from "@/i18n";
 import { formatDayRange } from "@/lib/format";
 import { axiosNetworkError } from "@/test/http-errors";
+import { makeWrapper, memberFixture, reportFixture } from "./team-report-test-utils";
 
 vi.mock("@/lib/api", () => ({
   api: { get: vi.fn(), put: vi.fn(), post: vi.fn(), delete: vi.fn() },
 }));
 
-const makeWrapper = () => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
-
-/** 單一成員的報表回應。`rating` 缺席即模擬後端沒給評級（fixture 刻意允許不傳）。 */
-const memberFixture = (rating?: string, extra: Record<string, unknown> = {}) => ({
-  data: {
-    members: [
-      {
-        userId: "u1",
-        username: "alice",
-        displayName: "Alice",
-        completedCards: 5,
-        totalCards: 10,
-        completionRate: 0.5,
-        ...(rating === undefined ? {} : { rating }),
-        ...extra,
-      },
-    ],
-  },
-});
-
 /**
- * 完整的報表回應（含頂層的 `availableYears`）。
+ * drill-down 對話框在這一檔只驗**接線**（哪個 metric、哪個成員、哪一段窗框），
+ * 內部的請求與表格在同名的 `ReportDrilldownDialog.test.tsx` 驗。
  *
- * `memberFixture` 的 `extra` 展開在**成員**物件上、帶不了頂層欄位，所以另外包一層而不是
- * 改它的形狀——那個形狀有 23 支測試依賴。
+ * 替身把 props 印成 data 屬性：`toHaveBeenCalledWith` 對 React 元件的 props 比對
+ * 依賴函式元件的呼叫時機（React 19 可能先以空 props 暖身、或把元件當成 memo 包裝），
+ * 而 DOM 上的屬性只在「真的以這組 props 渲染」時才存在——判別力在畫面上，
+ * 不在 mock 的呼叫紀錄裡。
  */
-const reportFixture = (years: number[] = []) => ({
-  data: { ...memberFixture().data, availableYears: years },
-});
+vi.mock("./ReportDrilldownDialog", () => ({
+  ReportDrilldownDialog: (props: {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    teamId: string;
+    member: { userId: string };
+    metric: string;
+    from?: string;
+    to?: string;
+  }) => (
+    <div
+      data-testid="report-drilldown-dialog"
+      data-open={String(props.open)}
+      data-team-id={props.teamId}
+      data-user-id={props.member.userId}
+      data-metric={props.metric}
+      data-from={props.from ?? ""}
+      data-to={props.to ?? ""}
+    >
+      {/* 關閉路徑：父層的 onOpenChange 必須把 metric 收掉、讓條件掛載卸載它。 */}
+      <button type="button" onClick={() => props.onOpenChange(false)}>
+        close-drilldown
+      </button>
+    </div>
+  ),
+}));
 
 /**
  * 一個一定不等於今年的年份。fixture 用它才驗得出「今年由前端併入下拉」——
@@ -96,46 +97,38 @@ const captureAnchorClicks = () => {
   return { clicked, restore: () => spy.mockRestore() };
 };
 
-/** 評級欄（第 3 格）的文字。用 td 的索引而不是 role，避免對表格語意多做假設。 */
+// 格序（2026-10-21 起）：0 個人檔案（動作欄，移到最前面）、1 排名、2 成員、3 評級、
+// 4 完成／總卡片、5 達成率、6 準時交付率、7 一次交付通過率、8 平均評分。
+// 索引不必等於欄序的權威，但順序一變這裡就該跟著改。
+
+/** 評級欄（第 4 格）的文字。用 td 的索引而不是 role，避免對表格語意多做假設。 */
 const ratingCell = async () => {
   const row = (await screen.findByText("Alice")).closest("tr")!;
-  return row.children[2] as HTMLElement;
+  return row.children[3] as HTMLElement;
 };
 
-/** 一次交付通過率欄（第 7 格）。索引不必等於欄序的權威，但順序一變這裡就該跟著改。 */
+/** 一次交付通過率欄（第 8 格）。 */
 const firstPassCell = async () => {
-  const row = (await screen.findByText("Alice")).closest("tr")!;
-  return row.children[6] as HTMLElement;
-};
-
-/** 平均評分欄（第 8 格）。 */
-const averageScoreCell = async () => {
   const row = (await screen.findByText("Alice")).closest("tr")!;
   return row.children[7] as HTMLElement;
 };
 
-/** 達成率欄（第 5 格）。 */
-const completionCell = async () => {
+/** 平均評分欄（第 9 格）。 */
+const averageScoreCell = async () => {
   const row = (await screen.findByText("Alice")).closest("tr")!;
-  return row.children[4] as HTMLElement;
+  return row.children[8] as HTMLElement;
 };
 
-/** 準時交付率欄（第 6 格）——**使用者回報的那一格**。 */
-const onTimeCell = async () => {
+/** 達成率欄（第 6 格）。 */
+const completionCell = async () => {
   const row = (await screen.findByText("Alice")).closest("tr")!;
   return row.children[5] as HTMLElement;
 };
 
-/**
- * 明細對話框裡某一張統計卡的值。
- *
- * **必須以對話框為範圍查標籤**：`準時交付率` 這個字串在表格表頭也有一份
- * （同一條 `team:report.metric.onTime`），不限定範圍會命中表頭那一份。
- */
-const dialogStat = async (label: string) => {
-  const dialog = await screen.findByRole("dialog");
-  const labelEl = within(dialog).getByText(label);
-  return labelEl.parentElement!.querySelector(".text-xl") as HTMLElement;
+/** 準時交付率欄（第 7 格）——**使用者回報的那一格**。 */
+const onTimeCell = async () => {
+  const row = (await screen.findByText("Alice")).closest("tr")!;
+  return row.children[6] as HTMLElement;
 };
 
 describe("TeamReportTab", () => {
@@ -194,9 +187,8 @@ describe("TeamReportTab", () => {
 
   // ---------- Task 10／11 的兩個新指標 ----------
   //
-  // 兩欄刻意插在 onTime（索引 5）與 action 欄之間 ⇒ 索引 6 與 7。插在評級欄之前會讓
-  // `ratingCell()` 的 `children[2]` 指向別的欄，上面那幾支評級斷言會以「像翻譯壞了」
-  // 的樣子變紅。
+  // 兩欄在格序的 7 與 8。**在評級欄之前插入任何一欄**都會讓 `ratingCell()` 的索引
+  // 指向別的欄，上面那幾支評級斷言會以「像翻譯壞了」的樣子變紅。
 
   it("有樣本時顯示一次交付通過率與平均評分", async () => {
     (api.get as Mock).mockResolvedValue(
@@ -315,19 +307,6 @@ describe("TeamReportTab", () => {
     const cell = await completionCell();
     expect(cell).toHaveTextContent("0.0%");
     expect(cell).not.toHaveTextContent("樣本不足");
-  });
-
-  it("明細對話框的達成率與準時率同樣顯示「樣本不足」", async () => {
-    (api.get as Mock).mockResolvedValue(
-      memberFixture("A", { completionRate: null, onTimeRate: null, completedCards: 0, totalCards: 0 }),
-    );
-
-    render(<TeamReportTab teamId="t1" />, { wrapper: makeWrapper() });
-
-    fireEvent.click(await screen.findByRole("button", { name: /檢視檔案/ }));
-
-    expect((await dialogStat("任務達成率")).textContent).toBe("樣本不足");
-    expect((await dialogStat("準時交付率")).textContent).toBe("樣本不足");
   });
 
   // 匯出鈕有兩顆（Excel 與 CSV），用 `/匯出 Excel/` 才只命中要驗的那一顆
@@ -683,5 +662,79 @@ describe("TeamReportTab", () => {
 
     expect(await screen.findByText("目前沒有任何績效數據")).toBeInTheDocument();
     expect(screen.queryByText("所選期間沒有績效數據")).not.toBeInTheDocument();
+  });
+
+  // ---------- Task 5：dossier 的 metric 可 drill-down ----------
+  //
+  // dossier 的考評表是**唯一**逐成員的畫面，drill-down 的 userId 與 metric 都從這裡來。
+  // 這一組只驗接線：哪個 metric、哪個成員、哪一段窗框。表格與請求在
+  // `ReportDrilldownDialog.test.tsx`。
+
+  const openDossier = async () => {
+    fireEvent.click(await screen.findByRole("button", { name: /檢視檔案/ }));
+    return screen.findByRole("dialog");
+  };
+
+  it("metric card opens drilldown with the member, metric and report window", async () => {
+    (api.get as Mock).mockResolvedValue(memberFixture("A"));
+    render(<TeamReportTab teamId="t1" />, { wrapper: makeWrapper() });
+    const dossier = await openDossier();
+
+    fireEvent.click(within(dossier).getByRole("button", { name: /任務達成率/ }));
+
+    const drilldown = await screen.findByTestId("report-drilldown-dialog");
+    expect(drilldown).toHaveAttribute("data-open", "true");
+    expect(drilldown).toHaveAttribute("data-team-id", "t1");
+    expect(drilldown).toHaveAttribute("data-user-id", "u1");
+    expect(drilldown).toHaveAttribute("data-metric", "completion");
+    // 窗框要與報表**同源**（預設今年、上界排他）：不傳窗框的實作會讓 drill-down 變成全期，
+    // 而畫面上看起來完全正常——數字只是「比上面那張表多」。
+    const year = new Date().getFullYear();
+    expect(drilldown).toHaveAttribute("data-from", new Date(year, 0, 1).toISOString());
+    expect(drilldown).toHaveAttribute("data-to", new Date(year + 1, 0, 1).toISOString());
+    // drill-down 是疊在 dossier 上的，不是把它換掉。
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    // 同一個成員的另一個 metric：按鈕各自接自己的 wire 名稱（不是四顆都送 completion）。
+    fireEvent.click(within(dossier).getByRole("button", { name: /平均評分/ }));
+    await waitFor(() =>
+      expect(screen.getByTestId("report-drilldown-dialog")).toHaveAttribute("data-metric", "averageScore"),
+    );
+
+    // 關閉 drill-down：父層把 metric 收掉 ⇒ 條件掛載卸載它；dossier 仍在（只是疊了一層）。
+    // 用 data-testid 內的文字而不是 role：dossier 開著時 Radix 會把其餘子樹 aria-hidden，
+    // 這個替身落在 dossier 的 portal 之外，`getByRole` 依無障礙樹找不到它。
+    fireEvent.click(within(drilldown).getByText("close-drilldown"));
+    await waitFor(() =>
+      expect(screen.queryByTestId("report-drilldown-dialog")).not.toBeInTheDocument(),
+    );
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  // 列印版的 dossier 只留解釋文字，不留 drill-down 的觸發鈕：印出來的是主管簽核文件，
+  // 清單本身受權限截斷（設計 §4.5）。四顆各自都要有——漏一顆就有一顆印在紙上。
+  it("drilldown buttons are print-hidden", async () => {
+    (api.get as Mock).mockResolvedValue(memberFixture("A"));
+    render(<TeamReportTab teamId="t1" />, { wrapper: makeWrapper() });
+    const dossier = await openDossier();
+
+    for (const name of [/任務達成率/, /準時交付率/, /一次交付通過率/, /平均評分/]) {
+      expect(within(dossier).getByRole("button", { name })).toHaveClass("print:hidden");
+    }
+  });
+
+  // 列印隔離（2026-10-21，使用者實測「兩頁內容一樣」）：Radix 的 DialogContent 基底是
+  // `position: fixed`，列印時固定定位的內容會畫在**每一頁**上（當場量：報表頁 2 頁
+  // ⇒ 考核表也印了 2 份）。jsdom 量不到紙張，這裡只鎖住三個鉤子——資料標記
+  // （`index.css` 據此把背後的 `#root` 移出紙張）、回到文件流、列印鈕不進紙。
+  it("dossier carries the print-isolation hooks", async () => {
+    (api.get as Mock).mockResolvedValue(memberFixture("A"));
+    render(<TeamReportTab teamId="t1" />, { wrapper: makeWrapper() });
+    const dossier = await openDossier();
+
+    expect(dossier).toHaveAttribute("data-dossier-print");
+    expect(dossier.className).toContain("print:static");
+    expect(dossier.className).toContain("print:transform-none");
+    expect(within(dossier).getByRole("button", { name: /列印考評表/ })).toHaveClass("print:hidden");
   });
 });

@@ -111,8 +111,13 @@ public static class CardEndpoints
                     else return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "dueAt 須為 ISO 日期或 null" });
                     if (newDue != card.DueAt)
                     {
+                        // detail 記「變更前／變更後」：on-time drill-down 靠它還原每一次挪動
+                        // （讀取端在 `ReportDrilldownQueries.ParseDueChangeEntry`）。
+                        // 屬性名刻意是小寫 `from`／`to`——匿名型別照寫，不要改成 PascalCase。
+                        var previousDue = card.DueAt;
                         card.DueAt = newDue;
-                        await activity.AddAsync(card.Id, userId, ActivityTypes.DueChange);
+                        await activity.AddAsync(card.Id, userId, ActivityTypes.DueChange,
+                            detail: new { @from = previousDue, to = newDue });
                     }
                 }
                 if (body.TryGetProperty("startAt", out var startEl))

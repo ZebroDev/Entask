@@ -5,8 +5,11 @@ import { toast } from "sonner";
 import { api } from "@/lib/api";
 import { apiErrorMessage } from "@/lib/utils";
 import { formatDate } from "@/lib/format";
+import { Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
@@ -80,16 +83,25 @@ export function UsersPage() {
   if (users.isError) return <p className="p-6 text-sm text-destructive">{apiErrorMessage(users.error, t("admin:error"))}</p>;
 
   return (
-    <div className="p-6 space-y-4">
-      <header>
-        <h1 className="text-lg font-semibold">{t("admin:title")}</h1>
-        <p className="text-sm text-muted-foreground">{t("admin:subtitle")}</p>
-      </header>
+    <div className="container max-w-6xl space-y-6 px-4 py-6 md:px-6">
+      {/*
+        頁殼與「我的日誌」／「個人工作台」同一組（2026-10-21 使用者回報這兩頁畫風
+        與其他頁不一致）：`container max-w-6xl`、`text-2xl` 標題＋主色圖示、
+        `text-xs` 副標。先前是 `p-6` 滿版＋`text-lg`，在寬螢幕上被拉成整片，
+        與那兩頁的 1152px 內容欄不是同一個節奏。
+      */}
+      <div>
+        <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
+          {t("admin:title")}
+          <Users className="h-5 w-5 text-primary" />
+        </h1>
+        <p className="mt-1 text-xs text-muted-foreground">{t("admin:subtitle")}</p>
+      </div>
 
       {/* 三個篩選鈕刻意逐一寫出來、不走 map：i18next-parser 只抽得到**字面值**引數的
           t 呼叫，`t(\`admin:filter.${f}\`)` 會讓這三條被 --fail-on-update 判為沒人用
           而被刪掉（`i18next-parser.config.js` 的 input 註解）。 */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button variant={filter === "all" ? "default" : "outline"} size="sm" onClick={() => setFilter("all")}>
           {t("admin:filter.all")}
         </Button>
@@ -101,66 +113,73 @@ export function UsersPage() {
         </Button>
       </div>
 
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="text-left text-muted-foreground">
-            <th className="py-2">{t("admin:column.user")}</th>
-            <th>{t("admin:column.status")}</th>
-            <th>{t("admin:column.changedAt")}</th>
-            <th>{t("admin:column.actions")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((u) => (
-            <tr key={u.userId} className="border-t">
-              <td className="py-2">
-                <div className="font-medium">{u.displayName}</div>
-                <div className="text-xs text-muted-foreground">@{u.username}</div>
-              </td>
-              <td>
-                <Badge variant={u.deletedAt || u.deactivatedAt ? "secondary" : "default"}>{statusOf(u)}</Badge>
-              </td>
-              <td className="text-muted-foreground">
-                {changedAtOf(u) ? formatDate(changedAtOf(u)) : "—"}
-              </td>
-              <td className="space-x-2">
-                {!u.deletedAt && !u.deactivatedAt && (
-                  <>
-                    <Button variant="outline" size="sm" onClick={() => setDeactivating(u)}>
-                      {t("common:action.deactivate")}
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={() => setResetting(u)}>
-                      {t("admin:resetPassword.action")}
-                    </Button>
-                  </>
-                )}
-                {u.deactivatedAt && !u.deletedAt && (
-                  <>
-                    <Button variant="outline" size="sm" onClick={() => setReactivating(u)}>
-                      {t("common:action.reactivate")}
-                    </Button>
-                    <Button variant="destructive" size="sm" onClick={() => setDeleting(u)}>
-                      {t("common:action.delete")}
-                    </Button>
-                    {/* 停用者也給這一顆：後端**允許**對停用者重置（`Reset_ForDeactivatedUser_Succeeds`）。
-                        只放在 active 分支會讓 UI 與 API 不一致，而那個不一致沒有任何地方會響。 */}
-                    <Button variant="outline" size="sm" onClick={() => setResetting(u)}>
-                      {t("admin:resetPassword.action")}
-                    </Button>
-                  </>
-                )}
-                {/* 已刪除者沒有任何動作（設計 §4.9）：帳號資料已經清了，剩下的動作都是 400 */}
-                {u.deletedAt && <span className="text-muted-foreground">—</span>}
-              </td>
-            </tr>
-          ))}
-          {rows.length === 0 && (
-            <tr>
-              <td colSpan={4} className="py-6 text-center text-muted-foreground">{t("admin:empty")}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      {/* 表格改用共用的 `Table`／`Card`（與團隊報表同一組）：原本是裸 `<table>`，
+          表頭只有一層底色、列只有一條 border-top，旁邊沒有任何容器——這是「粗糙」
+          最明顯的來源。 */}
+      <Card className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-muted/50">
+              <TableHead>{t("admin:column.user")}</TableHead>
+              <TableHead>{t("admin:column.status")}</TableHead>
+              <TableHead>{t("admin:column.changedAt")}</TableHead>
+              <TableHead className="text-right">{t("admin:column.actions")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((u) => (
+              <TableRow key={u.userId}>
+                <TableCell>
+                  <div className="font-medium">{u.displayName}</div>
+                  <div className="text-xs text-muted-foreground">@{u.username}</div>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={u.deletedAt || u.deactivatedAt ? "secondary" : "default"}>{statusOf(u)}</Badge>
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {changedAtOf(u) ? formatDate(changedAtOf(u)) : "—"}
+                </TableCell>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-2 whitespace-nowrap">
+                    {!u.deletedAt && !u.deactivatedAt && (
+                      <>
+                        <Button variant="outline" size="sm" onClick={() => setDeactivating(u)}>
+                          {t("common:action.deactivate")}
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setResetting(u)}>
+                          {t("admin:resetPassword.action")}
+                        </Button>
+                      </>
+                    )}
+                    {u.deactivatedAt && !u.deletedAt && (
+                      <>
+                        <Button variant="outline" size="sm" onClick={() => setReactivating(u)}>
+                          {t("common:action.reactivate")}
+                        </Button>
+                        <Button variant="destructive" size="sm" onClick={() => setDeleting(u)}>
+                          {t("common:action.delete")}
+                        </Button>
+                        {/* 停用者也給這一顆：後端**允許**對停用者重置（`Reset_ForDeactivatedUser_Succeeds`）。
+                            只放在 active 分支會讓 UI 與 API 不一致，而那個不一致沒有任何地方會響。 */}
+                        <Button variant="outline" size="sm" onClick={() => setResetting(u)}>
+                          {t("admin:resetPassword.action")}
+                        </Button>
+                      </>
+                    )}
+                    {/* 已刪除者沒有任何動作（設計 §4.9）：帳號資料已經清了，剩下的動作都是 400 */}
+                    {u.deletedAt && <span className="text-muted-foreground">—</span>}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+            {rows.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4} className="py-8 text-center text-muted-foreground">{t("admin:empty")}</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Card>
 
       <AlertDialog open={reactivating !== null} onOpenChange={(open) => !open && setReactivating(null)}>
         <AlertDialogContent>

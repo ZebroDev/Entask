@@ -151,6 +151,35 @@
       "account": "アカウント：@{{username}}",
       "action": "プロフィールを表示",
       "criteria": "評価基準：達成率と納期遵守率がともに 85% 以上、かつ初回提出通過率が 80% 以上の場合は S 評価、達成率 70% 以上の場合は A 評価、達成率 50% 以上の場合は B 評価。",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}}（平均スコア {{score}}、{{samples}} 件）",
+          "appliedUp": "{{from}} → {{to}}（平均スコア {{score}}、{{samples}} 件）",
+          "atCeiling": "すでに最高評価です",
+          "atFloor": "すでに最低評価です",
+          "notApplied": "{{rating}} のまま：{{reason}}",
+          "notAppliedWithScore": "{{rating}} のまま：{{reason}}（平均スコア {{score}}、{{samples}} 件）",
+          "sampleInsufficient": "サンプル不足（{{samples}} / {{threshold}} 件）",
+          "withinRange": "平均スコアは {{down}}～{{up}} の範囲内です"
+        },
+        "adjustmentLabel": "主管スコア調整",
+        "averageScore": "平均スコア",
+        "completion": "達成率 {{value}} → {{achievedTier}}",
+        "firstPassYield": "初回提出通過率 {{value}}",
+        "notApplicable": {
+          "noCards": "サンプル不足のため評価なし",
+          "noDueSamples": "納期サンプルなし",
+          "sampleInsufficient": "サンプル不足"
+        },
+        "onTime": "納期遵守率 {{value}}",
+        "sampleSize": "{{samples}} 件",
+        "sampleWithThreshold": "{{samples}} 件、しきい値 {{threshold}}",
+        "sGateNote": "S 基準未達（{{final}} には影響しません）",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "この評価の理由",
+        "viewCards": "カードを表示",
+        "viewReviews": "レビューを表示"
+      },
       "period": "評価期間",
       "print": {
         "action": "評価表を印刷 / PDF として保存"
@@ -163,6 +192,35 @@
         "label": "上司評価と年間承認コメント："
       },
       "title": "{{name}} の業績評価表"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "カード",
+        "completedAt": "完了日時",
+        "dueAt": "納期",
+        "dueChanges": "納期の変更",
+        "firstReview": "最初のレビュー",
+        "project": "プロジェクト",
+        "qualifies": "該当",
+        "reviewedAt": "レビュー日時",
+        "reviewer": "レビュアー",
+        "score": "スコア"
+      },
+      "dueChange": {
+        "afterCompletion": "完了後に変更",
+        "legacy": "旧バージョンでは値が記録されていません"
+      },
+      "empty": "該当するデータはありません",
+      "hiddenCards_other": "{{count}} 枚のカードは閲覧権限のないプロジェクトにあります",
+      "hiddenReviews_other": "{{count}} 件のレビューは閲覧権限のないプロジェクトにあります",
+      "page": {
+        "next": "次へ",
+        "prev": "前へ"
+      },
+      "population": "母集団 {{n}}",
+      "qualifying": "該当 {{n}}",
+      "recordedSince": "この機能は 2026-10-20 から記録しています",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "パフォーマンスデータがまだありません",
     "export": {

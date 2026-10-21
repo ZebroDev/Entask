@@ -151,6 +151,35 @@
       "account": "账号：@{{username}}",
       "action": "查看文件",
       "criteria": "评级标准：达成率与准时交付率均达 85% 以上、且一次交付通过率达 80% 以上评为 S 级；达成率达 70% 评为 A 级；达成率 50% 以上评为 B 级。",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}}（平均分 {{score}}，{{samples}} 笔）",
+          "appliedUp": "{{from}} → {{to}}（平均分 {{score}}，{{samples}} 笔）",
+          "atCeiling": "已是最高等级",
+          "atFloor": "已是最低等级",
+          "notApplied": "维持 {{rating}}：{{reason}}",
+          "notAppliedWithScore": "维持 {{rating}}：{{reason}}（平均分 {{score}}，{{samples}} 笔）",
+          "sampleInsufficient": "样本不足（{{samples}} / {{threshold}} 笔）",
+          "withinRange": "平均分介于 {{down}} 与 {{up}} 之间"
+        },
+        "adjustmentLabel": "主管评分调整",
+        "averageScore": "平均评分",
+        "completion": "完成率 {{value}} → {{achievedTier}}",
+        "firstPassYield": "一次交付通过率 {{value}}",
+        "notApplicable": {
+          "noCards": "样本不足，不评等",
+          "noDueSamples": "无截止日样本",
+          "sampleInsufficient": "样本不足"
+        },
+        "onTime": "准时交付率 {{value}}",
+        "sampleSize": "{{samples}} 笔",
+        "sampleWithThreshold": "{{samples}} 笔，门槛 {{threshold}}",
+        "sGateNote": "未达 S 门槛（不影响 {{final}}）",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "为什么是这个等级",
+        "viewCards": "查看卡片",
+        "viewReviews": "查看 review"
+      },
       "period": "考核期间",
       "print": {
         "action": "打印考评表 / 另存为 PDF"
@@ -163,6 +192,35 @@
         "label": "主管考评与年度审批意见："
       },
       "title": "{{name}} 的绩效考核表"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "卡片",
+        "completedAt": "完成时间",
+        "dueAt": "截止日期",
+        "dueChanges": "截止日期变更",
+        "firstReview": "第一条 review",
+        "project": "项目",
+        "qualifies": "符合",
+        "reviewedAt": "审查时间",
+        "reviewer": "审查者",
+        "score": "分数"
+      },
+      "dueChange": {
+        "afterCompletion": "完成后变更",
+        "legacy": "旧版未记录数值"
+      },
+      "empty": "没有符合条件的数据",
+      "hiddenCards_other": "{{count}} 张卡片位于你无权查看的项目",
+      "hiddenReviews_other": "{{count}} 条 review 位于你无权查看的项目",
+      "page": {
+        "next": "下一页",
+        "prev": "上一页"
+      },
+      "population": "母体 {{n}}",
+      "qualifying": "符合 {{n}}",
+      "recordedSince": "本功能自 2026-10-20 起记录",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "目前没有任何绩效数据",
     "export": {

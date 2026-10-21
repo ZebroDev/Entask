@@ -20,11 +20,16 @@
 //      （`TeamReportTab.tsx` 的三格註解就在講那幾個門檻）。AST 讓「註解與字串不是節點」
 //      這件是**結構上**成立，不是靠正規表示式小心避開——那是 `check-error-paths.mjs`
 //      已經立下的同一條規矩。
-//   3. **每一側都必須「恰好命中宣告的次數」**。命中 0 次（改名、改形狀）與數量不符
+//   3. **後端右運算元可以是具名常數**（2026-10-20）：門檻集中成
+//      `private const double FpyS = 0.80;` 這一類宣告之後，比較式本身不再帶數字。
+//      閘門因此讀**同一檔**的 `const <型別> <名稱> = <數值>;` 宣告把值解析回來。
+//      **解析不到就 exit 1，不是略過**：那時「在比哪一個值」沒有答案。宣告在別的檔、
+//      或值不是單純數字（算式、另一個常數）也一樣大聲——這一支不猜。
+//   4. **每一側都必須「恰好命中宣告的次數」**。命中 0 次（改名、改形狀）與數量不符
 //      （同一句寫兩處、或其中一處被刪掉）都 exit 1：前者會讓這一列**靜默變成守著空氣**，
 //      後者讓「在比哪一個」失去答案。這一條與 `check-error-codes.mjs` 的「恰好一處」是
-//      同一種驅動；前端側多一個 `count`（預設 1）用來宣告**重數**——同一條界線在畫面上
-//      有兩個消費端時，列 2 比放寬成「至少一次」誠實。
+//      同一種驅動；兩側都可以用 `count`（預設 1）宣告**重數**——同一條界線在畫面上／
+//      程式裡有兩個消費端時，列 2 比放寬成「至少一次」誠實。
 //
 // **關係（`relation`）的兩種值**：
 //   - `same`：兩側的**運算子逐字相同**且數值相等（`>=` 與 `>` 在邊界上差一個值 ⇒ 分開看）。
@@ -39,8 +44,13 @@
 //      （避免宣告腐爛成保護死碼）。值的漂移不歸它。
 //   3. **後端那一側是遮罩後的正規表示式，不是 C# AST**（本 repo 沒有 C# 剖析器）。
 //      所以形狀改寫之後 pattern 會失配——但那是**大聲**的（「找不到站點」），不是靜默。
+//      具名常數的值解析同理：只認同一檔「`const <型別> <名稱> = <數字>;`」的宣告，
+//      讀不到就 exit 1（「解析不到常數」），不會退回 0 對。
 //   4. **只認「左運算元 ＋ 比較運算子 ＋ 數值右運算元」**這個形狀。兩邊都是變數的比較、
 //      或左右顛倒（`0.8 <= m.fpy`）不在涵蓋範圍。
+//   5. **同一檔若在兩個類別各宣告同名常數，解析會取最後一個宣告的值**（本樹沒有這個形狀；
+//      真有時值若不同會靜默挑一個）。要收緊就得把「解析到幾個宣告」變成第三種命中數，
+//      那會讓這一列的 `count` 同時管兩件事——現階段選擇如實記載，不假裝它被守住了。
 //
 // 名稱：**門檻**（threshold），不是「常數」——這一支管的是「拿來比大小的那一條界線」，
 // 常數的一般性比對（`ErrorCodes` 的值 ↔ 前端）另有 `check:labels` 與 `check:errors`。
@@ -64,26 +74,43 @@ const TEAM_REPORT_CS = "src/Entask.Api/Endpoints/TeamReportEndpoints.cs";
 const TEAM_REPORT_TSX = "web/src/pages/team/TeamReportTab.tsx";
 
 /**
+ * 後端右運算元的兩種形狀：數字字面值（`0.80`）或**具名常數**（`FpyS`）。
+ * 常數的值由同一檔的 `const <型別> <名稱> = <數值>;` 宣告解析（`constantDeclarations`）。
+ */
+const VALUE_PATTERN = String.raw`(?<value>[A-Za-z_][A-Za-z0-9_]*|\d+(?:\.\d+)?)`;
+
+/** 以左運算元的原始碼文字組出後端比較的 pattern（跑在遮罩後的字串上）。 */
+const comparisonPattern = (left) => new RegExp(String.raw`${left} (?<op>>=|>|<=|<) ${VALUE_PATTERN}`);
+
+/**
  * 兩側必須相符的門檻。後端用 `pattern`（跑在遮罩後的字串上，抓 `op` 與 `value` 兩個
  * 具名群組），前端用 `left`（**左運算元的原始碼文字**，比對時把空白全部去掉）。
+ *
+ * `count` 是**宣告的重數**，兩側都適用（預設 1）。後端兩列都是 2：同一個門檻除了
+ * 主公式（`RatingFor`／`ApplyScoreAdjustment`）之外，grade 分解的狀態（`BuildRatingBreakdown`
+ * 的 sGate）與 `NotAppliedReason` 也各再比一次——**兩處都必須指著同一個值**，
+ * 所以列 2 而不是放寬成「至少一次」。
  */
 const PAIRS = [
   {
     concept: "一次交付通過率（fpy）的 S 門檻",
     relation: "same",
-    backend: { file: TEAM_REPORT_CS, pattern: /fpy (?<op>>=|>|<=|<) (?<value>\d+(?:\.\d+)?)/ },
+    backend: { file: TEAM_REPORT_CS, pattern: comparisonPattern(String.raw`fpy`), count: 2 },
     frontend: { file: TEAM_REPORT_TSX, left: "m.fpy" },
   },
   {
     concept: "主管評分調整項的樣本門檻",
     relation: "same",
-    backend: { file: TEAM_REPORT_CS, pattern: /scoreSamples (?<op>>=|>|<=|<) (?<value>\d+(?:\.\d+)?)/ },
+    backend: { file: TEAM_REPORT_CS, pattern: comparisonPattern(String.raw`scoreSamples`), count: 2 },
     frontend: { file: TEAM_REPORT_TSX, left: "(m.scoreSamples ?? 0)" },
   },
   {
     concept: "跨團隊使用者搜尋的最短長度",
     relation: "complementary",
-    backend: { file: "src/Entask.Api/Endpoints/AuthEndpoints.cs", pattern: /trimmed\.Length (?<op>>=|>|<=|<) (?<value>\d+(?:\.\d+)?)/ },
+    backend: {
+      file: "src/Entask.Api/Endpoints/AuthEndpoints.cs",
+      pattern: comparisonPattern(String.raw`trimmed\.Length`),
+    },
     // `count: 2`——同一條界線在畫面上有**兩個**消費端：`enabled`（不要送出必定被擋的請求）
     // 與「其他團隊」那一區的渲染條件（沒有查詢結果就不要宣稱在搜尋）。兩者都要跟著後端走，
     // 少一個就是宣告過期；**第三個**出現時要一起改這個數字（那正是它存在的理由）。
@@ -123,20 +150,64 @@ const readSource = (rel) => {
 
 const lineOf = (text, index) => text.slice(0, index).split("\n").length;
 
-/** 後端一側：遮罩（字串與註解變空白）之後才比對，且必須恰好命中一次。 */
-const backendSite = (spec, concept) => {
-  const { masked } = maskCSharp(readSource(spec.file), spec.file);
+/**
+ * 同一檔的數字常數宣告：`private const double FpyS = 0.80;` ⇒ `FpyS → 0.80`。
+ * **只認宣告值就是一個數字**的形狀（可帶負號）；算式、別人的常數、字串一律不認——
+ * 那些情況會落到 `backendSites` 的「解析不到常數」，而不是被猜一個值。
+ */
+const constantDeclarations = (masked) => {
+  const constants = new Map();
+  const declaration =
+    /\bconst\s+[A-Za-z_][A-Za-z0-9_]*\s+(?<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?<value>-?\d+(?:\.\d+)?)\s*;/g;
+  for (const match of masked.matchAll(declaration)) {
+    constants.set(match.groups.name, Number(match.groups.value));
+  }
+  return constants;
+};
+
+const NUMERIC_LITERAL = /^-?\d+(?:\.\d+)?$/;
+
+/**
+ * 後端一側：遮罩（字串與註解變空白）之後才比對，且必須恰好命中宣告的次數。
+ * 右運算元若是具名常數，值由同一檔的宣告解析；解析不到就記違規、整列不算完成
+ * （回傳 null）——**不略過**。
+ */
+const backendSites = (spec, concept) => {
+  const masked = maskCSharp(readSource(spec.file), spec.file).masked;
+  const expected = spec.count ?? 1;
   const matches = [...masked.matchAll(new RegExp(spec.pattern.source, "g"))];
-  if (matches.length !== 1) {
+  if (matches.length !== expected) {
     violations.push(
-      `${matches.length === 0 ? "找不到站點" : `命中 ${matches.length} 次（必須恰好 1 次）`}：` +
+      `${matches.length === 0 ? "找不到站點" : `命中 ${matches.length} 次（必須恰好 ${expected} 次）`}：` +
         `${concept}——後端 ${spec.file} 的 ${spec.pattern.source}。` +
         `改寫了那個條件就要一起更新這一列的 pattern（本檢查不猜）。`,
     );
     return null;
   }
-  const [match] = matches;
-  return { ...match.groups, line: lineOf(masked, match.index) };
+
+  const constants = constantDeclarations(masked);
+  const sites = [];
+  for (const match of matches) {
+    const line = lineOf(masked, match.index);
+    const raw = match.groups.value;
+    let value;
+    let constant = null;
+    if (NUMERIC_LITERAL.test(raw)) {
+      value = Number(raw);
+    } else if (constants.has(raw)) {
+      value = constants.get(raw);
+      constant = raw;
+    } else {
+      violations.push(
+        `解析不到常數：${concept}——後端 ${spec.file}:${line} 的比較右邊是 \`${raw}\`，` +
+          `但同一檔找不到 \`const <型別> ${raw} = <數值>;\` 的宣告。` +
+          `宣告在別的檔、或值不是單純數字（算式／另一個常數）時這裡都讀不到——本檢查不猜。`,
+      );
+      continue;
+    }
+    sites.push({ op: match.groups.op, value, raw, constant, line });
+  }
+  return sites.length === matches.length ? sites : null;
 };
 
 const sourceFileOf = (rel) => {
@@ -206,25 +277,30 @@ const sourceFor = (rel) => {
 };
 
 for (const { concept, relation, backend, frontend } of PAIRS) {
-  const back = backendSite(backend, concept);
+  const backs = backendSites(backend, concept);
   const front = frontendSite(sourceFor(frontend.file), frontend, concept, "前端");
-  if (!back || !front) continue;
+  if (!backs || !front) continue;
 
-  const valuesDiffer = Number(back.value) !== front.value;
-  const operatorsDiffer =
-    relation === "same" ? back.op !== front.op : COMPLEMENT[front.op] !== back.op;
+  for (const back of backs) {
+    // 訊息要能回指到「哪一個站點、哪一個常數」——值一樣但常數不同時，讀者才知道在比什麼。
+    const where =
+      `後端 ${backend.file}:${back.line}` +
+      (back.constant === null ? "" : ` 的常數 \`${back.constant}\`（${back.value}）`);
 
-  if (valuesDiffer) {
-    violations.push(
-      `數值不同：${concept}——後端 ${backend.file}:${back.line} 是 ${back.value}，` +
-        `前端 ${frontend.file}:${front.line} 是 ${front.value}。`,
-    );
-  }
-  if (operatorsDiffer) {
-    violations.push(
-      `運算子不同：${concept}——後端 ${backend.file}:${back.line} 是 \`${back.op}\`，` +
-        `前端 ${frontend.file}:${front.line} 是 \`${front.op}\`（這一列宣告的關係是 \`${relation}\`）。`,
-    );
+    if (back.value !== front.value) {
+      violations.push(
+        `數值不同：${concept}——${where} 是 ${back.value}，` +
+          `前端 ${frontend.file}:${front.line} 是 ${front.value}。`,
+      );
+    }
+    const operatorsDiffer =
+      relation === "same" ? back.op !== front.op : COMPLEMENT[front.op] !== back.op;
+    if (operatorsDiffer) {
+      violations.push(
+        `運算子不同：${concept}——${where} 是 \`${back.op}\`，` +
+          `前端 ${frontend.file}:${front.line} 是 \`${front.op}\`（這一列宣告的關係是 \`${relation}\`）。`,
+      );
+    }
   }
 }
 

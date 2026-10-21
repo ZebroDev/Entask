@@ -141,35 +141,7 @@ public static class ProjectReportQueries
         EntaskDbContext db, IReadOnlyCollection<Guid> projectIds, ReportWindow window,
         IReadOnlyCollection<Guid> userIds)
     {
-        // **全庫唯一的 query filter 破例**（設計 §4.4／D2）：這一行的存在就是「曾指派過」
-        // 的實作本體。`c.Reviews` 是導覽屬性，而 EF 的 query filter **也作用在導覽屬性上**
-        // ——少了 `IgnoreQueryFilters()`，這裡會退化成「**現在**有審查者」，
-        // 把某張卡的審查者全部移除就能讓它離開分母（10 張卡有審查者、5 張沒過時，
-        // 移除那 5 張的審查者即可讓 FPY 從 50% 變成 100%）。拿掉這一行，這個設計整體失效，
-        // 設計 §6.3 的判別力測試會紅。
-        //
-        // **已知代價**：`IgnoreQueryFilters()` 是鈍的——它關掉**整個查詢裡所有實體**的 filter，
-        // 不只 `CardReview`。未來 `Card` 若自己也掛上 filter（例如卡片軟刪除），
-        // 這一支會靜默跟著受影響、沒有任何症狀。目前 `Card` 沒有任何 filter，接受這個代價。
-        var cardsQuery = db.Cards.IgnoreQueryFilters().Where(c =>
-            projectIds.Contains(c.List.Board.ProjectId) && !c.IsArchived && c.Reviews.Any());
-        // 述詞形狀在兩支方法各手寫一次（lambda 參數型別不同：`Card` / `CardReviewEntry`），
-        // 但**值一律取自 `ReportWindow`**——`window.From`／`window.To` 不越過它。
-        if (window.From is not null) cardsQuery = cardsQuery.Where(c => c.CompletedAt != null && c.CompletedAt >= window.From);
-        if (window.To is not null) cardsQuery = cardsQuery.Where(c => c.CompletedAt != null && c.CompletedAt < window.To);
-
-        var cards = await cardsQuery
-            .Select(c => new
-            {
-                c.Id,
-                c.CreatedById,
-                Owners = c.Members.Select(m => m.UserId).ToList(),
-                // 沒有 entry 時 `FirstOrDefault()` 回 null（string 的 default），
-                // 與 approved 不相等 ⇒ 只進分母。指派了卻沒審＝沒通過，不是免計。
-                FirstEntry = c.ReviewEntries.OrderBy(e => e.CreatedAt).ThenBy(e => e.Id)
-                    .Select(e => e.Status).FirstOrDefault(),
-            })
-            .ToListAsync();
+        var cards = await GetFirstPassCardsAsync(db, projectIds, window);
 
         var result = userIds.ToDictionary(u => u, _ => (FirstPass: 0, Reviewed: 0));
         foreach (var c in cards)
@@ -180,10 +152,77 @@ public static class ProjectReportQueries
             foreach (var owner in owners.Where(userIds.Contains))
             {
                 var (first, reviewed) = result[owner];
-                result[owner] = (first + (c.FirstEntry == ReviewStatuses.Approved ? 1 : 0), reviewed + 1);
+                result[owner] = (first + (c.FirstEntryStatus == ReviewStatuses.Approved ? 1 : 0), reviewed + 1);
             }
         }
         return result;
+    }
+
+    /// <summary>
+    /// 一次交付通過率的**母體列**：一張卡＋它的第一筆 entry。
+    /// `GetFirstPassYieldAsync`（團隊報表的 FPY 原料）與 `ReportDrilldownQueries`
+    /// （FPY drill-down）**共用這一支**——同一個母體只有一個實作，兩邊的數字因此
+    /// 不可能各自漂移。
+    ///
+    /// **全庫唯一的 query filter 破例就在這裡**（設計 §4.4／D2）：`IgnoreQueryFilters()`
+    /// 的存在就是「**曾**指派過審查者」的實作本體。`c.Reviews` 是導覽屬性，而 EF 的
+    /// query filter **也作用在導覽屬性上**——少了它，這裡會退化成「**現在**有審查者」，
+    /// 把某張卡的審查者全部移除就能讓它離開分母（10 張卡有審查者、5 張沒過時，
+    /// 移除那 5 張的審查者即可讓 FPY 從 50% 變成 100%）。拿掉那一行，這個設計整體失效，
+    /// 設計 §6.3 的判別力測試會紅。`check:query-filters` 把關「恰好一處」。
+    ///
+    /// **已知代價**：`IgnoreQueryFilters()` 是鈍的——它關掉**整個查詢裡所有實體**的 filter，
+    /// 不只 `CardReview`。未來 `Card` 若自己也掛上 filter（例如卡片軟刪除），
+    /// 這一支會靜默跟著受影響、沒有任何症狀。目前 `Card` 沒有任何 filter，接受這個代價。
+    ///
+    /// **第一筆 entry 的排序（`CreatedAt`、再 `Id`）在**這一個查詢**裡決定**，兩個呼叫端
+    /// 共用同一個答案——不要在任何一側另外排序一次：`Guid` 在 .NET 的 `CompareTo` 與
+    /// PostgreSQL uuid 的排序不是同一個順序，`CreatedAt` 撞在一起時兩側會挑到不同的 entry。
+    /// </summary>
+    public record FirstPassCardRow(
+        Guid CardId, string Title, Guid ProjectId, string ProjectName,
+        DateTime? CompletedAt, DateTime? DueAt, Guid CreatedById, List<Guid> Owners,
+        Guid? FirstEntryId, string? FirstEntryStatus, DateTime? FirstEntryCreatedAt,
+        Guid? FirstEntryReviewerUserId);
+
+    public static async Task<List<FirstPassCardRow>> GetFirstPassCardsAsync(
+        EntaskDbContext db, IReadOnlyCollection<Guid> projectIds, ReportWindow window)
+    {
+        var cardsQuery = db.Cards.IgnoreQueryFilters().Where(c =>
+            projectIds.Contains(c.List.Board.ProjectId) && !c.IsArchived && c.Reviews.Any());
+        // 述詞形狀在兩支方法各手寫一次（lambda 參數型別不同：`Card` / `CardReviewEntry`），
+        // 但**值一律取自 `ReportWindow`**——`window.From`／`window.To` 不越過它。
+        if (window.From is not null) cardsQuery = cardsQuery.Where(c => c.CompletedAt != null && c.CompletedAt >= window.From);
+        if (window.To is not null) cardsQuery = cardsQuery.Where(c => c.CompletedAt != null && c.CompletedAt < window.To);
+
+        // 四個第一筆欄位各自是一支相關子查詢，**排序條件逐字相同**（`CreatedAt`、`Id`）
+        // ⇒ 它們一定落在同一列。沒有 entry 時 `FirstOrDefault()` 回各自型別的 default
+        // （`null`），與 approved 不相等 ⇒ 只進分母。指派了卻沒審＝沒通過，不是免計。
+        var rows = await cardsQuery
+            .Select(c => new
+            {
+                c.Id,
+                c.Title,
+                ProjectId = c.List.Board.ProjectId,
+                ProjectName = c.List.Board.Project.Name,
+                c.CompletedAt,
+                c.DueAt,
+                c.CreatedById,
+                Owners = c.Members.Select(m => m.UserId).ToList(),
+                FirstEntryId = c.ReviewEntries.OrderBy(e => e.CreatedAt).ThenBy(e => e.Id)
+                    .Select(e => (Guid?)e.Id).FirstOrDefault(),
+                FirstEntryStatus = c.ReviewEntries.OrderBy(e => e.CreatedAt).ThenBy(e => e.Id)
+                    .Select(e => e.Status).FirstOrDefault(),
+                FirstEntryCreatedAt = c.ReviewEntries.OrderBy(e => e.CreatedAt).ThenBy(e => e.Id)
+                    .Select(e => (DateTime?)e.CreatedAt).FirstOrDefault(),
+                FirstEntryReviewerUserId = c.ReviewEntries.OrderBy(e => e.CreatedAt).ThenBy(e => e.Id)
+                    .Select(e => (Guid?)e.ReviewerUserId).FirstOrDefault(),
+            })
+            .ToListAsync();
+
+        return rows.Select(r => new FirstPassCardRow(
+            r.Id, r.Title, r.ProjectId, r.ProjectName, r.CompletedAt, r.DueAt, r.CreatedById, r.Owners,
+            r.FirstEntryId, r.FirstEntryStatus, r.FirstEntryCreatedAt, r.FirstEntryReviewerUserId)).ToList();
     }
 
     /// <summary>

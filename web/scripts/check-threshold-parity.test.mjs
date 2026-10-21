@@ -12,6 +12,10 @@
 //      站點**重複**（同一句寫兩次＝不知道在比哪一個）都要大聲，兩個方向各一支。
 //   4. **運算子屬於契約的一部分**。只比數值的話，`>=` 寫成 `>` 在邊界上差一個值，
 //      而那是會動結果的差；`complementary` 那一對還多一層「方向必須互補」。
+//   5. **後端右運算元可以是具名常數**（2026-10-20）。門檻集中成宣告之後，閘門要從同一檔
+//      的 `const <型別> <名稱> = <數值>;` 解析值；解析不到是**紅**、不是略過。fixture 預設
+//      就走常數（`FpyS`／`AdjustmentSampleThreshold`），所以「三對都相符」那一支同時釘住
+//      解析成功；另兩支釘住宣告值漂移與引用未宣告常數。
 //
 // 做法與 `check-error-codes.test.mjs` 同一個 harness：在系統暫存目錄造沙箱，把閘門
 // 本體與它的 `lib/` 複製進去，`node_modules` 用 junction 連回本 repo，閘門以
@@ -82,8 +86,19 @@ const runGate = (sandbox) =>
 /**
  * `TeamReportEndpoints.cs` 的縮影：`RatingFor` 的 fpy 條件 ＋ 調整項的樣本門檻。
  * **`///` 註解裡那句話刻意與程式碼同形**——它是第 1 支的判別點（遮罩失效 ⇒ 命中 2 次）。
+ *
+ * **與真 repo 同形狀的兩件事**（2026-10-20 起）：
+ *   - 門檻是**具名常數**（`FpyS`／`AdjustmentSampleThreshold`），比較式不帶數字；
+ *     `fpy`／`samples` 兩個旋鈕仍可換成數字字面值，用來釘住「字面值那條路也還在」。
+ *   - 每個門檻有**兩個**消費端（主公式 ＋ grade 分解的狀態／`NotAppliedReason`）——
+ *     閘門表那一列的 `count` 是 2，少一個就該紅。
  */
-const backendTeamReport = ({ fpy = "0.80", samples = "3" } = {}) => [
+const backendTeamReport = ({
+  fpy = "FpyS",
+  fpyValue = "0.80",
+  samples = "AdjustmentSampleThreshold",
+  samplesValue = "3",
+} = {}) => [
   "namespace Entask.Api.Endpoints;",
   "",
   "public static class TeamReportProbe",
@@ -92,6 +107,9 @@ const backendTeamReport = ({ fpy = "0.80", samples = "3" } = {}) => [
   "    /// S 的第三個條件。**fpy 為 null ＝樣本不足＝這個條件不列入**，不是「不滿足」。",
   "    /// 寫成 `fpy >= 0.80` 的形狀在註解裡也有一份（遮罩沒生效時站點會命中 2 次）。",
   "    /// </summary>",
+  `    private const double FpyS = ${fpyValue};`,
+  `    private const int AdjustmentSampleThreshold = ${samplesValue};`,
+  "",
   "    public static string RatingFor(double completionRate, double? fpy)",
   `        => completionRate >= 0.85 && (fpy is null || fpy >= ${fpy}) ? "S" : "A";`,
   "",
@@ -102,6 +120,15 @@ const backendTeamReport = ({ fpy = "0.80", samples = "3" } = {}) => [
   '        if (averageScore >= 4.5) return "B";',
   '        return "C";',
   "    }",
+  "",
+  "    private static string NotAppliedReason(double? averageScore, int scoreSamples)",
+  "    {",
+  `        if (averageScore is null || scoreSamples < ${samples}) return "sampleInsufficient";`,
+  '        return "withinRange";',
+  "    }",
+  "",
+  "    private static string FpyGate(double? fpy)",
+  `        => fpy is null ? "notApplicable" : fpy >= ${fpy} ? "met" : "failed";`,
   "}",
 ];
 
@@ -174,8 +201,9 @@ const withAll = (overrides, run) => {
 const output = (result) => `${result.stdout}${result.stderr}`;
 
 describe("門檻副本閘門", () => {
-  // 這一支同時釘住「遮罩生效」與「AST 不是 grep」：fixture 的兩側註解裡都有一份
-  // **同形**的比較，任一個機制失效都會讓某一對變成「命中 2 次」。
+  // 這一支同時釘住「遮罩生效」「AST 不是 grep」與**常數解析成功**：fixture 的兩側註解裡
+  // 都有一份**同形**的比較（任一個機制失效都會讓某一對變成「命中 2 次」），而後端預設
+  // 走具名常數（`FpyS`／`AdjustmentSampleThreshold`）——解析壞掉就不會是三對相符。
   it("三對都相符時 exit 0（兩側的註解各有一份同形比較，仍只算一次）", () => {
     withAll({}, (sandbox) => {
       const result = runGate(sandbox);
@@ -199,6 +227,28 @@ describe("門檻副本閘門", () => {
       expect(result.status).toBe(1);
       expect(output(result)).toContain("數值不同");
       expect(output(result)).toContain(BACKEND_TEAM_REPORT);
+    });
+  });
+
+  // 真 repo 的門檻是具名常數（Task 2 起）。這一支把**宣告值**改掉——如果閘門只比對
+  // 字面值、不解析常數，它會靜默變成守著空氣（而「三對都相符」那一支照樣綠）。
+  it("後端具名常數的宣告值漂移 ⇒ exit 1（常數解析不是裝飾）", () => {
+    withAll({ backendTeamReport: { fpyValue: "0.81" } }, (sandbox) => {
+      const result = runGate(sandbox);
+      expect(result.status).toBe(1);
+      expect(output(result)).toContain("數值不同");
+      expect(output(result)).toContain("FpyS");
+    });
+  });
+
+  // 解析不到時**不能退回 0 對**：那會讓這一列變成守著空氣而不說。宣告在別的檔、
+  // 值不是單純數字，都在同一個出口大聲。
+  it("後端引用未宣告的常數 ⇒ exit 1（解析不到就大聲，不略過）", () => {
+    withAll({ backendTeamReport: { fpy: "UndefinedS" } }, (sandbox) => {
+      const result = runGate(sandbox);
+      expect(result.status).toBe(1);
+      expect(output(result)).toContain("解析不到常數");
+      expect(output(result)).toContain("UndefinedS");
     });
   });
 

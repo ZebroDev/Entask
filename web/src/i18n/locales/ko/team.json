@@ -151,6 +151,35 @@
       "account": "계정: @{{username}}",
       "action": "프로필 보기",
       "criteria": "등급 기준: 달성률과 정시 제출률이 모두 85% 이상이고 1차 제출 통과율이 80% 이상이면 S 등급, 달성률 70% 이상이면 A 등급, 달성률 50% 이상이면 B 등급입니다",
+      "explanation": {
+        "adjustment": {
+          "appliedDown": "{{from}} → {{to}} (평균 점수 {{score}}, {{samples}}건)",
+          "appliedUp": "{{from}} → {{to}} (평균 점수 {{score}}, {{samples}}건)",
+          "atCeiling": "이미 최고 등급입니다",
+          "atFloor": "이미 최저 등급입니다",
+          "notApplied": "{{rating}} 유지: {{reason}}",
+          "notAppliedWithScore": "{{rating}} 유지: {{reason}} (평균 점수 {{score}}, {{samples}}건)",
+          "sampleInsufficient": "표본 부족 ({{samples}} / {{threshold}}건)",
+          "withinRange": "평균 점수가 {{down}}~{{up}} 범위에 있습니다"
+        },
+        "adjustmentLabel": "상사 점수 조정",
+        "averageScore": "평균 점수",
+        "completion": "달성률 {{value}} → {{achievedTier}}",
+        "firstPassYield": "1차 제출 통과율 {{value}}",
+        "notApplicable": {
+          "noCards": "표본이 부족하여 평가하지 않음",
+          "noDueSamples": "마감일 표본 없음",
+          "sampleInsufficient": "표본 부족"
+        },
+        "onTime": "정시 제출률 {{value}}",
+        "sampleSize": "{{samples}}건",
+        "sampleWithThreshold": "{{samples}}건, 기준 {{threshold}}",
+        "sGateNote": "S 기준 미달 ({{final}}에 영향 없음)",
+        "tierThreshold": "{{rating}} ≥ {{threshold}}",
+        "title": "이 등급인 이유",
+        "viewCards": "카드 보기",
+        "viewReviews": "리뷰 보기"
+      },
       "period": "평가 기간",
       "print": {
         "action": "평가표 인쇄 / PDF로 저장"
@@ -163,6 +192,35 @@
         "label": "상사 평가 및 연간 서명 의견: "
       },
       "title": "{{name}}의 성과 평가표"
+    },
+    "drilldown": {
+      "columns": {
+        "card": "카드",
+        "completedAt": "완료 시간",
+        "dueAt": "마감일",
+        "dueChanges": "마감일 변경",
+        "firstReview": "첫 리뷰",
+        "project": "프로젝트",
+        "qualifies": "충족",
+        "reviewedAt": "리뷰 시간",
+        "reviewer": "리뷰어",
+        "score": "점수"
+      },
+      "dueChange": {
+        "afterCompletion": "완료 후 변경",
+        "legacy": "이전 버전에서는 값이 기록되지 않았습니다"
+      },
+      "empty": "조건에 맞는 데이터가 없습니다",
+      "hiddenCards_other": "{{count}}개의 카드가 볼 권한이 없는 프로젝트에 있습니다",
+      "hiddenReviews_other": "{{count}}건의 리뷰가 볼 권한이 없는 프로젝트에 있습니다",
+      "page": {
+        "next": "다음",
+        "prev": "이전"
+      },
+      "population": "대상 {{n}}",
+      "qualifying": "충족 {{n}}",
+      "recordedSince": "이 기능은 2026-10-20부터 기록됩니다",
+      "title": "{{name}} · {{metric}}"
     },
     "empty": "현재 성과 데이터가 없습니다",
     "export": {

@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { Activity } from "lucide-react";
 import { api } from "@/lib/api";
 import { AuditLogRow } from "@/components/AuditLogRow";
 import type { AuditPageResponse } from "@/lib/audit-labels";
@@ -38,10 +39,17 @@ export function SystemActivityPage() {
   const logs = data?.pages.flatMap((page) => page.items) ?? [];
 
   return (
-    // 頁面自己帶容器：活動牆的 `space-y-2` 是在 TeamPage 的容器**裡面**，這一頁沒有
-    // 外層容器（`AppLayout` 的 `<main>` 不帶 padding），不補的話第一列會貼著頁首。
-    <div className="p-6 space-y-4">
-      <h1 className="text-lg font-semibold">{t("admin:activity.title")}</h1>
+    // 頁面自己帶容器（`AppLayout` 的 `<main>` 不帶 padding），而且與「使用者管理」
+    // 「我的日誌」「個人工作台」同一組頁殼（2026-10-21 使用者回報畫風不一致）：
+    // 原本是滿版 `p-6` ＋ `text-lg` 標題、沒有副標，在寬螢幕上像另一個系統。
+    <div className="container max-w-6xl space-y-6 px-4 py-6 md:px-6">
+      <div>
+        <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
+          {t("admin:activity.title")}
+          <Activity className="h-5 w-5 text-primary" />
+        </h1>
+        <p className="mt-1 text-xs text-muted-foreground">{t("admin:activity.subtitle")}</p>
+      </div>
       <div className="space-y-2">
         {isLoading && <p className="text-muted-foreground">{t("common:state.loading")}</p>}
         {!isLoading && isError && <p className="text-destructive">{t("common:error.loadRetry")}</p>}
