@@ -565,7 +565,7 @@ export function TeamReportTab({ teamId }: Props) {
           */}
           <DialogContent
             data-dossier-print=""
-            className="max-w-md print:static print:transform-none print:w-full print:max-w-none print:max-h-none print:overflow-visible print:rounded-none print:border-none print:shadow-none print:p-6"
+            className="max-w-md max-h-[84vh] overflow-y-auto print:static print:transform-none print:w-full print:max-w-none print:max-h-none print:overflow-visible print:rounded-none print:border-none print:shadow-none print:p-6"
           >
             <DialogHeader>
               {/*

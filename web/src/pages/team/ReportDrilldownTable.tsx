@@ -42,7 +42,11 @@ export function ReportDrilldownTable({ metric, rows, onOpenRow }: Props) {
       : 7;
 
   return (
-    <Table>
+    // 窄螢幕（手機）上表格是 `w-full`：欄位不禁止換行時，日期／徽章／動作鈕先吃掉
+    // 最小寬度，卡片欄只剩一個字寬，中文逐字換行 ⇒ 文字看起來是直的、每列高度等於
+    // 字數（2026-10-21 使用者實測）。禁止換行後由 `Table` 外層的 `overflow-auto`
+    // 橫向捲動——與報表主表格同一個做法。
+    <Table className="whitespace-nowrap">
       <TableHeader>
         <TableRow>
           <TableHead>{t("team:report.drilldown.columns.card")}</TableHead>

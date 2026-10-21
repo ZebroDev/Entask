@@ -6,6 +6,24 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-10-21
+
+### Fixed
+
+- Security: the build- and test-only dependency `vite` was updated to 8.3.5, replacing a
+  bundled `launch-editor` affected by three high-severity advisories (argument escaping and an
+  existence-check bypass on Windows). The production transitive dependency `follow-redirects`
+  was updated to 1.16.1, fixing two high-severity advisories where credential headers could
+  leak across origins.
+- Mobile: the member performance dossier now scrolls inside the viewport instead of extending
+  below the bottom of the screen.
+- Mobile: team report drill-down tables keep the card column readable; on narrow screens the
+  table scrolls horizontally instead of wrapping one character per line.
+
+### Notes
+
+- No database migrations or configuration changes.
+
 ## [1.0.4] - 2026-10-21
 
 ### Fixed
@@ -83,6 +101,7 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
 [1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
 [1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2

@@ -66,6 +66,18 @@ describe("TeamReportTab dossier", () => {
     return screen.findByRole("dialog");
   };
 
+  // jsdom 沒有版面，量不到「手機上拉不拉得動」；比照列印隔離的既有做法，把契約釘在
+  // 類別上：對話框本身要是垂直捲動容器（`overflow-y-auto`），而且高度上限必須小於
+  // 視窗減去 `top-[8vh]`——只加 overflow 而沒有 max-h 時，內容會直接長出視窗、
+  // 永遠不會出現捲軸（2026-10-21 使用者手機實測）。
+  it("dossier 對話框是視窗內的垂直捲動容器", async () => {
+    (api.get as Mock).mockResolvedValue(memberFixture("B"));
+    render(<TeamReportTab teamId="t1" />, { wrapper: makeWrapper() });
+    const dialog = await openDossier();
+
+    expect(dialog).toHaveClass("overflow-y-auto", "max-h-[84vh]");
+  });
+
   it("dossier 顯示 grade 分解與調整方向，並依 components 的陣列順序渲染", async () => {
     (api.get as Mock).mockResolvedValue(
       memberFixture("C", {

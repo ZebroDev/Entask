@@ -244,6 +244,12 @@ describe("ReportDrilldownDialog", () => {
 
     const excluded = (screen.getByText("卡片二")).closest("tr")!;
     expect(within(excluded).getByText("—")).toBeInTheDocument();
+
+    // 手機版（2026-10-21 使用者實測）：`w-full` 的表格在窄螢幕上會把「卡片」欄壓到
+    // 一次只放得下一個字，中文逐字換行 ⇒ 文字看起來是直的、每列高度等於字數。
+    // 表格必須禁止換行（`whitespace-nowrap`），讓外層的 `overflow-auto` 改成橫向捲動。
+    // jsdom 量不到版面，所以釘類別——與既有列印測試同一個做法。
+    expect(screen.getByRole("table")).toHaveClass("whitespace-nowrap");
   });
 
   // 卡片類列走 `viewCards`、平均分列走 `viewReviews`——**同一顆按鈕的文案是 metric 的**

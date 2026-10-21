@@ -6,6 +6,21 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.5] - 2026-10-21
+
+### 修正
+
+- 安全性：建置與測試用的相依套件 `vite` 升到 8.3.5（內含的 `launch-editor` 三個 high 等級
+  公告已修：Windows 參數轉義與存在性檢查繞過）；正式相依鏈中的 `follow-redirects` 升到
+  1.16.1（兩個 high：認證標頭可能跨來源外洩）。
+- 手機版：成員績效檔案（考核表）改為在視窗內垂直捲動，不再超出畫面下緣。
+- 手機版：團隊報表 drill-down 表格的卡片欄保持可讀；窄螢幕改由表格橫向捲動，
+  不再一列一個字。
+
+### 備註
+
+- 沒有資料庫 migration，也沒有設定變更。
+
 ## [1.0.4] - 2026-10-21
 
 ### 修正
@@ -73,6 +88,7 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
 [1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
 [1.0.2]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.2
