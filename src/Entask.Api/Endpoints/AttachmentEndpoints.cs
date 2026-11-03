@@ -1,10 +1,13 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Authorization;
+using Entask.Api.Options;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Core.Entities;
+using Entask.Identity.Models;
 using Entask.Infrastructure.Data;
 using Entask.Infrastructure.Storage;
 
@@ -12,9 +15,10 @@ namespace Entask.Api.Endpoints;
 
 public static class AttachmentEndpoints
 {
-    private const long MaxFileSize = 20 * 1024 * 1024;
-    // multipart 上限（global Kestrel 已收緊為 1MiB——僅此端點以 per-endpoint 上限豁免）
-    private const long MaxMultipartBodySize = 135_266_304;
+    // 20 MiB 單檔上限；multipart body 上限 = 20 MiB + 1 MiB（boundary 與欄位標頭 overhead）。
+    // 總 body 上限由本端點的 per-endpoint RequestSizeLimitMetadata 提供（全域 Kestrel 1 MiB
+    // 只在此端點豁免）；FormOptions.MultipartBodyLengthLimit 是「每個 multipart section」的
+    // 上限，在 Program.cs 也指向同一個值。兩個上限都以 AttachmentLimits 為單一來源。
 
     private sealed class RequestSizeLimitMetadata(long maxRequestBodySize) : IRequestSizeLimitMetadata
     {
@@ -30,6 +34,8 @@ public static class AttachmentEndpoints
             if (card is null) return ApiResults.NotFound(ErrorCodes.CardNotFound);
             if (!request.HasFormContentType)
                 return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "必須以 multipart/form-data 上傳" });
+            if (request.ContentLength is > AttachmentLimits.MaxMultipartBodySize)
+                return Results.BadRequest(new { code = ErrorCodes.RequestBodyTooLarge, message = "請求的資料量過大或格式錯誤" });
             IFormFile? file;
             try
             {
@@ -38,7 +44,7 @@ public static class AttachmentEndpoints
             }
             catch (InvalidDataException)
             {
-                // multipart body 介於 Kestrel 上限與 FormOptions.MultipartBodyLengthLimit 之間時
+                // multipart 解析失敗（含單一 section 超過 21 MiB；總 body 由 endpoint metadata 先擋）
                 return Results.BadRequest(new { code = ErrorCodes.RequestBodyTooLarge, message = "請求的資料量過大或格式錯誤" });
             }
             if (file is null) return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "缺少檔案" });
@@ -46,7 +52,7 @@ public static class AttachmentEndpoints
             var contentType = file.ContentType.Contains(';')
                 ? file.ContentType[..file.ContentType.IndexOf(';')].Trim()
                 : file.ContentType;
-            if (file.Length > MaxFileSize) return Results.BadRequest(new { code = ErrorCodes.AttachmentTooLarge, message = "檔案超過 20MB 上限", @params = new { max = MaxFileSize / (1024 * 1024) } });
+            if (file.Length > AttachmentLimits.MaxFileSize) return Results.BadRequest(new { code = ErrorCodes.AttachmentTooLarge, message = "檔案超過 20MB 上限", @params = new { max = AttachmentLimits.MaxFileSize / (1024 * 1024) } });
             if (!AttachmentStore.AllowedContentTypes.Contains(contentType))
                 return Results.BadRequest(new { code = ErrorCodes.AttachmentUnsupportedType, message = "不支援的檔案型態" });
 
@@ -72,7 +78,7 @@ public static class AttachmentEndpoints
             {
                 attachment.Id, attachment.FileName, attachment.ContentType, attachment.Size, attachment.CreatedAt,
             });
-        }).WithMetadata(new RequestSizeLimitMetadata(MaxMultipartBodySize))
+        }).WithMetadata(new RequestSizeLimitMetadata(AttachmentLimits.MaxMultipartBodySize))
           .RequireAuthorization().RequireProjectPermission(PermissionCodes.CardEdit);
 
         app.MapDelete("/api/cards/{cardId:guid}/attachments/{attachmentId:guid}", async (Guid cardId, Guid attachmentId,
@@ -94,8 +100,12 @@ public static class AttachmentEndpoints
         }).RequireAuthorization().RequireProjectPermission(PermissionCodes.CardEdit);
 
         app.MapGet("/api/attachments/{id:guid}", async (Guid id, ClaimsPrincipal principal,
-            EntaskDbContext db, IAttachmentStore store, IPermissionChecker checker) =>
+            EntaskDbContext db, IAttachmentStore store, IPermissionChecker checker,
+            UserManager<ApplicationUser> userManager) =>
         {
+            var (_, sessionError) = await UserEndpoints.ResolveCurrentUserAsync(principal, userManager);
+            if (sessionError is not null) return sessionError;
+
             var attachment = await db.Attachments.FirstOrDefaultAsync(a => a.Id == id);
             if (attachment is null) return ApiResults.NotFound(ErrorCodes.AttachmentNotFound);
             var projectId = await db.Cards.Where(c => c.Id == attachment.CardId)

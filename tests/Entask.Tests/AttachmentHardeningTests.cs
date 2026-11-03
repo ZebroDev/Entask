@@ -2,7 +2,12 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Entask.Api.Options;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Infrastructure.Data;
@@ -68,6 +73,74 @@ public class AttachmentHardeningTests : IClassFixture<ApiWebApplicationFactory>
         return await resp.Content.ReadFromJsonAsync<JsonElement>();
     }
 
+    private async Task<HttpResponseMessage> UploadRawAsync(
+        string cardId, string content, string contentType, string fileName)
+    {
+        using var form = new MultipartFormDataContent();
+        var bytes = System.Text.Encoding.UTF8.GetBytes(content);
+        form.Add(new ByteArrayContent(bytes) { Headers = { ContentType = new(contentType) } }, "file", fileName);
+        return await _client.PostAsync($"/api/cards/{cardId}/attachments", form);
+    }
+
+    // 只宣告 Content-Length，實際只寫 1 byte：用來走 handler 的前置檢查，
+    // 而不是先讀完整個 multipart body 才在 file.Length 那一站拒絕。
+    private sealed class SpoofedLengthContent : HttpContent
+    {
+        private readonly byte[] _payload;
+        private readonly long _declaredLength;
+
+        public SpoofedLengthContent(byte[] payload, long declaredLength)
+        {
+            _payload = payload;
+            _declaredLength = declaredLength;
+            Headers.ContentType = new MediaTypeHeaderValue("multipart/form-data")
+            {
+                Parameters = { new NameValueHeaderValue("boundary", "spoofed") },
+            };
+        }
+
+        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context)
+            => stream.WriteAsync(_payload).AsTask();
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = _declaredLength;
+            return true;
+        }
+    }
+
+    [Fact]
+    public void FormOptions_MultipartBodyLengthLimit_IsAttachmentLimit()
+    {
+        // 21 MiB 是規格值：用字面值釘住，避免「常數改壞、測試跟著改」的恆綠。
+        Assert.Equal(21L * 1024 * 1024, AttachmentLimits.MaxMultipartBodySize);
+        var options = _factory.Services.GetRequiredService<IOptions<FormOptions>>().Value;
+        Assert.Equal(AttachmentLimits.MaxMultipartBodySize, options.MultipartBodyLengthLimit);
+    }
+
+    [Fact]
+    public void AttachmentUploadEndpoint_RequestSizeLimit_IsAttachmentLimit()
+    {
+        var endpoints = _factory.Services.GetServices<EndpointDataSource>().SelectMany(ds => ds.Endpoints);
+        var post = endpoints.OfType<RouteEndpoint>().Single(e =>
+            e.RoutePattern.RawText == "/api/cards/{cardId:guid}/attachments"
+            && e.Metadata.GetMetadata<IHttpMethodMetadata>()!.HttpMethods.Contains("POST"));
+
+        Assert.Equal(
+            (long?)AttachmentLimits.MaxMultipartBodySize,
+            post.Metadata.GetMetadata<IRequestSizeLimitMetadata>()!.MaxRequestBodySize);
+    }
+
+    [Fact]
+    public void AllowedContentTypes_DoNotIncludeExecutableMarkup()
+    {
+        // 這是護欄，不是新行為：今天的白名單已經沒有這三種。
+        // 若有人把 SVG／HTML 加進 ContentTypeExtensions，這一支必須紅。
+        Assert.DoesNotContain("image/svg+xml", AttachmentStore.AllowedContentTypes);
+        Assert.DoesNotContain("text/html", AttachmentStore.AllowedContentTypes);
+        Assert.DoesNotContain("application/xhtml+xml", AttachmentStore.AllowedContentTypes);
+    }
+
     [Fact]
     public async Task AttachmentUpload_CharsetContentType_Accepted()
     {
@@ -110,6 +183,32 @@ public class AttachmentHardeningTests : IClassFixture<ApiWebApplicationFactory>
     }
 
     [Fact]
+    public async Task AttachmentUpload_DeclaredBodyOverLimit_Returns400BeforeReading()
+    {
+        var (cardId, _) = await SetupAsync();
+        using var content = new SpoofedLengthContent(
+            new byte[1], AttachmentLimits.MaxMultipartBodySize + 1);
+
+        var resp = await _client.PostAsync($"/api/cards/{cardId}/attachments", content);
+
+        Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
+        Assert.Equal(ErrorCodes.RequestBodyTooLarge, await ErrorBody.CodeOfAsync(resp));
+    }
+
+    [Theory]
+    [InlineData("image/svg+xml", "x.svg")]
+    [InlineData("text/html", "x.html")]
+    public async Task AttachmentUpload_ExecutableMarkup_Returns400UnsupportedType(
+        string contentType, string fileName)
+    {
+        var (cardId, _) = await SetupAsync();
+        var resp = await UploadRawAsync(cardId, "<script>alert(1)</script>", contentType, fileName);
+
+        Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
+        Assert.Equal(ErrorCodes.AttachmentUnsupportedType, await ErrorBody.CodeOfAsync(resp));
+    }
+
+    [Fact]
     public async Task AttachmentGet_MissingFile_Returns404()
     {
         var (cardId, _) = await SetupAsync();
@@ -146,6 +245,39 @@ public class AttachmentHardeningTests : IClassFixture<ApiWebApplicationFactory>
         Assert.Equal(HttpStatusCode.Forbidden, resp.StatusCode);
         Assert.Equal("permission.denied",
             (await resp.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+    }
+
+    [Fact]
+    public async Task AttachmentGet_DeactivatedAdmin_Returns401SessionInvalid()
+    {
+        var (cardId, _) = await SetupAsync();
+        var attachmentId = await UploadTextAsync(cardId);
+
+        var username = "att-admin-" + Guid.NewGuid().ToString("N")[..8];
+        var create = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+        {
+            username,
+            password = "Password1!",
+            displayName = "附件管理員二",
+            isAdmin = true,
+        }));
+        Assert.Equal(HttpStatusCode.OK, create.StatusCode);
+
+        var login = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username, password = "Password1!" }));
+        var body = await login.Content.ReadFromJsonAsync<JsonElement>();
+        var userId = body.GetProperty("userId").GetString()!;
+        var token = body.GetProperty("accessToken").GetString()!;
+
+        var deactivate = await _client.PostAsync($"/api/admin/users/{userId}/deactivate", null);
+        Assert.Equal(HttpStatusCode.NoContent, deactivate.StatusCode);
+
+        var req = new HttpRequestMessage(HttpMethod.Get, $"/api/attachments/{attachmentId}");
+        req.Headers.Authorization = new("Bearer", token);
+        var resp = await _client.SendAsync(req);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, resp.StatusCode);
+        Assert.Equal(ErrorCodes.AuthSessionInvalid, await ErrorBody.CodeOfAsync(resp));
     }
 
     [Fact]

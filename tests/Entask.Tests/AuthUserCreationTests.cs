@@ -123,6 +123,49 @@ public class AuthUserCreationTests : IClassFixture<ApiWebApplicationFactory>
         Assert.Equal("你沒有存取這個資源的權限", body.GetProperty("message").GetString());
     }
 
+    [Fact]
+    public async Task DeactivatedAdmin_CreatesUser_Returns401SessionInvalid()
+    {
+        var client = _factory.CreateClient();
+        var adminToken = await GetAdminTokenAsync(client);
+        client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+
+        var created = await client.PostAsync("/api/auth/users", Body(new
+        {
+            username = "off-admin",
+            password = "Password1!",
+            displayName = "停用管理員",
+            isAdmin = true,
+        }));
+        Assert.Equal(HttpStatusCode.OK, created.StatusCode);
+        var userId = (await created.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("userId").GetString()!;
+
+        var login = await client.PostAsync("/api/auth/login", JsonContent.Create(new
+        {
+            username = "off-admin",
+            password = "Password1!",
+        }));
+        var token = (await login.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        var deactivate = await client.PostAsync($"/api/admin/users/{userId}/deactivate", null);
+        Assert.Equal(HttpStatusCode.NoContent, deactivate.StatusCode);
+
+        var offClient = _factory.CreateClient();
+        offClient.DefaultRequestHeaders.Authorization = new("Bearer", token);
+        var response = await offClient.PostAsync("/api/auth/users", Body(new
+        {
+            username = "off-created",
+            password = "Password1!",
+            displayName = "不該被建立",
+        }));
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        Assert.Equal("auth.sessionInvalid",
+            (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+    }
+
     private async Task<string> GetAdminTokenAsync(HttpClient client)
     {
         // 第一個管理員由 AdminSeed 建立（appsettings: Seed:AdminUsername / AdminPassword）

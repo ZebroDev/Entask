@@ -152,6 +152,8 @@ public class AttachmentTests : IClassFixture<ApiWebApplicationFactory>
             .First(e => e.RoutePattern.RawText == "/api/cards/{cardId:guid}/attachments");
         var metadata = endpoint.Metadata.GetMetadata<IRequestSizeLimitMetadata>();
         Assert.NotNull(metadata);
-        Assert.Equal(135_266_304, metadata!.MaxRequestBodySize);
+        // 2026-11-03：上限由 AttachmentLimits 收斂為 21 MiB（20 MiB 單檔 + 1 MiB overhead）。
+        // 這裡刻意寫字面值，讓常數本身漂移時這支會紅。
+        Assert.Equal(21L * 1024 * 1024, metadata!.MaxRequestBodySize);
     }
 }

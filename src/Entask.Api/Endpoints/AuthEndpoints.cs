@@ -210,6 +210,9 @@ public static class AuthEndpoints
             IAuditService audit,
             ClaimsPrincipal principal) =>
         {
+            var (_, sessionError) = await UserEndpoints.ResolveCurrentUserAsync(principal, userManager);
+            if (sessionError is not null) return sessionError;
+
             if (principal.FindFirstValue(AdminClaim.Type) != AdminClaim.Value)
                 return Results.Json(new { code = ErrorCodes.PermissionDenied, message = "你沒有存取這個資源的權限" },
                     statusCode: StatusCodes.Status403Forbidden);

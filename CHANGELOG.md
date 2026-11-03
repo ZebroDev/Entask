@@ -6,6 +6,20 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2026-11-03
+
+### Security
+
+- JWT signing keys are now validated at startup: `Jwt:Secret` must be at least 32 UTF-8 bytes, and an empty or short value now stops the host instead of failing later at login.
+- Attachment uploads now enforce the documented 20 MiB file limit end to end: the multipart request body is capped at 21 MiB (20 MiB file plus 1 MiB boundary/header overhead), with an early `Content-Length` check. Previously the effective limit was close to 128 MiB.
+- Downloading an attachment and creating a user now reject deactivated or deleted principals before any admin or permission check, returning 401 `auth.sessionInvalid`.
+- `follow-redirects` was updated to 1.16.2, fixing the high-severity advisory that affected 1.16.0–1.16.1.
+
+### Notes
+
+- Deactivating an administrator revokes that user's refresh tokens, but an access token already issued remains valid until it expires (up to 30 minutes). Rotate `Jwt:Secret` if an access token is suspected to be compromised.
+- No database migrations. Upgrade note: `Jwt:Secret` must be at least 32 UTF-8 bytes; attachments larger than 20 MiB are now rejected.
+
 ## [1.0.5] - 2026-10-21
 
 ### Fixed
@@ -101,6 +115,7 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.6]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.6
 [1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
 [1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3

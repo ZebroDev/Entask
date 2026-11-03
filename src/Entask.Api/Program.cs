@@ -2,6 +2,7 @@ using System.Text;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,10 +32,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    // JSON 端點全域 1MiB 即足；附件上傳端點以 per-endpoint IRequestSizeLimitMetadata 豁免
-    // （135_266_304 = 20MB app 上限 + multipart boundary overhead，FormOptions.MultipartBodyLengthLimit 預設 128MB）
+    // JSON 端點全域 1 MiB 即足；附件上傳端點以 per-endpoint IRequestSizeLimitMetadata 豁免。
+    // 附件上限由 AttachmentLimits 單一來源提供（20 MiB 單檔 + 1 MiB multipart overhead）；
+    // 總 body 由 endpoint metadata 封頂，FormOptions 則是「每個 multipart section」的上限，
+    // 兩者在 Program.cs／AttachmentEndpoints.cs 都指向同一個值。
     options.Limits.MaxRequestBodySize = 1_048_576;
 });
+
+builder.Services.Configure<FormOptions>(o =>
+    o.MultipartBodyLengthLimit = AttachmentLimits.MaxMultipartBodySize);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -51,7 +57,12 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
 .AddRoles<IdentityRole<Guid>>()
 .AddEntityFrameworkStores<EntaskDbContext>();
 
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.Section));
+builder.Services.AddOptions<JwtOptions>()
+    .Bind(builder.Configuration.GetSection(JwtOptions.Section))
+    .Validate(o => !string.IsNullOrWhiteSpace(o.Secret)
+                && Encoding.UTF8.GetByteCount(o.Secret) >= 32,
+        "Jwt:Secret 未設定或不足 32 bytes")
+    .ValidateOnStart();
 builder.Services.AddScoped<JwtTokenService>();
 
 // 預設值只在 JwtOptions 的屬性初始化定義一次。這裡做「空字串視同未設定」的正規化，

@@ -6,6 +6,20 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.6] - 2026-11-03
+
+### 安全性
+
+- JWT 簽章金鑰改為啟動時驗證：`Jwt:Secret` 必須至少 32 個 UTF-8 位元組；空值或過短會讓 host 啟動失敗，不再拖到登入時才壞。
+- 附件上傳全面套用文件上的 20 MiB 上限：multipart 請求 body 上限 21 MiB（20 MiB 檔案＋1 MiB boundary／標頭），並加 `Content-Length` 前置檢查。先前的有效上限接近 128 MiB。
+- 附件下載與建立使用者端點現在會在任何 admin／權限判斷前拒絕停用或刪除的主體，回 401 `auth.sessionInvalid`。
+- `follow-redirects` 升到 1.16.2，修掉 1.16.0–1.16.1 的 high 等級公告。
+
+### 備註
+
+- 停用管理員會撤銷該使用者的 refresh token，但已簽發的 access token 在到期前仍有效（最長 30 分鐘）。若懷疑 access token 外洩，請輪替 `Jwt:Secret`。
+- 沒有資料庫 migration。升級注意：`Jwt:Secret` 必須至少 32 個 UTF-8 位元組；超過 20 MiB 的附件現在會被拒絕。
+
 ## [1.0.5] - 2026-10-21
 
 ### 修正
@@ -88,6 +102,7 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.6]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.6
 [1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
 [1.0.3]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.3
