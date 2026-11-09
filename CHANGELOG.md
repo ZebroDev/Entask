@@ -6,6 +6,20 @@ All notable changes to Entask are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.7] - 2026-11-09
+
+### Security
+
+- Fixed cross-account data exposure in the web app: signing out, switching accounts, or signing in from another tab now clears the shared query cache, stops the previous account's real-time collaboration connection, dismisses its notifications, and hydrates the new session from shared storage.
+- Fixed deactivated and deleted users retaining API access with an already-issued access token (for up to 30 minutes). Every authenticated request, including SignalR negotiate, now checks account status and returns 401 `auth.sessionInvalid`.
+- Fixed SignalR subscriptions surviving permission revocation: deactivating or deleting a user, removing a team or project member, or changing a role now aborts that user's live connections and invalidates the permission cache immediately. Reconnections re-check current permissions.
+- Fixed login failing when `localStorage` is unavailable (private browsing or quota). Requests and token refresh now use the in-memory session; cross-tab token rotation is synchronised through `storage` events, and an in-flight refresh is discarded when the session changes, preventing refresh-token replay from revoking all sessions.
+- Hardened refresh persistence so one account's tokens can never be written into another account's stored session, and a failed login write cannot resurrect the previous account.
+
+### Notes
+
+- No database migrations or configuration changes.
+
 ## [1.0.6] - 2026-11-03
 
 ### Security
@@ -115,6 +129,7 @@ version 3.0 only (AGPL-3.0-only).
 - One-click self-hosting with Docker Compose; Fly.io deployment files included
 - AGPL section 13 source offer on the login page and in the user menu
 
+[1.0.7]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.7
 [1.0.6]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.6
 [1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4

@@ -6,6 +6,20 @@ Entask 所有值得注意的變更都記錄在本檔。
 格式以 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 為基礎，
 且本專案遵循[語意化版本](https://semver.org/spec/v2.0.0.html)。
 
+## [1.0.7] - 2026-11-09
+
+### 安全性
+
+- 修正 Web 端的跨帳號資料外洩：登出、切換帳號，或從其他分頁登入時，現在會清除共用的查詢快取、停止前一個帳號的即時協作連線、關閉其通知，並由共用儲存還原新的 session。
+- 修正停用與刪除的使用者仍可用已簽發的 access token 存取 API（最長 30 分鐘）的問題。每個已驗證請求（含 SignalR negotiate）現在都會檢查帳號狀態，回 401 `auth.sessionInvalid`。
+- 修正撤權後 SignalR 訂閱仍然有效的問題：停用或刪除使用者、移除團隊／專案成員、變更角色時，現在會立即中止該使用者的既有連線並讓權限快取失效；重連時重新驗證目前權限。
+- 修正 `localStorage` 不可用（隱私模式或配額已滿）時無法登入的問題。請求與 token refresh 改用記憶體 session；跨分頁的 token 輪替透過 `storage` 事件同步，session 被替換時會丟棄在途 refresh，避免 refresh token 重放導致所有 session 被撤銷。
+- 強化 refresh 的持久化：一個帳號的 token 不可能被寫進另一個帳號的儲存記錄；登入寫入失敗也不會讓前一個帳號復活。
+
+### 備註
+
+- 沒有資料庫 migration 或設定變更。
+
 ## [1.0.6] - 2026-11-03
 
 ### 安全性
@@ -102,6 +116,7 @@ Entask 所有值得注意的變更都記錄在本檔。
 - 以 Docker Compose 一鍵自架；附 Fly.io 部署檔
 - 登入頁與使用者選單中的 AGPL 第 13 條原始碼提供連結
 
+[1.0.7]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.7
 [1.0.6]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.6
 [1.0.5]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.5
 [1.0.4]: https://github.com/ZebroDev/Entask/releases/tag/v1.0.4
