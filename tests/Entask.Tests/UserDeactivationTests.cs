@@ -638,6 +638,237 @@ public class UserDeactivationTests : IClassFixture<ApiWebApplicationFactory>
         Assert.Equal("auth.sessionInvalid", body.GetProperty("code").GetString());
     }
 
+    // F-02（外部審查 2026-11-09）：停用只撤銷 refresh token；access token 在到期前仍有效。
+    // 一般專案權限守衛（RequireProjectPermission）與 PermissionChecker 都不檢查帳號狀態，
+    // 且停用不會移除團隊/專案成員身分 ⇒ 停用者仍可讀取專案資料。
+    // 這支釘住「一般使用者」；上面那支只覆蓋 admin 端點，專案端點在修正前是綠的。
+    [Fact]
+    public async Task DeactivatedUser_WithStillValidToken_CannotAccessProject()
+    {
+        const string username = "proj-off";
+        var adminToken = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        var created = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+        {
+            username,
+            password = "Password1!",
+            displayName = "專案停用測試",
+        }));
+        Assert.Equal(HttpStatusCode.OK, created.StatusCode);
+        var userId = Guid.Parse((await created.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("userId").GetString()!);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var (projectId, _) = await SeedProjectWithMemberAsync(username);
+
+        var login = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username, password = "Password1!" }));
+        var token = (await login.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        // 先證明 token 在停用前可用（200），否則「停用後 401」可能只是 token 本來就壞。
+        using (var before = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}"))
+        {
+            before.Headers.Authorization = new("Bearer", token);
+            Assert.Equal(HttpStatusCode.OK, (await _client.SendAsync(before)).StatusCode);
+        }
+
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.PostAsync($"/api/admin/users/{userId}/deactivate", null)).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}");
+        request.Headers.Authorization = new("Bearer", token);
+        var response = await _client.SendAsync(request);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal("auth.sessionInvalid", body.GetProperty("code").GetString());
+    }
+
+    // F-02 的第二格：被停用的管理員在 token 過期前仍帶著 `entask:admin` claim，
+    // `RequireProjectPermission` 的 admin 旁路會直接放行（RequireProjectPermissionAttribute.cs:41）。
+    // 這支釘住「管理員」——專案端點必須回 401，而不是靠 admin claim 繼續放行。
+    [Fact]
+    public async Task DeactivatedAdmin_WithStillValidToken_CannotAccessProject()
+    {
+        const string username = "admin-proj-off";
+        var adminToken = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        var created = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+        {
+            username,
+            password = "Password1!",
+            displayName = "專案停用管理員",
+            isAdmin = true,
+        }));
+        Assert.Equal(HttpStatusCode.OK, created.StatusCode);
+        var userId = Guid.Parse((await created.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("userId").GetString()!);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var (projectId, _) = await SeedProjectWithMemberAsync(username);
+
+        var login = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username, password = "Password1!" }));
+        var token = (await login.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        // 先證明 token 在停用前可用（200），否則「停用後 401」可能只是 token 本來就壞。
+        using (var before = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}"))
+        {
+            before.Headers.Authorization = new("Bearer", token);
+            Assert.Equal(HttpStatusCode.OK, (await _client.SendAsync(before)).StatusCode);
+        }
+
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.PostAsync($"/api/admin/users/{userId}/deactivate", null)).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}");
+        request.Headers.Authorization = new("Bearer", token);
+        var response = await _client.SendAsync(request);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal("auth.sessionInvalid", body.GetProperty("code").GetString());
+    }
+
+    // 刪除也要走同一個帳號狀態守衛（`DeletedAt` 分支）。少了這格，只檢查
+    // `DeactivatedAt` 的實作會全綠——而「停用後才刪除」正是刪除端點的前置條件。
+    [Fact]
+    public async Task DeletedUser_WithStillValidToken_CannotAccessProject()
+    {
+        const string username = "proj-gone";
+        var adminToken = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        var created = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+        {
+            username,
+            password = "Password1!",
+            displayName = "專案刪除測試",
+        }));
+        Assert.Equal(HttpStatusCode.OK, created.StatusCode);
+        var userId = Guid.Parse((await created.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("userId").GetString()!);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var (projectId, _) = await SeedProjectWithMemberAsync(username);
+
+        var login = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username, password = "Password1!" }));
+        var token = (await login.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        using (var before = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}"))
+        {
+            before.Headers.Authorization = new("Bearer", token);
+            Assert.Equal(HttpStatusCode.OK, (await _client.SendAsync(before)).StatusCode);
+        }
+
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.PostAsync($"/api/admin/users/{userId}/deactivate", null)).StatusCode);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.DeleteAsync($"/api/admin/users/{userId}")).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/projects/{projectId}");
+        request.Headers.Authorization = new("Bearer", token);
+        var response = await _client.SendAsync(request);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal("auth.sessionInvalid", body.GetProperty("code").GetString());
+    }
+
+    // L-5（安全審查 2026-11-09）：SignalR negotiate 也是已驗證端點；hub 的 [Authorize]
+    // 只驗 token 有效性，停用後必須由帳號狀態守衛擋在 negotiate。
+    [Fact]
+    public async Task DeactivatedUser_HubNegotiate_ReturnsSessionInvalid()
+    {
+        const string username = "hub-off-negotiate";
+        var adminToken = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        var created = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+        {
+            username,
+            password = "Password1!",
+            displayName = "Hub 停用測試",
+        }));
+        Assert.Equal(HttpStatusCode.OK, created.StatusCode);
+        var userId = (await created.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("userId").GetString()!;
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var login = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username, password = "Password1!" }));
+        var token = (await login.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.PostAsync($"/api/admin/users/{userId}/deactivate", null)).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        using var request = new HttpRequestMessage(HttpMethod.Post,
+            "/hubs/collaboration/negotiate?negotiateVersion=1");
+        request.Headers.Authorization = new("Bearer", token);
+        var response = await _client.SendAsync(request);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal("auth.sessionInvalid", body.GetProperty("code").GetString());
+    }
+
+    // L-5：登入端點是匿名的——夾帶前一個 session 的（已停用）Authorization header
+    // 不得擋掉重新登入。這是 `IAllowAnonymous` 跳過條件的守門員：拿掉跳過，這一格會紅。
+    [Fact]
+    public async Task DeactivatedUser_StaleTokenOnLogin_DoesNotBlockAnotherAccount()
+    {
+        var adminToken = await TestAuth.GetAdminTokenAsync(_factory, _client);
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+
+        async Task<Guid> CreateAsync(string username)
+        {
+            var response = await _client.PostAsync("/api/auth/users", JsonContent.Create(new
+            {
+                username,
+                password = "Password1!",
+                displayName = username,
+            }));
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            return Guid.Parse((await response.Content.ReadFromJsonAsync<JsonElement>())
+                .GetProperty("userId").GetString()!);
+        }
+
+        var staleUserId = await CreateAsync("stale-header-user");
+        await CreateAsync("login-after-switch");
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var staleLogin = await _client.PostAsync("/api/auth/login",
+            JsonContent.Create(new { username = "stale-header-user", password = "Password1!" }));
+        var staleToken = (await staleLogin.Content.ReadFromJsonAsync<JsonElement>())
+            .GetProperty("accessToken").GetString()!;
+
+        _client.DefaultRequestHeaders.Authorization = new("Bearer", adminToken);
+        Assert.Equal(HttpStatusCode.NoContent,
+            (await _client.PostAsync($"/api/admin/users/{staleUserId}/deactivate", null)).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        // 已停用使用者的舊 access token 當 header，登入另一個仍在使用的帳號。
+        using var request = new HttpRequestMessage(HttpMethod.Post, "/api/auth/login")
+        {
+            Content = JsonContent.Create(new { username = "login-after-switch", password = "Password1!" }),
+        };
+        request.Headers.Authorization = new("Bearer", staleToken);
+        var response = await _client.SendAsync(request);
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
     [Fact]
     public async Task AdminEndpoints_RejectNonAdmin()
     {
@@ -979,33 +1210,8 @@ public class UserDeactivationTests : IClassFixture<ApiWebApplicationFactory>
     }
 
     /// <summary>同形，改為團隊 → 專案 → 專案成員；回傳 (projectId, userId)。</summary>
-    private async Task<(Guid ProjectId, Guid UserId)> SeedProjectWithMemberAsync(string username)
-    {
-        using var scope = _factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<EntaskDbContext>();
-        var user = await db.Users.FirstAsync(u => u.UserName == username);
-        var role = await db.Roles.FirstAsync(r => r.TeamId == null && r.Code != null);
-        var teamId = Guid.NewGuid();
-        db.Teams.Add(new Entask.Core.Entities.Team
-        {
-            Id = teamId, Name = "名冊測試團隊", CreatedById = user.Id,
-            CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow,
-        });
-        var projectId = Guid.NewGuid();
-        db.Projects.Add(new Entask.Core.Entities.Project
-        {
-            Id = projectId, TeamId = teamId, Name = "名冊測試專案", CreatedById = user.Id,
-            CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow,
-        });
-        var joinedAt = DateTime.UtcNow;
-        db.ProjectMembers.Add(new Entask.Core.Entities.ProjectMember
-        {
-            Id = Guid.NewGuid(), ProjectId = projectId, UserId = user.Id, RoleId = role.Id,
-            JoinedAt = joinedAt, JoinedLocalDate = DateOnly.FromDateTime(joinedAt),
-        });
-        await db.SaveChangesAsync();
-        return (projectId, user.Id);
-    }
+    private Task<(Guid ProjectId, Guid UserId)> SeedProjectWithMemberAsync(string username) =>
+        TestSeed.ProjectWithMemberAsync(_factory, username);
 
     /// <summary>
     /// 直接寫 DB 建「團隊 → 專案 → 看板 → 清單 → 卡片」鏈：卡片上先掛兩個成員，兩人也都是

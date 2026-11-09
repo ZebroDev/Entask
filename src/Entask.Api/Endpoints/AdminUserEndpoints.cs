@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Dtos;
+using Entask.Api.Hubs;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Core.Entities;
@@ -84,7 +85,7 @@ public static class AdminUserEndpoints
 
         group.MapPost("/{userId:guid}/deactivate", async (Guid userId, EntaskDbContext db,
             UserManager<ApplicationUser> userManager, JwtTokenService tokens,
-            IAuditService audit, ClaimsPrincipal principal) =>
+            IAuditService audit, ClaimsPrincipal principal, CollaborationConnectionRegistry connections) =>
         {
             var (caller, error) = await UserEndpoints.ResolveCurrentUserAsync(principal, userManager);
             if (error is not null) return error;
@@ -124,6 +125,10 @@ public static class AdminUserEndpoints
             await audit.AddAsync(caller.Id, null, AuditActions.UserDeactivated, "user", user.Id,
                 user.UserName, new { username = user.UserName });
 
+            // F-03：既有 SignalR 連線不經過 HTTP 管線；不中止的話，停用者會繼續收到協作事件，
+            // 直到 access token／連線自然結束。前端會自動重連，屆時由 F-02 的守衛擋下。
+            connections.AbortUserConnections(user.Id);
+
             return Results.NoContent();
         });
 
@@ -154,7 +159,7 @@ public static class AdminUserEndpoints
 
         group.MapPost("/{userId:guid}/reset-password", async (Guid userId, ResetPasswordRequest req,
             EntaskDbContext db, UserManager<ApplicationUser> userManager, JwtTokenService tokens,
-            IAuditService audit, ClaimsPrincipal principal) =>
+            IAuditService audit, ClaimsPrincipal principal, CollaborationConnectionRegistry connections) =>
         {
             var (caller, error) = await UserEndpoints.ResolveCurrentUserAsync(principal, userManager);
             if (error is not null) return error;
@@ -256,6 +261,8 @@ public static class AdminUserEndpoints
                     user.UserName, new { username = user.UserName });
 
                 await tx.CommitAsync();
+                // F-03：密碼重設會撤銷 refresh token，既有協作連線也必須一起中止。
+                connections.AbortUserConnections(user.Id);
                 return Results.NoContent();
             }
             catch
@@ -266,7 +273,8 @@ public static class AdminUserEndpoints
         });
 
         group.MapDelete("/{userId:guid}", async (Guid userId, EntaskDbContext db,
-            UserManager<ApplicationUser> userManager, IAuditService audit, ClaimsPrincipal principal) =>
+            UserManager<ApplicationUser> userManager, IAuditService audit, ClaimsPrincipal principal,
+            CollaborationConnectionRegistry connections) =>
         {
             var (caller, error) = await UserEndpoints.ResolveCurrentUserAsync(principal, userManager);
             if (error is not null) return error;
@@ -302,6 +310,9 @@ public static class AdminUserEndpoints
 
             await audit.AddAsync(caller!.Id, null, AuditActions.UserDeleted, "user", user.Id,
                 user.DisplayName, new { username = placeholder });
+
+            // 刪除的前置條件是已停用（連線當時已中止）；這裡再保一次，避免任何殘留連線。
+            connections.AbortUserConnections(user.Id);
 
             return Results.NoContent();
         });

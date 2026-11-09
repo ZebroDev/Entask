@@ -46,7 +46,13 @@ interface NotificationState {
 export const useNotificationStore = create<NotificationState>((set, get) => ({
   notifications: [],
   unreadCount: () => get().notifications.filter((n) => !n.read).length,
-  resetNotifications: () => set({ notifications: [] }),
+  resetNotifications: () => {
+    set({ notifications: [] });
+    // L-6：toast 是 DOM 狀態，不在陣列裡。切換帳號時必須一併關掉，否則前一個帳號的
+    // 通知內容（人名、卡片標題、分數）仍留在畫面上且可點擊。可選呼叫是為了容忍
+    // 只 mock `success`/`error` 的既有測試替身。
+    toast.dismiss?.();
+  },
   fetchNotifications: async () => {
     try {
       const { data } = await api.get("/notifications");

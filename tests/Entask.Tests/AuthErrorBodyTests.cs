@@ -155,6 +155,20 @@ public class AuthErrorBodyTests : IClassFixture<ApiWebApplicationFactory>
         Assert.Equal(filter, revokedRefresh);
     }
 
+    // L-1（安全審查 2026-11-09）：F-02 中間件自己也要拒絕「已驗證但 sub 不是 GUID」。
+    // 既有 ③④ 兩站的端點都有各自的 `Guid.TryParse` 守衛、body 逐字相同 ⇒ 拿掉中間件
+    // 那一支它們仍然是綠的。這裡挑一條**只掛 `RequireAuthorization`** 的端點：
+    // 少了中間件，handler 內解析 sub 會變成 500，判別力就在「401 vs 500」。
+    [Fact]
+    public async Task MalformedSub_OnPlainAuthorizedEndpoint_ReturnsSessionInvalid()
+    {
+        var malformedSubToken = CreateToken("not-a-guid");
+
+        var response = await SendAsync(HttpMethod.Get, "/api/notifications", malformedSubToken);
+
+        await AssertUnauthorizedAsync(response, SessionInvalidCode);
+    }
+
     // ③ 認證挑戰：沒有憑證、憑證壞掉，都必須帶同一個 body，**而且仍然是一個合規的 401**。
     // 後半段是這支測試的真正價值：`OnChallenge` 裡呼叫 `HandleResponse()` 會讓框架
     // **同時跳過狀態碼與 `WWW-Authenticate` 標頭**，兩者都得自己補——少補一個就是

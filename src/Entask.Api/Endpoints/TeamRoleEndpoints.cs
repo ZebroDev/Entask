@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Authorization;
 using Entask.Api.Dtos;
+using Entask.Api.Hubs;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Core.Entities;
 using Entask.Infrastructure.Data;
+using Entask.Infrastructure.Permissions;
 
 namespace Entask.Api.Endpoints;
 
@@ -60,7 +62,8 @@ public static class TeamRoleEndpoints
 
         // 更新自訂角色
         group.MapPut("/{roleId:guid}", async (Guid teamId, Guid roleId, UpdateRoleRequest req, EntaskDbContext db,
-            IAuditService audit, ClaimsPrincipal principal) =>
+            IAuditService audit, ClaimsPrincipal principal, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             // 集合上限（2026-10-10 公開前硬化）：在任何 DB 工作之前——見 `RequestLimits` 的摘要
             // 與 POST 那一站的同一句（權限碼與 id 清單共用同一個上限）。
@@ -88,6 +91,12 @@ public static class TeamRoleEndpoints
             if (permissionIds.Count != req.PermissionCodes.Distinct().Count())
                 return Results.BadRequest(new { code = ErrorCodes.RequestInvalid, message = "包含無效的權限碼" });
 
+            // F-03：這次改權限會影響所有持有此角色的成員（團隊或專案層指派），先收集起來，
+            // 成功寫入後一次中止他們的協作連線。
+            var affectedUserIds = await db.TeamMembers.Where(m => m.RoleId == roleId).Select(m => m.UserId)
+                .Union(db.ProjectMembers.Where(m => m.RoleId == roleId).Select(m => m.UserId))
+                .ToListAsync();
+
             role.Name = req.Name;
             role.Description = req.Description;
             role.UpdatedAt = DateTime.UtcNow;
@@ -98,6 +107,8 @@ public static class TeamRoleEndpoints
             foreach (var pid in permissionIds.Where(p => !keep.Any(k => k.PermissionId == p)))
                 db.RolePermissions.Add(new RolePermission { RoleId = roleId, PermissionId = pid });
             await db.SaveChangesAsync();
+            permissionVersion.Bump();
+            foreach (var affectedUserId in affectedUserIds) connections.AbortUserConnections(affectedUserId);
             await audit.AddAsync(BoardEndpoints.CurrentUserId(principal), teamId, AuditActions.RoleUpdated, "role",
                 role.Id, role.Name, new { permissionCodes = req.PermissionCodes });
             return Results.Ok(new RoleResponse(role.Id, role.Name, role.Description, false, req.PermissionCodes));

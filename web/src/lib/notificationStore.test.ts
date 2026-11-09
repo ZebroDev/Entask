@@ -8,6 +8,8 @@ vi.mock("@/lib/api", () => ({
   },
 }));
 
+vi.mock("sonner", () => ({ toast: { dismiss: vi.fn() } }));
+
 describe("notificationStore API 路徑", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -45,6 +47,17 @@ describe("notificationStore API 路徑", () => {
     await useNotificationStore.getState().markAllAsRead();
 
     expect(api.put).toHaveBeenCalledWith("/notifications/read-all");
+  });
+
+  // L-6（安全審查 2026-11-09）：toast 是 DOM 狀態，不在 notifications 陣列裡。
+  // 切換帳號時只清陣列，前一個帳號的通知內容（人名、卡片標題、分數）仍留在畫面上可點擊。
+  it("resetNotifications 同時關閉已顯示的 toast", async () => {
+    const { toast } = await import("sonner");
+    vi.mocked(toast.dismiss).mockClear();
+
+    useNotificationStore.getState().resetNotifications();
+
+    expect(toast.dismiss).toHaveBeenCalledTimes(1);
   });
 
   it("fetchNotifications 收到非陣列回應（如 SPA fallback 的 HTML）時不污染狀態", async () => {

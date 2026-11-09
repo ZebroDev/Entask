@@ -1,12 +1,12 @@
 ﻿import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/query-client";
 import { Toaster } from "sonner";
-import axios from "axios";
 import App from "./App";
 import { ThemeProvider } from "./components/theme-provider";
-import { useAuth } from "./stores/auth";
+import { registerAuthStorageSync, useAuth } from "./stores/auth";
 import { THEME_STORAGE_KEY } from "./lib/storage-keys";
 // 必須在 render 之前：資源內嵌且 init 同步，首次 render 就是正確語系（無 FOUC），
 // 並在同步階段一併設好 document.documentElement.lang。
@@ -15,25 +15,11 @@ import "./i18n";
 import "./index.css";
 
 useAuth.getState().hydrate();
+// F-04：多分頁共享 storage；讓其他分頁的登入／登出／refresh 即時反映到本頁記憶體。
+registerAuthStorageSync();
 
-// #15/#23：staleTime 30s（回訪不立即重取）；403 權限錯誤不重試（重試無意義且卡 7.8s），其餘最多 2 次
-// 429（2026-09-24 追加）：**限流也不重試**。重試正好是限流器在叫呼叫端別做的事，而預設的
-// 「最多 2 次」會把**一次**超限放大成**三個**請求——第 2、3 次照樣逾額，還繼續吃掉窗內的額度，
-// 於是下一個正常的搜尋更慢被放行。這是**同一個碼，兩種行為**：403 是「再送也不會變」，
-// 429 是「現在不行、等一下可以」——兩者都當場放棄，但只有後者會在下次使用者動作時自然重來。
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 30_000,
-      retry: (failureCount, error) => {
-        const status = axios.isAxiosError(error) ? error.response?.status : undefined;
-        if (status === 403 || status === 429) return false;
-        return failureCount < 2;
-      },
-    },
-  },
-});
-
+// queryClient 的設定在 `lib/query-client`：auth store 的登出流程需要清除快取，
+// 從 bootstrap 檔匯入會形成 main → App → auth → main 的循環依賴。
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

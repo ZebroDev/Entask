@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Authorization;
 using Entask.Api.Dtos;
+using Entask.Api.Hubs;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Core.Entities;
 using Entask.Identity;
 using Entask.Identity.Models;
 using Entask.Infrastructure.Data;
+using Entask.Infrastructure.Permissions;
 
 namespace Entask.Api.Endpoints;
 
@@ -178,7 +180,8 @@ public static class TeamEndpoints
 
         group.MapPut("/{teamId:guid}/members", async (
             Guid teamId, AssignMemberRequest req, EntaskDbContext db, UserManager<ApplicationUser> userManager,
-            IAuditService audit, ClaimsPrincipal principal) =>
+            IAuditService audit, ClaimsPrincipal principal, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             // 集合上限（2026-10-10 公開前硬化）：在任何 DB 工作之前——見 `RequestLimits` 的摘要。
             if (req.RoleIds is { Count: > RequestLimits.MaxReferenceIds })
@@ -235,6 +238,9 @@ public static class TeamEndpoints
                     JoinedAt = DateTime.UtcNow, JoinedLocalDate = joinedLocalDate,
                 });
             await db.SaveChangesAsync();
+            // F-03：團隊角色變更會影響專案有效權限（團隊角色聯集）；舊快取立即失效並中止連線。
+            permissionVersion.Bump();
+            connections.AbortUserConnections(user.Id);
             await audit.AddAsync(BoardEndpoints.CurrentUserId(principal), teamId, AuditActions.MemberAssigned, "member",
                 user.Id, user.UserName, new { username = req.Username, roleIds = req.RoleIds });
             return Results.Ok();
@@ -242,13 +248,16 @@ public static class TeamEndpoints
 
         group.MapDelete("/{teamId:guid}/members/{userId:guid}", async (
             Guid teamId, Guid userId, EntaskDbContext db, UserManager<ApplicationUser> userManager,
-            IAuditService audit, ClaimsPrincipal principal) =>
+            IAuditService audit, ClaimsPrincipal principal, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             var existing = await db.TeamMembers
                 .Where(m => m.TeamId == teamId && m.UserId == userId).ToListAsync();
             if (existing.Count == 0) return ApiResults.NotFound(ErrorCodes.TeamMemberNotFound);
             db.TeamMembers.RemoveRange(existing);
             await db.SaveChangesAsync();
+            permissionVersion.Bump();
+            connections.AbortUserConnections(userId);
             var user = await userManager.FindByIdAsync(userId.ToString());
             // 名稱查不到時退回 userId，不讓 entityTitle 留 null——前端在 null 時會退回
             // 顯示 entityType（裸字 "member"），那是把後端識別碼印到使用者面前。

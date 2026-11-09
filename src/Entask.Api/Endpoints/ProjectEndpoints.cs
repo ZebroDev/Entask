@@ -2,11 +2,13 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Entask.Api.Authorization;
 using Entask.Api.Dtos;
+using Entask.Api.Hubs;
 using Entask.Core;
 using Entask.Core.Abstractions;
 using Entask.Core.Entities;
 using Entask.Identity;
 using Entask.Infrastructure.Data;
+using Entask.Infrastructure.Permissions;
 
 namespace Entask.Api.Endpoints;
 
@@ -171,7 +173,8 @@ public static class ProjectEndpoints
         }).RequireAuthorization().RequireProjectPermission(PermissionCodes.ProjectRead);
 
         app.MapPost("/api/projects/{projectId:guid}/members", async (Guid projectId, AddProjectMemberRequest req, ClaimsPrincipal principal,
-            EntaskDbContext db, IAuditService audit) =>
+            EntaskDbContext db, IAuditService audit, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             // 集合上限（2026-10-10 公開前硬化）：在任何 DB 工作之前——見 `RequestLimits` 的摘要。
             if (req.RoleIds is { Count: > RequestLimits.MaxReferenceIds })
@@ -221,13 +224,18 @@ public static class ProjectEndpoints
                 db.ProjectMembers.RemoveRange(db.ProjectMembers.Where(m => m.ProjectId == projectId && m.UserId == req.UserId && m.RoleId == roleId));
 
             await db.SaveChangesAsync();
+            // F-03：權限集合可能縮小（差集含移除）；舊快取立即失效，既有協作連線中止後
+            // 由前端自動重連、重新 Join 時以最新權限驗證。
+            permissionVersion.Bump();
+            connections.AbortUserConnections(req.UserId);
             await audit.AddAsync(BoardEndpoints.CurrentUserId(principal), project.TeamId, AuditActions.ProjectMemberAdded, "Project", projectId, project.Name, new { req.UserId, req.RoleIds }, projectId);
             return Results.Ok();
         }).RequireAuthorization().RequireProjectPermission(PermissionCodes.ProjectMemberManage);
 
         // 全量重設該成員角色；roleIds 空 = 移除該成員
         app.MapPut("/api/projects/{projectId:guid}/members/{userId:guid}", async (Guid projectId, Guid userId, UpdateProjectMemberRequest req, ClaimsPrincipal principal,
-            EntaskDbContext db, IAuditService audit) =>
+            EntaskDbContext db, IAuditService audit, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             // 集合上限（2026-10-10 公開前硬化）：在任何 DB 工作之前——見 `RequestLimits` 的摘要。
             if (req.RoleIds is { Count: > RequestLimits.MaxReferenceIds })
@@ -285,12 +293,15 @@ public static class ProjectEndpoints
                 db.ProjectMembers.Add(new ProjectMember { ProjectId = projectId, UserId = userId, RoleId = roleId, JoinedAt = DateTime.UtcNow, JoinedLocalDate = joinedLocalDate });
 
             await db.SaveChangesAsync();
+            permissionVersion.Bump();
+            connections.AbortUserConnections(userId);
             await audit.AddAsync(BoardEndpoints.CurrentUserId(principal), project.TeamId, AuditActions.ProjectMemberUpdated, "Project", projectId, project.Name, new { userId, req.RoleIds }, projectId);
             return Results.Ok();
         }).RequireAuthorization().RequireProjectPermission(PermissionCodes.ProjectMemberManage);
 
         app.MapDelete("/api/projects/{projectId:guid}/members/{userId:guid}", async (Guid projectId, Guid userId, ClaimsPrincipal principal,
-            EntaskDbContext db, IAuditService audit) =>
+            EntaskDbContext db, IAuditService audit, CollaborationConnectionRegistry connections,
+            PermissionCacheVersion permissionVersion) =>
         {
             var project = await db.Projects.FirstOrDefaultAsync(x => x.Id == projectId);
             if (project is null) return ApiResults.NotFound(ErrorCodes.ProjectNotFound);
@@ -302,6 +313,8 @@ public static class ProjectEndpoints
 
             db.ProjectMembers.RemoveRange(db.ProjectMembers.Where(m => m.ProjectId == projectId && m.UserId == userId));
             await db.SaveChangesAsync();
+            permissionVersion.Bump();
+            connections.AbortUserConnections(userId);
             await audit.AddAsync(BoardEndpoints.CurrentUserId(principal), project.TeamId, AuditActions.ProjectMemberRemoved, "Project", projectId, project.Name, new { userId }, projectId);
             return Results.Ok();
         }).RequireAuthorization().RequireProjectPermission(PermissionCodes.ProjectMemberManage);

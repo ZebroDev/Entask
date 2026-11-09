@@ -11,11 +11,13 @@ public class PermissionChecker : IPermissionChecker
 {
     private readonly EntaskDbContext _db;
     private readonly IMemoryCache _cache;
+    private readonly PermissionCacheVersion _version;
 
-    public PermissionChecker(EntaskDbContext db, IMemoryCache cache)
+    public PermissionChecker(EntaskDbContext db, IMemoryCache cache, PermissionCacheVersion version)
     {
         _db = db;
         _cache = cache;
+        _version = version;
     }
 
     public async Task<HashSet<string>> GetEffectivePermissionsAsync(Guid userId, Guid teamId)
@@ -24,7 +26,8 @@ public class PermissionChecker : IPermissionChecker
             c.UserId == userId && c.ClaimType == AdminClaim.Type && c.ClaimValue == AdminClaim.Value);
         if (isAdmin) return AllPermissionCodes();
 
-        var cacheKey = $"perm:{userId}:{teamId}";
+        // 世代號在鍵裡：角色／成員異動會 Bump，舊世代的鍵立刻不再被讀取。
+        var cacheKey = $"perm:v{_version.Value}:{userId}:{teamId}";
         if (_cache.TryGetValue<HashSet<string>>(cacheKey, out var cached)) return cached!;
 
         var codes = await _db.TeamMembers
@@ -48,7 +51,7 @@ public class PermissionChecker : IPermissionChecker
             c.UserId == userId && c.ClaimType == AdminClaim.Type && c.ClaimValue == AdminClaim.Value);
         if (isAdmin) return AllPermissionCodes();
 
-        var cacheKey = $"perm:p:{projectId}:{userId}";
+        var cacheKey = $"perm:p:v{_version.Value}:{projectId}:{userId}";
         if (_cache.TryGetValue<HashSet<string>>(cacheKey, out var cached)) return cached!;
 
         var project = await _db.Projects

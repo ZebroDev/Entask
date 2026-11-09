@@ -255,8 +255,12 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<Microsoft.AspNetCore.SignalR.IUserIdProvider, Entask.Api.Hubs.CustomUserIdProvider>();
+// F-03：撤權／停用時中止該使用者的既有協作連線（Hub 是 transient，狀態放在 singleton）。
+builder.Services.AddSingleton<Entask.Api.Hubs.CollaborationConnectionRegistry>();
 
 builder.Services.AddMemoryCache();
+// 權限快取的世代號（F-03 配套）：角色／成員異動時 Bump，舊快取鍵立即失效。
+builder.Services.AddSingleton<PermissionCacheVersion>();
 builder.Services.AddScoped<IPermissionChecker, PermissionChecker>();
 builder.Services.AddScoped<IProjectScopeResolver, ProjectScopeResolver>();
 builder.Services.AddScoped<IAuditService, AuditService>();
@@ -387,6 +391,8 @@ app.UseDefaultFiles();
 app.UseStaticFiles(staticFileOptions);
 
 app.UseAuthentication();
+// F-02：停用／刪除後，舊 access token 不得再通過任何需驗證的端點（見該擴充方法檔頭）。
+app.UseActiveUserValidation();
 app.UseAuthorization();
 
 // 限流器排在授權**之後**（順序是語意，不是排版）：未帶憑證的請求在上一行就被挑戰成 401，

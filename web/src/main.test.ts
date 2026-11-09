@@ -1,5 +1,6 @@
 import { AxiosError, type AxiosResponse } from "axios";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { AUTH_STORAGE_KEY } from "@/lib/storage-keys";
 
 // main.tsx 為 bootstrap 檔：mock react-dom/client 避免測試環境實際掛載整棵 App
 // （main.tsx 以 default import 引入 ReactDOM，mock 須提供 default export）
@@ -7,7 +8,7 @@ vi.mock("react-dom/client", () => ({
   default: { createRoot: vi.fn(() => ({ render: vi.fn() })) },
 }));
 
-import { queryClient } from "./main";
+import { queryClient } from "@/lib/query-client";
 
 const forbiddenResponse = {
   status: 403,
@@ -24,6 +25,36 @@ const tooManyResponse = {
   headers: {},
   config: { headers: undefined },
 } as unknown as AxiosResponse;
+
+// main.test 改從 `lib/query-client` 匯入後，bootstrap 的副作用就沒有任何測試罩著：
+// hydrate 若被移掉，重新整理會變成未登入；storage 同步若被移掉，跨分頁 token 輪替
+// 會回到 F-04 的舊行為（本頁沿用舊 refresh token）。這兩行是它們的守門員。
+describe("bootstrap（main.tsx）", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    localStorage.clear();
+  });
+
+  it("render 前 hydrate 還原 session，並註冊跨分頁 storage 同步", async () => {
+    localStorage.clear();
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({
+      user: { userId: "u1", username: "a", displayName: "A", isAdmin: false },
+      tokens: { accessToken: "at", refreshToken: "rt" },
+      teamId: "t1",
+    }));
+    const addEventListener = vi.spyOn(window, "addEventListener");
+    vi.resetModules();
+
+    // resetModules 之後重新取得實例：main 會匯入同一份新的 auth store。
+    const { useAuth } = await import("@/stores/auth");
+    await import("./main");
+
+    expect(useAuth.getState().tokens).toEqual({ accessToken: "at", refreshToken: "rt" });
+    expect(useAuth.getState().teamId).toBe("t1");
+    expect(addEventListener).toHaveBeenCalledWith("storage", expect.any(Function));
+  // 匯入整棵 App（含 i18n）在完整套件平行執行時會超過預設 5 秒；單獨跑約 2.7 秒。
+  }, 20_000);
+});
 
 describe("QueryClient 全域配置（#15/#23）", () => {
   it("queries staleTime 為 30 秒", () => {
